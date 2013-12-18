@@ -1,17 +1,33 @@
 <div class="row">
-  <div class="col-xs-4">
-    <img src="{{unbound model.imagen_url}}" class="profile_image small">
+  <div class="col-xs-4 align_right">
+    <img src="{{unbound model.imagen_url_small}}" class="profile_image small">
   </div>
   <div class="col-xs-8">
     <div class="form-group">
-      <input type="text" value="{{unbound model.nombres}}" class="form-control" placeholder="Nombres" />
+      {{view Ember.TextField value=view.nombres class="form-control" placeholder="Nombres"}}
     </div>
     <div class="form-group">
-      <input type="email" value="{{unbound model.email}}" class="form-control" placeholder="Email" />
+      {{view Ember.TextField value=view.username class="form-control" placeholder="Nombre de usuario"}}
+    </div>
+    <div class="form-group">
+      {{view Ember.TextField value=view.email type="email" class="form-control" placeholder="Email"}}
+    </div>
+    <div class="form-group">
+      <div class="divider"></div>
+    </div>
+    <div class="form-group">
+      {{view Ember.TextField value=view.password type="password" class="form-control" placeholder="Nueva contraseña"}}
+    </div>
+    <div class="form-group">
+      {{view Ember.TextField value=view.password_confirmation type="password" class="form-control" placeholder="Confirmar contraseña"}}
+      <div class="align_right small">
+        Deja en blanco estos campos si no deseas cambiar tu contraseña
+      </div>
     </div>
   </div>
 </div>
 <div class="actions">
+  <span class="text-danger">{{view.errors}}</span>
   {{link-to "Cancelar" "me.index" class="btn btn-link"}}
-  <input type="submit" value="Actualizar" class="btn btn-primary">
+  <input type="submit" value="Actualizar" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
 </div>
