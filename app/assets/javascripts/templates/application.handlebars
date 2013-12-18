@@ -2,6 +2,7 @@
   <h1>Bandango</h1>
   <div class="col-md-3 col-lg-3 sidebar">
     {{#if Bandango.currentSession.loggedIn}}
+      {{view Bandango.CurrentUserResumeView}}
       <ul class="nav nav-pills nav-stacked">
         <li>{{link-to "Facturas" "facturas"}}</li>
         <li>{{link-to "Usuarios"}}</li>
