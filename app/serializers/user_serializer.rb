@@ -3,6 +3,7 @@ class UserSerializer < ActiveModel::Serializer
   
   attributes :id,
              :nombres,
+             :username,
              :imagen_url,
              :token
 
