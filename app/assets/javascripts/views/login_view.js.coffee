@@ -3,8 +3,8 @@ self = null
 Bandango.LoginView = Ember.View.extend
   tagName: "form"
 
-  loginSuccess: (response) ->
-    self.get("controller").send "login", response.token
+  loginSuccess: (user) ->
+    Bandango.currentSession.logInAs user
     self.set "sendingRequest", false
 
   loginFailure: (response) ->
@@ -19,4 +19,4 @@ Bandango.LoginView = Ember.View.extend
       error: null
     data = @getProperties "username", "password"
     $.post("/sessions.json", data).then @loginSuccess, @loginFailure
-    null
+    false
