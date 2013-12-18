@@ -67,3 +67,6 @@ end
 # ember
 gem "ember-rails", github: "emberjs/ember-rails"
 gem "ember-source", "1.2.0"
+
+# sorcery
+gem "sorcery"
