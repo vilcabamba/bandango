@@ -1,0 +1,23 @@
+#= require jquery
+#= require jquery_ujs
+#= require handlebars
+#= require ember
+#= require ember-data
+#= require_self
+#= require bootstrap
+#= require bandango
+
+# for more details see: http://emberjs.com/guides/application/
+log = true
+<% if Rails.env == "production" %>
+  log = false
+<% end %>
+
+window.Bandango = Ember.Application.create({
+  rootElement: "#app",
+  LOG_TRANSITIONS: log,
+  LOG_TRANSITIONS_INTERNAL: log,
+  LOG_BINDINGS: log,
+  LOG_ACTIVE_GENERATION: log,
+  LOG_VIEW_LOOKUPS: log
+});
