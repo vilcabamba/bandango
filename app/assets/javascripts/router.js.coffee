@@ -2,4 +2,5 @@
 
 Bandango.Router.map ()->
   # @resource('posts')
+  @route "login"
 

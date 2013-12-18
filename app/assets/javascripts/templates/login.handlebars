@@ -1,0 +1,15 @@
+<div class="login_modal">
+  <h1>Inicia sesión</h1>
+  <div class="form-group">
+    {{view Ember.TextField value=view.username placeholder="Nombre de usuario" class="form-control"}}
+  </div>
+  <div class="form-group">
+    {{view Ember.TextField value=view.password type="password" placeholder="Contraseña" class="form-control"}}
+  </div>
+  <div class="actions">
+    <span class="small">
+      <span class="text-danger">{{view.error}}</span>
+    </span>
+    <input type="submit" value="Iniciar sesión" class="btn btn-default" {{bind-attr disabled=view.sendingRequest}}/>
+  </div>
+</div>
