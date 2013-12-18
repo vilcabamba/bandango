@@ -105,7 +105,7 @@ q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
-small {
+small, .small {
   font-size: 80%;
 }
 
