@@ -1,0 +1,5 @@
+<% if current_user %>
+  <%= javascript_tag do %>
+    Bandango.currentSession.logInAs(<%= raw current_user.to_json %>);
+  <% end %>
+<% end %>
