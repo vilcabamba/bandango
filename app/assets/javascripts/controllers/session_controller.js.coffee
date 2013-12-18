@@ -4,6 +4,7 @@ Bandango.SessionController = Ember.Controller.extend
     @set "user", user
     $.ajaxSetup
       headers: { "Authorization": "Token token=\"#{user.token}\""}
+    window.location.hash = "#/facturas"
 
   loggedIn: (->
     !!@get("user")
