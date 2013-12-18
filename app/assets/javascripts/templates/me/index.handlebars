@@ -1,0 +1,12 @@
+{{#with Bandango.currentSession.user}}
+  <div class="row">
+    <div class="col-xs-4">
+      <img {{bind-attr src=imagen}}>
+    </div>
+    <div class="col-xs-8">
+      <h3>{{nombres}}</h3>
+      {{email}}
+    </div>
+  </div>
+  {{link-to "Editar" "me.edit" class="btn btn-default"}}
+{{/with}}
