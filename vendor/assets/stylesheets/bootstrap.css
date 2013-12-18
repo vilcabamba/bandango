@@ -4235,8 +4235,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-pills > li.active > a,
+.nav-pills > li > a.active,
 .nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus {
+.nav-pills > li > a.active:hover,
+.nav-pills > li.active > a:focus,
+.nav-pills > li > a.active:focus {
   color: #ffffff;
   background-color: #428bca;
 }
