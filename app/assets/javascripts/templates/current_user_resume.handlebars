@@ -1,4 +1,5 @@
 {{#with Bandango.currentSession.user}}
+  <img {{bind-attr src=imagen_url}} class="profile_image tiny">
   {{nombres}}
   {{link-to "ver" "me"}}
 {{/with}}
