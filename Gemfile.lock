@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 8c4f3999a250a7dab9ea4cc723e781bf4e7ec11b
+  specs:
+    annotate (2.6.0)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
+
+GIT
   remote: git://github.com/emberjs/ember-rails.git
   revision: dcc6d39f73ce5d870231fce8830d6485c9038f77
   specs:
@@ -236,6 +244,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   better_errors
   binding_of_caller
   bullet

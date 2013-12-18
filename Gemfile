@@ -70,3 +70,6 @@ gem "ember-source", "1.2.0"
 
 # sorcery
 gem "sorcery"
+
+# annotate models
+gem "annotate", :git => "git://github.com/ctran/annotate_models.git"
