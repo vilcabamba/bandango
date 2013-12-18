@@ -68,5 +68,5 @@ group :test do
 end
 
 # ember
-gem "ember-rails"
+gem "ember-rails", github: "emberjs/ember-rails"
 gem "ember-source", "1.2.0"

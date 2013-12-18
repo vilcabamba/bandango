@@ -1,3 +1,17 @@
+GIT
+  remote: git://github.com/emberjs/ember-rails.git
+  revision: dcc6d39f73ce5d870231fce8830d6485c9038f77
+  specs:
+    ember-rails (0.14.1)
+      active_model_serializers
+      barber (>= 0.4.1)
+      ember-data-source
+      ember-source
+      execjs (>= 1.2)
+      handlebars-source
+      jquery-rails (>= 1.0.17)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,15 +77,6 @@ GEM
     diff-lcs (1.2.5)
     ember-data-source (0.14)
       ember-source
-    ember-rails (0.14.1)
-      active_model_serializers
-      barber (>= 0.4.1)
-      ember-data-source
-      ember-source
-      execjs (>= 1.2)
-      handlebars-source
-      jquery-rails (>= 1.0.17)
-      railties (>= 3.1)
     ember-source (1.2.0)
       handlebars-source (= 1.1.1)
     erubis (2.7.0)
@@ -220,7 +225,7 @@ DEPENDENCIES
   bullet
   capybara
   coffee-rails (~> 4.0.0)
-  ember-rails
+  ember-rails!
   ember-source (= 1.2.0)
   exception_notification
   factory_girl_rails
