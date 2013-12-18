@@ -8,3 +8,5 @@ Bandango.SessionController = Ember.Controller.extend
   loggedIn: (->
     !!@get("user")
   ).property("user")
+
+Bandango.currentSession = Bandango.SessionController.create()
