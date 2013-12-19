@@ -1,18 +1,22 @@
 <div class="row">
   <h1>Bandango</h1>
   {{#if Bandango.currentSession.loggedIn}}
-  <div class="col-md-3 col-lg-3 sidebar">
+    <div class="col-md-3 col-lg-3 sidebar">
       {{view Bandango.CurrentUserResumeView}}
-      <ul class="nav nav-pills nav-stacked">
-        <li>{{link-to "Facturas" "facturas"}}</li>
-        <li>{{link-to "Clientes" "clientes"}}</li>
-        <li>{{link-to "Usuarios"}}</li>
-        <li class="bandango_divider"></li>
-        <li><a href="/logout">Cerrar sesión</a></li>
-      </ul>
-  </div>
+        <ul class="nav nav-pills nav-stacked">
+          <li>{{link-to "Facturas" "facturas"}}</li>
+          <li>{{link-to "Clientes" "clientes"}}</li>
+          <li>{{link-to "Usuarios"}}</li>
+          <li class="bandango_divider"></li>
+          <li><a href="/logout">Cerrar sesión</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9 col-lg-9 main_content">
+      {{outlet}}
+    </div>
+  {{else}}
+    <div class="main_content">
+      {{outlet}}
+    </div>
   {{/if}}
-  <div class="col-md-9 col-lg-9 main_content">
-    {{outlet}}
-  </div>
 </div>
