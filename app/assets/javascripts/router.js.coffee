@@ -7,4 +7,5 @@ Bandango.Router.map ()->
     @route "edit"
   @resource "facturas", ->
     @route "index", path: "/"
+    @route "new"
 
