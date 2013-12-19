@@ -1,10 +1,12 @@
 Bandango.User = Ember.Object.extend
 
   firstNames: (->
-    nombres = @get("nombres").split(" ")
+    nombres = @get("nombres")
     Ember.debug "computing user's firstNames"
-    if nombres.length > 2
-      nombres.slice(0, 2).join " "
+    unless nombres
+      return @get("username")
+    if nombres.split(" ").length > 2
+      nombres.split(" ").slice(0, 2).join " "
     else
       @get("nombres")
   ).property("nombres")
