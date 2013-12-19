@@ -1,3 +1,8 @@
+@mixin white_background
+  background-color: white
+  box-shadow: 0 1px 5px #ddd
+  border-radius: 4px
+
 body
   padding-top: 40px
   padding-bottom: 40px
@@ -8,10 +13,10 @@ body
   .sidebar
     padding: 1em 0.3em
     ul
-      border-radius: 4px
+      @include white_background
     .btn-group
       width: 100%
-      margin: 1em 0
+      margin: 0 0 1em 0
       .current_user
         width: 100%
         text-align: left
@@ -21,6 +26,8 @@ body
           right: 5px
           top: 15px
   .main_content
-    padding: 0.3em
+    @include white_background
+    padding: 0.7em 1em
+    margin-top: 1em
     h2
       text-align: center
