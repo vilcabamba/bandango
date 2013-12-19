@@ -73,3 +73,6 @@ gem "sorcery"
 
 # annotate models
 gem "annotate", :git => "git://github.com/ctran/annotate_models.git"
+
+# id_ecuador
+gem "id_ecuador"
