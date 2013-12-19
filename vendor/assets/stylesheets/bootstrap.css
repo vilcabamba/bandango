@@ -154,6 +154,7 @@ select,
 textarea {
   margin: 0;
   font-family: inherit;
+  font-weight: 300;
   font-size: 100%;
 }
 
@@ -2255,7 +2256,7 @@ textarea.input-lg {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.428571429;
   text-align: center;
   white-space: nowrap;
@@ -2579,7 +2580,7 @@ fieldset[disabled] .btn-info.active {
 }
 
 .btn-link {
-  font-weight: normal;
+  font-weight: 300;
   color: #428bca;
   cursor: pointer;
   border-radius: 0;
@@ -3558,7 +3559,7 @@ input[type="button"].btn-block {
   display: block;
   padding: 3px 20px;
   clear: both;
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.428571429;
   color: #333333;
   white-space: nowrap;
