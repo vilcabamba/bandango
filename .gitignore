@@ -20,3 +20,5 @@ config/initializers/secret_token.rb
 config/database.yml
 public/index.original.html
 config/email.yml
+
+db/schema.rb
