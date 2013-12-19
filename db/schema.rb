@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218225107) do
+ActiveRecord::Schema.define(version: 20131219172534) do
+
+  create_table "clientes", force: true do |t|
+    t.string "tipo_id",        default: "Cédula", null: false
+    t.string "identificacion",                    null: false
+    t.string "nombres",                           null: false
+    t.string "direccion"
+    t.string "telefono"
+    t.string "email"
+  end
+
+  add_index "clientes", ["identificacion"], name: "index_clientes_on_identificacion", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",         null: false
