@@ -52,6 +52,7 @@ Bandango::Application.routes.draw do
   namespace :api do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
+    resources :clientes
     resources :current_user do
       collection do
         post "/", to: "current_user#update"
