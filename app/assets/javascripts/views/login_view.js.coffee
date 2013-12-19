@@ -6,6 +6,7 @@ Bandango.LoginView = Ember.View.extend
   loginSuccess: (user) ->
     Bandango.currentSession.logInAs user
     self.set "sendingRequest", false
+    self.get("controller").transitionToRoute "index"
 
   loginFailure: (response) ->
     self.setProperties
