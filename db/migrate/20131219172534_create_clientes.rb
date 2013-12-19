@@ -8,6 +8,8 @@ class CreateClientes < ActiveRecord::Migration
       t.string :direccion
       t.string :telefono
       t.string :email
+
+      t.timestamps
     end
     add_index :clientes, :identificacion, unique: true
   end
