@@ -49,11 +49,15 @@ Bandango::Application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
+  namespace :api do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+    resources :current_user do
+      collection do
+        post "/", to: "current_user#update"
+      end
+    end
+  end
 end
 # put next lines before end statement: (route unroutable paths)
 # match '*a', :to => 'application#routing_error'
