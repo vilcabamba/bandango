@@ -1,7 +1,7 @@
 <div class="row">
   <h1>Bandango</h1>
+  {{#if Bandango.currentSession.loggedIn}}
   <div class="col-md-3 col-lg-3 sidebar">
-    {{#if Bandango.currentSession.loggedIn}}
       {{view Bandango.CurrentUserResumeView}}
       <ul class="nav nav-pills nav-stacked">
         <li>{{link-to "Facturas" "facturas"}}</li>
@@ -10,8 +10,8 @@
         <li class="bandango_divider"></li>
         <li><a href="/logout">Cerrar sesión</a></li>
       </ul>
-    {{/if}}
   </div>
+  {{/if}}
   <div class="col-md-9 col-lg-9 main_content">
     {{outlet}}
   </div>
