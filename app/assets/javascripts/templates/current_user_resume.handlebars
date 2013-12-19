@@ -1,5 +1,15 @@
 {{#with Bandango.currentSession.user}}
-  <img {{bind-attr src=imagen_url}} class="profile_image tiny">
-  {{nombres}}
-  {{link-to "ver" "me"}}
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle current_user" data-toggle="dropdown">
+      <img {{bind-attr src=imagen_url}} class="profile_image really_tiny">
+      {{firstNames}}
+      <span class="caret"></span>
+    </button>
+    
+    <ul class="dropdown-menu" role="menu">
+      <li>{{link-to "Mi perfil" "me"}}</li>
+      <li class="divider"></li>
+      <li><a href="/logout">Cerrar sesión</a></li>
+    </ul>
+  </div>
 {{/with}}
