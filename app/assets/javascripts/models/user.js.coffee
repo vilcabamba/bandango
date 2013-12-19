@@ -1,13 +1,17 @@
 Bandango.User = Ember.Object.extend
 
   firstNames: (->
-    nombres = @get("nombres").split(" ")
-    Ember.debug "computing user's firstNames"
-    if nombres.length > 2
-      nombres.slice(0, 2).join " "
+    if @get("nombres")
+      nombres = @get("nombres").split(" ")
+      Ember.debug "computing user's firstNames"
+      if nombres.length > 2
+        nombres.slice(0, 2).join " "
+      else
+        @get("nombres")
     else
-      @get("nombres")
-  ).property("nombres")
+      nombres = @get("username")
+    ).property("nombres")
+
 
   imagen_url_small: (->
     @get("imagen_url") + "?s=200"
