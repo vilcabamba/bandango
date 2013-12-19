@@ -8,7 +8,7 @@ module Api
       if current_user.update_attributes(user_params)
         render json: current_user, serializer: UserSerializer
       else
-        render json: current_user.errors.full_messages, status: 422
+        render json: current_user.errors, status: 422
       end
     end
 
