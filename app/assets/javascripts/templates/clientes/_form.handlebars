@@ -1,22 +1,22 @@
 <div class="row form-group">
-  <div class="col-xs-4">
+  <div class="col-xs-4" {{bind-attr class=":col-xs-4 view.errors.tipoId"}}>
     {{view Ember.Select content=view.tiposIds class="form-control" value=view.tipoId}}
   </div>
-  <div class="col-xs-8">
+  <div {{bind-attr class=":col-xs-8 view.errors.identificacion"}}>
     {{view Ember.TextField value=view.identificacion class="form-control" placeholder="Número de identificación"}}
   </div>
 </div>
-<div class="form-group">
+<div {{bind-attr class=":form-group view.errors.nombres"}}>
   {{view Ember.TextField value=view.nombres class="form-control" placeholder="Nombres"}}
 </div>
-<div class="form-group">
+<div {{bind-attr class=":form-group view.errors.direccion"}}>
   {{view Ember.TextField value=view.direccion class="form-control" placeholder="Dirección"}}
 </div>
 <div class="row form-group">
-  <div class="col-xs-6">
+  <div {{bind-attr class=":col-xs-6 view.errors.telefono"}}>
     {{view Ember.TextField value=view.telefono type="tel" class="form-control" placeholder="Teléfono"}}
   </div>
-  <div class="col-xs-6">
+  <div {{bind-attr class=":col-xs-6 view.errors.email"}}>
     {{view Ember.TextField value=view.email type="email" class="form-control" placeholder="Email"}}
   </div>
 </div>
