@@ -5,6 +5,7 @@
 {{partial "clientes/form"}}
 
 <div class="actions">
+  <span class="text-danger">{{view.errors_messages}}</span>
   {{link-to "Cancelar" "clientes.index" class="btn btn-link"}}
   <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
 </div>
