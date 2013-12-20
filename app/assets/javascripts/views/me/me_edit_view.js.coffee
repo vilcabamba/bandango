@@ -1,9 +1,7 @@
 self = null
 
-Bandango.MeEditView = Ember.View.extend
+Bandango.MeEditView = Bandango.ModelBackedView.extend
   tagName: "form"
-  raw_errors: {}
-  errors: {}
 
   model: (->
     @get("controller").get("model")
@@ -18,26 +16,6 @@ Bandango.MeEditView = Ember.View.extend
   email: (->
     @get("model").get("email")
   ).property()
-
-  errors_messages: (->
-    messages = ""
-    for key, value of @get("raw_errors")
-      messages += "#{key}: #{value.join(", ")}. "
-    messages
-  ).property("raw_errors")
-
-  emptyErrors: ->
-    @setProperties
-      errors: {}
-      raw_errors: {}
-
-  setErrors: (obj) ->
-    errors = {}
-    for key, value of obj
-      errors[key] = "has-error"
-    @setProperties
-      errors: errors
-      raw_errors: obj
 
   failureEditing: (response) ->
     self.setErrors response.responseJSON
