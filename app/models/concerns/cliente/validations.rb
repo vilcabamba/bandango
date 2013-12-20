@@ -8,6 +8,7 @@ class Cliente < ActiveRecord::Base
                                uniqueness: true
       validates :nombres, presence: true
       validates :email, uniqueness: true
+      validates_id :identificacion
     end
   end
 end
