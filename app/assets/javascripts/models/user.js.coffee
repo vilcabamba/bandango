@@ -1,5 +1,9 @@
-Bandango.User = Ember.Object.extend
-
+Bandango.User = Ember.Object.extend( Ember.Validations, {
+  validations: {
+    nombres: {
+      presence: true
+    }
+  }
   firstNames: (->
     if @get("nombres")
       nombres = @get("nombres").split(" ")
@@ -16,3 +20,4 @@ Bandango.User = Ember.Object.extend
   imagen_url_small: (->
     @get("imagen_url") + "?s=200"
   ).property("imagen_url")
+});
