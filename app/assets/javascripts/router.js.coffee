@@ -2,6 +2,7 @@
 
 Bandango.Router.map ()->
   @route "login"
+  @route "dashboard"
   @resource "me", ->
     @route "index", path: "/"
     @route "edit"
