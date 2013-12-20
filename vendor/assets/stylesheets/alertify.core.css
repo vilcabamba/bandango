@@ -1,3 +1,7 @@
+.alertify-logs {
+    top: 10px;
+    right: 10px;
+}
 .alertify,
 .alertify-show,
 .alertify-log {
