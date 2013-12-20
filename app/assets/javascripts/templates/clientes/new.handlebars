@@ -1,0 +1,7 @@
+
+{{partial "clientes/cliente_form"}}
+
+<div class="actions">
+  {{link-to "Cancelar" "clientes.index" class="btn btn-link"}}
+  <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
+</div>
