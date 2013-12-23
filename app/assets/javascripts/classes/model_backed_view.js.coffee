@@ -17,13 +17,17 @@ Bandango.ModelBackedView = Ember.View.extend
     messages
   ).property("raw_errors")
 
-  actionText: (->
-    if not @get("model") or @get("model").get("isNew") then "Nuevo" else "Editar"
+  newRecord: (->
+    not @get("model") or @get("model").get("isNew")
   ).property("model")
 
+  actionText: (->
+    if @get("newRecord") then "Nuevo" else "Editar"
+  ).property("newRecord")
+
   submitButtonText: (->
-    if not @get("model") or @get("model").get("isNew") then "Crear" else "Actualizar"
-  ).property("model")
+    if @get("newRecord") then "Crear" else "Actualizar"
+  ).property("newRecord")
 
   getFormData: ->
     @getProperties @get("attributes")
