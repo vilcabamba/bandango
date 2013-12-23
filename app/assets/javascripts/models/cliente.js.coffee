@@ -5,4 +5,3 @@ Bandango.Cliente = DS.Model.extend Bandango.PersonImagen,
   direccion: DS.attr()
   telefono: DS.attr()
   email: DS.attr()
-  imagen_url: DS.attr()

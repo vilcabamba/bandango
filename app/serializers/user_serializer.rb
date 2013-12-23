@@ -5,7 +5,6 @@ class UserSerializer < ActiveModel::Serializer
              :nombres,
              :username,
              :email,
-             :imagen_url,
              :token
 
 end

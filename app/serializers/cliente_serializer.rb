@@ -6,7 +6,6 @@ class ClienteSerializer < ActiveModel::Serializer
              :nombres,
              :direccion,
              :telefono,
-             :email,
-             :imagen_url
+             :email
 
 end
