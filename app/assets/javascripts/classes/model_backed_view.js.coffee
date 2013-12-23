@@ -13,7 +13,7 @@ Bandango.ModelBackedView = Ember.View.extend
   errors_messages: (->
     messages = []
     for key, value of @get("raw_errors")
-      messages.push "#{key}: #{value.join(", ")}"
+      messages.push "#{value.join(", ")}"
     messages
   ).property("raw_errors")
 
