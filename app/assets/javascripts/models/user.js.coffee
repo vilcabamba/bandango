@@ -1,4 +1,4 @@
-Bandango.User = Ember.Object.extend( Ember.Validations, {
+Bandango.User = Ember.Object.extend Ember.Validations, Bandango.PersonImagen, 
   validations: {
     nombres: {
       presence: true
@@ -14,9 +14,3 @@ Bandango.User = Ember.Object.extend( Ember.Validations, {
     else
       nombres
     ).property("nombres")
-
-
-  imagen_url_small: (->
-    @get("imagen_url") + "?s=200"
-  ).property("imagen_url")
-});
