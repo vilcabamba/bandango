@@ -1,4 +1,4 @@
-Bandango.ClienteFormView = Bandango.ModelBackedView.extend
+Bandango.ClienteFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm,
   tiposIds: ["RUC", "Cédula", "Pasaporte - otro"]
 
   attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
