@@ -3,14 +3,12 @@ module Api
 
     respond_to :json
 
-    before_action :find_cliente, only: [:show, :update, :destroy]
-
     def index
       respond_with Cliente.all
     end
 
     def show
-      respond_with @cliente
+      respond_with Cliente.find(params[:id])
     end
 
     def create
@@ -18,20 +16,17 @@ module Api
     end
 
     def update
-      respond_with :api, @cliente.update_attributes(cliente_params)
+      respond_with Cliente.update(params[:id], cliente_params)
     end
 
     def destroy
-      respond_with :api, @cliente.destroy
+      respond_with Cliente.destroy(params[:id])
     end
 
     private
 
     def cliente_params
       params.require(:cliente).permit :tipo_id, :identificacion, :nombres, :direccion, :telefono, :email
-    end
-    def find_cliente
-      @cliente = Cliente.find(params[:id])
     end
   end
 end
