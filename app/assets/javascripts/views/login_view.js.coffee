@@ -6,7 +6,6 @@ Bandango.LoginView = Ember.View.extend
   loginSuccess: (user) ->
     Bandango.currentSession.logInAs user
     alertify.log "Hola, #{user.username}"
-    # window.location.hash = "#/dashboard"
     self.get("controller").transitionToRoute "dashboard"
 
   loginFailure: (response) ->
