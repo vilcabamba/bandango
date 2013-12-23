@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     def create_token!
       begin
         self.token = SecureRandom.hex(50)
-      end while self.class.exists?(token: @token)
+      end while self.class.exists?(token: token)
     end
   end
 end
