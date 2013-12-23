@@ -4,9 +4,5 @@ Bandango.ClienteFormView = Bandango.ModelBackedView.extend Bandango.GravatarImag
   attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
 
   successCallback: (cliente, action) ->
-    alertify.log "#{cliente.get("nombres")} #{action}"
+    @_super "#{cliente.get("nombres")} #{action}"
     @get("controller").transitionToRoute "clientes.show", cliente.get("id")
-
-  failure: (response) ->
-    self.setErrors response.erorrs
-    self.set "submitting", false
