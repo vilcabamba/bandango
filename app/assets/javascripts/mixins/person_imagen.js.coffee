@@ -9,4 +9,4 @@ Bandango.PersonImagen = Ember.Mixin.create
   ).property("imagen_url")
 
   imagen_url_with_size: (size) ->
-    @get("imagen_url") + "?s=#{size}" if @get("imagen_url")
+    @get("imagen_url") + "&s=#{size}" if @get("imagen_url")
