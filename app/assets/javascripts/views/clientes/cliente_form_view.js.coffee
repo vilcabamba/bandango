@@ -1,5 +1,5 @@
 Bandango.ClienteFormView = Bandango.ModelBackedView.extend
-  tiposIds: ["RUC", "Cédula", "Otro"]
+  tiposIds: ["RUC", "Cédula", "Pasaporte - otro"]
 
   attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
 
