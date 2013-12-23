@@ -1,4 +1,4 @@
-Bandango.Cliente = DS.Model.extend
+Bandango.Cliente = DS.Model.extend Bandango.PersonImagen,
   tipoId: DS.attr()
   identificacion: DS.attr()
   nombres: DS.attr()
