@@ -13,7 +13,7 @@ Bandango.GravatarImagenHelper =
 
   imagenUrlWithOptions: (options) ->
     default_options = {
-      email: "a"
+      email: null
       size: 100
     }
     $.extend default_options, options
