@@ -1,5 +1,5 @@
-// Fetched from channel: canary, with url http://builds.emberjs.com/canary/ember-data.js
-// Fetched on: 2013-12-18T15:44:23Z
+// Fetched from channel: tags/v1.0.0-beta.4, with url http://builds.emberjs.com/tags/v1.0.0-beta.4/ember-data.js
+// Fetched on: 2013-12-23T20:10:30Z
 /*!
  * @overview  Ember Data
  * @copyright Copyright 2011-2013 Tilde Inc. and contributors.
@@ -8,7 +8,7 @@
  */
 
 
- // Version: 1.0.0-beta.4+canary.35e55667
+ // Version: 1.0.0-beta.4
 
 (function() {
 var define, requireModule;
@@ -63,7 +63,7 @@ var define, requireModule;
 var DS;
 if ('undefined' === typeof DS) {
   DS = Ember.Namespace.create({
-    VERSION: '1.0.0-beta.4+canary.35e55667'
+    VERSION: '1.0.0-beta.4'
   });
 
   if ('undefined' !== typeof window) {
@@ -1723,160 +1723,6 @@ DS.ManyArray = DS.RecordArray.extend({
 
 
 (function() {
-/**
-  @module ember-data
-*/
-
-var get = Ember.get;
-var forEach = Ember.ArrayPolyfills.forEach;
-
-var resolveMapConflict = function(oldValue, newValue) {
-  return oldValue;
-};
-
-var transformMapKey = function(key, value) {
-  return key;
-};
-
-var transformMapValue = function(key, value) {
-  return value;
-};
-
-/**
-  The Mappable mixin is designed for classes that would like to
-  behave as a map for configuration purposes.
-
-  For example, the DS.Adapter class can behave like a map, with
-  more semantic API, via the `map` API:
-
-    DS.Adapter.map('App.Person', { firstName: { key: 'FIRST' } });
-
-  Class configuration via a map-like API has a few common requirements
-  that differentiate it from the standard Ember.Map implementation.
-
-  First, values often are provided as strings that should be normalized
-  into classes the first time the configuration options are used.
-
-  Second, the values configured on parent classes should also be taken
-  into account.
-
-  Finally, setting the value of a key sometimes should merge with the
-  previous value, rather than replacing it.
-
-  This mixin provides a instance method, `createInstanceMapFor`, that
-  will reify all of the configuration options set on an instance's
-  constructor and provide it for the instance to use.
-
-  Classes can implement certain hooks that allow them to customize
-  the requirements listed above:
-
-  * `resolveMapConflict` - called when a value is set for an existing
-    value
-  * `transformMapKey` - allows a key name (for example, a global path
-    to a class) to be normalized
-  * `transformMapValue` - allows a value (for example, a class that
-    should be instantiated) to be normalized
-
-  Classes that implement this mixin should also implement a class
-  method built using the `generateMapFunctionFor` method:
-
-    DS.Adapter.reopenClass({
-      map: DS.Mappable.generateMapFunctionFor('attributes', function(key, newValue, map) {
-        var existingValue = map.get(key);
-
-        for (var prop in newValue) {
-          if (!newValue.hasOwnProperty(prop)) { continue; }
-          existingValue[prop] = newValue[prop];
-        }
-      })
-    });
-
-  The function passed to `generateMapFunctionFor` is invoked every time a
-  new value is added to the map.
-
-  @class _Mappable
-  @private
-  @namespace DS
-**/
-DS._Mappable = Ember.Mixin.create({
-  createInstanceMapFor: function(mapName) {
-    var instanceMeta = getMappableMeta(this);
-
-    instanceMeta.values = instanceMeta.values || {};
-
-    if (instanceMeta.values[mapName]) { return instanceMeta.values[mapName]; }
-
-    var instanceMap = instanceMeta.values[mapName] = new Ember.Map();
-
-    var klass = this.constructor;
-
-    while (klass && klass !== DS.Store) {
-      this._copyMap(mapName, klass, instanceMap);
-      klass = klass.superclass;
-    }
-
-    instanceMeta.values[mapName] = instanceMap;
-    return instanceMap;
-  },
-
-  _copyMap: function(mapName, klass, instanceMap) {
-    var classMeta = getMappableMeta(klass);
-
-    var classMap = classMeta[mapName];
-    if (classMap) {
-      forEach.call(classMap, eachMap, this);
-    }
-
-    function eachMap(key, value) {
-      var transformedKey = (klass.transformMapKey || transformMapKey)(key, value);
-      var transformedValue = (klass.transformMapValue || transformMapValue)(key, value);
-
-      var oldValue = instanceMap.get(transformedKey);
-      var newValue = transformedValue;
-
-      if (oldValue) {
-        newValue = (this.constructor.resolveMapConflict || resolveMapConflict)(oldValue, newValue);
-      }
-
-      instanceMap.set(transformedKey, newValue);
-    }
-  }
-
-});
-
-DS._Mappable.generateMapFunctionFor = function(mapName, transform) {
-  return function(key, value) {
-    var meta = getMappableMeta(this);
-
-    var map = meta[mapName] || Ember.MapWithDefault.create({
-      defaultValue: function() { return {}; }
-    });
-
-    transform.call(this, key, value, map);
-
-    meta[mapName] = map;
-  };
-};
-
-function getMappableMeta(obj) {
-  var meta = Ember.meta(obj, true),
-      keyName = 'DS.Mappable',
-      value = meta[keyName];
-
-  if (!value) { meta[keyName] = {}; }
-
-  if (!meta.hasOwnProperty(keyName)) {
-    meta[keyName] = Ember.create(meta[keyName]);
-  }
-
-  return meta[keyName];
-}
-
-})();
-
-
-
-(function() {
 /*globals Ember*/
 /*jshint eqnull:true*/
 /**
@@ -1925,7 +1771,9 @@ var coerceId = function(id) {
 
   Define your application's store like this:
 
-       MyApp.Store = DS.Store.extend();
+  ```javascript
+  MyApp.Store = DS.Store.extend();
+  ```
 
   Most Ember.js applications will only have a single `DS.Store` that is
   automatically created by their `Ember.Application`.
@@ -1933,12 +1781,16 @@ var coerceId = function(id) {
   You can retrieve models from the store in several ways. To retrieve a record
   for a specific id, use `DS.Model`'s `find()` method:
 
-       var person = App.Person.find(123);
+  ```javascript
+  var person = App.Person.find(123);
+  ```
 
   If your application has multiple `DS.Store` instances (an unusual case), you can
   specify which store should be used:
 
-      var person = store.find(App.Person, 123);
+  ```javascript
+  var person = store.find(App.Person, 123);
+  ```
 
   In general, you should retrieve models using the methods on `DS.Model`; you should
   rarely need to interact with the store directly.
@@ -1946,9 +1798,11 @@ var coerceId = function(id) {
   By default, the store will talk to your backend using a standard REST mechanism.
   You can customize how the store talks to your backend by specifying a custom adapter:
 
-       MyApp.store = DS.Store.create({
-         adapter: 'MyApp.CustomAdapter'
-       });
+  ```javascript
+   MyApp.store = DS.Store.create({
+     adapter: 'MyApp.CustomAdapter'
+   });
+   ```
 
   You can learn more about writing a custom adapter by reading the `DS.Adapter`
   documentation.
@@ -1956,9 +1810,8 @@ var coerceId = function(id) {
   @class Store
   @namespace DS
   @extends Ember.Object
-  @uses DS._Mappable
 */
-DS.Store = Ember.Object.extend(DS._Mappable, {
+DS.Store = Ember.Object.extend({
 
   /**
     @method init
@@ -2145,7 +1998,9 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
 
     To find a record by ID, pass the `id` as the second parameter:
 
-        store.find('person', 1);
+    ```javascript
+    store.find('person', 1);
+    ```
 
     The `find` method will always return a **promise** that will be resolved
     with the record. If the record was already in the store, the promise will
@@ -2159,7 +2014,9 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
 
     To find all records for a type, call `find` with no additional parameters:
 
-        store.find('person');
+    ```javascript
+    store.find('person');
+    ```
 
     This will ask the adapter's `findAll` method to find the records for the
     given type, and return a promise that will be resolved once the server
@@ -2170,7 +2027,9 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     To find a record by a query, call `find` with a hash as the second
     parameter:
 
-        store.find(App.Person, { page: 1 });
+    ```javascript
+    store.find(App.Person, { page: 1 });
+    ```
 
     This will ask the adapter's `findQuery` method to find the records for
     the query, and return a promise that will be resolved once the server
@@ -2214,6 +2073,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     This method makes a series of requests to the adapter's `find` method
     and returns a promise that resolves once they are all loaded.
 
+    @private
     @method findByIds
     @param {String} type
     @param {Array} ids
@@ -4954,7 +4814,12 @@ DS.Model = Ember.Object.extend(Ember.Evented, {
       this._inFlightAttributes = {};
       set(this, 'isError', false);
     }
-
+    
+    if (!get(this, 'isValid')) {
+      this._inFlightAttributes = {};
+      this.send('becameValid');
+    } 
+  
     this.send('rolledBack');
 
     this.suspendRelationshipObservers(function() {
@@ -5186,7 +5051,7 @@ DS.Model.reopenClass({
 
     Example
 
-    ```JavaScript
+    ```javascript
 
     App.Person = DS.Model.extend({
       firstName: attr('string'),
@@ -5234,7 +5099,7 @@ DS.Model.reopenClass({
 
     Example
 
-    ```JavaScript
+    ```javascript
     App.Person = DS.Model.extend({
       firstName: attr(),
       lastName: attr('string'),
@@ -5276,7 +5141,7 @@ DS.Model.reopenClass({
     The callback method you provide should have the following signature (all
     parameters are optional):
 
-    ```JavaScript
+    ```javascript
     function(name, meta);
     ```
 
@@ -5288,7 +5153,7 @@ DS.Model.reopenClass({
 
     Example
 
-    ```JavaScript
+    ```javascript
     App.Person = DS.Model.extend({
       firstName: attr('string'),
       lastName: attr('string'),
@@ -5324,7 +5189,7 @@ DS.Model.reopenClass({
     The callback method you provide should have the following signature (all
     parameters are optional):
 
-    ```JavaScript
+    ```javascript
     function(name, type);
     ```
 
@@ -5337,7 +5202,7 @@ DS.Model.reopenClass({
 
     Example
 
-    ```JavaScript
+    ```javascript
     App.Person = DS.Model.extend({
       firstName: attr(),
       lastName: attr('string'),
@@ -5412,7 +5277,7 @@ function getValue(record, key) {
 
   Example
 
-  ```JavaScript
+  ```javascript
   var attr = DS.attr;
 
   App.User = DS.Model.extend({
@@ -5443,7 +5308,14 @@ DS.attr = function(type, options) {
     if (arguments.length > 1) {
       Ember.assert("You may not set `id` as an attribute on your model. Please remove any lines that look like: `id: DS.attr('<type>')` from " + this.constructor.toString(), key !== 'id');
       var oldValue = this._attributes[key] || this._inFlightAttributes[key] || this._data[key];
-      this.send('didSetProperty', { name: key, oldValue: oldValue, originalValue: this._data[key], value: value });
+
+      this.send('didSetProperty', {
+        name: key,
+        oldValue: oldValue,
+        originalValue: this._data[key],
+        value: value
+      });
+
       this._attributes[key] = value;
       return value;
     } else if (hasValue(this, key)) {
@@ -6020,6 +5892,53 @@ function asyncBelongsTo(type, options, meta) {
   }).property('data').meta(meta);
 }
 
+/**
+  `DS.belongsTo` is used to define One-To-One and One-To-Many
+  relationships on a [DS.Model](DS.Model.html).
+
+
+  `DS.belongsTo` takes an optional hash as a second parameter, currently
+  supported options are:
+
+  - `async`: A boolean value used to explicitly declare this to be an async relationship.
+  - `inverse`: A string used to identify the inverse property on a
+    related model in a One-To-Many relationship. See [Explicit Inverses](#toc_explicit-inverses)
+
+  #### One-To-One
+  To declare a one-to-one relationship between two models, use
+  `DS.belongsTo`:
+
+  ```javascript
+  App.User = DS.Model.extend({
+    profile: DS.belongsTo('profile')
+  });
+
+  App.Profile = DS.Model.extend({
+    user: DS.belongsTo('user')
+  });
+  ```
+
+  #### One-To-Many
+  To declare a one-to-many relationship between two models, use
+  `DS.belongsTo` in combination with `DS.hasMany`, like this:
+
+  ```javascript
+  App.Post = DS.Model.extend({
+    comments: DS.hasMany('comment')
+  });
+
+  App.Comment = DS.Model.extend({
+    post: DS.belongsTo('post')
+  });
+  ```
+
+  @namespace
+  @method belongsTo
+  @for DS
+  @param {String or DS.Model} type the model type of the relationship
+  @param {Object} options a hash of options
+  @return {Ember.computed} relationship
+*/
 DS.belongsTo = function(type, options) {
   if (typeof type === 'object') {
     options = type;
@@ -6061,7 +5980,7 @@ DS.belongsTo = function(type, options) {
   }).property('data').meta(meta);
 };
 
-/*
+/**
   These observers observe all `belongsTo` relationships on the record. See
   `relationships/ext` to see how these observers get their dependencies.
 
@@ -6189,6 +6108,84 @@ function hasRelationship(type, options) {
   }).property('data').meta(meta);
 }
 
+/**
+  `DS.hasMany` is used to define One-To-Many and Many-To-Many
+  relationships on a [DS.Model](DS.Model.html).
+
+  `DS.hasMany` takes an optional hash as a second parameter, currently
+  supported options are:
+
+  - `async`: A boolean value used to explicitly declare this to be an async relationship.
+  - `inverse`: A string used to identify the inverse property on a related model.
+
+  #### One-To-Many
+  To declare a one-to-many relationship between two models, use
+  `DS.belongsTo` in combination with `DS.hasMany`, like this:
+
+  ```javascript
+  App.Post = DS.Model.extend({
+    comments: DS.hasMany('comment')
+  });
+
+  App.Comment = DS.Model.extend({
+    post: DS.belongsTo('post')
+  });
+  ```
+
+  #### Many-To-Many
+  To declare a many-to-many relationship between two models, use
+  `DS.hasMany`:
+
+  ```javascript
+  App.Post = DS.Model.extend({
+    tags: DS.hasMany('tag')
+  });
+
+  App.Tag = DS.Model.extend({
+    posts: DS.hasMany('post')
+  });
+  ```
+
+  #### Explicit Inverses
+
+  Ember Data will do its best to discover which relationships map to
+  one another. In the one-to-many code above, for example, Ember Data
+  can figure out that changing the `comments` relationship should update
+  the `post` relationship on the inverse because post is the only
+  relationship to that model.
+
+  However, sometimes you may have multiple `belongsTo`/`hasManys` for the
+  same type. You can specify which property on the related model is
+  the inverse using `DS.hasMany`'s `inverse` option:
+
+  ```javascript
+  var belongsTo = DS.belongsTo,
+      hasMany = DS.hasMany;
+
+  App.Comment = DS.Model.extend({
+    onePost: belongsTo('post'),
+    twoPost: belongsTo('post'),
+    redPost: belongsTo('post'),
+    bluePost: belongsTo('post')
+  });
+
+  App.Post = DS.Model.extend({
+    comments: hasMany('comment', {
+      inverse: 'redPost'
+    })
+  });
+  ```
+
+  You can also specify an inverse on a `belongsTo`, which works how
+  you'd expect.
+
+  @namespace
+  @method hasMany
+  @for DS
+  @param {String or DS.Model} type the model type of the relationship
+  @param {Object} options a hash of options
+  @return {Ember.computed} relationship
+*/
 DS.hasMany = function(type, options) {
   if (typeof type === 'object') {
     options = type;
@@ -6231,9 +6228,11 @@ DS.Model.reopen({
     This hook passes the class being set up, as well as the key and value
     being defined. So, for example, when the user does this:
 
-      DS.Model.extend({
-        parent: DS.belongsTo('user')
-      });
+    ```javascript
+    DS.Model.extend({
+      parent: DS.belongsTo('user')
+    });
+    ```
 
     This hook would be called with "parent" as the key and the computed
     property returned by `DS.belongsTo` as the value.
@@ -6285,9 +6284,11 @@ DS.Model.reopenClass({
 
     For example, if you define a model like this:
 
-        App.Post = DS.Model.extend({
-          comments: DS.hasMany('comment')
-        });
+   ```javascript
+    App.Post = DS.Model.extend({
+      comments: DS.hasMany('comment')
+    });
+   ```
 
     Calling `App.Post.typeForRelationship('comments')` will return `App.Comment`.
 
@@ -6359,21 +6360,25 @@ DS.Model.reopenClass({
 
     For example, given the following model definition:
 
-        App.Blog = DS.Model.extend({
-          users: DS.hasMany('user'),
-          owner: DS.belongsTo('user'),
-          posts: DS.hasMany('post')
-        });
+    ```javascript
+    App.Blog = DS.Model.extend({
+      users: DS.hasMany('user'),
+      owner: DS.belongsTo('user'),
+      posts: DS.hasMany('post')
+    });
+    ```
 
     This computed property would return a map describing these
     relationships, like this:
 
-        var relationships = Ember.get(App.Blog, 'relationships');
-        relationships.get(App.User);
-        //=> [ { name: 'users', kind: 'hasMany' },
-        //     { name: 'owner', kind: 'belongsTo' } ]
-        relationships.get(App.Post);
-        //=> [ { name: 'posts', kind: 'hasMany' } ]
+    ```javascript
+    var relationships = Ember.get(App.Blog, 'relationships');
+    relationships.get(App.User);
+    //=> [ { name: 'users', kind: 'hasMany' },
+    //     { name: 'owner', kind: 'belongsTo' } ]
+    relationships.get(App.Post);
+    //=> [ { name: 'posts', kind: 'hasMany' } ]
+    ```
 
     @property relationships
     @static
@@ -6409,20 +6414,24 @@ DS.Model.reopenClass({
     by the relationship kind. For example, given a model with this
     definition:
 
-        App.Blog = DS.Model.extend({
-          users: DS.hasMany('user'),
-          owner: DS.belongsTo('user'),
+    ```javascript
+    App.Blog = DS.Model.extend({
+      users: DS.hasMany('user'),
+      owner: DS.belongsTo('user'),
 
-          posts: DS.hasMany('post')
-        });
+      posts: DS.hasMany('post')
+    });
+    ```
 
     This property would contain the following:
 
-       var relationshipNames = Ember.get(App.Blog, 'relationshipNames');
-       relationshipNames.hasMany;
-       //=> ['users', 'posts']
-       relationshipNames.belongsTo;
-       //=> ['owner']
+    ```javascript
+    var relationshipNames = Ember.get(App.Blog, 'relationshipNames');
+    relationshipNames.hasMany;
+    //=> ['users', 'posts']
+    relationshipNames.belongsTo;
+    //=> ['owner']
+    ```
 
     @property relationshipNames
     @static
@@ -6448,17 +6457,21 @@ DS.Model.reopenClass({
 
     For example, given a model with this definition:
 
-        App.Blog = DS.Model.extend({
-          users: DS.hasMany('user'),
-          owner: DS.belongsTo('user'),
-  
-          posts: DS.hasMany('post')
-        });
+    ```javascript
+    App.Blog = DS.Model.extend({
+      users: DS.hasMany('user'),
+      owner: DS.belongsTo('user'),
+
+      posts: DS.hasMany('post')
+    });
+    ```
 
     This property would contain the following:
 
-       var relatedTypes = Ember.get(App.Blog, 'relatedTypes');
-       //=> [ App.User, App.Post ]
+    ```javascript
+    var relatedTypes = Ember.get(App.Blog, 'relatedTypes');
+    //=> [ App.User, App.Post ]
+    ```
 
     @property relatedTypes
     @static
@@ -6499,20 +6512,24 @@ DS.Model.reopenClass({
     For example, given a model with this
     definition:
 
-        App.Blog = DS.Model.extend({
-          users: DS.hasMany('user'),
-          owner: DS.belongsTo('user'),
+    ```javascript
+    App.Blog = DS.Model.extend({
+      users: DS.hasMany('user'),
+      owner: DS.belongsTo('user'),
 
-          posts: DS.hasMany('post')
-        });
+      posts: DS.hasMany('post')
+    });
+    ```
 
     This property would contain the following:
 
-       var relationshipsByName = Ember.get(App.Blog, 'relationshipsByName');
-       relationshipsByName.get('users');
-       //=> { key: 'users', kind: 'hasMany', type: App.User }
-       relationshipsByName.get('owner');
-       //=> { key: 'owner', kind: 'belongsTo', type: App.User }
+    ```javascript
+    var relationshipsByName = Ember.get(App.Blog, 'relationshipsByName');
+    relationshipsByName.get('users');
+    //=> { key: 'users', kind: 'hasMany', type: App.User }
+    relationshipsByName.get('owner');
+    //=> { key: 'owner', kind: 'belongsTo', type: App.User }
+    ```
 
     @property relationshipsByName
     @static
@@ -6551,25 +6568,28 @@ DS.Model.reopenClass({
 
     For example:
 
-        App.Blog = DS.Model.extend({
-          users: DS.hasMany('user'),
-          owner: DS.belongsTo('user'),
+    ```javascript
 
-          posts: DS.hasMany('post'),
+    App.Blog = DS.Model.extend({
+      users: DS.hasMany('user'),
+      owner: DS.belongsTo('user'),
 
-          title: DS.attr('string')
-        });
+      posts: DS.hasMany('post'),
 
-        var fields = Ember.get(App.Blog, 'fields');
-        fields.forEach(function(field, kind) {
-          console.log(field, kind);
-        });
+      title: DS.attr('string')
+    });
 
-        // prints:
-        // users, hasMany
-        // owner, belongsTo
-        // posts, hasMany
-        // title, attribute
+    var fields = Ember.get(App.Blog, 'fields');
+    fields.forEach(function(field, kind) {
+      console.log(field, kind);
+    });
+
+    // prints:
+    // users, hasMany
+    // owner, belongsTo
+    // posts, hasMany
+    // title, attribute
+    ```
 
     @property fields
     @static
@@ -6886,15 +6906,19 @@ DS.InvalidError.prototype = Ember.create(Error.prototype);
 
   First, create a new subclass of `DS.Adapter`:
 
-      App.MyAdapter = DS.Adapter.extend({
-        // ...your code here
-      });
+  ```javascript
+  App.MyAdapter = DS.Adapter.extend({
+    // ...your code here
+  });
+  ```
 
   To tell your store which adapter to use, set its `adapter` property:
 
-      App.store = DS.Store.create({
-        adapter: App.MyAdapter.create()
-      });
+  ```javascript
+  App.store = DS.Store.create({
+    adapter: App.MyAdapter.create()
+  });
+  ```
 
   `DS.Adapter` is an abstract base class that you should override in your
   application to customize it for your backend. The minimum set of methods
@@ -6920,10 +6944,9 @@ DS.InvalidError.prototype = Ember.create(Error.prototype);
   @class Adapter
   @namespace DS
   @extends Ember.Object
-  @uses DS._Mappable
 */
 
-DS.Adapter = Ember.Object.extend(DS._Mappable, {
+DS.Adapter = Ember.Object.extend({
 
   /**
     The `find()` method is invoked when the store is asked for a record that
@@ -6934,25 +6957,27 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
 
     Here is an example `find` implementation:
 
-        find: function(store, type, id) {
-          var url = type.url;
-          url = url.fmt(id);
+    ```javascript
+    find: function(store, type, id) {
+      var url = type.url;
+      url = url.fmt(id);
 
-          jQuery.getJSON(url, function(data) {
-              // data is a hash of key/value pairs. If your server returns a
-              // root, simply do something like:
-              // store.push(type, id, data.person)
-              store.push(type, id, data);
-          });
-        }
+      jQuery.getJSON(url, function(data) {
+          // data is a hash of key/value pairs. If your server returns a
+          // root, simply do something like:
+          // store.push(type, id, data.person)
+          store.push(type, id, data);
+      });
+    }
+    ```
 
     @method find
   */
   find: Ember.required(Function),
 
   /**
-    Optional
 
+    @private
     @method findAll
     @param  store
     @param  type
@@ -6961,8 +6986,8 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
   findAll: null,
 
   /**
-    Optional
 
+    @private
     @method findQuery
     @param  store
     @param  type
@@ -6985,10 +7010,12 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
     The `generateIdForRecord()` method will be invoked with the requesting store as
     the first parameter and the newly created record as the second parameter:
 
-        generateIdForRecord: function(store, record) {
-          var uuid = App.generateUUIDWithStatisticallyLowOddsOfCollision();
-          return uuid;
-        }
+    ```javascript
+    generateIdForRecord: function(store, record) {
+      var uuid = App.generateUUIDWithStatisticallyLowOddsOfCollision();
+      return uuid;
+    }
+    ```
 
     @method generateIdForRecord
     @param {DS.Store} store
@@ -7223,6 +7250,7 @@ DS.FixtureAdapter = DS.Adapter.extend({
   },
 
   /**
+    @private
     @method findAll
     @param  store
     @param  type
@@ -7238,6 +7266,7 @@ DS.FixtureAdapter = DS.Adapter.extend({
   },
 
   /**
+    @private
     @method findQuery
     @param  store
     @param  type
@@ -7506,7 +7535,7 @@ DS.RESTSerializer = DS.JSONSerializer.extend({
     this.normalizeRelationships(type, hash);
 
     if (this.normalizeHash && this.normalizeHash[prop]) {
-      return this.normalizeHash[prop](hash);
+      this.normalizeHash[prop](hash);
     }
 
     return this._super(type, hash, prop);
@@ -8264,6 +8293,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     The `findAll` method makes an Ajax (HTTP GET) request to a URL computed by `buildURL`, and returns a
     promise for the resulting payload.
 
+    @private
     @method findAll
     @see RESTAdapter/buildURL
     @see RESTAdapter/ajax
@@ -8292,6 +8322,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     The `query` argument is a simple JavaScript object that will be passed directly
     to the server as parameters.
 
+    @private
     @method findQuery
     @see RESTAdapter/buildURL
     @see RESTAdapter/ajax
