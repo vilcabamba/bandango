@@ -1,5 +1,5 @@
 <div class="align_center">
-  <h3>Nuevo</h3>
+  <h3>{{view.actionText}}</h3>
 </div>
 
 {{partial "clientes/form"}}
@@ -10,6 +10,6 @@
   </div>
   <div class="col-xs-4 actions">
     {{link-to "Cancelar" "clientes.index" class="btn btn-link"}}
-    <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
+    <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
   </div>
 </div>
