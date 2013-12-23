@@ -8,6 +8,7 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
     self.successCallback cliente, "actualizado"
 
   failure: (response) ->
+    self.get("model").rollback()
     self.failureCallback response
 
   submit: ->
