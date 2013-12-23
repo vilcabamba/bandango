@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-4 align_right">
-    <img src="{{unbound model.imagen_url_small}}" class="profile_image small">
+    <img {{bind-attr src=view.imagen_url_small}} class="profile_image small">
   </div>
   <div class="col-xs-8">
     <div {{bind-attr class=":form-group view.errors.nombres"}}>

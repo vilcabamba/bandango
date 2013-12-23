@@ -7,6 +7,10 @@ Bandango.MeEditView = Bandango.ModelBackedView.extend
     @get("controller").get("model")
   ).property("controller.model")
 
+  imagen_url_small: (->
+    Bandango.GravatarImagenHelper.imagenUrlWithOptions email: @get("email"), size: 200
+  ).property("email")
+
   nombres: (->
     @get("model").get("nombres")
   ).property()
