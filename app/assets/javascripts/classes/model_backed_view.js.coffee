@@ -1,8 +1,14 @@
 Bandango.ModelBackedView = Ember.View.extend
+  # defaults
   raw_errors: {}
   errors: {}
-
   tagName: "form"
+  attributes: []
+  bindAttributesTo: "model"
+
+  init: ->
+    @_super()
+    @defineComputedPropertiesForAttributes()
 
   errors_messages: (->
     messages = []
@@ -19,10 +25,22 @@ Bandango.ModelBackedView = Ember.View.extend
     if not @get("model") or @get("model").get("isNew") then "Crear" else "Actualizar"
   ).property("model")
 
+  getFormData: ->
+    @getProperties @get("attributes")
+
+  defineComputedPropertiesForAttributes: ->
+    if bindTo = @get("bindAttributesTo")
+      for attribute in @get("attributes")
+        Ember.defineProperty @, attribute, (->
+          @get(bindTo).get(arguments[0])
+        ).property()
+    null
+
   emptyErrors: ->
     @setProperties
       errors: {}
       raw_errors: {}
+    null
 
   setErrors: (the_errors) ->
     errors = {}
@@ -31,3 +49,4 @@ Bandango.ModelBackedView = Ember.View.extend
     @setProperties
       errors: errors
       raw_errors: the_errors
+    null
