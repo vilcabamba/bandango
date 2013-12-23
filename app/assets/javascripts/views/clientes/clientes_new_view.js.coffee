@@ -2,6 +2,7 @@ self = null
 
 Bandango.ClientesNewView = Bandango.ModelBackedView.extend
   tiposIds: ["RUC", "Cédula", "Otro"]
+  bindAttributesTo: null
 
   success: ->
     console.log "success"
@@ -13,7 +14,7 @@ Bandango.ClientesNewView = Bandango.ModelBackedView.extend
   submit: ->
     self = @
     @emptyErrors()
-    data = @getProperties "tipoId", "identificacion", "nombres", "direccion", "telefono", "email"
+    data = @getFormData()
     store = @get("controller").get("store")
     new_cliente = store.createRecord "cliente", data
     new_cliente.save().then @success, @failure
