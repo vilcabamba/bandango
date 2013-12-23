@@ -1,7 +1,6 @@
 self = null
 
 Bandango.ClientesNewView = Bandango.ModelBackedView.extend
-  tagName: "form"
   tiposIds: ["RUC", "Cédula", "Otro"]
 
   success: ->
