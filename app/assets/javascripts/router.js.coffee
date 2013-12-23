@@ -12,3 +12,4 @@ Bandango.Router.map ()->
   @resource "clientes", ->
     @route "index", path: "/"
     @route "new"
+    @route "show", path: "/:cliente_id"
