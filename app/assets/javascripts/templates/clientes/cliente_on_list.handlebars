@@ -1,0 +1,17 @@
+{{#with view.model}}
+  <div class="imagen">
+    <img src="{{unbound imagen_url}}" class="profile_image mini">
+  </div>
+  <div class="info">
+    <div class="nombres">
+      {{nombres}}
+    </div>
+    <div class="identificacion">
+      {{tipoId}}:
+      {{identificacion}}
+    </div>
+  </div>
+{{/with}}
+<span class="pull-right">
+  <span class="glyphicon glyphicon-chevron-right"></span>
+</span>
