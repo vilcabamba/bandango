@@ -1,19 +1,11 @@
 self = null
 
-Bandango.ClientesEditView = Bandango.ModelBackedView.extend
-  tiposIds: ["RUC", "Cédula", "Otro"]
+Bandango.ClientesEditView = Bandango.ClienteFormView.extend
   templateName: "clientes/new"
   modelBinding: "controller.model"
 
-  attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
-
   success: (cliente) ->
-    alertify.log "Cliente actualizado"
-    self.get("controller").transitionToRoute "clientes.show", cliente.get("id")
-
-  failure: (response) ->
-    self.setErrors response.errors
-    self.set "submitting", false
+    self.successCallback cliente, "actualizado"
 
   submit: ->
     self = @

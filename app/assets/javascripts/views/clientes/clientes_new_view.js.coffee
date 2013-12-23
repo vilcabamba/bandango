@@ -1,15 +1,10 @@
 self = null
 
-Bandango.ClientesNewView = Bandango.ModelBackedView.extend
-  tiposIds: ["RUC", "Cédula", "Otro"]
+Bandango.ClientesNewView = Bandango.ClienteFormView.extend
   bindAttributesTo: null
 
-  success: ->
-    console.log "success"
-
-  failure: (response) ->
-    self.setErrors response.errors
-    self.set "submitting", false
+  success: (cliente) ->
+    self.successCallback cliente, "creado"
 
   submit: ->
     self = @
