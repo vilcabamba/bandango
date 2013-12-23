@@ -9,4 +9,8 @@ Bandango.SessionController = Ember.Controller.extend
     !!@get("user")
   ).property("user")
 
+  requireLogin: (route) ->
+    unless @get("loggedIn")
+      route.transitionTo "login"
+
 Bandango.currentSession = Bandango.SessionController.create()
