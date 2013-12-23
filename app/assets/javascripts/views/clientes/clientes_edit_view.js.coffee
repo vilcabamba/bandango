@@ -7,9 +7,20 @@ Bandango.ClientesEditView = Bandango.ModelBackedView.extend
 
   attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
 
+  success: (cliente) ->
+    alertify.log "Cliente actualizado"
+    self.get("controller").transitionToRoute "clientes.show", cliente.get("id")
+
+  failure: (response) ->
+    self.setErrors response.errors
+    self.set "submitting", false
+
   submit: ->
     self = @
     @emptyErrors()
     data = @getFormData()
-    console.log data
+    cliente = @get("model")
+    cliente.setProperties data
+    cliente.save().then @success, @failure
+    @set "submitting", true
     false
