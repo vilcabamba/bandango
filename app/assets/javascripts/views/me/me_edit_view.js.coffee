@@ -17,13 +17,13 @@ Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnF
     @get("model").get("email")
   ).property()
 
-  failureEditing: (response) ->
-    self.setErrors response.responseJSON
-    self.set "submitting", false
-
   successEditing: (user) ->
     Bandango.currentSession.logInAs user
     self.get("controller").transitionToRoute "me.index"
+    self.successCallback "Tu perfil fue actualizado"
+
+  failureEditing: (response) ->
+    self.failureCallback {errors: response.responseJSON}
 
   submit: ->
     self = @

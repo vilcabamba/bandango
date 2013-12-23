@@ -7,6 +7,9 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
   success: (cliente) ->
     self.successCallback cliente, "actualizado"
 
+  failure: (response) ->
+    self.failureCallback response
+
   submit: ->
     self = @
     @emptyErrors()
