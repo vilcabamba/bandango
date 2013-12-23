@@ -1,16 +1,16 @@
-// Fetched from channel: canary, with url http://builds.emberjs.com/canary/ember.js
-// Fetched on: 2013-12-18T15:44:10Z
-/*!
- * @overview  Ember - JavaScript Application Framework
- * @copyright Copyright 2011-2013 Tilde Inc. and contributors
- *            Portions Copyright 2006-2011 Strobe Inc.
- *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
- * @license   Licensed under MIT license
- *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- */
+// Fetched from channel: beta, with url http://builds.emberjs.com/beta/ember.js
+// Fetched on: 2013-12-23T20:08:06Z
+// ==========================================================================
+// Project:   Ember - JavaScript Application Framework
+// Copyright: Copyright 2011-2013 Tilde Inc. and contributors
+//            Portions Copyright 2006-2011 Strobe Inc.
+//            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
+// License:   Licensed under MIT license
+//            See https://raw.github.com/emberjs/ember.js/master/LICENSE
+// ==========================================================================
 
 
- // Version: 1.4.0-beta.1+canary.19457287
+ // Version: 1.3.0-beta.4+pre.3ade3067
 
 (function() {
 /*global __fail__*/
@@ -60,6 +60,11 @@ if (!('MANDATORY_SETTER' in Ember.ENV)) {
 */
 Ember.assert = function(desc, test) {
   if (!test) {
+    Ember.Logger.assert(test, desc);
+  }
+
+  if (Ember.testing && !test) {
+    // when testing, ensure test failures when assertions fail
     throw new Ember.Error("Assertion Failed: " + desc);
   }
 };
@@ -181,17 +186,17 @@ if (!Ember.testing) {
 
 })();
 
-/*!
- * @overview  Ember - JavaScript Application Framework
- * @copyright Copyright 2011-2013 Tilde Inc. and contributors
- *            Portions Copyright 2006-2011 Strobe Inc.
- *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
- * @license   Licensed under MIT license
- *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- */
+// ==========================================================================
+// Project:   Ember - JavaScript Application Framework
+// Copyright: Copyright 2011-2013 Tilde Inc. and contributors
+//            Portions Copyright 2006-2011 Strobe Inc.
+//            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
+// License:   Licensed under MIT license
+//            See https://raw.github.com/emberjs/ember.js/master/LICENSE
+// ==========================================================================
 
 
- // Version: 1.4.0-beta.1+canary.19457287
+ // Version: 1.3.0-beta.4+pre.3ade3067
 
 (function() {
 var define, requireModule, require, requirejs;
@@ -272,7 +277,7 @@ var define, requireModule, require, requirejs;
 
   @class Ember
   @static
-  @version 1.4.0-beta.1+canary.19457287
+  @version 1.3.0-beta.4+pre.3ade3067
 */
 
 if ('undefined' === typeof Ember) {
@@ -299,10 +304,10 @@ Ember.toString = function() { return "Ember"; };
 /**
   @property VERSION
   @type String
-  @default '1.4.0-beta.1+canary.19457287'
+  @default '1.3.0-beta.4+pre.3ade3067'
   @final
 */
-Ember.VERSION = '1.4.0-beta.1+canary.19457287';
+Ember.VERSION = '1.3.0-beta.4+pre.3ade3067';
 
 /**
   Standard environmental variables. You can define these in a global `ENV`
@@ -1543,41 +1548,6 @@ Ember.typeOf = function(item) {
   return ret;
 };
 
-/**
-  Convenience method to inspect an object. This method will attempt to
-  convert the object into a useful string description.
-
-  It is a pretty simple implementation. If you want something more robust,
-  use something like JSDump: https://github.com/NV/jsDump
-
-  @method inspect
-  @for Ember
-  @param {Object} obj The object you want to inspect.
-  @return {String} A description of the object
-*/
-Ember.inspect = function(obj) {
-  var type = Ember.typeOf(obj);
-  if (type === 'array') {
-    return '[' + obj + ']';
-  }
-  if (type !== 'object') {
-    return obj + '';
-  }
-
-  var v, ret = [];
-  for(var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      v = obj[key];
-      if (v === 'toString') { continue; } // ignore useless items
-      if (Ember.typeOf(v) === 'function') { v = "function() { ... }"; }
-      ret.push(key + ": " + v);
-    }
-  }
-  return "{" + ret.join(", ") + "}";
-};
-
-
-
 })();
 
 
@@ -1989,7 +1959,7 @@ var normalizeTuple = Ember.normalizeTuple = function(target, path) {
   }
 
   // must return some kind of path to be valid else other things will break.
-  if (!path || path.length===0) throw new Ember.Error('Path cannot be empty');
+  if (!path || path.length===0) throw new Ember.Error('Invalid Path');
 
   return [ target, path ];
 };
@@ -2257,7 +2227,7 @@ function suspendListener(obj, eventName, target, method, callback) {
 
   Suspends multiple listeners during a callback.
 
-  
+
   @method suspendListeners
   @for Ember
   @param obj
@@ -2325,7 +2295,7 @@ function watchedEvents(obj) {
   is skipped, and once listeners are removed. A listener without
   a target is executed on the passed object. If an array of actions
   is not passed, the actions stored on the passed object are invoked.
-  
+
   @method sendEvent
   @for Ember
   @param obj
@@ -2404,13 +2374,16 @@ function listenersFor(obj, eventName) {
   Define a property as a function that should be executed when
   a specified event or events are triggered.
 
-      var Job = Ember.Object.extend({
-        logCompleted: Ember.on('completed', function(){
-          console.log('Job completed!');
-        })
-      });
-      var job = Job.create();
-      Ember.sendEvent(job, 'completed'); // Logs "Job completed!"
+
+  ``` javascript
+  var Job = Ember.Object.extend({
+    logCompleted: Ember.on('completed', function(){
+      console.log('Job completed!');
+    })
+  });
+  var job = Job.create();
+  Ember.sendEvent(job, 'completed'); // Logs "Job completed!"
+ ```
 
   @method on
   @for Ember
@@ -3334,6 +3307,7 @@ Ember.Logger = {
    @param {*} arguments
   */
   log:   consoleMethod('log')   || Ember.K,
+
   /**
    Prints the arguments to the console with a warning icon.
    You can pass as many arguments as you want and they will be joined together with a space.
@@ -3347,8 +3321,9 @@ Ember.Logger = {
    @param {*} arguments
   */
   warn:  consoleMethod('warn')  || Ember.K,
+
   /**
-   Prints the arguments to the console with an error icon, red text and a stack race.
+   Prints the arguments to the console with an error icon, red text and a stack trace.
    You can pass as many arguments as you want and they will be joined together with a space.
 
     ```javascript
@@ -3360,6 +3335,7 @@ Ember.Logger = {
    @param {*} arguments
   */
   error: consoleMethod('error') || Ember.K,
+
   /**
    Logs the arguments to the console.
    You can pass as many arguments as you want and they will be joined together with a space.
@@ -3374,6 +3350,7 @@ Ember.Logger = {
    @param {*} arguments
   */
   info:  consoleMethod('info')  || Ember.K,
+
   /**
    Logs the arguments to the console in blue text.
    You can pass as many arguments as you want and they will be joined together with a space.
@@ -3388,9 +3365,9 @@ Ember.Logger = {
    @param {*} arguments
   */
   debug: consoleMethod('debug') || consoleMethod('info') || Ember.K,
-  /**
 
-   If the value passed into Ember.Logger.assert is not truthy it will throw an error with a stack trace.
+  /**
+   If the value passed into `Ember.Logger.assert` is not truthy it will throw an error with a stack trace.
 
     ```javascript
     Ember.Logger.assert(true); // undefined
@@ -4035,52 +4012,6 @@ Ember.finishChains = function(obj) {
 
 
 (function() {
-if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-  /**
-    @module ember-metal
-  */
-
-  var forEach = Ember.EnumerableUtils.forEach,
-      BRACE_EXPANSION = /^((?:[^\.]*\.)*)\{(.*)\}$/;
-
-  /**
-    Expands `pattern`, invoking `callback` for each expansion.
-
-    The only pattern supported is brace-expansion, anything else will be passed
-    once to `callback` directly. Brace expansion can only appear at the end of a
-    pattern, for example as the last item in a chain.
-
-    Example
-    ```js
-    function echo(arg){ console.log(arg); }
-
-    Ember.expandProperties('foo.bar', echo);        //=> 'foo.bar'
-    Ember.expandProperties('{foo,bar}', echo);      //=> 'foo', 'bar'
-    Ember.expandProperties('foo.{bar,baz}', echo);  //=> 'foo.bar', 'foo.baz'
-    Ember.expandProperties('{foo,bar}.baz', echo);  //=> '{foo,bar}.baz'
-    ```
-
-    @method
-    @private
-    @param {string} pattern The property pattern to expand.
-    @param {function} callback The callback to invoke.  It is invoked once per
-    expansion, and is passed the expansion.
-  */
-  Ember.expandProperties = function (pattern, callback) {
-    var match, prefix, list;
-
-    if (match = BRACE_EXPANSION.exec(pattern)) {
-      prefix = match[1];
-      list = match[2];
-
-      forEach(list.split(','), function (suffix) {
-        callback(prefix + suffix);
-      });
-    } else {
-      callback(pattern);
-    }
-  };
-}
 
 })();
 
@@ -4286,9 +4217,6 @@ var get = Ember.get,
     watch = Ember.watch,
     unwatch = Ember.unwatch;
 
-if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-  var expandProperties = Ember.expandProperties;
-}
 
 // ..........................................................
 // DEPENDENT KEYS
@@ -4484,11 +4412,11 @@ ComputedPropertyPrototype.cacheable = function(aFlag) {
   mode the computed property will not automatically cache the return value.
 
   ```javascript
-  MyApp.outsideService = Ember.Object.create({
+  MyApp.outsideService = Ember.Object.extend({
     value: function() {
       return OutsideService.getValue();
     }.property().volatile()
-  });
+  }).create();
   ```
 
   @method volatile
@@ -4504,11 +4432,13 @@ ComputedPropertyPrototype.volatile = function() {
   mode the computed property will throw an error when set.
 
   ```javascript
-  MyApp.person = Ember.Object.create({
+  MyApp.Person = Ember.Object.extend({
     guid: function() {
       return 'guid-guid-guid';
     }.property().readOnly()
   });
+
+  MyApp.person = MyApp.Person.create();
 
   MyApp.person.set('guid', 'new-guid'); // will throw an exception
   ```
@@ -4527,7 +4457,7 @@ ComputedPropertyPrototype.readOnly = function(readOnly) {
   arguments containing key paths that this computed property depends on.
 
   ```javascript
-  MyApp.president = Ember.Object.create({
+  MyApp.President = Ember.Object.extend({
     fullName: Ember.computed(function() {
       return this.get('firstName') + ' ' + this.get('lastName');
 
@@ -4535,6 +4465,12 @@ ComputedPropertyPrototype.readOnly = function(readOnly) {
       // and lastName
     }).property('firstName', 'lastName')
   });
+
+  MyApp.president = MyApp.President.create({
+    firstName: 'Barack',
+    lastName: 'Obama',
+  });
+  MyApp.president.get('fullName'); // Barack Obama
   ```
 
   @method property
@@ -4545,18 +4481,9 @@ ComputedPropertyPrototype.readOnly = function(readOnly) {
 ComputedPropertyPrototype.property = function() {
   var args;
 
-  if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-    var addArg = function (property) {
-      args.push(property); 
-    };
-
-    args = [];
-    for (var i = 0, l = arguments.length; i < l; i++) {
-      expandProperties(arguments[i], addArg);
-    }
-  } else {
+  
     args = a_slice.call(arguments);
-  }
+  
 
   this._dependentKeys = args;
   return this;
@@ -4685,7 +4612,7 @@ ComputedPropertyPrototype.set = function(obj, keyName, value) {
       funcArgLength, cachedValue, ret;
 
   if (this._readOnly) {
-    throw new Ember.Error('Cannot Set: ' + keyName + ' on: ' + Ember.inspect(obj));
+    throw new Ember.Error('Cannot Set: ' + keyName + ' on: ' + obj.toString() );
   }
 
   this._suspended = obj;
@@ -5362,51 +5289,7 @@ Ember.computed.oneWay = function(dependentKey) {
   });
 };
 
-if (Ember.FEATURES.isEnabled('computed-read-only')) {
-/**
-  Where `computed.oneWay` provides oneWay bindings, `computed.readOnly` provides
-  a readOnly one way binding. Very often when using `computed.oneWay` one does
-  not also want changes to propogate back up, as they will replace the value.
 
-  This prevents the reverse flow, and also throws an exception when it occurs.
-
-  Example
-
-  ```javascript
-  User = Ember.Object.extend({
-    firstName: null,
-    lastName: null,
-    nickName: Ember.computed.readOnly('firstName')
-  });
-
-  user = User.create({
-    firstName: 'Teddy',
-    lastName:  'Zeenny'
-  });
-
-  user.get('nickName');
-  # 'Teddy'
-
-  user.set('nickName', 'TeddyBear');
-  # throws Exception
-  # throw new Ember.Error('Cannot Set: nickName on: <User:ember27288>' );`
-
-  user.get('firstName');
-  # 'Teddy'
-  ```
-
-  @method computed.readOnly
-  @for Ember
-  @param {String} dependentKey
-  @return {Ember.ComputedProperty} computed property which creates a
-  one way computed property to the original value for property.
-*/
-Ember.computed.readOnly = function(dependentKey) {
-  return Ember.computed(dependentKey, function() {
-    return get(this, dependentKey);
-  }).readOnly();
-};
-}
 /**
   A computed property that acts like a standard getter and setter,
   but returns the value at the provided `defaultPath` if the
@@ -6276,6 +6159,7 @@ Ember.run = function(target, method) {
 
   If invoked when not within a run loop:
 
+
   ```javascript
   Ember.run.join(function() {
     // creates a new run-loop
@@ -6283,6 +6167,7 @@ Ember.run = function(target, method) {
   ```
 
   Alternatively, if called within an existing run loop:
+
 
   ```javascript
   Ember.run(function() {
@@ -6482,7 +6367,7 @@ Ember.run.later = function(target, method) {
     If you pass a string it will be resolved on the
     target at the time the method is invoked.
   @param {Object} [args*] Optional arguments to pass to the timeout.
-  @return {Object} Timer information for use in cancelling, see `Ember.run.cancel`.
+  @return {Object} timer
 */
 Ember.run.once = function(target, method) {
   checkAutoRun();
@@ -6533,7 +6418,7 @@ Ember.run.once = function(target, method) {
     If you pass a string it will be resolved on the
     target at the time the method is invoked.
   @param {Object} [args*] Optional arguments to pass to the timeout.
-  @return {Object} Timer information for use in cancelling, see `Ember.run.cancel`.
+  @return {Object} timer
 */
 Ember.run.scheduleOnce = function(queue, target, method) {
   checkAutoRun();
@@ -6595,7 +6480,7 @@ Ember.run.scheduleOnce = function(queue, target, method) {
     If you pass a string it will be resolved on the
     target at the time the method is invoked.
   @param {Object} [args*] Optional arguments to pass to the timeout.
-  @return {Object} Timer information for use in cancelling, see `Ember.run.cancel`.
+  @return {Object} timer
 */
 Ember.run.next = function() {
   var args = slice.call(arguments);
@@ -6605,8 +6490,7 @@ Ember.run.next = function() {
 
 /**
   Cancels a scheduled item. Must be a value returned by `Ember.run.later()`,
-  `Ember.run.once()`, `Ember.run.next()`, `Ember.run.debounce()`, or 
-  `Ember.run.throttle()`.
+  `Ember.run.once()`, or `Ember.run.next()`.
 
   ```javascript
   var runNext = Ember.run.next(myContext, function() {
@@ -6623,29 +6507,11 @@ Ember.run.next = function() {
     // will not be executed
   });
   Ember.run.cancel(runOnce);
-
-  var throttle = Ember.run.throttle(myContext, function() {
-    // will not be executed
-  }, 1);
-  Ember.run.cancel(throttle);
-
-  var debounce = Ember.run.debounce(myContext, function() {
-    // will not be executed
-  }, 1);
-  Ember.run.cancel(debounce);
-
-  var debounceImmediate = Ember.run.debounce(myContext, function() {
-    // will be executed since we passed in true (immediate)
-  }, 100, true);
-  // the 100ms delay until this method can be called again will be cancelled
-  Ember.run.cancel(debounceImmediate);
-  ```
-  ```
   ```
 
   @method cancel
   @param {Object} timer Timer object to cancel
-  @return {Boolean} true if cancelled or false/undefined if it wasn't found
+  @return {void}
 */
 Ember.run.cancel = function(timer) {
   return backburner.cancel(timer);
@@ -6677,34 +6543,6 @@ Ember.run.cancel = function(timer) {
     // console logs 'debounce ran.' one time.
   ```
 
-  Immediate allows you to run the function immediately, but debounce
-  other calls for this function until the wait time has elapsed. If
-  `debounce` is called again before the specified time has elapsed,
-  the timer is reset and the entire period msut pass again before
-  the method can be called again.
-
-  ```javascript
-    var myFunc = function() { console.log(this.name + ' ran.'); };
-    var myContext = {name: 'debounce'};
-
-    Ember.run.debounce(myContext, myFunc, 150, true);
-
-    // console logs 'debounce ran.' one time immediately.
-    // 100ms passes
-
-    Ember.run.debounce(myContext, myFunc, 150, true);
-
-    // 150ms passes and nothing else is logged to the console and 
-    // the debouncee is no longer being watched
-
-    Ember.run.debounce(myContext, myFunc, 150, true);
-
-    // console logs 'debounce ran.' one time immediately.
-    // 150ms passes and nothing else is logged tot he console and
-    // the debouncee is no longer being watched
-
-  ```
-
   @method debounce
   @param {Object} [target] target of method to invoke
   @param {Function|String} method The method to invoke.
@@ -6713,7 +6551,7 @@ Ember.run.cancel = function(timer) {
   @param {Object} [args*] Optional arguments to pass to the timeout.
   @param {Number} wait Number of milliseconds to wait.
   @param {Boolean} immediate Trigger the function on the leading instead of the trailing edge of the wait interval.
-  @return {Array} Timer information for use in cancelling, see `Ember.run.cancel`.
+  @return {void}
 */
 Ember.run.debounce = function() {
   return backburner.debounce.apply(backburner, arguments);
@@ -6750,7 +6588,7 @@ Ember.run.debounce = function() {
     then it will be looked up on the passed target.
   @param {Object} [args*] Optional arguments to pass to the timeout.
   @param {Number} spacing Number of milliseconds to space out requests.
-  @return {Array} Timer information for use in cancelling, see `Ember.run.cancel`.
+  @return {void}
 */
 Ember.run.throttle = function() {
   return backburner.throttle.apply(backburner, arguments);
@@ -7260,9 +7098,6 @@ var Mixin, REQUIRED, Alias,
     defineProperty = Ember.defineProperty,
     guidFor = Ember.guidFor;
 
-if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-  var expandProperties = Ember.expandProperties;
-}
 
 function mixinsMeta(obj) {
   var m = Ember.meta(obj, true), ret = m.mixins;
@@ -7837,6 +7672,35 @@ Alias = function(methodName) {
 Alias.prototype = new Ember.Descriptor();
 
 /**
+  Makes a property or method available via an additional name.
+
+  ```javascript
+  App.PaintSample = Ember.Object.extend({
+    color: 'red',
+    colour: Ember.alias('color'),
+    name: function() {
+      return "Zed";
+    },
+    moniker: Ember.alias("name")
+  });
+
+  var paintSample = App.PaintSample.create()
+  paintSample.get('colour');  // 'red'
+  paintSample.moniker();      // 'Zed'
+  ```
+
+  @method alias
+  @for Ember
+  @param {String} methodName name of the method or property to alias
+  @return {Ember.Descriptor}
+  @deprecated Use `Ember.aliasMethod` or `Ember.computed.alias` instead
+*/
+Ember.alias = function(methodName) {
+  Ember.deprecate("Ember.alias is deprecated. Please use Ember.aliasMethod or Ember.computed.alias instead.");
+  return new Alias(methodName);
+};
+
+/**
   Makes a method available via an additional name.
 
   ```javascript
@@ -7890,23 +7754,7 @@ Ember.observer = function() {
   var func  = a_slice.call(arguments, -1)[0];
   var paths;
 
-  if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-    var addWatchedProperty = function (path) { paths.push(path); };
-    var _paths = a_slice.call(arguments, 0, -1);
-
-    if (typeof func !== "function") {
-      // revert to old, soft-deprecated argument ordering
-
-      func  = arguments[0];
-      _paths = a_slice.call(arguments, 1);
-    }
-
-    paths = [];
-
-    for (var i=0; i<_paths.length; ++i) {
-      expandProperties(_paths[i], addWatchedProperty);
-    }
-  } else {
+  
     paths = a_slice.call(arguments, 0, -1);
 
     if (typeof func !== "function") {
@@ -7915,7 +7763,7 @@ Ember.observer = function() {
       func  = arguments[0];
       paths = a_slice.call(arguments, 1);
     }
-  }
+  
 
   if (typeof func !== "function") {
     throw new Ember.Error("Ember.observer called without a function");
@@ -8004,24 +7852,7 @@ Ember.beforeObserver = function() {
   var func  = a_slice.call(arguments, -1)[0];
   var paths;
 
-  if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-    var addWatchedProperty = function(path) { paths.push(path); };
-
-    var _paths = a_slice.call(arguments, 0, -1);
-
-    if (typeof func !== "function") {
-      // revert to old, soft-deprecated argument ordering
-
-      func  = arguments[0];
-      _paths = a_slice.call(arguments, 1);
-    }
-
-    paths = [];
-
-    for (var i=0; i<_paths.length; ++i) {
-      expandProperties(_paths[i], addWatchedProperty);
-    }
-  } else {
+  
     paths = a_slice.call(arguments, 0, -1);
 
     if (typeof func !== "function") {
@@ -8030,7 +7861,7 @@ Ember.beforeObserver = function() {
       func  = arguments[0];
       paths = a_slice.call(arguments, 1);
     }
-  }
+  
 
   if (typeof func !== "function") {
     throw new Ember.Error("Ember.beforeObserver called without a function");
@@ -8108,7 +7939,7 @@ Ember Metal
   @class RSVP
   @module RSVP
   */
-define("rsvp/all", 
+define("rsvp/all",
   ["./promise","./utils","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -8204,7 +8035,7 @@ define("rsvp/all",
     __exports__.all = all;
   });
 
-define("rsvp/cast", 
+define("rsvp/cast",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -8275,7 +8106,7 @@ define("rsvp/cast",
 
     __exports__.cast = cast;
   });
-define("rsvp/config", 
+define("rsvp/config",
   ["./events","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
@@ -8306,7 +8137,7 @@ define("rsvp/config",
     __exports__.config = config;
     __exports__.configure = configure;
   });
-define("rsvp/defer", 
+define("rsvp/defer",
   ["./promise","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
@@ -8361,7 +8192,7 @@ define("rsvp/defer",
 
     __exports__.defer = defer;
   });
-define("rsvp/events", 
+define("rsvp/events",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -8570,7 +8401,7 @@ define("rsvp/events",
 
     __exports__.EventTarget = EventTarget;
   });
-define("rsvp/hash", 
+define("rsvp/hash",
   ["./promise","./utils","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -8715,7 +8546,7 @@ define("rsvp/hash",
 
     __exports__.hash = hash;
   });
-define("rsvp/instrument", 
+define("rsvp/instrument",
   ["./config","./utils","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -8742,7 +8573,7 @@ define("rsvp/instrument",
 
     __exports__.instrument = instrument;
   });
-define("rsvp/node", 
+define("rsvp/node",
   ["./promise","./all","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -8857,7 +8688,7 @@ define("rsvp/node",
 
     __exports__.denodeify = denodeify;
   });
-define("rsvp/promise", 
+define("rsvp/promise",
   ["./config","./events","./cast","./instrument","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
@@ -9106,7 +8937,7 @@ define("rsvp/promise",
 
     __exports__.Promise = Promise;
   });
-define("rsvp/race", 
+define("rsvp/race",
   ["./promise","./utils","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -9198,7 +9029,7 @@ define("rsvp/race",
 
     __exports__.race = race;
   });
-define("rsvp/reject", 
+define("rsvp/reject",
   ["./promise","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
@@ -9248,7 +9079,7 @@ define("rsvp/reject",
 
     __exports__.reject = reject;
   });
-define("rsvp/resolve", 
+define("rsvp/resolve",
   ["./promise","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
@@ -9294,7 +9125,7 @@ define("rsvp/resolve",
 
     __exports__.resolve = resolve;
   });
-define("rsvp/rethrow", 
+define("rsvp/rethrow",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -9347,7 +9178,7 @@ define("rsvp/rethrow",
 
     __exports__.rethrow = rethrow;
   });
-define("rsvp/utils", 
+define("rsvp/utils",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -9373,7 +9204,7 @@ define("rsvp/utils",
     __exports__.isArray = isArray;
     __exports__.now = now;
   });
-define("rsvp", 
+define("rsvp",
   ["./rsvp/events","./rsvp/promise","./rsvp/node","./rsvp/all","./rsvp/race","./rsvp/hash","./rsvp/rethrow","./rsvp/defer","./rsvp/config","./rsvp/resolve","./rsvp/reject", "exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __exports__) {
     "use strict";
@@ -9417,7 +9248,6 @@ define("rsvp",
     __exports__.reject = reject;
     __exports__.async = async;
   });
-
 })();
 
 (function() {
@@ -9438,7 +9268,6 @@ Ember.MODEL_FACTORY_INJECTIONS = false || !!Ember.ENV.MODEL_FACTORY_INJECTIONS;
 define("container",
   [],
   function() {
-    "use strict";
 
     // A safe and simple inheriting object.
     function InheritingDict(parent) {
@@ -9471,6 +9300,7 @@ define("container",
         no matching key is found, return undefined.
 
         @method get
+        @param {String} key
         @return {any}
       */
       get: function(key) {
@@ -9559,8 +9389,7 @@ define("container",
 
       this.registry = new InheritingDict(parent && parent.registry);
       this.cache = new InheritingDict(parent && parent.cache);
-      this.factoryCache = new InheritingDict(parent && parent.factoryCache);
-      this.resolveCache = new InheritingDict(parent && parent.resolveCache);
+      this.factoryCache = new InheritingDict(parent && parent.cache);
       this.typeInjections = new InheritingDict(parent && parent.typeInjections);
       this.injections = {};
 
@@ -9681,7 +9510,9 @@ define("container",
         @param {Object} options
       */
       register: function(fullName, factory, options) {
-        validateFullName(fullName);
+        if (fullName.indexOf(':') === -1) {
+          throw new TypeError("malformed fullName, expected: `type:name` got: " + fullName + "");
+        }
 
         if (factory === undefined) {
           throw new TypeError('Attempting to register an unknown factory: `' + fullName + '`');
@@ -9714,14 +9545,11 @@ define("container",
         @param {String} fullName
        */
       unregister: function(fullName) {
-        validateFullName(fullName);
-
         var normalizedName = this.normalize(fullName);
 
         this.registry.remove(normalizedName);
         this.cache.remove(normalizedName);
         this.factoryCache.remove(normalizedName);
-        this.resolveCache.remove(normalizedName);
         this._options.remove(normalizedName);
       },
 
@@ -9758,18 +9586,7 @@ define("container",
         @return {Function} fullName's factory
       */
       resolve: function(fullName) {
-        validateFullName(fullName);
-
-        var normalizedName = this.normalize(fullName);
-        var cached = this.resolveCache.get(normalizedName);
-
-        if (cached) { return cached; }
-
-        var resolved = this.resolver(normalizedName) || this.registry.get(normalizedName);
-
-        this.resolveCache.set(normalizedName, resolved);
-
-        return resolved;
+        return this.resolver(fullName) || this.registry.get(fullName);
       },
 
       /**
@@ -9781,6 +9598,8 @@ define("container",
         to find the `fullName`.
 
         @method describe
+        @param {String} fullName
+        @return {string} described fullName
       */
       describe: function(fullName) {
         return fullName;
@@ -9824,7 +9643,7 @@ define("container",
         twitter instanceof Twitter; // => true
 
         // by default the container will return singletons
-        twitter2 = container.lookup('api:twitter');
+        var twitter2 = container.lookup('api:twitter');
         twitter instanceof Twitter; // => true
 
         twitter === twitter2; //=> true
@@ -9848,8 +9667,23 @@ define("container",
         @return {any}
       */
       lookup: function(fullName, options) {
-        validateFullName(fullName);
-        return lookup(this, this.normalize(fullName), options);
+        fullName = this.normalize(fullName);
+
+        options = options || {};
+
+        if (this.cache.has(fullName) && options.singleton !== false) {
+          return this.cache.get(fullName);
+        }
+
+        var value = instantiate(this, fullName);
+
+        if (value === undefined) { return; }
+
+        if (isSingleton(this, fullName) && options.singleton !== false) {
+          this.cache.set(fullName, value);
+        }
+
+        return value;
       },
 
       /**
@@ -9860,8 +9694,7 @@ define("container",
         @return {any}
       */
       lookupFactory: function(fullName) {
-        validateFullName(fullName);
-        return factoryFor(this, this.normalize(fullName));
+        return factoryFor(this, fullName);
       },
 
       /**
@@ -9873,8 +9706,11 @@ define("container",
         @return {Boolean}
       */
       has: function(fullName) {
-        validateFullName(fullName);
-        return has(this, this.normalize(fullName));
+        if (this.cache.has(fullName)) {
+          return true;
+        }
+
+        return !!this.resolve(fullName);
       },
 
       /**
@@ -9956,7 +9792,6 @@ define("container",
         @param {String} fullName
       */
       typeInjection: function(type, property, fullName) {
-        validateFullName(fullName);
         if (this.parent) { illegalChildOperation('typeInjection'); }
 
         addTypeInjection(this.typeInjections, type, property, fullName);
@@ -9970,8 +9805,8 @@ define("container",
 
         Two forms of injections are possible:
 
-      * Injecting one fullName on another fullName
-      * Injecting one fullName on a type
+        * Injecting one fullName on another fullName
+        * Injecting one fullName on a type
 
         Example:
 
@@ -10006,20 +9841,14 @@ define("container",
         @param {String} property
         @param {String} injectionName
       */
-      injection: function(fullName, property, injectionName) {
+      injection: function(factoryName, property, injectionName) {
         if (this.parent) { illegalChildOperation('injection'); }
 
-        validateFullName(injectionName);
-        var normalizedInjectionName = this.normalize(injectionName);
-
-        if (fullName.indexOf(':') === -1) {
-          return this.typeInjection(fullName, property, normalizedInjectionName);
+        if (factoryName.indexOf(':') === -1) {
+          return this.typeInjection(factoryName, property, injectionName);
         }
 
-        validateFullName(fullName);
-        var normalizedName = this.normalize(fullName);
-
-        addInjection(this.injections, normalizedName, property, normalizedInjectionName);
+        addInjection(this.injections, factoryName, property, injectionName);
       },
 
 
@@ -10056,7 +9885,7 @@ define("container",
       factoryTypeInjection: function(type, property, fullName) {
         if (this.parent) { illegalChildOperation('factoryTypeInjection'); }
 
-        addTypeInjection(this.factoryTypeInjections, type, property, this.normalize(fullName));
+        addTypeInjection(this.factoryTypeInjections, type, property, fullName);
       },
 
       /**
@@ -10108,21 +9937,14 @@ define("container",
         @param {String} property
         @param {String} injectionName
       */
-      factoryInjection: function(fullName, property, injectionName) {
+      factoryInjection: function(factoryName, property, injectionName) {
         if (this.parent) { illegalChildOperation('injection'); }
 
-        var normalizedName = this.normalize(fullName);
-        var normalizedInjectionName = this.normalize(injectionName);
-
-        validateFullName(injectionName);
-
-        if (fullName.indexOf(':') === -1) {
-          return this.factoryTypeInjection(normalizedName, property, normalizedInjectionName);
+        if (factoryName.indexOf(':') === -1) {
+          return this.factoryTypeInjection(factoryName, property, injectionName);
         }
 
-        validateFullName(fullName);
-
-        addInjection(this.factoryInjections, normalizedName, property, normalizedInjectionName);
+        addInjection(this.factoryInjections, factoryName, property, injectionName);
       },
 
       /**
@@ -10132,6 +9954,7 @@ define("container",
         @method destroy
       */
       destroy: function() {
+
         for (var i=0, l=this.children.length; i<l; i++) {
           this.children[i].destroy();
         }
@@ -10157,32 +9980,6 @@ define("container",
       }
     };
 
-    function has(container, fullName){
-      if (container.cache.has(fullName)) {
-        return true;
-      }
-
-      return !!container.resolve(fullName);
-    }
-
-    function lookup(container, fullName, options) {
-      options = options || {};
-
-      if (container.cache.has(fullName) && options.singleton !== false) {
-        return container.cache.get(fullName);
-      }
-
-      var value = instantiate(container, fullName);
-
-      if (value === undefined) { return; }
-
-      if (isSingleton(container, fullName) && options.singleton !== false) {
-        container.cache.set(fullName, value);
-      }
-
-      return value;
-    }
-
     function illegalChildOperation(operation) {
       throw new Error(operation + " is not currently supported on child containers");
     }
@@ -10198,14 +9995,14 @@ define("container",
 
       if (!injections) { return hash; }
 
-      var injection, injectable;
+      var injection, lookup;
 
       for (var i=0, l=injections.length; i<l; i++) {
         injection = injections[i];
-        injectable = lookup(container, injection.fullName);
+        lookup = container.lookup(injection.fullName);
 
-        if (injectable !== undefined) {
-          hash[injection.property] = injectable;
+        if (lookup !== undefined) {
+          hash[injection.property] = lookup;
         } else {
           throw new Error('Attempting to inject an unknown injection: `' + injection.fullName + '`');
         }
@@ -10230,7 +10027,7 @@ define("container",
     }
 
     function factoryFor(container, fullName) {
-      var name = fullName;
+      var name = container.normalize(fullName);
       var factory = container.resolve(name);
       var injectedFactory;
       var cache = container.factoryCache;
@@ -10338,13 +10135,6 @@ define("container",
         property: property,
         fullName: fullName
       });
-    }
-
-    var VALID_FULL_NAME_REGEXP = /^[^:]+.+:[^:]+$/;
-    function validateFullName(fullName) {
-      if (!VALID_FULL_NAME_REGEXP.test(fullName)) {
-        throw new TypeError('Invalid Fullname, expected: `type:name` got: ' + fullName);
-      }
     }
 
     function addInjection(rules, factoryName, property, injectionName) {
@@ -10542,6 +10332,39 @@ Ember.copy = function(obj, deep) {
 };
 
 /**
+  Convenience method to inspect an object. This method will attempt to
+  convert the object into a useful string description.
+
+  It is a pretty simple implementation. If you want something more robust,
+  use something like JSDump: https://github.com/NV/jsDump
+
+  @method inspect
+  @for Ember
+  @param {Object} obj The object you want to inspect.
+  @return {String} A description of the object
+*/
+Ember.inspect = function(obj) {
+  var type = Ember.typeOf(obj);
+  if (type === 'array') {
+    return '[' + obj + ']';
+  }
+  if (type !== 'object') {
+    return obj + '';
+  }
+
+  var v, ret = [];
+  for(var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      v = obj[key];
+      if (v === 'toString') { continue; } // ignore useless items
+      if (Ember.typeOf(v) === 'function') { v = "function() { ... }"; }
+      ret.push(key + ": " + v);
+    }
+  }
+  return "{" + ret.join(", ") + "}";
+};
+
+/**
   Compares two objects, returning true if they are logically equal. This is
   a deeper comparison than a simple triple equal. For sets it will compare the
   internal objects. For any other object that implements `isEqual()` it will
@@ -10645,10 +10468,6 @@ var STRING_DECAMELIZE_REGEXP = (/([a-z\d])([A-Z])/g);
 var STRING_CAMELIZE_REGEXP = (/(\-|_|\.|\s)+(.)?/g);
 var STRING_UNDERSCORE_REGEXP_1 = (/([a-z\d])([A-Z]+)/g);
 var STRING_UNDERSCORE_REGEXP_2 = (/\-|\s+/g);
-var STRING_PARAMETERIZE_REGEXP_1 = (/[_|\/|\s]+/g);
-var STRING_PARAMETERIZE_REGEXP_2 = (/[^a-z0-9\-]+/gi);
-var STRING_PARAMETERIZE_REGEXP_3 = (/[\-]+/g);
-var STRING_PARAMETERIZE_REGEXP_4 = (/^-+|-+$/g);
 
 /**
   Defines the hash of localized strings for the current language. Used by
@@ -10887,54 +10706,6 @@ Ember.String = {
   }
 };
 
-if (Ember.FEATURES.isEnabled("string-humanize")) {
-  /**
-    Returns the Humanized form of a string
-
-    Replaces underscores with spaces, and capitializes first character
-    of string. Also strips "_id" suffixes.
-
-    ```javascript
-    'first_name'.humanize()       // 'First name'
-    'user_id'.humanize()          // 'User'
-    ```
-
-    @method humanize
-    @param {String} str The string to humanize.
-    @return {String} The humanized string.
-  */
-
-  Ember.String.humanize = function(str) {
-    return str.replace(/_id$/, '').
-      replace(/_/g, ' ').
-      replace(/^\w/g, function(s){
-        return s.toUpperCase();
-      });
-  };
-}
-
-if (Ember.FEATURES.isEnabled("string-parameterize")) {
-  /**
-    Transforms a string so that it may be used as part of a 'pretty' / SEO friendly URL.
-
-    ```javascript
-    'My favorite items.'.parameterize();                        // 'my-favorite-items'
-    'action_name'.parameterize();                               // 'action-name'
-    '100 ways Ember.js is better than Angular.'.parameterize(); // '100-ways-emberjs-is-better-than-angular'
-    ```
-
-    @method parameterize
-    @param {String} str The string to parameterize.
-    @return {String} the parameterized string.
-  */
-  Ember.String.parameterize = function(str) {
-    return str.replace(STRING_PARAMETERIZE_REGEXP_1, '-') // replace underscores, slashes and spaces with separator
-              .replace(STRING_PARAMETERIZE_REGEXP_2, '')  // remove non-alphanumeric characters except the separator
-              .replace(STRING_PARAMETERIZE_REGEXP_3, '-') // replace multiple occurring separators
-              .replace(STRING_PARAMETERIZE_REGEXP_4, '')  // trim leading and trailing separators 
-              .toLowerCase();
-  };
-}
 
 
 })();
@@ -10959,13 +10730,6 @@ var fmt = Ember.String.fmt,
     capitalize = Ember.String.capitalize,
     classify = Ember.String.classify;
 
-if (Ember.FEATURES.isEnabled("string-humanize")) {
-  var humanize = Ember.String.humanize;
-}
-
-if (Ember.FEATURES.isEnabled("string-parameterize")) {
-  var parameterize = Ember.String.parameterize;
-}
 
 if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.String) {
 
@@ -11059,30 +10823,7 @@ if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.String) {
     return capitalize(this);
   };
 
-  if (Ember.FEATURES.isEnabled("string-humanize")) {
-    /**
-      See [Ember.String.humanize](/api/classes/Ember.String.html#method_humanize).
-
-      @method humanize
-      @for String
-    */
-    String.prototype.humanize = function() {
-      return humanize(this);
-    };
-  }
-
-  if (Ember.FEATURES.isEnabled("string-parameterize")) {
-    /**
-      See [Ember.String.parameterize](/api/classes/Ember.String.html#method_parameterize).
-
-      @method parameterize
-      @for String
-    */
-    String.prototype.parameterize = function() {
-      return parameterize(this);
-    };
-  }
-
+  
 }
 
 
@@ -11285,9 +11026,11 @@ Ember.Observable = Ember.Mixin.create({
     return this;
   },
 
+
   /**
-    To set multiple properties at once, call `setProperties`
-    with a Hash:
+    Sets a list of properties at once. These properties are set inside
+    a single `beginPropertyChanges` and `endPropertyChanges` batch, so
+    observers will be buffered.
 
     ```javascript
     record.setProperties({ firstName: 'Charles', lastName: 'Jolley' });
@@ -11583,8 +11326,8 @@ Ember.Observable = Ember.Mixin.create({
 
 (function() {
 /**
-@module ember
-@submodule ember-runtime
+  @module ember
+  @submodule ember-runtime
 */
 
 
@@ -11933,27 +11676,33 @@ CoreObject.PrototypeMixin = Mixin.create({
     than Javascript's `toString` typically does, in a generic way for all Ember
     objects.
 
-        App.Person = Em.Object.extend()
-        person = App.Person.create()
-        person.toString() //=> "<App.Person:ember1024>"
+    ```javascript
+    App.Person = Em.Object.extend()
+    person = App.Person.create()
+    person.toString() //=> "<App.Person:ember1024>"
+    ```
 
     If the object's class is not defined on an Ember namespace, it will
     indicate it is a subclass of the registered superclass:
 
-        Student = App.Person.extend()
-        student = Student.create()
-        student.toString() //=> "<(subclass of App.Person):ember1025>"
+   ```javascript
+    Student = App.Person.extend()
+    student = Student.create()
+    student.toString() //=> "<(subclass of App.Person):ember1025>"
+    ```
 
     If the method `toStringExtension` is defined, its return value will be
     included in the output.
 
-        App.Teacher = App.Person.extend({
-          toStringExtension: function() {
-            return this.get('fullName');
-          }
-        });
-        teacher = App.Teacher.create()
-        teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
+    ```javascript
+    App.Teacher = App.Person.extend({
+      toStringExtension: function() {
+        return this.get('fullName');
+      }
+    });
+    teacher = App.Teacher.create()
+    teacher.toString(); //=> "<App.Teacher:ember1026:Tom Dale>"
+    ```
 
     @method toString
     @return {String} string representation
@@ -12149,7 +11898,6 @@ var ClassMixin = Mixin.create({
   },
 
   /**
-
     Augments a constructor's prototype with additional
     properties and functions:
 
@@ -12191,7 +11939,6 @@ var ClassMixin = Mixin.create({
     MyObject = Ember.Object.extend({
       name: 'an object'
     });
-
 
     MyObject.reopenClass({
       canBuild: false
@@ -13075,7 +12822,9 @@ Ember.Enumerable = Ember.Mixin.create({
     The callback method you provide should have the following signature (all
     parameters are optional):
 
-          function(item, index, enumerable);
+    ```javascript
+    function(item, index, enumerable);
+    ```
 
     - *item* is the current item in the iteration.
     - *index* is the current index in the iteration
@@ -13381,7 +13130,7 @@ Ember.Enumerable = Ember.Mixin.create({
     Returns `true` if the passed property resolves to `true` for any item in
     the enumerable. This method is often simpler/faster than using a callback.
 
-    @method anyBy
+    @method isAny
     @param {String} key the property to test
     @param {String} [value] optional value to test against.
     @return {Boolean} `true` if the passed function returns `true` for any item
@@ -13391,7 +13140,7 @@ Ember.Enumerable = Ember.Mixin.create({
   },
 
   /**
-    @method someProperty
+    @method anyBy
     @param {String} key the property to test
     @param {String} [value] optional value to test against.
     @return {Boolean} `true` if the passed function returns `true` for any item
@@ -13447,7 +13196,7 @@ Ember.Enumerable = Ember.Mixin.create({
     var ret = initialValue;
 
     this.forEach(function(item, i) {
-      ret = callback(ret, item, i, this, reducerProperty);
+      ret = callback.call(null, ret, item, i, this, reducerProperty);
     }, this);
 
     return ret;
@@ -13470,7 +13219,7 @@ Ember.Enumerable = Ember.Mixin.create({
     this.forEach(function(x, idx) {
       var method = x && x[methodName];
       if ('function' === typeof method) {
-        ret[idx] = args ? method.apply(x, args) : x[methodName]();
+        ret[idx] = args ? method.apply(x, args) : method.call(x);
       }
     }, this);
 
@@ -13876,7 +13625,7 @@ Ember.Array = Ember.Mixin.create(Ember.Enumerable, /** @scope Ember.Array.protot
 
     @method slice
     @param {Integer} beginIndex (Optional) index to begin slicing from.
-    @param {Integer} endIndex (Optional) index to end the slice at (but not included).
+    @param {Integer} endIndex (Optional) index to end the slice at.
     @return {Array} New array with specified slice
   */
   slice: function(beginIndex, endIndex) {
@@ -14176,9 +13925,6 @@ var e_get = Ember.get,
     doubleEachPropertyPattern = /(.*\.@each){2,}/,
     arrayBracketPattern = /\.\[\]$/;
 
-if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-  var expandProperties = Ember.expandProperties;
-}
 
 function get(obj, key) {
   if (key === '@this') {
@@ -14764,17 +14510,10 @@ ReduceComputedProperty.prototype.property = function () {
     } else if (match = eachPropertyPattern.exec(dependentKey)) {
       dependentArrayKey = match[1];
 
-      if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-        var itemPropertyKeyPattern = match[2],
-            addItemPropertyKey = function (itemPropertyKey) {
-              cp.itemPropertyKey(dependentArrayKey, itemPropertyKey);
-            };
-
-        expandProperties(itemPropertyKeyPattern, addItemPropertyKey);
-      } else {
+      
         itemPropertyKey = match[2];
         cp.itemPropertyKey(dependentArrayKey, itemPropertyKey);
-      }
+      
       propertyArgs.add(dependentArrayKey);
     } else {
       propertyArgs.add(dependentKey);
@@ -14885,7 +14624,7 @@ ReduceComputedProperty.prototype.property = function () {
 
   ```javascript
   Ember.computed.max = function (dependentKey) {
-    return Ember.reduceComputed(dependentKey, {
+    return Ember.reduceComputed.call(null, dependentKey, {
       initialValue: -Infinity,
 
       addedItem: function (accumulatedValue, item, changeMeta, instanceMeta) {
@@ -15216,7 +14955,7 @@ var get = Ember.get,
   @return {Ember.ComputedProperty} computes the largest value in the dependentKey's array
 */
 Ember.computed.max = function (dependentKey) {
-  return Ember.reduceComputed(dependentKey, {
+  return Ember.reduceComputed.call(null, dependentKey, {
     initialValue: -Infinity,
 
     addedItem: function (accumulatedValue, item, changeMeta, instanceMeta) {
@@ -15258,7 +14997,7 @@ Ember.computed.max = function (dependentKey) {
   @return {Ember.ComputedProperty} computes the smallest value in the dependentKey's array
 */
 Ember.computed.min = function (dependentKey) {
-  return Ember.reduceComputed(dependentKey, {
+  return Ember.reduceComputed.call(null, dependentKey, {
     initialValue: Infinity,
 
     addedItem: function (accumulatedValue, item, changeMeta, instanceMeta) {
@@ -15649,7 +15388,7 @@ Ember.computed.setDiff = function (setAProperty, setBProperty) {
   if (arguments.length !== 2) {
     throw new Ember.Error("setDiff requires exactly two dependent arrays.");
   }
-  return Ember.arrayComputed(setAProperty, setBProperty, {
+  return Ember.arrayComputed.call(null, setAProperty, setBProperty, {
     addedItem: function (array, item, changeMeta, instanceMeta) {
       var setA = get(this, setAProperty),
           setB = get(this, setBProperty);
@@ -15851,7 +15590,7 @@ Ember.computed.sort = function (itemsKey, sortDefinition) {
     };
   }
 
-  return Ember.arrayComputed(itemsKey, {
+  return Ember.arrayComputed.call(null, itemsKey, {
     initialize: initFn,
 
     addedItem: function (array, item, changeMeta, instanceMeta) {
@@ -15914,9 +15653,6 @@ Ember.RSVP.on('error', Ember.RSVP.onerrorDefault);
 
 var a_slice = Array.prototype.slice;
 
-if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-  var expandProperties = Ember.expandProperties;
-}
 
 if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Function) {
 
@@ -16013,18 +15749,9 @@ if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Function) {
     @for Function
   */
   Function.prototype.observes = function() {
-    if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-      var addWatchedProperty = function (obs) { watched.push(obs); };
-      var watched = [];
-
-      for (var i=0; i<arguments.length; ++i) {
-        expandProperties(arguments[i], addWatchedProperty);
-      }
-
-      this.__ember_observes__ = watched;
-    } else {
+    
       this.__ember_observes__ = a_slice.call(arguments);
-    }
+    
 
     return this;
   };
@@ -16087,18 +15814,9 @@ if (Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Function) {
     @for Function
   */
   Function.prototype.observesBefore = function() {
-    if (Ember.FEATURES.isEnabled('propertyBraceExpansion')) {
-      var addWatchedProperty = function (obs) { watched.push(obs); };
-      var watched = [];
-
-      for (var i=0; i<arguments.length; ++i) {
-        expandProperties(arguments[i], addWatchedProperty);
-      }
-
-      this.__ember_observesBefore__ = watched;
-    } else {
+    
       this.__ember_observesBefore__ = a_slice.call(arguments);
-    }
+    
 
     return this;
   };
@@ -16559,7 +16277,7 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,/**
     method. You can pass either a single index, or a start and a length.
 
     If you pass a start and length that is beyond the
-    length this method will throw an `OUT_OF_RANGE_EXCEPTION`
+    length this method will throw an `OUT_OF_RANGE_EXCEPTION`.
 
     ```javascript
     var colors = ["red", "green", "blue", "yellow", "orange"];
@@ -16593,18 +16311,18 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,/**
     is KVO-compliant.
 
     ```javascript
-    var colors = ["red", "green", "blue"];
-    colors.pushObject("black");               // ["red", "green", "blue", "black"]
-    colors.pushObject(["yellow", "orange"]);  // ["red", "green", "blue", "black", ["yellow", "orange"]]
+    var colors = ["red", "green"];
+    colors.pushObject("black");     // ["red", "green", "black"]
+    colors.pushObject(["yellow"]);  // ["red", "green", ["yellow"]]
     ```
 
     @method pushObject
     @param {*} obj object to push
-    @return {*} the same obj passed as param
+    @return The same obj passed as param
   */
   pushObject: function(obj) {
     this.insertAt(get(this, 'length'), obj) ;
-    return obj ;
+    return obj;
   },
 
   /**
@@ -16612,9 +16330,8 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,/**
     notifying observers of the change until all objects are added.
 
     ```javascript
-    var colors = ["red", "green", "blue"];
-    colors.pushObjects(["black"]);               // ["red", "green", "blue", "black"]
-    colors.pushObjects(["yellow", "orange"]);  // ["red", "green", "blue", "black", "yellow", "orange"]
+    var colors = ["red"];
+    colors.pushObjects(["yellow", "orange"]);  // ["red", "yellow", "orange"]
     ```
 
     @method pushObjects
@@ -16676,14 +16393,14 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,/**
     KVO-compliant.
 
     ```javascript
-    var colors = ["red", "green", "blue"];
-    colors.unshiftObject("yellow");             // ["yellow", "red", "green", "blue"]
-    colors.unshiftObject(["black", "white"]);   // [["black", "white"], "yellow", "red", "green", "blue"]
+    var colors = ["red"];
+    colors.unshiftObject("yellow");    // ["yellow", "red"]
+    colors.unshiftObject(["black"]);   // [["black"], "yellow", "red"]
     ```
 
     @method unshiftObject
     @param {*} obj object to unshift
-    @return {*} the same obj passed as param
+    @return The same obj passed as param
   */
   unshiftObject: function(obj) {
     this.insertAt(0, obj) ;
@@ -16695,9 +16412,9 @@ Ember.MutableArray = Ember.Mixin.create(Ember.Array, Ember.MutableEnumerable,/**
     observers until all objects have been added.
 
     ```javascript
-    var colors = ["red", "green", "blue"];
-    colors.unshiftObjects(["black", "white"]);   // ["black", "white", "red", "green", "blue"]
-    colors.unshiftObjects("yellow");             // Type Error: 'undefined' is not a function
+    var colors = ["red"];
+    colors.unshiftObjects(["black", "white"]);   // ["black", "white", "red"]
+    colors.unshiftObjects("yellow"); // Type Error: 'undefined' is not a function
     ```
 
     @method unshiftObjects
@@ -17070,6 +16787,11 @@ RSVP.configure('async', function(callback, promise) {
   Ember.run.schedule('actions', promise, callback, promise);
 });
 
+RSVP.Promise.prototype.fail = function(callback, label){
+  Ember.deprecate('RSVP.Promise.fail has been renamed as RSVP.Promise.catch');
+  return this['catch'](callback, label);
+};
+
 /**
 @module ember
 @submodule ember-runtime
@@ -17179,8 +16901,6 @@ Ember.ActionHandler = Ember.Mixin.create({
     var hashName;
 
     if (!props._actions) {
-      Ember.assert(this + " 'actions' should not be a function", typeof(props.actions) !== 'function');
-
       if (typeOf(props.actions) === 'object') {
         hashName = 'actions';
       } else if (typeOf(props.events) === 'object') {
@@ -17227,6 +16947,8 @@ Ember.ActionHandler = Ember.Mixin.create({
 
 (function() {
 var set = Ember.set, get = Ember.get,
+    resolve = Ember.RSVP.resolve,
+    rethrow = Ember.RSVP.rethrow,
     not = Ember.computed.not,
     or = Ember.computed.or;
 
@@ -17235,15 +16957,14 @@ var set = Ember.set, get = Ember.get,
   @submodule ember-runtime
  */
 
-function tap(proxy, promise) {
-  return promise.then(function(value) {
+function observePromise(proxy, promise) {
+  promise.then(function(value) {
     set(proxy, 'isFulfilled', true);
     set(proxy, 'content', value);
-    return value;
   }, function(reason) {
     set(proxy, 'isRejected', true);
     set(proxy, 'reason', reason);
-    throw reason;
+    // don't re-throw, as we are merely observing
   });
 }
 
@@ -17321,7 +17042,9 @@ Ember.PromiseProxyMixin = Ember.Mixin.create({
 
   promise: Ember.computed(function(key, promise) {
     if (arguments.length === 2) {
-      return tap(this, promise);
+      promise = resolve(promise);
+      observePromise(this, promise);
+      return promise.then(); // fork the promise.
     } else {
       throw new Ember.Error("PromiseProxy's promise must be set");
     }
@@ -19084,32 +18807,31 @@ Ember.Deferred = Deferred;
 var forEach = Ember.ArrayPolyfills.forEach;
 
 /**
-@module ember
-@submodule ember-runtime
+  @module ember
+  @submodule ember-runtime
 */
 
 var loadHooks = Ember.ENV.EMBER_LOAD_HOOKS || {};
 var loaded = {};
 
 /**
+  Detects when a specific package of Ember (e.g. 'Ember.Handlebars')
+  has fully loaded and is available for extension.
 
-Detects when a specific package of Ember (e.g. 'Ember.Handlebars')
-has fully loaded and is available for extension.
-
-The provided `callback` will be called with the `name` passed
-resolved from a string into the object:
-
-```javascript
-Ember.onLoad('Ember.Handlebars' function(hbars){
-  hbars.registerHelper(...);
-});
-```
+  The provided `callback` will be called with the `name` passed
+  resolved from a string into the object:
 
 
-@method onLoad
-@for Ember
-@param name {String} name of hook
-@param callback {Function} callback to be called
+  ``` javascript
+  Ember.onLoad('Ember.Handlebars' function(hbars){
+    hbars.registerHelper(...);
+  });
+  ```
+
+  @method onLoad
+  @for Ember
+  @param name {String} name of hook
+  @param callback {Function} callback to be called
 */
 Ember.onLoad = function(name, callback) {
   var object;
@@ -19123,14 +18845,13 @@ Ember.onLoad = function(name, callback) {
 };
 
 /**
+  Called when an Ember.js package (e.g Ember.Handlebars) has finished
+  loading. Triggers any callbacks registered for this event.
 
-Called when an Ember.js package (e.g Ember.Handlebars) has finished
-loading. Triggers any callbacks registered for this event.
-
-@method runLoadHooks
-@for Ember
-@param name {String} name of hook
-@param object {Object} object to pass to callbacks
+  @method runLoadHooks
+  @for Ember
+  @param name {String} name of hook
+  @param object {Object} object to pass to callbacks
 */
 Ember.runLoadHooks = function(name, object) {
   loaded[name] = object;
@@ -19781,7 +19502,7 @@ Ember Runtime
 @submodule ember-views
 */
 
-var jQuery = (this && this.jQuery) || (Ember.imports && Ember.imports.jQuery);
+var jQuery = this.jQuery || (Ember.imports && Ember.imports.jQuery);
 if (!jQuery && typeof require === 'function') {
   jQuery = require('jquery');
 }
@@ -19832,7 +19553,7 @@ if (Ember.$) {
 // is a "zero-scope" element. This problem can be worked around by making
 // the first node an invisible text node. We, like Modernizr, use &shy;
 
-var needsShy = typeof document !== 'undefined' && (function() {
+var needsShy = this.document && (function() {
   var testEl = document.createElement('div');
   testEl.innerHTML = "<div></div>";
   testEl.firstChild.innerHTML = "<script></script>";
@@ -19842,7 +19563,7 @@ var needsShy = typeof document !== 'undefined' && (function() {
 // IE 8 (and likely earlier) likes to move whitespace preceeding
 // a script tag to appear after it. This means that we can
 // accidentally remove whitespace when updating a morph.
-var movesWhitespace = typeof document !== 'undefined' && (function() {
+var movesWhitespace = this.document && (function() {
   var testEl = document.createElement('div');
   testEl.innerHTML = "Test: <script type='text/x-placeholder'></script>Value";
   return testEl.childNodes[0].nodeValue === 'Test:' &&
@@ -23083,8 +22804,6 @@ Ember.View = Ember.CoreView.extend(
     element was destroyed, it is in the preRender state
   * inBuffer: once a view has been rendered, but before it has
     been inserted into the DOM, it is in the inBuffer state
-  * hasElement: the DOM representation of the view is created,
-    and is ready to be inserted
   * inDOM: once a view has been inserted into the DOM it is in
     the inDOM state. A view spends the vast majority of its
     existence in this state.
@@ -23583,17 +23302,7 @@ Ember.merge(hasElement, {
     observer.call(target);
   }
 });
-})();
 
-
-
-(function() {
-/**
-@module ember
-@submodule ember-views
-*/
-
-var hasElement = Ember.View.states.hasElement;
 var inDOM = Ember.View.states.inDOM = Ember.create(hasElement);
 
 Ember.merge(inDOM, {
@@ -24160,7 +23869,7 @@ var get = Ember.get, set = Ember.set, fmt = Ember.String.fmt;
   Given an empty `<body>` and the following code:
 
   ```javascript
-  anUnorderedListView = Ember.CollectionView.create({
+  anUndorderedListView = Ember.CollectionView.create({
     tagName: 'ul',
     content: ['A','B','C'],
     itemViewClass: Ember.View.extend({
@@ -24168,7 +23877,7 @@ var get = Ember.get, set = Ember.set, fmt = Ember.String.fmt;
     })
   });
 
-  anUnorderedListView.appendTo('body');
+  anUndorderedListView.appendTo('body');
   ```
 
   Will result in the following HTML structure
@@ -24869,15 +24578,16 @@ define("metamorph",
 
     var K = function() {},
         guid = 0,
+        document = this.document,
         disableRange = ('undefined' === typeof ENV ? {} : ENV).DISABLE_RANGE_API,
 
         // Feature-detect the W3C range API, the extended check is for IE9 which only partially supports ranges
-        supportsRange = (!disableRange) && typeof document !== 'undefined' && ('createRange' in document) && (typeof Range !== 'undefined') && Range.prototype.createContextualFragment,
+        supportsRange = (!disableRange) && document && ('createRange' in document) && (typeof Range !== 'undefined') && Range.prototype.createContextualFragment,
 
         // Internet Explorer prior to 9 does not allow setting innerHTML if the first element
         // is a "zero-scope" element. This problem can be worked around by making
         // the first node an invisible text node. We, like Modernizr, use &shy;
-        needsShy = typeof document !== 'undefined' && (function() {
+        needsShy = document && (function() {
           var testEl = document.createElement('div');
           testEl.innerHTML = "<div></div>";
           testEl.firstChild.innerHTML = "<script></script>";
@@ -25698,21 +25408,7 @@ var handlebarsGet = Ember.Handlebars.get = function(root, path, options) {
       normalizedPath = normalizePath(root, path, data),
       value;
 
-  if (Ember.FEATURES.isEnabled("ember-handlebars-caps-lookup")) {
-
-    // If the path starts with a capital letter, look it up on Ember.lookup,
-    // which defaults to the `window` object in browsers.
-    if (Ember.isGlobalPath(path)) {
-      value = Ember.get(Ember.lookup, path);
-    } else {
-
-      // In cases where the path begins with a keyword, change the
-      // root to the value represented by that keyword, and ensure
-      // the path is relative to it.
-      value = Ember.get(normalizedPath.root, normalizedPath.path);
-    }
-
-  } else {
+  
     root = normalizedPath.root;
     path = normalizedPath.path;
 
@@ -25721,7 +25417,7 @@ var handlebarsGet = Ember.Handlebars.get = function(root, path, options) {
     if (value === undefined && root !== Ember.lookup && Ember.isGlobalPath(path)) {
       value = Ember.get(Ember.lookup, path);
     }
-  }
+  
 
   return value;
 };
@@ -26605,12 +26301,6 @@ Ember._HandlebarsBoundView = Ember._MetamorphView.extend({
         preserveContext = get(this, 'preserveContext'),
         context = get(this, 'previousContext');
 
-    var contextController;
-
-    if (Ember.FEATURES.isEnabled('with-controller')) {
-      contextController = get(this, 'contextController');
-    }
-
     var inverseTemplate = get(this, 'inverseTemplate'),
         displayTemplate = get(this, 'displayTemplate');
 
@@ -26630,12 +26320,6 @@ Ember._HandlebarsBoundView = Ember._MetamorphView.extend({
       // Otherwise, determine if this is a block bind or not.
       // If so, pass the specified object to the template
         if (displayTemplate) {
-          if (Ember.FEATURES.isEnabled('with-controller')) {
-            if (contextController) {
-              set(contextController, 'content', result);
-              result = contextController;
-            }
-          }
           set(this, '_context', result);
         } else {
         // This is not a bind block, just push the result of the
@@ -26736,14 +26420,6 @@ function bind(property, options, preserveContext, shouldDisplay, valueNormalizer
         templateData: options.data
       });
 
-      if (Ember.FEATURES.isEnabled('with-controller'))  {
-        if (options.hash.controller) {
-          bindView.set('contextController', this.container.lookupFactory('controller:'+options.hash.controller).create({
-            container: currentContext
-          }));
-        }
-      }
-
       view.appendChild(bindView);
 
       observer = function() {
@@ -26815,17 +26491,6 @@ function simpleBind(currentContext, property, options) {
     // be done with it.
     output = handlebarsGet(currentContext, property, options);
     data.buffer.push((output === null || typeof output === 'undefined') ? '' : output);
-  }
-}
-
-function shouldDisplayIfHelperContent(result) {
-  var truthy = result && get(result, 'isTruthy');
-  if (typeof truthy === 'boolean') { return truthy; }
-
-  if (Ember.isArray(result)) {
-    return get(result, 'length') !== 0;
-  } else {
-    return !!result;
   }
 }
 
@@ -26936,43 +26601,18 @@ EmberHandlebars.registerHelper('bind', function bindHelper(property, options) {
 */
 EmberHandlebars.registerHelper('boundIf', function boundIfHelper(property, fn) {
   var context = (fn.contexts && fn.contexts.length) ? fn.contexts[0] : this;
+  var func = function(result) {
+    var truthy = result && get(result, 'isTruthy');
+    if (typeof truthy === 'boolean') { return truthy; }
 
-  return bind.call(context, property, fn, true, shouldDisplayIfHelperContent, shouldDisplayIfHelperContent, ['isTruthy', 'length']);
-});
+    if (Ember.isArray(result)) {
+      return get(result, 'length') !== 0;
+    } else {
+      return !!result;
+    }
+  };
 
-
-/**
-  @private
-
-  Use the `unboundIf` helper to create a conditional that evaluates once.
-
-  ```handlebars
-  {{#unboundIf "content.shouldDisplayTitle"}}
-    {{content.title}}
-  {{/unboundIf}}
-  ```
-
-  @method unboundIf
-  @for Ember.Handlebars.helpers
-  @param {String} property Property to bind
-  @param {Function} fn Context to provide for rendering
-  @return {String} HTML string
-*/
-EmberHandlebars.registerHelper('unboundIf', function unboundIfHelper(property, fn) {
-  var context = (fn.contexts && fn.contexts.length) ? fn.contexts[0] : this,
-      data = fn.data,
-      template = fn.fn,
-      inverse = fn.inverse,
-      normalized, propertyValue, result;
-
-  normalized = normalizePath(context, property, data);
-  propertyValue = handlebarsGet(context, property, fn);
-
-  if (!shouldDisplayIfHelperContent(propertyValue)) {
-    template = inverse;
-  }
-
-  template(context, { data: data });
+  return bind.call(context, property, fn, true, func, func, ['isTruthy', 'length']);
 });
 
 /**
@@ -27025,7 +26665,6 @@ EmberHandlebars.registerHelper('with', function withHelper(context, options) {
 
 /**
   See [boundIf](/api/classes/Ember.Handlebars.helpers.html#method_boundIf)
-  and [unboundIf](/api/classes/Ember.Handlebars.helpers.html#method_unboundIf)
 
   @method if
   @for Ember.Handlebars.helpers
@@ -27036,11 +26675,8 @@ EmberHandlebars.registerHelper('with', function withHelper(context, options) {
 EmberHandlebars.registerHelper('if', function ifHelper(context, options) {
   Ember.assert("You must pass exactly one argument to the if helper", arguments.length === 2);
   Ember.assert("You must pass a block to the if helper", options.fn && options.fn !== Handlebars.VM.noop);
-  if (options.data.isUnbound) {
-    return helpers.unboundIf.call(options.contexts[0], context, options);
-  } else {
-    return helpers.boundIf.call(options.contexts[0], context, options);
-  }
+
+  return helpers.boundIf.call(options.contexts[0], context, options);
 });
 
 /**
@@ -27059,11 +26695,7 @@ EmberHandlebars.registerHelper('unless', function unlessHelper(context, options)
   options.fn = inverse;
   options.inverse = fn;
 
-  if (options.data.isUnbound) {
-    return helpers.unboundIf.call(options.contexts[0], context, options);
-  } else {
-    return helpers.boundIf.call(options.contexts[0], context, options);
-  }
+  return helpers.boundIf.call(options.contexts[0], context, options);
 });
 
 /**
@@ -27838,7 +27470,7 @@ var get = Ember.get, handlebarsGet = Ember.Handlebars.get, fmt = Ember.String.fm
   </div>
   ```
 
-  ### Blockless use in a collection
+  ### Blockless Use
 
   If you provide an `itemViewClass` option that has its own `template` you can
   omit the block.
@@ -28147,7 +27779,6 @@ Ember.Handlebars.registerHelper('debugger', function debuggerHelper(options) {
 */
 
 var get = Ember.get, set = Ember.set;
-var fmt = Ember.String.fmt;
 
 Ember.Handlebars.EachView = Ember.CollectionView.extend(Ember._Metamorph, {
   init: function() {
@@ -28180,8 +27811,8 @@ Ember.Handlebars.EachView = Ember.CollectionView.extend(Ember._Metamorph, {
   },
 
   _assertArrayLike: function(content) {
-    Ember.assert(fmt("The value that #each loops over must be an Array. You passed %@, but it should have been an ArrayController", [content.constructor]), !Ember.ControllerMixin.detect(content) || (content && content.isGenerated) || content instanceof Ember.ArrayController);
-    Ember.assert(fmt("The value that #each loops over must be an Array. You passed %@", [(Ember.ControllerMixin.detect(content) && content.get('model') !== undefined) ? fmt("'%@' (wrapped in %@)", [content.get('model'), content]) : content]), Ember.Array.detect(content));
+    Ember.assert("The value that #each loops over must be an Array. You passed " + content.constructor + ", but it should have been an ArrayController", !Ember.ControllerMixin.detect(content) || (content && content.isGenerated) || content instanceof Ember.ArrayController);
+    Ember.assert("The value that #each loops over must be an Array. You passed " + ((Ember.ControllerMixin.detect(content) && content.get('model') !== undefined) ? ("" + content.get('model') + " (wrapped in " + content + ")") : ("" + content)), Ember.Array.detect(content));
   },
 
   disableContentObservers: function(callback) {
@@ -29141,7 +28772,7 @@ Ember.TextField = Ember.Component.extend(Ember.TextSupport,
 
   classNames: ['ember-text-field'],
   tagName: "input",
-  attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max'],
+  attributeBindings: ['type', 'value', 'size', 'pattern', 'name'],
 
   /**
     The `value` attribute of the input element. As the user inputs text, this
@@ -29172,31 +28803,141 @@ Ember.TextField = Ember.Component.extend(Ember.TextSupport,
   size: null,
 
   /**
-    The `pattern` attribute of input element.
+    The `pattern` the pattern attribute of input element.
 
     @property pattern
     @type String
     @default null
   */
-  pattern: null,
+  pattern: null
+});
 
-  /**
-    The `min` attribute of input element used with `type="number"` or `type="range"`.
+})();
 
-    @property min 
-    @type String
-    @default null
+
+
+(function() {
+/*
+@module ember
+@submodule ember-handlebars
+*/
+
+var get = Ember.get, set = Ember.set;
+
+/*
+  @class Button
+  @namespace Ember
+  @extends Ember.View
+  @uses Ember.TargetActionSupport
+  @deprecated
+*/
+Ember.Button = Ember.View.extend(Ember.TargetActionSupport, {
+  classNames: ['ember-button'],
+  classNameBindings: ['isActive'],
+
+  tagName: 'button',
+
+  propagateEvents: false,
+
+  attributeBindings: ['type', 'disabled', 'href', 'tabindex'],
+
+  /*
+    @private
+
+    Overrides `TargetActionSupport`'s `targetObject` computed
+    property to use Handlebars-specific path resolution.
+
+    @property targetObject
   */
-  min: null,
+  targetObject: Ember.computed(function() {
+    var target = get(this, 'target'),
+        root = get(this, 'context'),
+        data = get(this, 'templateData');
 
-  /**
-    The `max` attribute of input element used with `type="number"` or `type="range"`.
+    if (typeof target !== 'string') { return target; }
 
-    @property max 
-    @type String
-    @default null
-  */
-  max: null
+    return Ember.Handlebars.get(root, target, { data: data });
+  }).property('target'),
+
+  // Defaults to 'button' if tagName is 'input' or 'button'
+  type: Ember.computed(function(key) {
+    var tagName = this.tagName;
+    if (tagName === 'input' || tagName === 'button') { return 'button'; }
+  }),
+
+  disabled: false,
+
+  // Allow 'a' tags to act like buttons
+  href: Ember.computed(function() {
+    return this.tagName === 'a' ? '#' : null;
+  }),
+
+  mouseDown: function() {
+    if (!get(this, 'disabled')) {
+      set(this, 'isActive', true);
+      this._mouseDown = true;
+      this._mouseEntered = true;
+    }
+    return get(this, 'propagateEvents');
+  },
+
+  mouseLeave: function() {
+    if (this._mouseDown) {
+      set(this, 'isActive', false);
+      this._mouseEntered = false;
+    }
+  },
+
+  mouseEnter: function() {
+    if (this._mouseDown) {
+      set(this, 'isActive', true);
+      this._mouseEntered = true;
+    }
+  },
+
+  mouseUp: function(event) {
+    if (get(this, 'isActive')) {
+      // Actually invoke the button's target and action.
+      // This method comes from the Ember.TargetActionSupport mixin.
+      this.triggerAction();
+      set(this, 'isActive', false);
+    }
+
+    this._mouseDown = false;
+    this._mouseEntered = false;
+    return get(this, 'propagateEvents');
+  },
+
+  keyDown: function(event) {
+    // Handle space or enter
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      this.mouseDown();
+    }
+  },
+
+  keyUp: function(event) {
+    // Handle space or enter
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      this.mouseUp();
+    }
+  },
+
+  // TODO: Handle proper touch behavior. Including should make inactive when
+  // finger moves more than 20x outside of the edge of the button (vs mouse
+  // which goes inactive as soon as mouse goes out of edges.)
+
+  touchStart: function(touch) {
+    return this.mouseDown(touch);
+  },
+
+  touchEnd: function(touch) {
+    return this.mouseUp(touch);
+  },
+
+  init: function() {
+    Ember.deprecate("Ember.Button is deprecated and will be removed from future releases. Consider using the `{{action}}` helper.");
+    this._super();
+  }
 });
 
 })();
@@ -29998,6 +29739,7 @@ function program7(depth0,data) {
   if you are deploying to browsers where the `required` attribute is used, you
   can add this to the `TextField`'s `attributeBindings` property:
 
+
   ```javascript
   Ember.TextField.reopen({
     attributeBindings: ['required']
@@ -30061,6 +29803,7 @@ function program7(depth0,data) {
   arguments from the helper to `Ember.Checkbox`'s `create` method. You can extend the
   capablilties of checkbox inputs in your applications by reopening this class. For example,
   if you wanted to add a css class to all checkboxes in your application:
+
 
   ```javascript
   Ember.Checkbox.reopen({
@@ -30220,7 +29963,7 @@ Ember.Handlebars.registerHelper('input', function(options) {
   extend the capabilities of text areas in your application by reopening this
   class. For example, if you are deploying to browsers where the `required`
   attribute is used, you can globally add support for the `required` attribute
-  on all {{textarea}}'s' in your app by reopening `Ember.TextArea` or
+  on all `{{textarea}}`s' in your app by reopening `Ember.TextArea` or
   `Ember.TextSupport` and adding it to the `attributeBindings` concatenated
   property:
 
@@ -32481,15 +32224,7 @@ DSL.prototype = {
     }
 
 
-    if (Ember.FEATURES.isEnabled("ember-routing-named-substates")) {
-      // For namespace-preserving nested resource (e.g. resource('foo.bar') within
-      // resource('foo')) we only want to use the last route name segment to determine
-      // the names of the error/loading substates (e.g. 'bar_loading')
-      name = name.split('.').pop();
-      route(this, name + '_loading');
-      route(this, name + '_error', { path: "/_unused_dummy_error_path_route_" + name + "/:error" });
-    }
-  },
+      },
 
   push: function(url, name, callback, queryParams) {
     var parts = name.split('.');
@@ -32500,11 +32235,7 @@ DSL.prototype = {
 
   route: function(name, options) {
     route(this, name, options);
-    if (Ember.FEATURES.isEnabled("ember-routing-named-substates")) {
-      route(this, name + '_loading');
-      route(this, name + '_error', { path: "/_unused_dummy_error_path_route_" + name + "/:error" });
-    }
-  },
+      },
 
   generate: function() {
     var dslMatches = this.matches;
@@ -32517,12 +32248,7 @@ DSL.prototype = {
       for (var i=0, l=dslMatches.length; i<l; i++) {
         var dslMatch = dslMatches[i];
         var matchObj = match(dslMatch[0]).to(dslMatch[1], dslMatch[2]);
-        if (Ember.FEATURES.isEnabled("query-params")) {
-          if(dslMatch[3]) {
-            matchObj.withQueryParams.apply(matchObj, dslMatch[3]);
-          }
-        }
-      }
+              }
     };
   }
 };
@@ -32564,7 +32290,7 @@ var get = Ember.get;
 */
 
 /**
-
+  
   Finds a controller instance.
 
   @for Ember
@@ -32576,22 +32302,17 @@ Ember.controllerFor = function(container, controllerName, lookupOptions) {
 };
 
 /**
-  Generates a controller factory
-
-  The type of the generated controller factory is derived
-  from the context. If the context is an array an array controller
-  is generated, if an object, an object controller otherwise, a basic
-  controller is generated.
-
+  Generates a controller automatically if none was provided.
+  The type of generated controller depends on the context.
   You can customize your generated controllers by defining
-  `App.ObjectController` or `App.ArrayController`.
-
+  `App.ObjectController` and `App.ArrayController`
+  
   @for Ember
-  @method generateControllerFactory
+  @method generateController
   @private
 */
-Ember.generateControllerFactory = function(container, controllerName, context) {
-  var Factory, fullName, instance, name, factoryName, controllerType;
+Ember.generateController = function(container, controllerName, context) {
+  var ControllerFactory, fullName, instance, name, factoryName, controllerType;
 
   if (context && Ember.isArray(context)) {
     controllerType = 'array';
@@ -32603,7 +32324,7 @@ Ember.generateControllerFactory = function(container, controllerName, context) {
 
   factoryName = 'controller:' + controllerType;
 
-  Factory = container.lookupFactory(factoryName).extend({
+  ControllerFactory = container.lookupFactory(factoryName).extend({
     isGenerated: true,
     toString: function() {
       return "(generated " + controllerName + " controller)";
@@ -32612,27 +32333,9 @@ Ember.generateControllerFactory = function(container, controllerName, context) {
 
   fullName = 'controller:' + controllerName;
 
-  container.register(fullName,  Factory);
+  container.register(fullName, ControllerFactory);
 
-  return Factory;
-};
-
-/**
-  Generates and instantiates a controller.
-
-  The type of the generated controller factory is derived
-  from the context. If the context is an array an array controller
-  is generated, if an object, an object controller otherwise, a basic
-  controller is generated.
-
-  @for Ember
-  @method generateController
-  @private
-*/
-Ember.generateController = function(container, controllerName, context) {
-  Ember.generateControllerFactory(container, controllerName, context);
-  var fullName = 'controller:' + controllerName;
-  var instance = container.lookup(fullName);
+  instance = container.lookup(fullName);
 
   if (get(instance, 'namespace.LOG_ACTIVE_GENERATION')) {
     Ember.Logger.info("generated -> " + fullName, { fullName: fullName });
@@ -32771,6 +32474,13 @@ Ember.Router = Ember.Object.extend(Ember.Evented, {
     this.router.reset();
   },
 
+  willDestroy: function(){
+    var location = get(this, 'location');
+    location.destroy();
+
+    this._super.apply(this, arguments);
+  },
+
   _lookupActiveView: function(templateName) {
     var active = this._activeViews[templateName];
     return active && active[0];
@@ -32793,23 +32503,16 @@ Ember.Router = Ember.Object.extend(Ember.Evented, {
 
   _setupLocation: function() {
     var location = get(this, 'location'),
-        rootURL = get(this, 'rootURL');
-
-    if ('string' === typeof location && this.container) {
-      var resolvedLocation = this.container.lookup('location:' + location);
-
-      if ('undefined' !== typeof resolvedLocation) {
-        location = set(this, 'location', resolvedLocation);
-      } else {
-        // Allow for deprecated registration of custom location API's
-        var options = {implementation: location};
-
-        location = set(this, 'location', Ember.Location.create(options));
-      }
-    }
+        rootURL = get(this, 'rootURL'),
+        options = {};
 
     if (typeof rootURL === 'string') {
-      location.rootURL = rootURL;
+      options.rootURL = rootURL;
+    }
+
+    if ('string' === typeof location) {
+      options.implementation = location;
+      location = set(this, 'location', Ember.Location.create(options));
     }
 
     // ensure that initState is called AFTER the rootURL is set on
@@ -32882,10 +32585,7 @@ Ember.Router = Ember.Object.extend(Ember.Evented, {
     var passedName = args[0], name, self = this,
       isQueryParamsOnly = false;
 
-    if (Ember.FEATURES.isEnabled("query-params")) {
-      isQueryParamsOnly = (args.length === 1 && args[0].hasOwnProperty('queryParams'));
-    }
-
+    
     if (!isQueryParamsOnly && passedName.charAt(0) === '/') {
       name = passedName;
     } else if (!isQueryParamsOnly) {
@@ -33035,14 +32735,7 @@ function findChildRouteName(parentRoute, originatingChildRoute, name) {
       targetChildRouteName = originatingChildRoute.routeName.split('.').pop(),
       namespace = parentRoute.routeName === 'application' ? '' : parentRoute.routeName + '.';
 
-  if (Ember.FEATURES.isEnabled("ember-routing-named-substates")) {
-    // First, try a named loading state, e.g. 'foo_loading'
-    childName = namespace + targetChildRouteName + '_' + name;
-    if (routeHasBeenDefined(router, childName)) {
-      return childName;
-    }
-  }
-
+  
   // Second, try general loading state, e.g. 'loading'
   childName = namespace + name;
   if (routeHasBeenDefined(router, childName)) {
@@ -33655,10 +33348,7 @@ Ember.Route = Ember.Object.extend(Ember.ActionHandler, {
 
     var args = [controller, context];
 
-    if (Ember.FEATURES.isEnabled("query-params")) {
-      args.push(queryParams);
-    }
-
+    
     if (this.setupControllers) {
       Ember.deprecate("Ember.Route.setupControllers is deprecated. Please use Ember.Route.setupController(controller, model) instead.");
       this.setupControllers(controller, context);
@@ -34097,10 +33787,13 @@ Ember.Route = Ember.Object.extend(Ember.ActionHandler, {
   },
 
   /**
-    Returns the current model for a given route.
-
-    This is the object returned by the `model` hook of the route
-    in question.
+    Returns the model of a parent (or any ancestor) route
+    in a route hierarchy.  During a transition, all routes
+    must resolve a model object, and if a route
+    needs access to a parent route's model in order to
+    resolve a model (or just reuse the model from a parent),
+    it can call `this.modelFor(theNameOfParentRoute)` to
+    retrieve it.
 
     Example
 
@@ -34688,14 +34381,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
       var eventName = get(this, 'eventName'), i;
       this.on(eventName, this, this._invoke);
 
-      if (Ember.FEATURES.isEnabled("query-params")) {
-        var queryParams = get(this, '_potentialQueryParams') || [];
-
-        for(i=0; i < queryParams.length; i++) {
-          this.registerObserver(this, queryParams[i], this, this._queryParamsChanged);
-        }
-      }
-    },
+          },
 
     /**
       @private
@@ -34877,15 +34563,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
           types = options.types,
           data = options.data;
 
-      if (Ember.FEATURES.isEnabled("query-params")) {
-        if (parameters.params.length === 0) {
-          var appController = this.container.lookup('controller:application');
-          return [get(appController, 'currentRouteName')];
-        } else {
-          return resolveParams(parameters.context, parameters.params, { types: types, data: data });
-        }
-      }
-
+      
       // Original implementation if query params not enabled
       return resolveParams(parameters.context, parameters.params, { types: types, data: data });
     }).property(),
@@ -34917,12 +34595,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
         }
       }
 
-      if (Ember.FEATURES.isEnabled("query-params")) {
-        var queryParams = get(this, 'queryParams');
-
-        if (queryParams || queryParams === false) { resolvedParams.push({queryParams: queryParams}); }
-      }
-
+      
       return resolvedParams;
     }).property('resolvedParams', 'queryParams', 'router.url'),
 
@@ -35486,58 +35159,41 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
     @return {String} HTML string
   */
   Ember.Handlebars.registerHelper('render', function renderHelper(name, contextString, options) {
-    var length = arguments.length;
-
-    var contextProvided = length === 3,
+    Ember.assert("You must pass a template to render", arguments.length >= 2);
+    var contextProvided = arguments.length === 3,
         container, router, controller, view, context, lookupOptions;
 
-    container = (options || contextString).data.keywords.controller.container;
-    router = container.lookup('router:main');
-
-    if (length === 2) {
-      // use the singleton controller
+    if (arguments.length === 2) {
       options = contextString;
       contextString = undefined;
-      Ember.assert("You can only use the {{render}} helper once without a model object as its second argument, as in {{render \"post\" post}}.", !router || !router._lookupActiveView(name));
-    } else if (length === 3) {
-      // create a new controller
-      context = Ember.Handlebars.get(options.contexts[1], contextString, options);
-    } else {
-      throw Ember.Error("You must pass a templateName to render");
     }
 
-    // # legacy namespace
-    name = name.replace(/\//g, '.');
-    // \ legacy slash as namespace support
+    if (typeof contextString === 'string') {
+      context = Ember.Handlebars.get(options.contexts[1], contextString, options);
+      lookupOptions = { singleton: false };
+    }
 
+    name = name.replace(/\//g, '.');
+    container = options.data.keywords.controller.container;
+    router = container.lookup('router:main');
+
+    Ember.assert("You can only use the {{render}} helper once without a model object as its second argument, as in {{render \"post\" post}}.", contextProvided || !router || !router._lookupActiveView(name));
 
     view = container.lookup('view:' + name) || container.lookup('view:default');
 
-    // provide controller override
-    var controllerName = options.hash.controller || name;
-    var controllerFullName = 'controller:' + controllerName;
+    var controllerName = options.hash.controller;
 
-    if (options.hash.controller) {
-      Ember.assert("The controller name you supplied '" + controllerName + "' did not resolve to a controller.", container.has(controllerFullName));
+    // Look up the controller by name, if provided.
+    if (controllerName) {
+      controller = container.lookup('controller:' + controllerName, lookupOptions);
+      Ember.assert("The controller name you supplied '" + controllerName + "' did not resolve to a controller.", !!controller);
+    } else {
+      controller = container.lookup('controller:' + name, lookupOptions) ||
+                      Ember.generateController(container, name, context);
     }
 
-    var target = options.data.keywords.controller;
-
-    // choose name
-    if (length > 2) {
-      var factory = container.lookupFactory(controllerFullName) ||
-                    Ember.generateControllerFactory(container, controllerName, context);
-
-      controller = factory.create({
-        model: context,
-        target: target
-      });
-
-    } else {
-      controller = container.lookup(controllerFullName) ||
-                   Ember.generateController(container, controllerName);
-
-      controller.set('target', target);
+    if (controller && contextProvided) {
+      controller.set('model', context);
     }
 
     var root = options.contexts[1];
@@ -35547,6 +35203,8 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
         controller.set('model', Ember.Handlebars.get(root, contextString, options));
       });
     }
+
+    controller.set('target', options.data.keywords.controller);
 
     options.hash.viewName = Ember.String.camelize(name);
     options.hash.template = container.lookup('template:' + name);
@@ -35558,6 +35216,7 @@ Ember.onLoad('Ember.Handlebars', function(Handlebars) {
 
     Ember.Handlebars.helpers.view.call(this, view, options);
   });
+
 });
 
 })();
@@ -35896,8 +35555,8 @@ Ember.ControllerMixin.reopen({
     be either a single route or route path:
 
     ```javascript
-      aController.transitionToRoute('blogPosts');
-      aController.transitionToRoute('blogPosts.recentEntries');
+    aController.transitionToRoute('blogPosts');
+    aController.transitionToRoute('blogPosts.recentEntries');
     ```
 
     Optionally supply a model for the route in question. The model
@@ -35905,19 +35564,18 @@ Ember.ControllerMixin.reopen({
     the route:
 
     ```javascript
-      aController.transitionToRoute('blogPost', aPost);
+    aController.transitionToRoute('blogPost', aPost);
     ```
 
     Multiple models will be applied last to first recursively up the
     resource tree.
 
     ```javascript
+    this.resource('blogPost', {path:':blogPostId'}, function(){
+      this.resource('blogComment', {path: ':blogCommentId'});
+    });
 
-      this.resource('blogPost', {path:':blogPostId'}, function(){
-        this.resource('blogComment', {path: ':blogCommentId'});
-      });
-      
-      aController.transitionToRoute('blogComment', aPost, aComment);
+    aController.transitionToRoute('blogComment', aPost, aComment);
     ```
 
     See also 'replaceRoute'.
@@ -35951,8 +35609,8 @@ Ember.ControllerMixin.reopen({
     Beside that, it is identical to `transitionToRoute` in all other respects.
 
     ```javascript
-      aController.replaceRoute('blogPosts');
-      aController.replaceRoute('blogPosts.recentEntries');
+    aController.replaceRoute('blogPosts');
+    aController.replaceRoute('blogPosts.recentEntries');
     ```
 
     Optionally supply a model for the route in question. The model
@@ -35960,19 +35618,18 @@ Ember.ControllerMixin.reopen({
     the route:
 
     ```javascript
-      aController.replaceRoute('blogPost', aPost);
+    aController.replaceRoute('blogPost', aPost);
     ```
 
     Multiple models will be applied last to first recursively up the
     resource tree.
 
     ```javascript
+    this.resource('blogPost', {path:':blogPostId'}, function(){
+      this.resource('blogComment', {path: ':blogCommentId'});
+    });
 
-      this.resource('blogPost', {path:':blogPostId'}, function(){
-        this.resource('blogComment', {path: ':blogCommentId'});
-      });
-      
-      aController.replaceRoute('blogComment', aPost, aComment);
+    aController.replaceRoute('blogComment', aPost, aComment);
     ```
 
     @param {String} name the name of the route
@@ -36254,8 +35911,6 @@ Ember.Location = {
     @param {Object} implementation of the `location` API
   */
   registerImplementation: function(name, implementation) {
-    Ember.deprecate('Using the Ember.Location.registerImplementation is no longer supported. Register your custom location implementation with the container instead.', false);
-
     this.implementations[name] = implementation;
   },
 
@@ -36285,7 +35940,6 @@ var get = Ember.get, set = Ember.set;
   @extends Ember.Object
 */
 Ember.NoneLocation = Ember.Object.extend({
-  implementation: 'none',
   path: '',
 
   /**
@@ -36361,6 +36015,8 @@ Ember.NoneLocation = Ember.Object.extend({
   }
 });
 
+Ember.Location.registerImplementation('none', Ember.NoneLocation);
+
 })();
 
 
@@ -36383,7 +36039,6 @@ var get = Ember.get, set = Ember.set;
   @extends Ember.Object
 */
 Ember.HashLocation = Ember.Object.extend({
-  implementation: 'hash',
 
   init: function() {
     set(this, 'location', get(this, 'location') || window.location);
@@ -36397,19 +36052,7 @@ Ember.HashLocation = Ember.Object.extend({
     @method getURL
   */
   getURL: function() {
-    if (Ember.FEATURES.isEnabled("query-params")) {
-      // location.hash is not used because it is inconsistently
-      // URL-decoded between browsers.
-      var href = get(this, 'location').href,
-        hashIndex = href.indexOf('#');
-
-      if ( hashIndex === -1 ) {
-        return "";
-      } else {
-        return href.substr(hashIndex + 1);
-      }
-    }
-    // Default implementation without feature flag enabled
+        // Default implementation without feature flag enabled
     return get(this, 'location').hash.substr(1);
   },
 
@@ -36497,6 +36140,8 @@ Ember.HashLocation = Ember.Object.extend({
   }
 });
 
+Ember.Location.registerImplementation('hash', Ember.HashLocation);
+
 })();
 
 
@@ -36520,7 +36165,6 @@ var supportsHistoryState = window.history && 'state' in window.history;
   @extends Ember.Object
 */
 Ember.HistoryLocation = Ember.Object.extend({
-  implementation: 'history',
 
   init: function() {
     set(this, 'location', get(this, 'location') || window.location);
@@ -36562,11 +36206,7 @@ Ember.HistoryLocation = Ember.Object.extend({
     rootURL = rootURL.replace(/\/$/, '');
     var url = path.replace(rootURL, '');
 
-    if (Ember.FEATURES.isEnabled("query-params")) {
-      var search = location.search || '';
-      url += search;
-    }
-
+    
     return url;
   },
 
@@ -36718,6 +36358,8 @@ Ember.HistoryLocation = Ember.Object.extend({
     Ember.$(window).off('popstate.ember-location-'+guid);
   }
 });
+
+Ember.Location.registerImplementation('history', Ember.HistoryLocation);
 
 })();
 
@@ -37573,15 +37215,9 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
 
     ```javascript
     App.inject(<full_name or type>, <property name>, <full_name>)
-    App.inject('controller:application', 'email', 'model:email')
-    App.inject('controller', 'source', 'source:main')
+    App.inject('model:user', 'email', 'model:email')
+    App.inject('model', 'source', 'source:main')
     ```
-    Please note that injections on models are currently disabled. 
-    This was done because ember-data was not ready for fully a container aware ecosystem.
-    
-    You can enable injections on models by setting `Ember.MODEL_FACTORY_INJECTIONS` flag to `true`
-    If model factory injections are enabled, models should not be
-    accessed globally (only through `container.lookupFactory('model:modelName'))`);
 
     @method inject
     @param  factoryNameOrType {String}
@@ -37915,10 +37551,6 @@ Ember.Application.reopenClass({
 
     container.register('router:main',  Ember.Router);
     container.injection('router:main', 'namespace', 'application:main');
-
-    container.register('location:hash', Ember.HashLocation);
-    container.register('location:history', Ember.HistoryLocation);
-    container.register('location:none', Ember.NoneLocation);
 
     container.injection('controller', 'target', 'router:main');
     container.injection('controller', 'namespace', 'application:main');
@@ -38973,10 +38605,7 @@ Ember.Application.reopen({
        Ember.Test.adapter = Ember.Test.QUnitAdapter.create();
     }
 
-    if (Ember.FEATURES.isEnabled('ember-testing-simple-setup')){
-      this.testingSetup = true;
-    }
-  },
+      },
 
   /**
     This will be used as the container to inject the test helpers into. By
@@ -39087,7 +38716,7 @@ function isolate(fn, val) {
   // Reset lastPromise for nested helpers
   Ember.Test.lastPromise = null;
 
-  value = fn(val);
+  value = fn.call(null, val);
 
   lastPromise = Ember.Test.lastPromise;
 
@@ -39124,19 +38753,7 @@ Ember.onLoad('Ember.Application', function(Application) {
     });
   
 
-  if (Ember.FEATURES.isEnabled('ember-testing-simple-setup')){
-    Application.initializer({
-      name: 'setupForTesting and injectTestHelpers when created with testing = true',
-
-      initialize: function(container, application){
-        if (application.testing && !application.testingSetup) {
-          application.setupForTesting();
-          application.injectTestHelpers();
-        }
-      }
-    });
-  }
-});
+  });
 
 })();
 
@@ -39441,7 +39058,7 @@ function wait(app, value) {
         if (Test.waiters && Test.waiters.any(function(waiter) {
           var context = waiter[0];
           var callback = waiter[1];
-          return !callback.call(context);
+          return !callback.apply(context);
         })) { return; }
       
       // Stop polling
@@ -39597,82 +39214,7 @@ asyncHelper('wait', wait);
 asyncHelper('andThen', andThen);
 
 
-if (Ember.FEATURES.isEnabled('ember-testing-routing-helpers')){
-  /**
-    Returns the currently active route name.
 
-    Example:
-
-    ```
-    function validateRouteName(){
-      equal(currentRouteName(), 'some.path', "correct route was transitioned into.");
-    }
-
-    visit('/some/path').then(validateRouteName)
-
-    ```
-
-    @method currentRouteName
-    @return {Object} The name of the currently active route.
-  */
-  helper('currentRouteName', currentRouteName);
-
-  /**
-    Returns the current path.
-
-    Example:
-
-    ```
-    function validateURL(){
-      equal(currentPath(), 'some.path.index', "correct path was transitioned into.");
-    }
-
-    click('#some-link-id').then(validateURL);
-
-    ```
-
-    @method currentPath
-    @return {Object} The currently active path.
-  */
-  helper('currentPath', currentPath);
-
-  /**
-    Returns the current URL.
-
-    Example:
-
-    ```
-    function validateURL(){
-      equal(currentURL(), '/some/path', "correct URL was transitioned into.");
-    }
-
-    click('#some-link-id').then(validateURL);
-
-    ```
-
-    @method currentURL
-    @return {Object} The currently active URL.
-  */
-  helper('currentURL', currentURL);
-}
-
-if (Ember.FEATURES.isEnabled('ember-testing-triggerEvent-helper')) {
-  /**
-    Triggers the given event on the element identified by the provided selector.
-
-    Example:
-
-    ```javascript
-    triggerEvent('#some-elem-id', 'blur');
-    ```
-
-   @method triggerEvent
-   @param {String} selector jQuery selector for finding element on the DOM
-   @param {String} event The event to be triggered.
-   @return {RSVP.Promise}
-  */
-  asyncHelper('triggerEvent', triggerEvent);
-}
 
 })();
 
