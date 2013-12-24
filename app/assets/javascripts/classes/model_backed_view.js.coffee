@@ -11,10 +11,8 @@ Bandango.ModelBackedView = Ember.View.extend
     @defineComputedPropertiesForAttributes()
 
   errors_messages: (->
-    messages = []
-    for key, value of @get("raw_errors")
-      messages.push "#{value.join(", ")}"
-    messages
+    $.map @get("raw_errors"), (text) ->
+      text.join ", " if text
   ).property("raw_errors")
 
   newRecord: (->
