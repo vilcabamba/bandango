@@ -1,15 +1,13 @@
-self = null
-
 Bandango.ClientesEditView = Bandango.ClienteFormView.extend
   templateName: "clientes/new"
   modelBinding: "controller.model"
 
   success: (cliente) ->
-    self.successCallback cliente, "actualizado"
+    @successCallback cliente, "actualizado"
 
   failure: (response) ->
-    self.get("model").rollback()
-    self.failureCallback response
+    @get("model").rollback()
+    @failureCallback response
 
   submit: ->
     self = @
@@ -17,6 +15,6 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
     data = @getFormData()
     cliente = @get("model")
     cliente.setProperties data
-    cliente.save().then @success, @failure
+    cliente.save().then $.proxy(@success, @), $.proxy(@failure, @)
     @set "submitting", true
     false

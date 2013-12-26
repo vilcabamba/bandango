@@ -1,14 +1,12 @@
-self = null
-
 Bandango.ClientesNewView = Bandango.ClienteFormView.extend
   bindAttributesTo: null
 
   success: (cliente) ->
-    self.successCallback cliente, "creado"
+    @successCallback cliente, "creado"
 
   failure: (response) ->
-    self.new_cliente.deleteRecord()
-    self.failureCallback response
+    @new_cliente.deleteRecord()
+    @failureCallback response
 
   submit: ->
     self = @
@@ -16,6 +14,6 @@ Bandango.ClientesNewView = Bandango.ClienteFormView.extend
     data = @getFormData()
     store = @get("controller").get("store")
     @new_cliente = store.createRecord "cliente", data
-    @new_cliente.save().then @success, @failure
+    @new_cliente.save().then $.proxy(@success, @), $.proxy(@failure, @)
     @set "submitting", true
     false
