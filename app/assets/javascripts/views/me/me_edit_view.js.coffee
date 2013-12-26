@@ -1,5 +1,3 @@
-self = null
-
 Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm,
   tagName: "form"
 
@@ -19,11 +17,11 @@ Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnF
 
   successEditing: (user) ->
     Bandango.currentSession.logInAs user
-    self.get("controller").transitionToRoute "me.index"
-    self.successCallback "Tu perfil fue actualizado"
+    @get("controller").transitionToRoute "me.index"
+    @successCallback "Tu perfil fue actualizado"
 
   failureEditing: (response) ->
-    self.failureCallback {errors: response.responseJSON}
+    @failureCallback {errors: response.responseJSON}
 
   submit: ->
     self = @
@@ -33,5 +31,5 @@ Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnF
       @setErrors password: ["Las contraseñas no coinciden"]
       return false
     @set "submitting", true
-    $.post("/api/current_user", {user: data}).then @successEditing, @failureEditing
+    $.post("/api/current_user", {user: data}).then $.proxy(@successEditing, @), $.proxy(@failureEditing, @)
     false

@@ -38,6 +38,7 @@ Bandango.ModelBackedView = Ember.View.extend
         ).property()
     null
 
+# errors:
   emptyErrors: ->
     @setProperties
       errors: {}
@@ -53,7 +54,7 @@ Bandango.ModelBackedView = Ember.View.extend
       raw_errors: the_errors
     null
 
-  # callbacks:
+# callbacks:
   failureCallback: (response) ->
     @setErrors response.errors
     @set "submitting", false
