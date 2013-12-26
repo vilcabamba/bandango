@@ -11,7 +11,7 @@ Bandango.FacturasNewView = Ember.View.extend Bandango.GravatarImagenOnForm,
       @set attribute, cliente.get(attribute)
   ).observes("cliente")
 
-  willInsertElement: ->
+  didInsertElement: ->
     @$(".identificacion_input").on("keyup" , $.proxy(@identificacionKeyUpped, @))
                                .on("change", $.proxy(@identificacionChanged, @))
 
