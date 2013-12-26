@@ -3,6 +3,12 @@ Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnF
   modelBinding: "controller.model"
   attributes: ["nombres", "username", "email", "password", "password_confirmation"]
 
+  didInsertElement: ->
+    @$(".profile_image").popover()
+
+  willDestroyElement: ->
+    @$(".profile_image").popover "destroy"
+
   successEditing: (user) ->
     Bandango.currentSession.logInAs user
     @get("controller").transitionToRoute "me.index"
