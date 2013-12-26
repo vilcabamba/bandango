@@ -2,6 +2,15 @@ Bandango.FacturasNewView = Ember.View.extend Bandango.GravatarImagenOnForm,
   tagName: "form"
   tiposIds: ["RUC", "Cédula", "Pasaporte - otro"]
 
+
+# cliente methods
+  clienteChanged: (->
+    cliente = @get("cliente") || Ember.Object.create()
+    attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
+    for attribute in attributes
+      @set attribute, cliente.get(attribute)
+  ).observes("cliente")
+
   willInsertElement: ->
     @$(".identificacion_input").on("keyup" , $.proxy(@identificacionKeyUpped, @))
                                .on("change", $.proxy(@identificacionChanged, @))
@@ -18,11 +27,10 @@ Bandango.FacturasNewView = Ember.View.extend Bandango.GravatarImagenOnForm,
       @queryForCliente value
 
   gotCliente: (clientes) ->
-    cliente = clientes.get("firstObject")
-    console.log cliente.get("nombres")
+    @set "cliente", clientes.get("firstObject")
 
   didNotGetCliente: ->
-    console.log arguments
+    @set "cliente", null
 
   queryForCliente: (identificacion) ->
     unless @get("currentId") == identificacion
@@ -30,6 +38,7 @@ Bandango.FacturasNewView = Ember.View.extend Bandango.GravatarImagenOnForm,
       store = @get("controller").get("store")
       store.find("cliente", identificacion: identificacion).then $.proxy(@gotCliente, @), $.proxy(@didNotGetCliente, @)
 
+# view methods
   submit: ->
     console.log "submit!"
     false
