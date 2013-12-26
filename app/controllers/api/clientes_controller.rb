@@ -4,7 +4,11 @@ module Api
     respond_to :json
 
     def index
-      respond_with Cliente.all
+      if params[:identificacion]
+        respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
+      else
+        respond_with Cliente.all
+      end
     end
 
     def show
