@@ -6,11 +6,10 @@ Bandango.User = Ember.Object.extend Ember.Validations, Bandango.PersonImagen,
   }
 
   firstNames: (->
-    nombres = @get("nombres")
-    unless nombres
+    unless nombres = @get("nombres")
       return @get("username")
     if nombres.split(" ").length > 2
       nombres.split(" ").slice(0, 2).join " "
     else
       nombres
-    ).property("nombres")
+  ).property("nombres")
