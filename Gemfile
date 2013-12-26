@@ -75,4 +75,4 @@ gem "sorcery"
 gem "annotate", :git => "git://github.com/ctran/annotate_models.git"
 
 # id_ecuador
-gem "id_ecuador"
+gem "id_ecuador", ">= 0.0.2.alpha"
