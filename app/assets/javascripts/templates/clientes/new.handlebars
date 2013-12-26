@@ -5,14 +5,15 @@
 {{partial "clientes/form"}}
 
 <div class="row">
-  <div class="col-xs-8 text-danger">
+  <div class="col-xs-6 text-danger">
     {{array_with_lines view.errors_messages}}
   </div>
-  <div class="col-xs-4 actions">
+  <div class="col-xs-6 actions">
     {{#if view.newRecord}}
       {{link-to "Cancelar" "clientes.index" class="btn btn-link"}}
     {{else}}
       {{link-to "Cancelar" "clientes.show" view.model.id class="btn btn-link"}}
+      <button {{action destroyCliente target=view}} {{bind-attr disabled=view.submitting}} class="btn btn-danger">Eliminar</button>
     {{/if}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
   </div>

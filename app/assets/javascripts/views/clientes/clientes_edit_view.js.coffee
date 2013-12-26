@@ -2,10 +2,11 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
   templateName: "clientes/new"
   modelBinding: "controller.model"
 
-  success: (cliente) ->
+# editing
+  successEditing: (cliente) ->
     @successCallback cliente, "actualizado"
 
-  failure: (response) ->
+  failureEditing: (response) ->
     @get("model").rollback()
     @failureCallback response
 
@@ -15,6 +16,22 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
     data = @getFormData()
     cliente = @get("model")
     cliente.setProperties data
-    cliente.save().then $.proxy(@success, @), $.proxy(@failure, @)
+    cliente.save().then $.proxy(@successEditing, @), $.proxy(@failureEditing, @)
     @set "submitting", true
     false
+
+# destroying
+  successDestroying: ->
+    alertify.log "Cliente eliminado"
+    @get("controller").transitionToRoute "clientes.index"
+    @set "submitting", false
+
+  failureDestroying: ->
+    @get("model").rollback()
+    alertify.log "Algo salió mal. Por favor vuelve a intentar"
+    @set "submitting", false
+
+  actions:
+    destroyCliente: ->
+      @set "submitting", true
+      @get("model").destroyRecord().then($.proxy(@successDestroying, @), $.proxy(@failureDestroying, @))
