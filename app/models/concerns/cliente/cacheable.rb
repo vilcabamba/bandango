@@ -12,13 +12,14 @@ class Cliente < ActiveRecord::Base
 
     module ClassMethods
       def cached_find_by_identificacion(identificacion)
+        if identificacion.blank? then return end
         Rails.cache.fetch([name, "identificacion", identificacion]) do
           find_by identificacion: identificacion
         end
       end
       def cached_search_for_identificacion(identificacion)
         # returns an array with one record (used by ember-data#search)
-        [cached_find_by_identificacion(identificacion)]
+        [cached_find_by_identificacion(identificacion)].compact
       end
     end
   end
