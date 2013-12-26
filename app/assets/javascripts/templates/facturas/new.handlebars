@@ -5,6 +5,7 @@
 <section class="form_section">
   <div class="section_header">
     Cliente
+    {{view Bandango.SpinnerView size="tiny" show=view.isFetchingCliente}}
   </div>
   <div class="section_body">
     {{partial "clientes/form"}}

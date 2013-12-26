@@ -27,14 +27,20 @@ Bandango.FacturasNewView = Ember.View.extend Bandango.GravatarImagenOnForm,
       @queryForCliente value
 
   gotCliente: (clientes) ->
-    @set "cliente", clientes.get("firstObject")
+    @setProperties
+      isFetchingCliente: false
+      cliente: clientes.get("firstObject")
 
   didNotGetCliente: ->
-    @set "cliente", null
+    @setProperties
+      isFetchingCliente: false
+      cliente: null
 
   queryForCliente: (identificacion) ->
     unless @get("currentId") == identificacion
-      @set "currentId", identificacion
+      @setProperties
+        isFetchingCliente: true
+        currentId: identificacion
       store = @get("controller").get("store")
       store.find("cliente", identificacion: identificacion).then $.proxy(@gotCliente, @), $.proxy(@didNotGetCliente, @)
 
