@@ -26,7 +26,8 @@ Bandango.DeleteButtonView = Ember.View.extend
     @showFirstPart()
     @$(".first a").button("loading")
     setTimeout =>
-      @$(".first a").button("reset")
+      if $btn = @$(".first a")
+        $btn.button("reset")
     , 2000
     null
 
