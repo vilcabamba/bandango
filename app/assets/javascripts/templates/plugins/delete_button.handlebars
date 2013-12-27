@@ -1,0 +1,11 @@
+<div class="first">
+  <a href="#" {{bind-attr class=":delete_button view.classes"}} {{bind-attr data-loading-text=view.deletingText}}>
+    {{yield}}
+  </a>
+</div>
+<div class="last hidden">
+  <a href="#" {{bind-attr class=":cancel_trigger view.classes"}} title="Cancelar" data-placement="bottom">
+    <span class="glyphicon glyphicon-remove"></span>
+    {{view.waitingText}} {{view.remainingSeconds}}{{view.waitingTextPredicate}}
+  </a>
+</div>

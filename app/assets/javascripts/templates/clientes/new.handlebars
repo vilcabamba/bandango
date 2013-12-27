@@ -13,7 +13,7 @@
       {{link-to "Cancelar" "clientes.index" class="btn btn-link"}}
     {{else}}
       {{link-to "Cancelar" "clientes.show" view.model.id class="btn btn-link"}}
-      <button {{action destroyCliente target=view}} {{bind-attr disabled=view.submitting}} class="btn btn-danger">Eliminar</button>
+      {{#view Bandango.DeleteButtonView action="destroyCliente"}}Eliminar{{/view}}
     {{/if}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
   </div>
