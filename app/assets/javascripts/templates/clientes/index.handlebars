@@ -6,3 +6,11 @@
 {{#each cliente in controller}}
   {{view Bandango.ClienteOnListView model=cliente}}
 {{/each}}
+
+<div class="align_center has_margin">
+  {{#if hasMore}}
+    <a href="#" class="btn btn-link full_width" {{action showMore}}>Más</a>
+  {{else}}
+    No hay más clientes
+  {{/if}}
+</div>
