@@ -1,6 +1,6 @@
 Bandango.ClienteOnListView = Ember.View.extend
   tagName: "a"
-  classNames: "cliente_on_list"
+  classNames: "person_on_list"
   templateName: "clientes/cliente_on_list"
   attributeBindings: ["href"]
 
