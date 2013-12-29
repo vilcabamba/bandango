@@ -47,6 +47,7 @@ Bandango.DeleteButtonView = Ember.View.extend
                          .tooltip()
 
   willDestroyElement: ->
+    @countdown.abort() if @countdown
     @$(".delete_button").off "click"
     @$(".cancel_trigger").off("click")
                          .tooltip("destroy")
