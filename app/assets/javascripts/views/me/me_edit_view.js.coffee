@@ -6,7 +6,6 @@ Bandango.MeEditView = Bandango.UserFormView.extend
     @successCallback "Tu perfil fue actualizado"
 
   submit: ->
-    self = @
     @emptyErrors()
     data = @getFormData()
     unless data.password is data.password_confirmation

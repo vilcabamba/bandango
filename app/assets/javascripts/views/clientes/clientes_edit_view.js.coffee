@@ -11,7 +11,6 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
     @failureCallback response
 
   submit: ->
-    self = @
     @emptyErrors()
     data = @getFormData()
     cliente = @get("model")

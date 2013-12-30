@@ -9,7 +9,6 @@ Bandango.ClientesNewView = Bandango.ClienteFormView.extend
     @failureCallback response
 
   submit: ->
-    self = @
     @emptyErrors()
     data = @getFormData()
     store = @get("controller").get("store")
