@@ -14,7 +14,7 @@ module Api
     end
 
     def show
-      respond_with Cliente.find(params[:id])
+      respond_with Cliente.cached_find(params[:id])
     end
 
     def create

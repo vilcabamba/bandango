@@ -10,7 +10,25 @@ module Api
     end
 
     def show
-      respond_with User.find(params[:id])
+      respond_with User.cached_find(params[:id])
+    end
+
+    def create
+      respond_with :api, User.create(user_params)
+    end
+
+    def update
+      respond_with User.update(params[:id], user_params)
+    end
+
+    def destroy
+      respond_with User.destroy(params[:id])
+    end
+
+    private
+
+    def user_params
+      params.require(:user).permit :nombres, :username, :email, :password
     end
   end
 end
