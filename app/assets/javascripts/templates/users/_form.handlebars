@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-4 align_right">
+    <img {{bind-attr src=view.imagen_url_small}} class="cursor_pointer profile_image small" data-placement="bottom" data-toggle="popover" data-html="true" data-content="<small>Cambia tu imagen en <a href='http://es.gravatar.com/' target='_blank'>Gravatar</a></small>">
+  </div>
+  <div class="col-xs-8">
+    <div {{bind-attr class=":form-group view.errors.nombres"}}>
+      {{view Ember.TextField value=view.nombres class="form-control" placeholder="Nombres"}}
+    </div>
+    <div {{bind-attr class=":form-group view.errors.username"}}>
+      {{view Ember.TextField value=view.username class="form-control" placeholder="Nombre de usuario" required="true"}}
+    </div>
+    <div {{bind-attr class=":form-group view.errors.email"}}>
+      {{view Ember.TextField value=view.email type="email" class="form-control" placeholder="Email"}}
+    </div>
+    <div class="form-group">
+      <div class="bandango_divider"></div>
+    </div>
+    <div {{bind-attr class=":form-group view.errors.password"}}>
+      {{view Ember.TextField value=view.password type="password" class="form-control" placeholder="Nueva contraseña"}}
+    </div>
+    <div class="form-group">
+      {{view Ember.TextField value=view.password_confirmation type="password" class="form-control" placeholder="Confirmar contraseña"}}
+      <div class="align_right small">
+        Deja en blanco estos campos si no deseas cambiar la contraseña
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8 text-danger">
+    {{array_with_lines view.errors_messages}}
+  </div>
+  <div class="col-xs-4">
+    {{link-to "Cancelar" "me.index" class="btn btn-link"}}
+    <input type="submit" value="Actualizar" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
+  </div>
+</div>
