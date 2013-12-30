@@ -1,10 +1,4 @@
-Bandango.User = Ember.Object.extend Ember.Validations, Bandango.PersonImagen, 
-  validations: {
-    nombres: {
-      presence: true
-    }
-  }
-
+Bandango.User = Ember.Object.extend Bandango.PersonImagen, 
   firstNames: (->
     unless nombres = @get("nombres")
       return @get("username")
