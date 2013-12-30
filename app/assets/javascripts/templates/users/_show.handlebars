@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-4 align_right">
+    <img src="{{unbound imagen_url_small}}" class="profile_image small">
+  </div>
+  <div class="col-xs-8 user_info">
+    <div class="nombres">{{nombres}}</div>
+    <div class="username">{{username}}</div>
+    <div class="email">{{email}}</div>
+    {{#if isCurrentUser}}
+      <span class="label label-info">Este eres tú</span>
+    {{/if}}
+  </div>
+</div>

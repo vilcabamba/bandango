@@ -1,15 +1,7 @@
 {{#with Bandango.currentSession.user}}
-  <div class="row">
-    <div class="col-xs-4 align_right">
-      <img src="{{unbound imagen_url_small}}" class="profile_image small">
-    </div>
-    <div class="col-xs-8 user_info">
-      <div class="nombres">{{nombres}}</div>
-      <div class="username">{{username}}</div>
-      <div class="email">{{email}}</div>
-    </div>
-  </div>
-  <div class="actions">
-    {{link-to "Editar" "me.edit" class="btn btn-default"}}
-  </div>
+  {{partial "users/show"}}
 {{/with}}
+
+<div class="actions">
+  {{link-to "Editar" "me.edit" class="btn btn-default"}}
+</div>

@@ -1,9 +1,5 @@
-<div class="row">
-  <div class="col-xs-4 align_right">
-    <img src="{{unbound imagen_url_small}}" class="profile_image small">
-  </div>
-  <div class="col-xs-8 user_info">
-    <div class="nombres">{{nombres}}</div>
-    
-  </div>
+{{partial "users/show"}}
+
+<div class="actions">
+  {{link-to "editar" "users.edit" this class="btn btn-default"}}
 </div>
