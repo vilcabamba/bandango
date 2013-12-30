@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   
   def create
     if user = login(params[:username], params[:password])
-      render json: user
+      render json: user, serializer: CurrentUserSerializer
     else
       render json: {message: "Verifica tu nombre de usuario y contraseña"}, status: 422
     end

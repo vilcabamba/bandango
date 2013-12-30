@@ -1,5 +1,5 @@
 <% if current_user %>
   <%= javascript_tag do %>
-    Bandango.currentSession.logInAs(<%= raw UserSerializer.new(current_user).to_json %>);
+    Bandango.currentSession.logInAs(<%= raw CurrentUserSerializer.new(current_user).to_json %>);
   <% end %>
 <% end %>

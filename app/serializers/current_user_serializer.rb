@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class CurrentUserSerializer < ActiveModel::Serializer
   root false
   
   attributes :id,
