@@ -1,7 +1,7 @@
-Bandango.UsuarioOnListView = Ember.View.extend
+Bandango.UserOnListView = Ember.View.extend
   tagName: "a"
   className: "person_on_list"
-  templateName: "usuarios/usuario_on_list"
+  templateName: "users/user_on_list"
   attributeBindings: ["href"]
 
   href: (->
