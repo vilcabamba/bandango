@@ -1,0 +1,20 @@
+<div class="align_center">
+  <h3>{{view.actionText}}</h3>
+</div>
+
+{{partial "users/form"}}
+
+<div class="row">
+  <div class="col-xs-6 text-danger">
+    {{array_with_lines view.errors_messages}}
+  </div>
+  <div class="col-xs-6 actions">
+    {{#if view.newRecord}}
+      {{link-to "Cancelar" "users.index" class="btn btn-link"}}
+    {{else}}
+      {{link-to "Cancelar" "users.show" view.model.id class="btn btn-link"}}
+      {{#view Bandango.DeleteButtonView action="destroyCliente"}}Eliminar{{/view}}
+    {{/if}}
+    <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
+  </div>
+</div>
