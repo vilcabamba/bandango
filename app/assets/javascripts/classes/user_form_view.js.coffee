@@ -1,5 +1,4 @@
 Bandango.UserFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm,
-  tagName: "form"
   modelBinding: "controller.model"
   attributes: ["nombres", "username", "email", "password", "password_confirmation"]
 
