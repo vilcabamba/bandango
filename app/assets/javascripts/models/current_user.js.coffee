@@ -1,4 +1,4 @@
-Bandango.User = Ember.Object.extend Bandango.PersonImagen, 
+Bandango.CurrentUser = Ember.Object.extend Bandango.PersonImagen, 
   firstNames: (->
     unless nombres = @get("nombres")
       return @get("username")
