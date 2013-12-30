@@ -1,5 +1,8 @@
 Bandango.MeEditView = Bandango.UserFormView.extend
 
+  failureEditing: (response) ->
+    @failureCallback errors: response.responseJSON
+
   successEditing: (response) ->
     Bandango.currentSession.logInAs response.user
     @get("controller").transitionToRoute "me.index"
