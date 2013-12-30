@@ -1,0 +1,8 @@
+<div class="btn-group pull-right">
+  {{#link-to "users.new" class="btn btn-xs btn-default"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}
+</div>
+<div class="clearfix"></div>
+
+{{#each user in controller}}
+  {{view Bandango.UserOnListView model=user}}
+{{/each}}
