@@ -7,7 +7,7 @@
       {{view Ember.TextField value=view.nombres class="form-control" placeholder="Nombres"}}
     </div>
     <div {{bind-attr class=":form-group view.errors.username"}}>
-      {{view Ember.TextField value=view.username class="form-control" placeholder="Nombre de usuario"}}
+      {{view Ember.TextField value=view.username class="form-control" placeholder="Nombre de usuario" required="true"}}
     </div>
     <div {{bind-attr class=":form-group view.errors.email"}}>
       {{view Ember.TextField value=view.email type="email" class="form-control" placeholder="Email"}}
