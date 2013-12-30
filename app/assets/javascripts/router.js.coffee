@@ -17,3 +17,4 @@ Bandango.Router.map ()->
   @resource "users", ->
     @route "index", path: "/"
     @route "new"
+    @route "show", path: "/:user_id"
