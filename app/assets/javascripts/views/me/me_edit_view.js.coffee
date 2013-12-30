@@ -1,21 +1,9 @@
-Bandango.MeEditView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm,
-  tagName: "form"
-  modelBinding: "controller.model"
-  attributes: ["nombres", "username", "email", "password", "password_confirmation"]
-
-  didInsertElement: ->
-    @$(".profile_image").popover()
-
-  willDestroyElement: ->
-    @$(".profile_image").popover "destroy"
+Bandango.MeEditView = Bandango.UserFormView.extend
 
   successEditing: (user) ->
     Bandango.currentSession.logInAs user
     @get("controller").transitionToRoute "me.index"
     @successCallback "Tu perfil fue actualizado"
-
-  failureEditing: (response) ->
-    @failureCallback {errors: response.responseJSON}
 
   submit: ->
     self = @
