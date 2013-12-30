@@ -1,7 +1,7 @@
 Bandango.MeEditView = Bandango.UserFormView.extend
 
-  successEditing: (user) ->
-    Bandango.currentSession.logInAs user
+  successEditing: (response) ->
+    Bandango.currentSession.logInAs response.user
     @get("controller").transitionToRoute "me.index"
     @successCallback "Tu perfil fue actualizado"
 
