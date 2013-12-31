@@ -1,6 +1,8 @@
 Bandango.UsersNewView = Bandango.UserFormView.extend
   bindAttributesTo: null
 
+  nombres: (-> "").property()
+
   success: (user) ->
     @successCallback user, "creado"
 
