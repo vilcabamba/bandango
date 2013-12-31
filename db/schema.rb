@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219172534) do
+ActiveRecord::Schema.define(version: 20131231191025) do
 
   create_table "clientes", force: true do |t|
     t.string   "tipo_id",        default: "Cédula", null: false
@@ -40,5 +40,21 @@ ActiveRecord::Schema.define(version: 20131219172534) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "ventas", force: true do |t|
+    t.integer  "cliente_id",     null: false
+    t.integer  "comprobante_id", null: false
+    t.float    "base_no_iva",    null: false
+    t.float    "base_iva_zero",  null: false
+    t.float    "base_iva",       null: false
+    t.float    "monto_iva",      null: false
+    t.float    "iva_retenido",   null: false
+    t.float    "renta_retenido", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree
+  add_index "ventas", ["comprobante_id"], name: "index_ventas_on_comprobante_id", using: :btree
 
 end

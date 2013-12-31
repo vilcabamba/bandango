@@ -19,4 +19,7 @@ class Cliente < ActiveRecord::Base
   include IdValidations
   include GravatarImagen
 
+# relationships
+  has_many :ventas
+
 end
