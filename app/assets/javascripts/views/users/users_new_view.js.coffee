@@ -16,6 +16,7 @@ Bandango.UsersNewView = Bandango.UserFormView.extend
     unless data.password is data.password_confirmation
       @setErrors password: ["Las contraseñas no coinciden"]
       return false
+    delete data.password_confirmation
     store = @get("controller").get("store")
     @new_user = store.createRecord "user", data
     @new_user.save().then $.proxy(@success, @), $.proxy(@failure, @)

@@ -5,6 +5,7 @@ Bandango.UsersEditView = Bandango.UserFormView.extend
 # editing
   successEditing: (user) ->
     @successCallback user, "actualizado"
+    user.set "password", undefined
 
   failureEditing: (response) ->
     @get("model").rollback()
@@ -16,6 +17,7 @@ Bandango.UsersEditView = Bandango.UserFormView.extend
     unless data.password is data.password_confirmation
       @setErrors password: ["Las contraseñas no coinciden"]
       return false
+    delete data.password_confirmation
     user = @get("model")
     user.setProperties data
     user.save().then $.proxy(@successEditing, @), $.proxy(@failureEditing, @)
