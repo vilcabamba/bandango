@@ -1,24 +1,21 @@
-self = null
-
 Bandango.LoginView = Ember.View.extend
   tagName: "form"
 
   loginSuccess: (user) ->
     Bandango.currentSession.logInAs user
     alertify.log "Hola, #{user.username}"
-    self.get("controller").transitionToRoute "dashboard"
+    @get("controller").transitionToRoute "dashboard"
 
   loginFailure: (response) ->
-    self.setProperties
+    @setProperties
       sendingRequest: false
       error: response.responseJSON.message
     alertify.log "Ups, algo salió mal"
 
   submit: ->
-    self = @
     @setProperties
       sendingRequest: true
       error: null
     data = @getProperties "username", "password"
-    $.post("/sessions.json", data).then @loginSuccess, @loginFailure
+    $.post("/sessions.json", data).then $.proxy(@loginSuccess, @), $.proxy(@loginFailure, @)
     false
