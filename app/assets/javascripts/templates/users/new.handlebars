@@ -13,7 +13,7 @@
       {{link-to "Cancelar" "users.index" class="btn btn-link"}}
     {{else}}
       {{link-to "Cancelar" "users.show" view.model.id class="btn btn-link"}}
-      {{#view Bandango.DeleteButtonView action="destroyCliente"}}Eliminar{{/view}}
+      {{#view Bandango.DeleteButtonView action="destroyUser"}}Eliminar{{/view}}
     {{/if}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
   </div>
