@@ -9,3 +9,5 @@ Bandango.Venta = DS.Model.extend
 
   cliente: DS.belongsTo("cliente")
   comprobante: DS.belongsTo("comprobante")
+
+Ember.Inflector.inflector.irregular('venta', 'ventas');
