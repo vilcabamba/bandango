@@ -1,5 +1,6 @@
 Bandango.UsersEditView = Bandango.UserFormView.extend
   templateName: "users/new"
+  modelBinding: "controller.model"
 
 # editing
   successEditing: (user) ->
