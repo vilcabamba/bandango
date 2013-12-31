@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231191025) do
+ActiveRecord::Schema.define(version: 20131231191916) do
 
   create_table "clientes", force: true do |t|
     t.string   "tipo_id",        default: "Cédula", null: false
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20131231191025) do
   end
 
   add_index "clientes", ["identificacion"], name: "index_clientes_on_identificacion", unique: true, using: :btree
+
+  create_table "comprobantes", force: true do |t|
+    t.integer "codigo",              null: false
+    t.string  "tipo",                null: false
+    t.text    "codigo_secuenciales"
+    t.text    "sustento_tributario"
+  end
+
+  add_index "comprobantes", ["codigo"], name: "index_comprobantes_on_codigo", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",         null: false
