@@ -4,9 +4,4 @@
   {{view Bandango.ClienteOnListView model=cliente}}
 {{/each}}
 
-<div class="align_center has_margin">
-  <div class="small">{{length}} clientes</div>
-  {{#if hasMore}}
-    <a href="#" class="btn btn-link full_width" {{action showMore}}>Más</a>
-  {{/if}}
-</div>
+{{view Bandango.IndexBottomLoadMoreView name="clientes"}}

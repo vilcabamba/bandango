@@ -1,1 +1,7 @@
-[ventas]
+{{view Bandango.ModelAddButtonView route="ventas"}}
+
+{{#each venta in controller}}
+  {{view Bandango.VentaOnListView model=venta}}
+{{/each}}
+
+{{view Bandango.IndexBottomLoadMoreView name="ventas"}}

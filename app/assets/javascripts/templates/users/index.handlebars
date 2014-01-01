@@ -4,9 +4,4 @@
   {{view Bandango.UserOnListView model=user}}
 {{/each}}
 
-<div class="align_center has_margin">
-  <div class="small">{{length}} usuarios</div>
-  {{#if hasMore}}
-    <a href="#" class="btn btn-link full_width" {{action showMore}}>Más</a>
-  {{/if}}
-</div>
+{{view Bandango.IndexBottomLoadMoreView name="usuarios"}}
