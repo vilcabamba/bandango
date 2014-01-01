@@ -1,5 +1,5 @@
 Bandango.ModelAddButtonView = Ember.View.extend
-  templateName: "plugins/model_add_button"
+  templateName: "base/model_add_button"
   classNames: ["clearfix"]
 
   linkTo: (->

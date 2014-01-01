@@ -1,5 +1,5 @@
 Bandango.DeleteButtonView = Ember.View.extend
-  layoutName: "plugins/delete_button"
+  layoutName: "base/delete_button"
   tagName: "div"
   classNames: ["inline_block"]
   classes: "btn btn-danger"
