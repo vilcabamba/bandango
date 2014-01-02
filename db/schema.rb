@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231191916) do
+ActiveRecord::Schema.define(version: 20140102035631) do
 
   create_table "clientes", force: true do |t|
     t.string   "tipo_id",        default: "Cédula", null: false
     t.string   "identificacion",                    null: false
-    t.string   "nombres",                           null: false
+    t.string   "nombres"
     t.string   "direccion"
     t.string   "telefono"
     t.string   "email"
