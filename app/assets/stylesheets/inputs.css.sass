@@ -1,0 +1,22 @@
+// for required fields
+@mixin red_placeholder_color
+  color: rgba(155, 73, 72, 0.82)
+
+input:focus:invalid
+  border-color: #843534
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483
+
+.form-control:-moz-placeholder
+  @include red_placeholder_color
+
+.form-control::-moz-placeholder
+  @include red_placeholder_color
+
+.form-control:-ms-input-placeholder
+  @include red_placeholder_color
+
+.form-control:invalid::-webkit-input-placeholder
+  @include red_placeholder_color
+
+
