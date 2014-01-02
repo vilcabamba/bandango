@@ -3,16 +3,14 @@
     <img src="{{unbound cliente.imagen_url_mini}}" class="profile_image mini">
   </div>
   <div class="info">
-    <div>{{comprobante.tipo}}</div>
     <div>
+      <strong>{{comprobante.tipo}}</strong>
       {{cliente.nombres}}
     </div>
     <div>
       {{cliente.tipoId}}:
       {{cliente.identificacion}}
     </div>
-  </div>
-  <div class="info">
-    <div>{{createdAt}}</div>
+    <div>{{humanize_time createdAt}}</div>
   </div>
 {{/with}}
