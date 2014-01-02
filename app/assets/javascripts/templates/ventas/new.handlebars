@@ -1,0 +1,13 @@
+<div class="align_center">
+  <h3>{{view.actionText}}</h3>
+</div>
+
+<section class="form_section">
+  <div class="section_header">
+    Cliente
+    {{view Bandango.SpinnerView size="mini" show=view.isFetchingCliente}}
+  </div>
+  <div class="section_body">
+    {{partial "clientes/form"}}
+  </div>
+</section>
