@@ -1,5 +1,5 @@
 Bandango.ModelBackedView = Ember.View.extend
-  # defaults
+# defaults
   raw_errors: {}
   errors: {}
   tagName: "form"
