@@ -4,6 +4,14 @@
 
 <section class="form_section">
   <div class="section_header">
+    Comprobante
+  </div>
+  <div class="section_body">
+    {{partial "comprobantes/form"}}
+  </div>
+</section>
+<section class="form_section">
+  <div class="section_header">
     Cliente
     {{view Bandango.SpinnerView size="mini" show=view.isFetchingCliente}}
   </div>
@@ -11,3 +19,13 @@
     {{partial "clientes/form"}}
   </div>
 </section>
+
+<div class="row">
+  <div class="col-xs-6 text-danger">
+    
+  </div>
+  <div class="col-xs-6 actions">
+    {{link-to "Cancelar" "ventas.index" class="btn btn-link"}}
+    <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
+  </div>
+</div>
