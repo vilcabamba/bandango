@@ -14,6 +14,7 @@ class Cliente < ActiveRecord::Base
       def cached_find_by_identificacion(identificacion)
         if identificacion.blank? then return end
         Rails.cache.fetch([name, "identificacion", identificacion]) do
+          logger.debug "caching identificacion: #{identificacion}"
           find_by identificacion: identificacion
         end
       end
