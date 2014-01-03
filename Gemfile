@@ -32,8 +32,8 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Use puma as the app server
+gem "puma"
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -79,3 +79,6 @@ gem "id_ecuador", ">= 0.0.2.alpha"
 
 # ActionController caching
 gem "actionpack-action_caching", github: "rails/actionpack-action_caching"
+
+# rubinius fix
+gem "rubysl", "~> 2.0", platform: :rbx
