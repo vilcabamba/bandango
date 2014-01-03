@@ -10,6 +10,7 @@
 #
 
 class Comprobante < ActiveRecord::Base
+  include Caching
 
 # relationships
   has_many :ventas
