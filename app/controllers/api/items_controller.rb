@@ -5,10 +5,15 @@ module Api
     respond_to :json
 
     def index
-      @items = Item.page(params[:page])
-      render json: @items,
-             meta: { total_pages: @items.total_pages,
-                            page: @items.current_page }
+      if params[:query]     # respond to jQuery autocomplete
+        @items = Item.where("nombre LIKE :q", q: "%#{params[:query]}%")
+        render json: @items, root: :suggestions, each_serializer: ItemAutocompleteSerializer
+      else
+        @items = Item.page(params[:page])
+        render json: @items,
+               meta: { total_pages: @items.total_pages,
+                              page: @items.current_page }
+      end
     end
 
   end
