@@ -6,7 +6,7 @@ module Api
 
     def index
       if params[:query]     # respond to jQuery autocomplete
-        @items = Item.where("nombre LIKE :q", q: "%#{params[:query]}%")
+        @items = Item.search_by_nombre params[:query]
         render json: @items, root: :suggestions, each_serializer: ItemAutocompleteSerializer
       else
         @items = Item.page(params[:page])

@@ -12,6 +12,7 @@
 #
 
 class Item < ActiveRecord::Base
+  include Searchable
   include Validations
 
 # relationships
