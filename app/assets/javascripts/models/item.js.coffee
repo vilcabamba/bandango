@@ -3,4 +3,4 @@ Bandango.Item = DS.Model.extend
   descripcion: DS.attr()
   precio:      DS.attr()
 
-  category:    DS.belongsTo("category")
+  # category:    DS.belongsTo("category")
