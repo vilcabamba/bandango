@@ -3,7 +3,7 @@
 # Table name: items
 #
 #  id          :integer          not null, primary key
-#  category_id :integer          not null
+#  category_id :integer          default(1), not null
 #  nombre      :string(255)      not null
 #  descripcion :string(255)
 #  precio      :float            not null

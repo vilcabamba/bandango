@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102035631) do
+ActiveRecord::Schema.define(version: 20140103155325) do
+
+  create_table "categories", force: true do |t|
+    t.string   "nombre",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clientes", force: true do |t|
     t.string   "tipo_id",        default: "Cédula", null: false
@@ -34,6 +40,28 @@ ActiveRecord::Schema.define(version: 20140102035631) do
   end
 
   add_index "comprobantes", ["codigo"], name: "index_comprobantes_on_codigo", unique: true, using: :btree
+
+  create_table "items", force: true do |t|
+    t.integer  "category_id", default: 1, null: false
+    t.string   "nombre",                  null: false
+    t.string   "descripcion"
+    t.float    "precio",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "order_items", force: true do |t|
+    t.integer  "item_id",            null: false
+    t.integer  "order_id",           null: false
+    t.integer  "cantidad",           null: false
+    t.float    "cached_item_precio", null: false
+    t.string   "cached_item_nombre", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",         null: false
