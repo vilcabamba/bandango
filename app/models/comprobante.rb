@@ -11,6 +11,7 @@
 
 class Comprobante < ActiveRecord::Base
   include Caching
+  include Validations
 
 # relationships
   has_many :ventas
