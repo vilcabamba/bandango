@@ -1,1 +1,5 @@
-{{view Ember.Select content=view.comprobantes value=view.comprobanteId optionValuePath="content.id" optionLabelPath="content.tipo" class="form-control"}}
+<select class="form-control comprobante_select">
+  {{#each view.comprobantes}}
+    <option value="{{unbound id}}">{{unbound tipo}}</option>
+  {{/each}}
+</select>
