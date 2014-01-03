@@ -15,4 +15,8 @@
 class OrderItem < ActiveRecord::Base
   include Validations
 
+# relationships
+  belongs_to :item
+  belongs_to :venta, foreign_key: :order_id
+
 end

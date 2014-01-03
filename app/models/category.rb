@@ -10,5 +10,8 @@
 
 class Category < ActiveRecord::Base
   include Validations
+
+# relationships
+  has_many :items
   
 end

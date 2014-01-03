@@ -13,5 +13,10 @@
 
 class Item < ActiveRecord::Base
   include Validations
+
+# relationships
+  belongs_to :category
+  has_many :order_item
+  has_many :ventas, through: :order_item
   
 end

@@ -21,5 +21,7 @@ class Venta < ActiveRecord::Base
 # relationships
   belongs_to :cliente
   belongs_to :comprobante
+  has_many :order_items, foreign_key: :order_id
+  has_many :items, through: :order_items
 
 end
