@@ -76,3 +76,6 @@ gem "annotate", :git => "git://github.com/ctran/annotate_models.git"
 
 # id_ecuador
 gem "id_ecuador", ">= 0.0.2.alpha"
+
+# ActionController caching
+gem "actionpack-action_caching", github: "rails/actionpack-action_caching"
