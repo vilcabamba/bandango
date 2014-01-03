@@ -5,7 +5,7 @@ module Api
     respond_to :json
 
     def index
-      @users = User.page(params[:page]).per(10)
+      @users = User.page(params[:page])
       render json: @users, meta: {total_pages: @users.total_pages, page: @users.current_page}
     end
 

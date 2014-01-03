@@ -8,7 +8,7 @@ module Api
       if params[:identificacion]
         respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
       else
-        @clientes = Cliente.page(params[:page]).per(10)
+        @clientes = Cliente.page(params[:page])
         render json: @clientes, meta: {total_pages: @clientes.total_pages, page: @clientes.current_page}
       end
     end
