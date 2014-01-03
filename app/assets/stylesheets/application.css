@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require alertify.core
  *= require alertify.default
+ *= require chosen
  *= require_tree .
  */
