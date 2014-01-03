@@ -19,6 +19,15 @@
     {{partial "clientes/form"}}
   </div>
 </section>
+<section class="form_section">
+  <div class="section_header">
+    Items
+    {{view Bandango.SpinnerView size="mini" show=view.isFetchingItems}}
+  </div>
+  <div class="section_body">
+    {{partial "items/form"}}
+  </div>
+</section>
 
 <div class="row">
   <div class="col-xs-6 text-danger">
