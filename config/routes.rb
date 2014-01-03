@@ -56,6 +56,7 @@ Bandango::Application.routes.draw do
     resources :users
     resources :ventas
     resources :comprobantes
+    resources :items
     resources :current_user do
       collection do
         post "/", to: "current_user#update"
