@@ -7,7 +7,12 @@ Bandango.ItemOnFormMixin = Ember.Mixin.create
     @_super()
     $(".item_textfield").autocomplete
       serviceUrl: "/api/items.json"
+      keyPath: "items"
       onSelect: $.proxy(@itemSelected, @)
+      onSearchComplete: (query, suggestions) =>
+        store = @get("controller").get("store")
+        for suggestion in suggestions
+          store.push "item", suggestion
 
   willDestroyElement: ->
     @_super()
