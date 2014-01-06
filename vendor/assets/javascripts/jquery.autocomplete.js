@@ -58,6 +58,7 @@
                 serviceUrl: null,
                 lookup: null,
                 keyPath: "suggestions",
+                valueKey: "value",
                 onSelect: null,
                 width: 'auto',
                 minChars: 2,
@@ -118,10 +119,10 @@
 
     $.Autocomplete = Autocomplete;
 
-    Autocomplete.formatResult = function (suggestion, currentValue) {
+    Autocomplete.formatResult = function (suggestion, currentValue, context) {
         var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
 
-        return suggestion.value.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
+        return suggestion[context.options.valueKey].replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
     };
 
     Autocomplete.prototype = {
@@ -429,7 +430,7 @@
                 queryLowerCase = query.toLowerCase();
 
             $.each(that.suggestions, function (i, suggestion) {
-                if (suggestion.value.toLowerCase() === queryLowerCase) {
+                if (suggestion[that.options.valueKey].toLowerCase() === queryLowerCase) {
                     index = i;
                     return false;
                 }
@@ -571,7 +572,7 @@
 
             // Build suggestions inner HTML:
             $.each(that.suggestions, function (i, suggestion) {
-                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value) + '</div>';
+                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, that) + '</div>';
             });
 
             // If width is auto, adjust width before displaying suggestions,
@@ -611,7 +612,7 @@
             }
 
             $.each(that.suggestions, function (i, suggestion) {
-                var foundMatch = suggestion.value.toLowerCase().indexOf(value) === 0;
+                var foundMatch = suggestion[that.options.valueKey].toLowerCase().indexOf(value) === 0;
                 if (foundMatch) {
                     bestMatch = suggestion;
                 }
@@ -625,7 +626,7 @@
             var hintValue = '',
                 that = this;
             if (suggestion) {
-                hintValue = that.currentValue + suggestion.value.substr(that.currentValue.length);
+                hintValue = that.currentValue + suggestion[that.options.valueKey].substr(that.currentValue.length);
             }
             if (that.hintValue !== hintValue) {
                 that.hintValue = hintValue;
@@ -751,7 +752,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.suggestions[index].value));
+            that.el.val(that.getValue(that.suggestions[index].this[valueKey]));
             that.signalHint(null);
         },
 
@@ -760,7 +761,7 @@
                 onSelectCallback = that.options.onSelect,
                 suggestion = that.suggestions[index];
 
-            that.currentValue = that.getValue(suggestion.value);
+            that.currentValue = that.getValue(suggestion[that.valueKey]);
             that.el.val(that.currentValue);
             that.signalHint(null);
             that.suggestions = [];
