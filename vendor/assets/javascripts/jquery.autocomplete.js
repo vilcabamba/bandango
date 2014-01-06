@@ -752,7 +752,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.suggestions[index].this[valueKey]));
+            that.el.val(that.getValue(that.suggestions[index][that.options.valueKey]));
             that.signalHint(null);
         },
 
