@@ -761,7 +761,7 @@
                 onSelectCallback = that.options.onSelect,
                 suggestion = that.suggestions[index];
 
-            that.currentValue = that.getValue(suggestion[that.valueKey]);
+            that.currentValue = that.getValue(suggestion[that.options.valueKey]);
             that.el.val(that.currentValue);
             that.signalHint(null);
             that.suggestions = [];
