@@ -1,6 +1,11 @@
 Bandango.Item = DS.Model.extend
   nombre:      DS.attr()
   descripcion: DS.attr()
-  precio:      DS.attr()
+  base:        DS.attr()
+  iva:         DS.attr()
+  ivaTarifa:   DS.attr()
+  ice:         DS.attr()
+  iceTarifa:   DS.attr()
 
+  orderItems:  DS.hasMany("orderItem")
   # category:    DS.belongsTo("category")
