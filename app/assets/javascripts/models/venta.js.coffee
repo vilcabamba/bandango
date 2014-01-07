@@ -9,5 +9,6 @@ Bandango.Venta = DS.Model.extend
 
   cliente:       DS.belongsTo("cliente")
   comprobante:   DS.belongsTo("comprobante")
+  orderItems:    DS.hasMany("orderItem")
 
 Ember.Inflector.inflector.irregular('venta', 'ventas');
