@@ -1,7 +1,7 @@
 Bandango.ItemOnFormMixin = Ember.Mixin.create
   
   itemSelected: (item) ->
-    Ember.debug "selected item: #{item.nombre}"
+    Ember.debug "item selected! #{item}"
 
   didInsertElement: ->
     @_super()
