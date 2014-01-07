@@ -1,4 +1,4 @@
-Bandango.Venta = DS.Model.extend
+Bandango.Venta = DS.Model.extend Bandango.OrderItemsMixin,
   baseNoIva:     DS.attr()
   baseIvaZero:   DS.attr()
   baseIva:       DS.attr()
