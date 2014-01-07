@@ -17,7 +17,6 @@ Bandango.UsersEditView = Bandango.UserFormView.extend
     unless data.password is data.password_confirmation
       @setErrors password: ["Las contraseñas no coinciden"]
       return false
-    delete data.password_confirmation
     user = @get("model")
     user.setProperties data
     user.save().then $.proxy(@successEditing, @), $.proxy(@failureEditing, @)
