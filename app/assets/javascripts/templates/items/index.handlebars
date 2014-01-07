@@ -1,0 +1,11 @@
+<div class="align_center">
+  <h2 contenteditable>{{nombre}}</h2>
+</div>
+
+{{view Bandango.ModelAddButtonView route="items"}}
+
+{{#each item in controller}}
+  {{view Bandango.ItemOnListView model=item}}
+{{/each}}
+
+{{view Bandango.IndexBottomLoadMoreView name="ítems"}}

@@ -11,5 +11,9 @@ module Api
                             page: @categories.current_page }
     end
 
+    def show
+      respond_with Category.cached_find(params[:id])
+    end
+
   end
 end
