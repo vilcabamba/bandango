@@ -8,4 +8,4 @@ Bandango.Item = DS.Model.extend Bandango.ItemBaseMixin,
   iceTarifa:   DS.attr()
 
   orderItems:  DS.hasMany("orderItem")
-  # category:    DS.belongsTo("category")
+  category:    DS.belongsTo("category")
