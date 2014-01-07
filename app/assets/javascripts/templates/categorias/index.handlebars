@@ -1,0 +1,7 @@
+{{view Bandango.ModelAddButtonView route="categorias"}}
+
+{{#each category in controller}}
+  {{view Bandango.CategoryOnListView model=category}}
+{{/each}}
+
+{{view Bandango.IndexBottomLoadMoreView name="categorias"}}
