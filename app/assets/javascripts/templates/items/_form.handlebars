@@ -8,9 +8,9 @@
     </tr>
   </thead>
   <tbody>
+    {{view Bandango.OrderItemFormView}}
     {{#each orderItem in orderItems}}
       {{view Bandango.OrderItemView model=orderItem}}
     {{/each}}
-    {{view Bandango.OrderItemFormView}}
   </tbody>
 </table>
