@@ -12,5 +12,23 @@
     {{#each orderItem in orderItems}}
       {{view Bandango.OrderItemView model=orderItem}}
     {{/each}}
+    <tr class="row_divider">
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger">IVA 0%</td>
+      <td class="valor_total">{{number_to_currency ivaZero}}</td>
+    </tr>
+    <tr>
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger">IVA 12%</td>
+      <td class="valor_total">{{number_to_currency ivaTwelve}}</td>
+    </tr>
+    <tr>
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger">Total</td>
+      <td class="valor_total">{{number_to_currency totalPrice}}</td>
+    </tr>
   </tbody>
 </table>
