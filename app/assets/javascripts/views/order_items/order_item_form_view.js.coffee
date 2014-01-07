@@ -8,5 +8,5 @@ Bandango.OrderItemFormView = Ember.View.extend Bandango.ItemOnFormMixin,
     store.find("item", itemObject.id).then (item) =>
       # item = store.typeMapFor(Bandango.Item).idToRecord[itemObject.id]   # 'dirty'
       orderItem = store.createRecord("orderItem", cantidad: @get("cantidad"), item: item)
-      @get("parentView.model").get("orderItems").addObject orderItem
+      @get("parentView.model").addOrderItem orderItem
       $(".item_textfield").val null
