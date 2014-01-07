@@ -1,3 +1,16 @@
-<div class="form-group">
-  {{view Ember.TextField class="form-control item_textfield"}}
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Cant</th>
+      <th>Descripción</th>
+      <th>V. Unit</th>
+      <th>V. Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orderItem in orderItems}}
+      {{view Bandango.OrderItemView model=orderItem}}
+    {{/each}}
+    {{view Bandango.OrderItemFormView}}
+  </tbody>
+</table>
