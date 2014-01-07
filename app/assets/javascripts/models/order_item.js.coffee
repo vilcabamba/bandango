@@ -1,5 +1,5 @@
 Bandango.OrderItem = DS.Model.extend
-  cantidad:         DS.attr()
+  cantidad:         DS.attr("number")
   cachedItemPrecio: DS.attr()
   cachedItemNombre: DS.attr()
 
