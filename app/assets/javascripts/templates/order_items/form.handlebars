@@ -1,6 +1,8 @@
-<td>
-  {{view Bandango.NumberField class="form-control" value=view.cantidad}}  
+<td class="cantidad">
+  {{view Bandango.NumberField class="align_right small_padding form-control minimal_input" value=view.cantidad}}  
 </td>
-<td>
-  {{view Ember.TextField class="form-control item_textfield"}}
+<td class="descripcion">
+  {{view Ember.TextField class="form-control minimal_input item_textfield"}}
 </td>
+<td class="valor_unitario"></td>
+<td class="valor_total"></td>
