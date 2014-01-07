@@ -11,4 +11,9 @@ Bandango.Venta = DS.Model.extend
   comprobante:   DS.belongsTo("comprobante")
   orderItems:    DS.hasMany("orderItem")
 
+  rollback: ->
+    for orderItem in @get("orderItems.content")
+      orderItem.rollback() if orderItem.get("isDirty")
+    @_super()
+
 Ember.Inflector.inflector.irregular('venta', 'ventas');

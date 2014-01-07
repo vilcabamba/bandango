@@ -4,3 +4,9 @@ Bandango.VentasNewRoute = Ember.Route.extend
 
   model: ->
     @get("store").createRecord("venta")
+
+  actions:
+    willTransition: (transition) ->
+      model = @get("controller.model")
+      if model.get("isDirty")
+        model.rollback()
