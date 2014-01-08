@@ -5,17 +5,14 @@
 #  id             :integer          not null, primary key
 #  cliente_id     :integer          not null
 #  comprobante_id :integer          not null
-#  base_no_iva    :float            not null
-#  base_iva_zero  :float            not null
-#  base_iva       :float            not null
-#  monto_iva      :float            not null
-#  iva_retenido   :float            not null
 #  renta_retenido :float            not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #
 
 class Venta < ActiveRecord::Base
+  include VentaInfo
+  include Validations
   self.table_name = :ventas
 
 # relationships
