@@ -3,4 +3,5 @@ Bandango.ItemsIndexRoute = Ember.Route.extend
     Bandango.currentSession.requireLogin @
 
   model: ->
-    @get("store").findAll "item"
+    category = @modelFor "items"
+    @get("store").find "item", category_id: category.get("id")
