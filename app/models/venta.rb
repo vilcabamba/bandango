@@ -11,6 +11,7 @@
 
 class Venta < ActiveRecord::Base
   include VentaInfo
+  include Orderable
   include Validations
   self.table_name = :ventas
 

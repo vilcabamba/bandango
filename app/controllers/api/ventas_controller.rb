@@ -14,7 +14,7 @@ module Api
     end
 
     def create
-      respond_with :api, Venta.create(venta_params)
+      respond_with :api, Venta.create_with_order_items(venta_params)
     end
 
     private
