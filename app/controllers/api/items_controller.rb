@@ -9,7 +9,7 @@ module Api
         @items = Item.search_by_nombre params[:query]
         render json: @items
       else
-        @items = Item.page(params[:page])
+        @items = Item.category(params[:category_id]).page(params[:page])
         render json: @items,
                meta: { total_pages: @items.total_pages,
                               page: @items.current_page }

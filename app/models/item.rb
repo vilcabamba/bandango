@@ -19,6 +19,9 @@ class Item < ActiveRecord::Base
   include Searchable
   include Validations
 
+# scopes
+  scope :category, ->(category_id) { where(category_id: category_id) }
+
 # relationships
   belongs_to :category
   has_many :order_item
