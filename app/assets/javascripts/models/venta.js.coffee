@@ -17,3 +17,4 @@ Bandango.Venta = DS.Model.extend Bandango.OrderItemsMixin,
     @_super()
 
 Ember.Inflector.inflector.irregular('venta', 'ventas');
+Ember.Inflector.inflector.singular(/venta/, 'venta');
