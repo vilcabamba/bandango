@@ -1,19 +1,21 @@
 Bandango.ItemOnFormMixin = Ember.Mixin.create
   
-  itemSelected: (item) ->
-    Ember.debug "item selected! #{item}"
+  itemSelected: (itemObject) ->
+    itemObject.item
 
   didInsertElement: ->
     @_super()
+    store = @get("controller.store")
     $(".item_textfield").autocomplete
       serviceUrl: "/api/items.json"
-      keyPath: "items"
-      valueKey: "nombre"
       onSelect: $.proxy(@itemSelected, @)
-      onSearchComplete: (query, suggestions) =>
-        store = @get("controller").get("store")
-        for suggestion in suggestions
-          store.push "item", suggestion
+      transformResult: (response) =>
+        response = JSON.parse response, Bandango.jsonCamelizedReviver
+        { 
+          suggestions: response.items.map (itemObject) ->
+            item = store.push "item", itemObject
+            { value: itemObject.nombre, item: item }
+        }
 
   willDestroyElement: ->
     @_super()
