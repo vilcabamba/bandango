@@ -7,18 +7,17 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
 # view events
   clienteChanged: (->
     Ember.debug "cliente changed"
-    cliente = @get("cliente") || Ember.Object.create()
+    cliente = @get("model.cliente") || Ember.Object.create()
     attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
     for attribute in attributes
       @set attribute, cliente.get(attribute)
-    @set "model.cliente", cliente
-  ).observes("cliente")
+  ).observes("model.cliente")
 
 # query callbacks
   gotClientes: (clientes) ->
     @setProperties
       isFetchingCliente: false
-      cliente: clientes.get("firstObject")
+      "model.cliente": clientes.get("firstObject")
 
   didNotGetCliente: ->
     @setProperties
