@@ -4,7 +4,7 @@ class OrderItem < ActiveRecord::Base
 
     included do
       validates :item_id,            presence: true
-      validates :order_id,           presence: true
+      # validates :order_id,           presence: true
       validates :cantidad,           presence: true,
                                      numericality: { greater_than: 0 }
       validates :cached_item_precio, presence: true,
