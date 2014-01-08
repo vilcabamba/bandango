@@ -14,6 +14,7 @@
 
 class OrderItem < ActiveRecord::Base
   include Validations
+  include OrderItemInfo
 
 # relationships
   belongs_to :item
