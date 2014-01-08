@@ -15,5 +15,15 @@ module Api
       respond_with Category.cached_find(params[:id])
     end
 
+    def create
+      respond_with :api, Category.create(category_params)
+    end
+
+    private
+
+    def category_params
+      params.require(:category).permit :nombre
+    end
+
   end
 end
