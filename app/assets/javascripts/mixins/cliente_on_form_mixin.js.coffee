@@ -8,6 +8,7 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
     attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
     for attribute in attributes
       @set attribute, cliente.get(attribute)
+    @set "model.cliente", cliente
   ).observes("cliente")
 
 # query callbacks
