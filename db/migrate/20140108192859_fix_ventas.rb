@@ -5,7 +5,8 @@ class FixVentas < ActiveRecord::Migration
                :base_iva_zero,
                :base_iva,
                :monto_iva,
-               :iva_retenido
+               :iva_retenido,
+               :renta_retenido
     end
   end
   def down
@@ -15,6 +16,7 @@ class FixVentas < ActiveRecord::Migration
       t.float :base_iva
       t.float :monto_iva
       t.float :iva_retenido
+      t.float :renta_retenido
     end
   end
 end

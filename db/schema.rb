@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 20140108192859) do
   create_table "ventas", force: true do |t|
     t.integer  "cliente_id",     null: false
     t.integer  "comprobante_id", null: false
-    t.float    "renta_retenido", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -5,7 +5,6 @@
 #  id             :integer          not null, primary key
 #  cliente_id     :integer          not null
 #  comprobante_id :integer          not null
-#  renta_retenido :float            not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #
