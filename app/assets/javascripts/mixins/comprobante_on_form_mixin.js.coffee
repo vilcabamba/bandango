@@ -4,11 +4,14 @@ Bandango.ComprobanteOnFormMixin = Ember.Mixin.create
   ).property()
 
   comprobanteSelectChanged: (e) ->
-    @set "comprobanteId", e.target.value
+    @get("controller.store").find("comprobante", e.target.value).then (comprobante) =>
+      @set "model.comprobante", comprobante
 
   didInsertElement: ->
     @_super()
-    @$(".comprobante_select").chosen().on "change", $.proxy(@comprobanteSelectChanged, @)
+    @$(".comprobante_select").chosen().on("change", $.proxy(@comprobanteSelectChanged, @)).
+      trigger("change")
+
 
   willDestroyElement: ->
     @_super()
