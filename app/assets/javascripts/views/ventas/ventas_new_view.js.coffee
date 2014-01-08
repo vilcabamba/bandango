@@ -3,6 +3,12 @@ Bandango.VentasNewView = Bandango.ModelBackedView.extend Bandango.GravatarImagen
 
   modelBinding: "controller.model"
 
+  success: (a) ->
+    console.log a
+
+  failure: (r) ->
+    console.log r
+
   submit: ->
-    console.log "submit!"
+    @get("model").save().then $.proxy(@success, @), $.proxy(@failure, @)
     false
