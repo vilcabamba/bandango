@@ -10,7 +10,7 @@ Bandango.ItemOnFormMixin = Ember.Mixin.create
       serviceUrl: "/api/items.json"
       onSelect: $.proxy(@itemSelected, @)
       transformResult: (response) =>
-        response = JSON.parse response, Bandango.jsonCamelizedReviver
+        response = JSON.parse response, Bandango.jsonCamelizedReviverHelper
         { 
           suggestions: response.items.map (itemObject) ->
             item = store.push "item", itemObject
