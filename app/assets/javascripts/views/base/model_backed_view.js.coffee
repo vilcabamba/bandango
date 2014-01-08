@@ -55,10 +55,10 @@ Bandango.ModelBackedView = Ember.View.extend
     null
 
 # callbacks:
-  failureCallback: (response) ->
+  failureCallback: (response, errorMessage = "Ups, algo salió mal") ->
     @setErrors response.errors
     @set "submitting", false
-    alertify.log "Ups, algo salió mal"
+    alertify.log errorMessage
     null
 
   successCallback: (message) ->
