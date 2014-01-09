@@ -17,6 +17,10 @@ module Api
       respond_with :api, Venta.create_with_order_items(venta_params, order_items_venta_params)
     end
 
+    def update
+      respond_with Venta.update_with_order_items(params[:id], venta_params, order_items_venta_params)
+    end
+
     private
 
     def venta_params
