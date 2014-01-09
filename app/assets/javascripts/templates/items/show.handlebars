@@ -1,0 +1,47 @@
+<h2>
+  Ítem
+</h2>
+
+<ol class="breadcrumb">
+  <li>
+    {{link-to "Categorías" "categorias.index"}}
+  </li>
+  <li>
+    {{link-to model.category.nombre "items.index" model.category}}
+  </li>
+  <li class="active">{{model.nombre}}</li>
+</ol>
+
+<div class="item">
+  {{#with model}}
+    <div class="nombre">
+      {{nombre}}
+    </div>
+    <div class="descripcion">
+      {{descripcion}}
+    </div>
+    <div class="row">
+      <div class="col-xs-4 price">
+        {{number_to_currency base}}
+      </div>
+      <div class="col-xs-4">
+        {{#if iva}}
+          IVA <span class="stronger">{{ivaTarifa}}</span>%:
+          {{number_to_currency ivaTwelve}}
+        {{else}}
+          Sin IVA
+        {{/if}}
+      </div>
+      <div class="col-xs-4">
+        {{#if ice}}
+          ICE <span class="stronger">{{iceTarifa}}</span>%
+          {{number_to_currency iceTotal}}
+        {{/if}}
+      </div>
+    </div>
+  {{/with}}
+</div>
+<div class="actions">
+  {{link-to "Editar" "items.edit" model.category model class="btn btn-default"}}
+</div>
+
