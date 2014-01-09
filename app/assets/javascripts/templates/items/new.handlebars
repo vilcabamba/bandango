@@ -31,9 +31,10 @@
   <div class="col-xs-4">
     <div class="input-group">
       <span class="input-group-addon">
-        {{view Ember.Checkbox checked=view.ice}} ICE
+        {{view Ember.Checkbox checked=view.ice name="ice"}}
+        <label for="ice">ICE</label>
       </span>
-      {{view Bandango.NumberField value=view.iceTarifa class="form-control align_right" placeholder=""}}
+      {{view Bandango.NumberField value=view.iceTarifa class="form-control align_right" enabled=view.ice}}
       <span class="input-group-addon">
         %
       </span>
