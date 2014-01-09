@@ -1,6 +1,7 @@
 Bandango.VentaFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin,
   queryForClienteOnIdentificacionChange: true
   modelBinding: "controller.model"
+  removeOrderItemsWithoutIdAfterCommit: true
 
 # cliente
   failureSavingCliente: (response) ->
@@ -29,9 +30,10 @@ Bandango.VentaFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagen
     @failureCallback response
 
   ventaSaved: (venta) ->
-    # delete orderItems instantiated and not persisted:
-    for orderItem in venta.get("orderItems.content").filterBy("id", null)
-      orderItem.deleteRecord()
+    if @get("removeOrderItemsWithoutIdAfterCommit")
+      # delete orderItems instantiated and not persisted:
+      for orderItem in venta.get("orderItems.content").filterBy("id", null)
+        orderItem.deleteRecord()
     @get("controller").transitionToRoute "ventas.show", venta.get("id")
 
   saveVenta: ->
