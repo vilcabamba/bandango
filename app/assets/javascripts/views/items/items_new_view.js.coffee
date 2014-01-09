@@ -9,7 +9,7 @@ Bandango.ItemsNewView = Bandango.ItemFormView.extend
     @failureCallback response
 
   submit: ->
-    @emptyErrors
+    @emptyErrors()
     data = @getFormData()
     store = @get("controller.store")
     @newItem = store.createRecord "item", data
