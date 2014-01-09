@@ -7,21 +7,7 @@
   </li>
 </ol>
 
-<div class="row">
-  <div class="col-xs-4 align_right">
-    <img src="{{unbound imagen_url_small}}" class="profile_image small">
-  </div>
-  <div class="col-xs-8 user_info">
-    <div class="nombres">{{nombres}}</div>
-    <div class="identificacion">
-      {{tipoId}}:
-      {{identificacion}}
-    </div>
-    <a href="mailto:{{unbound email}}" class="email">{{email}}</a>
-    <div class="direccion">{{direccion}}</div>
-    <a href="tel:{{unbound telefono}}" class="telefono">{{telefono}}</a>
-  </div>
-</div>
+{{partial "clientes/show"}}
 
 <div class="actions">
   {{link-to "editar" "clientes.edit" this class="btn btn-default"}}
