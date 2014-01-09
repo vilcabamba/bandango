@@ -1,2 +1,2 @@
 Ember.TextField.reopen
-  attributeBindings: ['required']
+  attributeBindings: ["required", "step"]
