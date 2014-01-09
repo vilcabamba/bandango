@@ -1,6 +1,15 @@
 <div class="align_center">
-  <h3>{{view.actionText}}</h3>
+  <h2>{{view.actionText}}</h2>
 </div>
+
+<ol class="breadcrumb">
+  <li>
+    {{link-to "Categorías" "categorias.index"}}
+  </li>
+  <li class="active">
+    Nueva
+  </li>
+</ol>
 
 <div class="form-group">
   {{view Ember.TextField value=view.nombre class="form-control" placeholder="Nombre" required="true"}}
