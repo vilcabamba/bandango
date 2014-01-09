@@ -7,5 +7,5 @@ Bandango.OrderItemFormView = Ember.View.extend Bandango.ItemOnFormMixin,
     item = @_super(itemObject)
     store = @get("controller.store")
     orderItem = store.createRecord("orderItem", cantidad: @get("cantidad"), item: item)
-    @get("parentView.model").addOrderItem orderItem
+    @get("parentView.parentView.model").addOrderItem orderItem
     $(".item_textfield").val null
