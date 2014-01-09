@@ -9,6 +9,17 @@ class Venta < ActiveRecord::Base
         end
         create params
       end
+
+      def update_with_order_items(id, params, order_items_params)
+        update(id, params).tap do |venta|
+          items_ids = order_items_params[:order_items].map do |order_item|
+            venta.order_items.where(item_id: order_item[:item_id]).first_or_initialize.tap do |new_order_item|
+              new_order_item.update_attributes! order_item
+            end
+            order_item[:item_id]
+          end
+          venta.order_items.where.not(item_id: items_ids).destroy_all
+        end
       end
     end
   end
