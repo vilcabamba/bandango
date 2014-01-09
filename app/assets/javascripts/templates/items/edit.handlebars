@@ -1,5 +1,5 @@
 <div class="align_center">
-  <h2>Nuevo</h2>
+  <h2>Editar</h2>
 </div>
 
 <ol class="breadcrumb">
@@ -7,10 +7,13 @@
     {{link-to "Categorías" "categorias.index"}}
   </li>
   <li>
-    {{link-to view.category.nombre "items.index" view.category}}
+    {{link-to model.category.nombre "items.index" model.category}}
+  </li>
+  <li>
+    {{link-to model.nombre "items.show" model}}
   </li>
   <li class="active">
-    Nuevo
+    Editar
   </li>
 </ol>
 
@@ -21,7 +24,7 @@
     {{array_with_lines view.errors_messages}}
   </div>
   <div class="col-xs-6 actions">
-    {{link-to "Cancelar" "items.index" class="btn btn-link"}}
-    <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
+    {{link-to "Cancelar" "items.show" view.model class="btn btn-link"}}
+    <input type="submit" value="Actualizar" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
   </div>
 </div>

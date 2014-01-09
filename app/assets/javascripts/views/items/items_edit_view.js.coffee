@@ -1,5 +1,4 @@
 Bandango.ItemsEditView = Bandango.ItemFormView.extend
-  templateName: "items/new"
   modelBinding: "controller.model"
 
   success: (item) ->
