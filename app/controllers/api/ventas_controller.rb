@@ -14,18 +14,17 @@ module Api
     end
 
     def create
-      respond_with :api, Venta.create_with_order_items(venta_params)
+      respond_with :api, Venta.create_with_order_items(venta_params, order_items_venta_params)
     end
 
     private
 
     def venta_params
       params.require(:venta).permit :cliente_id,
-                                    :comprobante_id,
-                                    :order_items => [
-                                      :cantidad,
-                                      :item_id
-                                    ]
+                                    :comprobante_id
+    end
+    def order_items_venta_params
+      params.require(:venta).permit :order_items => [:cantidad, :item_id]
     end
     
   end
