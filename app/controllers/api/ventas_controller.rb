@@ -5,12 +5,12 @@ module Api
     respond_to :json
 
     def index
-      @ventas = Venta.includes(:cliente, :comprobante).page(params[:page])
+      @ventas = Venta.includes(:cliente, :comprobante, :order_items => [:item]).page(params[:page])
       render json: @ventas, meta: { total_pages: @ventas.total_pages, page: @ventas.current_page }
     end
 
     def show
-      respond_with Venta.cached_find(params[:id])
+      respond_with Venta.includes(:order_items => [:item]).cached_find(params[:id])
     end
 
     def create
