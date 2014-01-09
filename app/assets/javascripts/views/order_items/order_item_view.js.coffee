@@ -3,9 +3,9 @@ Bandango.OrderItemView = Ember.View.extend
   classNames: ["order_item_view"]
   tagName: "tr"
 
-  alreadyPersisted: (->
-    Ember.isEmpty @get("cachedItemNombre")
-  ).property("cachedItemNombre")
+  showEdit: (->
+    @get("parentView.includeForm")
+  ).property()
 
   removeOrderItem: ->
     @get("model").deleteRecord()
