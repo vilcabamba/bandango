@@ -5,7 +5,7 @@ class Item < ActiveRecord::Base
     included do
       validates :category_id, presence: true
       validates :nombre,      presence: true
-      validates :precio,      presence: true,
+      validates :base,        presence: true,
                               numericality: { greater_than: 0 }
     end
   end
