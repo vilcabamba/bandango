@@ -1,0 +1,34 @@
+<table class="default_table items_form">
+  <thead>
+    <tr>
+      <th class="cantidad">Cant</th>
+      <th class="descripcion">Descripción</th>
+      <th class="valor_unitario">V. Unit</th>
+      <th class="valor_total">V. Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{view Bandango.OrderItemFormView}}
+    {{#each orderItem in orderItems}}
+      {{view Bandango.OrderItemView model=orderItem}}
+    {{/each}}
+    <tr class="row_divider">
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger align_right">IVA 0%</td>
+      <td class="valor_total">{{number_to_currency ivaZero}}</td>
+    </tr>
+    <tr>
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger align_right">IVA 12%</td>
+      <td class="valor_total">{{number_to_currency ivaTwelve}}</td>
+    </tr>
+    <tr>
+      <td class="no_border"></td>
+      <td></td>
+      <td class="stronger align_right">Total</td>
+      <td class="valor_total">{{number_to_currency totalPrice}}</td>
+    </tr>
+  </tbody>
+</table>

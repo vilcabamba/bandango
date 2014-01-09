@@ -1,34 +1,39 @@
-<table class="default_table items_form">
-  <thead>
-    <tr>
-      <th class="cantidad">Cant</th>
-      <th class="descripcion">Descripción</th>
-      <th class="valor_unitario">V. Unit</th>
-      <th class="valor_total">V. Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{view Bandango.OrderItemFormView}}
-    {{#each orderItem in orderItems}}
-      {{view Bandango.OrderItemView model=orderItem}}
-    {{/each}}
-    <tr class="row_divider">
-      <td class="no_border"></td>
-      <td></td>
-      <td class="stronger align_right">IVA 0%</td>
-      <td class="valor_total">{{number_to_currency ivaZero}}</td>
-    </tr>
-    <tr>
-      <td class="no_border"></td>
-      <td></td>
-      <td class="stronger align_right">IVA 12%</td>
-      <td class="valor_total">{{number_to_currency ivaTwelve}}</td>
-    </tr>
-    <tr>
-      <td class="no_border"></td>
-      <td></td>
-      <td class="stronger align_right">Total</td>
-      <td class="valor_total">{{number_to_currency totalPrice}}</td>
-    </tr>
-  </tbody>
-</table>
+<div {{bind-attr class=":form-group view.errors.nombre"}}>
+  {{view Ember.TextField value=view.nombre class="form-control" required="true" placeholder="Nombre"}}
+</div>
+<div {{bind-attr class=":form-group view.errors.descripcion"}}>
+  {{view Ember.TextField value=view.descripcion class="form-control" placeholder="Descripción"}}
+</div>
+<div class="form-group row">
+  <div class="col-xs-3">
+    <div {{bind-attr class=":input-group view.errors.base"}}>
+      <span class="input-group-addon">$</span>
+      {{view Ember.TextField value=view.base class="form-control align_right" required="true" placeholder="Base" step="any"}}
+    </div>
+  </div>
+  <div class="col-xs-1"></div>
+  <div class="col-xs-4">
+    <div {{bind-attr class=":input-group view.errors.ivaTarifa"}}>
+      <span class="input-group-addon">
+        {{view Ember.Checkbox checked=view.iva name="iva"}}
+        <label for="iva">IVA</label>
+      </span>
+      {{view Bandango.NumberField value=view.ivaTarifa class="form-control align_right" enabled=view.iva enabledProperty=true}}
+      <span class="input-group-addon">
+        %
+      </span>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div {{bind-attr class=":input-group view.errors.iceTarifa"}}>
+      <span class="input-group-addon">
+        {{view Ember.Checkbox checked=view.ice name="ice"}}
+        <label for="ice">ICE</label>
+      </span>
+      {{view Bandango.NumberField value=view.iceTarifa class="form-control align_right" enabled=view.ice enabledProperty=true}}
+      <span class="input-group-addon">
+        %
+      </span>
+    </div>
+  </div>
+</div>
