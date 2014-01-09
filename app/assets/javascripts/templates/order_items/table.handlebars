@@ -8,7 +8,9 @@
     </tr>
   </thead>
   <tbody>
-    {{view Bandango.OrderItemFormView}}
+    {{#if view.includeForm}}
+      {{view Bandango.OrderItemFormView}}
+    {{/if}}
     {{#each orderItem in orderItems}}
       {{view Bandango.OrderItemView model=orderItem}}
     {{/each}}
