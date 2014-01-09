@@ -9,9 +9,16 @@ Bandango.ItemBaseMixin = Ember.Mixin.create
     @get("base") * (@get("ivaTarifa") / 100)
   ).property("base", "iva", "ivaTarifa")
 
+  iceTotal: (->
+    return 0 unless @get("ice")
+    @get("base") * (@get("iceTarifa") / 100)
+  ).property("base", "ice", "iceTarifa")
+
   totalPrice: (->
+    price = @get("base")
     if @get("iva")
-      @get("base") + @get("ivaTwelve")
-    else
-      @get("base")
+      price += @get("ivaTwelve")
+    if @get("ice")
+      price += @get("iceTotal")
+    price
   ).property("base", "iva", "ivaTarifa", "ice", "iceTarifa")
