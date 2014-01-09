@@ -1873,6 +1873,7 @@ legend {
 
 label {
   display: inline-block;
+  cursor: pointer;
 }
 
 input[type="search"] {
