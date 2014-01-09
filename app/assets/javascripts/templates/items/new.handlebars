@@ -22,7 +22,7 @@
         {{view Ember.Checkbox checked=view.iva name="iva"}}
         <label for="iva">IVA</label>
       </span>
-      {{view Bandango.NumberField value=view.ivaTarifa class="form-control align_right" placeholder=""}}
+      {{view Bandango.NumberField value=view.ivaTarifa class="form-control align_right" enabled=view.iva}}
       <span class="input-group-addon">
         %
       </span>
