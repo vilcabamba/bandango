@@ -8,7 +8,7 @@
 <div class="form-group">
   {{view Ember.TextField value=view.descripcion class="form-control" placeholder="Descripción"}}
 </div>
-<div class="row">
+<div class="form-group row">
   <div class="col-xs-3">
     <div class="input-group">
       <span class="input-group-addon">$</span>
@@ -22,7 +22,7 @@
         {{view Ember.Checkbox checked=view.iva name="iva"}}
         <label for="iva">IVA</label>
       </span>
-      {{view Bandango.NumberField value=view.ivaTarifa class="form-control align_right" enabled=view.iva}}
+      {{view Bandango.NumberField value=view.ivaTarifa class="form-control align_right" enabled=view.iva enabledProperty=true}}
       <span class="input-group-addon">
         %
       </span>
@@ -34,7 +34,7 @@
         {{view Ember.Checkbox checked=view.ice name="ice"}}
         <label for="ice">ICE</label>
       </span>
-      {{view Bandango.NumberField value=view.iceTarifa class="form-control align_right" enabled=view.ice}}
+      {{view Bandango.NumberField value=view.iceTarifa class="form-control align_right" enabled=view.ice enabledProperty=true}}
       <span class="input-group-addon">
         %
       </span>
@@ -42,7 +42,7 @@
   </div>
 </div>
 
-<div class="row has_margin">
+<div class="row">
   <div class="col-xs-6 text-danger">
     {{array_with_lines view.errors_messages}}
   </div>
