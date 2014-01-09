@@ -1,6 +1,19 @@
-<div class="align_center">
-  <h3>{{view.actionText}}</h3>
-</div>
+<ol class="breadcrumb">
+  {{#if view.newRecord}}
+    <li>
+      {{link-to "Usuarios" "users.index"}}
+    </li>
+    <li class="active">Nuevo</li>
+  {{else}}
+    <li>
+      {{link-to "Usuarios" "users.index"}}
+    </li>
+    <li>
+      {{link-to view.model.firstNames "users.show" view.model}}
+    </li>
+    <li class="active">Editar</li>
+  {{/if}}
+</ol>
 
 {{partial "users/form"}}
 
