@@ -2,7 +2,12 @@
   <h2 contenteditable>{{controllers.items.nombre}}</h2>
 </div>
 
-{{view Bandango.ModelAddButtonView route="items"}}
+{{#view Bandango.ModelAddButtonView route="items"}}
+  <li>
+    {{link-to "Categorías" "categorias.index"}}
+  </li>
+  <li class="active">{{controllers.items.nombre}}</li>
+{{/view}}
 
 {{#each item in controller}}
   {{view Bandango.ItemOnListView model=item}}
