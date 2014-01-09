@@ -1,3 +1,6 @@
-<div class="btn-group pull-right">
-  {{#link-to view.linkTo class="btn btn-xs btn-default"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}
-</div>
+<ol class="breadcrumb">
+  {{yield}}
+  <div class="btn-group pull-right">
+    {{#link-to view.linkTo class="btn btn-xs btn-default"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}
+  </div>
+</ol>
