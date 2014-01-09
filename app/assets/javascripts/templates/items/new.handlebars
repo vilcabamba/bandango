@@ -2,22 +2,22 @@
   <h3>{{view.actionText}}</h3>
 </div>
 
-<div class="form-group">
+<div {{bind-attr class=":form-group view.errors.nombre"}}>
   {{view Ember.TextField value=view.nombre class="form-control" required="true" placeholder="Nombre"}}
 </div>
-<div class="form-group">
+<div {{bind-attr class=":form-group view.errors.descripcion"}}>
   {{view Ember.TextField value=view.descripcion class="form-control" placeholder="Descripción"}}
 </div>
 <div class="form-group row">
   <div class="col-xs-3">
-    <div class="input-group">
+    <div {{bind-attr class=":input-group view.errors.base"}}>
       <span class="input-group-addon">$</span>
       {{view Ember.TextField value=view.base class="form-control align_right" required="true" placeholder="Base" step="any"}}
     </div>
   </div>
   <div class="col-xs-1"></div>
   <div class="col-xs-4">
-    <div class="input-group">
+    <div {{bind-attr class=":input-group view.errors.ivaTarifa"}}>
       <span class="input-group-addon">
         {{view Ember.Checkbox checked=view.iva name="iva"}}
         <label for="iva">IVA</label>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="col-xs-4">
-    <div class="input-group">
+    <div {{bind-attr class=":input-group view.errors.iceTarifa"}}>
       <span class="input-group-addon">
         {{view Ember.Checkbox checked=view.ice name="ice"}}
         <label for="ice">ICE</label>
@@ -47,7 +47,11 @@
     {{array_with_lines view.errors_messages}}
   </div>
   <div class="col-xs-6 actions">
-    {{link-to "Cancelar" "items.index" class="btn btn-link"}}
+    {{#if view.newRecord}}
+      {{link-to "Cancelar" "items.index" class="btn btn-link"}}
+    {{else}}
+      {{link-to "Cancelar" "items.show" view.model class="btn btn-link"}}
+    {{/if}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
   </div>
 </div>
