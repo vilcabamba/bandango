@@ -7,31 +7,7 @@
   </li>
 </ol>
 
-<section class="form_section">
-  <div class="section_header">
-    Comprobante
-  </div>
-  <div class="section_body">
-    {{partial "comprobantes/form"}}
-  </div>
-</section>
-<section class="form_section">
-  <div class="section_header">
-    Cliente
-    {{view Bandango.SpinnerView size="mini" show=view.isFetchingCliente}}
-  </div>
-  <div class="section_body">
-    {{partial "clientes/form"}}
-  </div>
-</section>
-<section class="form_section">
-  <div class="section_header">
-    Ítems
-  </div>
-  <div class="section_body">
-    {{view Bandango.OrderItemsTableView includeForm=true}}
-  </div>
-</section>
+{{partial "ventas/form"}}
 
 <div class="row">
   <div class="col-xs-6 text-danger">
