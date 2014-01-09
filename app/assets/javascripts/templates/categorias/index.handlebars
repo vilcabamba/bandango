@@ -1,6 +1,10 @@
 <h2>Categorías</h2>
 
-{{view Bandango.ModelAddButtonView route="categorias"}}
+{{#view Bandango.ModelAddButtonView route="categorias"}}
+  <li class="active">
+    Categorías
+  </li>
+{{/view}}
 
 {{#each category in controller}}
   {{view Bandango.CategoryOnListView model=category}}

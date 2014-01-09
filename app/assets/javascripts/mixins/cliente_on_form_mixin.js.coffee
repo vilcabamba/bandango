@@ -5,13 +5,12 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
   queryForClienteOnIdentificacionChange: false
 
 # view events
-  clienteChanged: (->
+  clienteChanged: ->
     Ember.debug "cliente changed"
     cliente = @get("model.cliente") || Ember.Object.create()
     attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
     for attribute in attributes
       @set attribute, cliente.get(attribute)
-  ).observes("model.cliente")
 
 # query callbacks
   gotClientes: (clientes) ->
@@ -22,7 +21,10 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
   didNotGetCliente: ->
     @setProperties
       isFetchingCliente: false
-      cliente: undefined
+      cliente: null
+
+  triggerClienteChange: ->
+    @clienteChanged()
 
 # query methods
   queryForCliente: (identificacion) ->
@@ -31,7 +33,7 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
         isFetchingCliente: true
         currentClienteId: identificacion
       store = @get("controller").get("store")
-      store.find("cliente", identificacion: identificacion).then $.proxy(@gotClientes, @), $.proxy(@didNotGetCliente, @)
+      store.find("cliente", identificacion: identificacion).then($.proxy(@gotClientes, @), $.proxy(@didNotGetCliente, @)).finally($.proxy(@triggerClienteChange, @))
 
 # input callbacks
   identificacionChanged: (event) ->
