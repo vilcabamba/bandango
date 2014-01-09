@@ -5,7 +5,7 @@ Bandango.ModelOnListView = Ember.View.extend
   classNames: ["model_on_list"]
 
   href: (->
-    "#/#{@get("baseRoute")}/#{@get("model").get("id")}"
+    "#/#{@get("baseRoute")}/#{@get("model.id")}"
   ).property()
 
   baseRoute: (->
