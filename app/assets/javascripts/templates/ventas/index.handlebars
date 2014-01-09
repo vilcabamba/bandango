@@ -1,4 +1,6 @@
-{{view Bandango.ModelAddButtonView route="ventas"}}
+{{#view Bandango.ModelAddButtonView route="ventas"}}
+  <li class="active">Ventas</li>
+{{/view}}
 
 {{#each venta in controller}}
   {{view Bandango.VentaOnListView model=venta}}
