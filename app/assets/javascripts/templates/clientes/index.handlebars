@@ -1,4 +1,8 @@
-{{view Bandango.ModelAddButtonView route="clientes"}}
+{{#view Bandango.ModelAddButtonView route="clientes"}}
+  <li class="active">
+    Clientes
+  </li>
+{{/view}}
 
 {{#each cliente in controller}}
   {{view Bandango.ClienteOnListView model=cliente}}
