@@ -1873,8 +1873,6 @@ legend {
 
 label {
   display: inline-block;
-  margin-bottom: 5px;
-  font-weight: bold;
 }
 
 input[type="search"] {
@@ -3995,7 +3993,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   line-height: 1;
   color: #555555;
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #fff;
   border: 1px solid #cccccc;
   border-radius: 4px;
 }
@@ -4015,6 +4013,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-addon input[type="radio"],
 .input-group-addon input[type="checkbox"] {
   margin-top: 0;
+  vertical-align: top;
 }
 
 .input-group .form-control:first-child,
