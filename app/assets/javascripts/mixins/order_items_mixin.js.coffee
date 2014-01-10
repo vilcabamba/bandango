@@ -1,4 +1,3 @@
-# Bandango.Venta
 Bandango.OrderItemsMixin = Ember.Mixin.create
 
 # orderItem relationships
