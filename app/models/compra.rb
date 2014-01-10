@@ -33,4 +33,11 @@
 #
 
 class Compra < ActiveRecord::Base
+
+# relationships
+  belongs_to :comprobante
+  belongs_to :cliente
+  belongs_to :sustento_comprobante
+  belongs_to :concepto_retencion_fuente
+  belongs_to :comprobante_modificado, class_name: Comprobante, foreign_key: :comprobante_modificado_id
 end

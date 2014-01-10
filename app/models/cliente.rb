@@ -21,5 +21,6 @@ class Cliente < ActiveRecord::Base
 
 # relationships
   has_many :ventas
+  has_many :compras
 
 end

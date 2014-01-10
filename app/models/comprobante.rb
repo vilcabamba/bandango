@@ -15,6 +15,7 @@ class Comprobante < ActiveRecord::Base
 
 # relationships
   has_many :ventas
+  has_many :compras
 
 # serializations
   serialize :codigo_secuenciales, Array

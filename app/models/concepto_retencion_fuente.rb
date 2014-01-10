@@ -10,4 +10,8 @@
 #
 
 class ConceptoRetencionFuente < ActiveRecord::Base
+
+# relationships
+  has_many :compras
+
 end
