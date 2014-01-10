@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+  <li>
+    {{link-to "Compras" "compras.index"}}
+  </li>
+  <li class="active">Nueva</li>
+</ol>
+
+{{partial "compras/form"}}
+
+<div class="row">
+  <div class="col-xs-6 text-danger">
+    {{array_with_lines view.errors_messages}}
+  </div>
+  <div class="col-xs-6 actions">
+    {{link-to "Cancelar" "ventas.index" class="btn btn-link"}}
+    <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
+  </div>
+</div>
