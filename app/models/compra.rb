@@ -33,6 +33,7 @@
 #
 
 class Compra < ActiveRecord::Base
+  include Orderable
 
 # relationships
   belongs_to :comprobante
