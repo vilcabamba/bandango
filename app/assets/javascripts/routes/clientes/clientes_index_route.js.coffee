@@ -1,7 +1,3 @@
-Bandango.ClientesIndexRoute = Ember.Route.extend
-
-  beforeModel: ->
-    Bandango.currentSession.requireLogin @
-
+Bandango.ClientesIndexRoute = Bandango.RequireAuthenticationRoute.extend
   model: ->
     @get("store").findAll "cliente"

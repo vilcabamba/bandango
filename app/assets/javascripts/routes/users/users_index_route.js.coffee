@@ -1,4 +1,4 @@
-Bandango.UsersIndexRoute = Ember.Route.extend
+Bandango.UsersIndexRoute = Bandango.RequireAuthenticationRoute.extend
   
   beforeModel: ->
     Bandango.currentSession.requireLogin @

@@ -1,3 +1,3 @@
-Bandango.MeEditRoute = Ember.Route.extend
+Bandango.MeEditRoute = Bandango.RequireAuthenticationRoute.extend
   model: ->
     Bandango.currentSession.get("user")

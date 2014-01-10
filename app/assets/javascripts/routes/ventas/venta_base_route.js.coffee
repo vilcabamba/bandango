@@ -1,5 +1,6 @@
-Bandango.VentaBaseRoute = Ember.Route.extend
+Bandango.VentaBaseRoute = Bandango.RequireAuthenticationRoute.extend
   beforeModel: ->
+    @_super()
     Bandango.comprobantesHelper.loadComprobantes(@get("store"))
 
   actions:

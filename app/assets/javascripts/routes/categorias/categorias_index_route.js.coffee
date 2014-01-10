@@ -1,6 +1,3 @@
-Bandango.CategoriasIndexRoute = Ember.Route.extend
-  beforeModel: ->
-    Bandango.currentSession.requireLogin @
-
+Bandango.CategoriasIndexRoute = Bandango.RequireAuthenticationRoute.extend
   model: ->
     @get("store").findAll "category"
