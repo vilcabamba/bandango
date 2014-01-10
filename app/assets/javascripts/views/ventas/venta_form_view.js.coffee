@@ -8,10 +8,7 @@ Bandango.VentaFormView = Bandango.OrderableFormView.extend
     @failureCallback response
 
   ventaSaved: (venta) ->
-    if @get("removeOrderItemsWithoutIdAfterCommit")
-      # delete orderItems instantiated and not persisted:
-      for orderItem in venta.get("orderItems.content").filterBy("id", null)
-        orderItem.deleteRecord()
+    @modelSaved(venta)
     @get("controller").transitionToRoute "ventas.show", venta.get("id")
 
   saveVenta: ->

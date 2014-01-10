@@ -1,7 +1,12 @@
 Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin,
   queryForClienteOnIdentificacionChange: true
   modelBinding: "controller.model"
-  removeOrderItemsWithoutIdAfterCommit: true
+
+  modelSaved: (model) ->
+    if @get("removeOrderItemsWithoutIdAfterCommit")
+      # delete orderItems instantiated and not persisted:
+      for orderItem in model.get("orderItems.content").filterBy("id", null)
+        orderItem.deleteRecord()
 
 # cliente
   failureSavingCliente: (response) ->
