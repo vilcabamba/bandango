@@ -10,6 +10,7 @@
 #
 
 class ConceptoRetencionFuente < ActiveRecord::Base
+  include Caching
 
 # relationships
   has_many :compras
