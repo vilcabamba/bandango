@@ -2,8 +2,12 @@ Bandango.CompraBaseRoute = Bandango.AuthenticationRequiredRoute.extend
   beforeModel: ->
     @_super()
     store = @get("store")
-    Bandango.comprobantesHelper.loadComprobantes store
-    Bandango.sustentoTributarioComprobantesHelper.loadComprobantes store
+    filters = [
+      Bandango.comprobantesHelper.loadComprobantes(store),
+      Bandango.sustentoTributarioComprobantesHelper.loadComprobantes(store),
+      Bandango.conceptoRetencionFuenteHelper.loadComprobantes(store)
+    ]
+    Ember.RSVP.all filters
 
   actions:
     willTransition: (transition) ->
