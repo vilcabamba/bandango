@@ -1,4 +1,4 @@
-Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin,
+Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin, Bandango.RetencionFuenteOnFormMixin,
   clienteSaved: ->
     @saveCompra()
 
