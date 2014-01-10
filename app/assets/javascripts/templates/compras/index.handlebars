@@ -1,0 +1,9 @@
+{{#view Bandango.ModelAddButtonView route="compras"}}
+  <li class="active">Compras</li>
+{{/view}}
+
+{{#each compra in controller}}
+  {{view Bandango.CompraOnListView model=compra}}
+{{/each}}
+
+{{view Bandango.IndexBottomLoadMoreView name="compras"}}

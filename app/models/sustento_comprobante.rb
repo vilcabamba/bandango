@@ -12,6 +12,9 @@
 
 class SustentoComprobante < ActiveRecord::Base
 
+# relationships
+  has_many :compras
+
 # serializations
   serialize :codigo_tipo_comprobantes, Array
 

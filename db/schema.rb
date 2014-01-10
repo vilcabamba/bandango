@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108192859) do
+ActiveRecord::Schema.define(version: 20140110143315) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20140108192859) do
   end
 
   add_index "clientes", ["identificacion"], name: "index_clientes_on_identificacion", unique: true, using: :btree
+
+  create_table "compras", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comprobantes", force: true do |t|
     t.integer "codigo",              null: false
@@ -66,6 +71,16 @@ ActiveRecord::Schema.define(version: 20140108192859) do
 
   add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+
+  create_table "sustento_comprobantes", force: true do |t|
+    t.integer  "codigo",                   null: false
+    t.string   "tipo",                     null: false
+    t.text     "codigo_tipo_comprobantes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sustento_comprobantes", ["codigo"], name: "index_sustento_comprobantes_on_codigo", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",         null: false
