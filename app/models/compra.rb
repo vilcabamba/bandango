@@ -38,9 +38,11 @@ class Compra < ActiveRecord::Base
   include OrderableValidations
 
 # relationships
-  belongs_to :comprobante
   belongs_to :cliente
+  belongs_to :comprobante
   belongs_to :sustento_comprobante
   belongs_to :concepto_retencion_fuente
   belongs_to :comprobante_modificado, class_name: Comprobante, foreign_key: :comprobante_modificado_id
+  has_many :order_items, foreign_key: :order_id
+  has_many :items, through: :order_items
 end

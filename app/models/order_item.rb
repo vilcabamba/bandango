@@ -18,6 +18,7 @@ class OrderItem < ActiveRecord::Base
 
 # relationships
   belongs_to :item
-  belongs_to :venta, foreign_key: :order_id
+  belongs_to :venta,  foreign_key: :order_id
+  belongs_to :compra, foreign_key: :order_id
 
 end
