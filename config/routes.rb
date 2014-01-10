@@ -56,6 +56,7 @@ Bandango::Application.routes.draw do
     resources :users
     resources :ventas
     resources :comprobantes
+    resources :sustento_comprobantes
     resources :items
     resources :categories
     resources :current_user do
