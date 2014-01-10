@@ -34,6 +34,7 @@
 
 class Compra < ActiveRecord::Base
   include Orderable
+  include OrderableValidations
 
 # relationships
   belongs_to :comprobante
