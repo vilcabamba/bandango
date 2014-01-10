@@ -1,3 +1,3 @@
-Bandango.CategoriasIndexRoute = Bandango.RequireAuthenticationRoute.extend
+Bandango.CategoriasIndexRoute = Bandango.AuthenticationRequiredRoute.extend
   model: ->
     @get("store").findAll "category"

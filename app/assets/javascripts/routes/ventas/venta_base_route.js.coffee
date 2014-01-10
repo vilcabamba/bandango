@@ -1,4 +1,4 @@
-Bandango.VentaBaseRoute = Bandango.RequireAuthenticationRoute.extend
+Bandango.VentaBaseRoute = Bandango.AuthenticationRequiredRoute.extend
   beforeModel: ->
     @_super()
     Bandango.comprobantesHelper.loadComprobantes(@get("store"))

@@ -1,3 +1,3 @@
-Bandango.MeEditRoute = Bandango.RequireAuthenticationRoute.extend
+Bandango.MeEditRoute = Bandango.AuthenticationRequiredRoute.extend
   model: ->
     Bandango.currentSession.get("user")

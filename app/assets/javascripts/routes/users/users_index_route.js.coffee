@@ -1,4 +1,4 @@
-Bandango.UsersIndexRoute = Bandango.RequireAuthenticationRoute.extend
+Bandango.UsersIndexRoute = Bandango.AuthenticationRequiredRoute.extend
   
   beforeModel: ->
     Bandango.currentSession.requireLogin @

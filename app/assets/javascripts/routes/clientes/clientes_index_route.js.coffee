@@ -1,3 +1,3 @@
-Bandango.ClientesIndexRoute = Bandango.RequireAuthenticationRoute.extend
+Bandango.ClientesIndexRoute = Bandango.AuthenticationRequiredRoute.extend
   model: ->
     @get("store").findAll "cliente"
