@@ -3,6 +3,7 @@ Bandango.CompraBaseRoute = Bandango.AuthenticationRequiredRoute.extend
     @_super()
     store = @get("store")
     Bandango.comprobantesHelper.loadComprobantes store
+    Bandango.sustentoTributarioComprobantesHelper.loadComprobantes store
 
   actions:
     willTransition: (transition) ->
