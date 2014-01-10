@@ -6,9 +6,6 @@ Bandango.Router.map ()->
   @resource "me", ->
     @route "index", path: "/"
     @route "edit"
-  @resource "facturas", ->
-    @route "index", path: "/"
-    @route "new"
   @resource "ventas", ->
     @route "index", path: "/"
     @route "new"
