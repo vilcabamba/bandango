@@ -19,10 +19,7 @@
 
 
 # for more details see: http://emberjs.com/guides/application/
-log = true
-<% if Rails.env == "production" %>
-  log = false
-<% end %>
+log = <%= Rails.env == "production" %>
 
 window.Bandango = Ember.Application.create({
   rootElement: "#app",
