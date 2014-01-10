@@ -79,6 +79,3 @@ gem "id_ecuador", ">= 0.0.2.alpha"
 
 # ActionController caching
 gem "actionpack-action_caching", github: "rails/actionpack-action_caching"
-
-# rubinius fix
-gem "rubysl", "~> 2.0", platform: :rbx
