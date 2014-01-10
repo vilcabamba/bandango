@@ -111,8 +111,10 @@ comprobantes = [
     c.update_attributes! comprobante
   end
 end
-Category.where(id: 1).first_or_initialize.tap do |c|
-  c.update_attributes! nombre: "General"
+if Category.count == 0
+  Category.where(id: 1).first_or_initialize.tap do |c|
+    c.update_attributes! nombre: "General"
+  end
 end
 sustento_comprobantes = [
   { codigo: 0,
