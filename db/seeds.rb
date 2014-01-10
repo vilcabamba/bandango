@@ -114,3 +114,39 @@ end
 Category.where(id: 1).first_or_initialize.tap do |c|
   c.update_attributes! nombre: "General"
 end
+sustento_comprobantes = [
+  { codigo: 0,
+    tipo: "No aplica",
+    codigo_tipo_comprobantes: [1, 2, 4, 5, 42] },
+  { codigo: 1,
+    tipo: "Crédito Tributario para declaración de IVA (servicios y bienes distintos de inventarios y activos fijos)",
+    codigo_tipo_comprobantes: [1, 3, 4, 5, 11, 12, 21, 41, 43, 47, 48] },
+  { codigo: 2,
+    tipo: "Costo o Gasto para declaración de IR (servicios y bienes distintos de inventarios y activos fijos)",
+    codigo_tipo_comprobantes: [1, 2, 3, 4, 5, 11, 12, 15, 19, 20, 21, 41, 43, 47, 48] },
+  { codigo: 3,
+    tipo: "Activo Fijo - Crédito Tributario para declaración de IVA",
+    codigo_tipo_comprobantes: [1, 3, 4, 5, 41, 47, 48] },
+  { codigo: 4,
+    tipo: "Activo Fijo - Costo o Gasto para declaración de IR",
+    codigo_tipo_comprobantes: [1, 2, 3, 4, 5, 15, 41, 47, 48] },
+  { codigo: 5,
+    tipo: "Liquidación Gastos de Viaje, hospedaje y alimentación Gastos IR (a nombre de empleados y no de la empresa)",
+    codigo_tipo_comprobantes: [1, 2, 3, 4, 5, 11] },
+  { codigo: 6,
+    tipo: "Inventario - Crédito Tributario para declaración de IVA",
+    codigo_tipo_comprobantes: [1, 3, 4, 5, 41, 43, 47, 48] },
+  { codigo: 7,
+    tipo: "Inventario - Costo o Gasto para declaración de IR",
+    codigo_tipo_comprobantes: [1, 2, 3, 4, 5, 15, 41, 43, 47, 48] },
+  { codigo: 8,
+    tipo: "Valor pagado para solicitar Reembolso de Gasto (intermediario)",
+    codigo_tipo_comprobantes: [1, 2, 3, 4, 5, 21] },
+  { codigo: 9,
+    tipo: "Reembolso por Siniestros",
+    codigo_tipo_comprobantes: [45, 4, 5] }
+].each do |sustento|
+  SustentoComprobante.where(codigo: sustento[:codigo]).first_or_initialize.tap do |s|
+    s.update_attributes! sustento
+  end
+end
