@@ -19,7 +19,7 @@
 
 
 # for more details see: http://emberjs.com/guides/application/
-log = <%= Rails.env == "production" %>
+log = <%= Rails.env == "development" %>
 
 window.Bandango = Ember.Application.create({
   rootElement: "#app",
