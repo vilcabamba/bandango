@@ -72,7 +72,7 @@ environment "production"
 # The default is “tcp://0.0.0.0:9292”.
 #
 # bind 'tcp://0.0.0.0:9292'
-# bind 'unix:///var/run/puma.sock'
+bind "unix:///tmp/bandango.sock"
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
 
