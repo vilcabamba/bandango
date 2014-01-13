@@ -34,12 +34,12 @@ environment "production"
 #
 # The default is “false”.
 #
-# daemonize
+daemonize
 # daemonize false
 
 # Store the pid of the server in the file at “path”.
 #
-# pidfile '/u/apps/lolcat/tmp/pids/puma.pid'
+pidfile '/tmp/bandango.pid'
 
 # Use “path” as the file to store the server info state. This is
 # used by “pumactl” to query and control the server.

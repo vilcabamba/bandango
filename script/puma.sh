@@ -6,8 +6,8 @@
 # The script will start with config set by $PUMA_CONFIG_FILE by default
  
 PUMA_CONFIG_FILE=config/puma.rb
-PUMA_PID_FILE=tmp/pids/puma.pid
-PUMA_SOCKET=tmp/sockets/puma.sock
+PUMA_PID_FILE=/tmp/bandango.pid
+PUMA_SOCKET=/tmp/bandango.sock
  
 # check if puma process is running
 puma_is_running() {
