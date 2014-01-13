@@ -4,7 +4,7 @@
 #
 # The default is the current directory.
 #
-# directory '/u/apps/lolcat'
+directory '/home/pi/bandango'
 
 # Use an object or block as the rack application. This allows the
 # config file to be the application itself.
