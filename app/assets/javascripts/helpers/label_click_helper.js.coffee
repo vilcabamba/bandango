@@ -1,3 +1,4 @@
 # labelClickHelper
 $(document).on "click", "label", ->
-  $("input[name='#{@attributes["for"]["value"]}']").trigger "click"
+  if @attributes["for"]
+    $("input[name='#{@attributes["for"]["value"]}']").focus().trigger "click"

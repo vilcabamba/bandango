@@ -55,6 +55,7 @@ Bandango::Application.routes.draw do
     resources :clientes
     resources :users
     resources :ventas
+    resources :compras
     resources :comprobantes
     resources :sustento_comprobantes
     resources :concepto_retencion_fuentes
