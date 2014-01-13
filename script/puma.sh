@@ -13,11 +13,12 @@ PUMA_SOCKET=/tmp/bandango.sock
 puma_is_running() {
   if [ -S $PUMA_SOCKET ] ; then
     if [ -e $PUMA_PID_FILE ] ; then
-      if cat $PUMA_PID_FILE | xargs pgrep -P > /dev/null ; then
-        return 0
-      else
-        echo "No puma process found"
-      fi
+      # if cat $PUMA_PID_FILE | xargs pgrep -P > /dev/null ; then
+      #   return 0
+      # else
+      #   echo "No puma process found"
+      # fi
+      return 0
     else
       echo "No puma pid file found"
     fi
