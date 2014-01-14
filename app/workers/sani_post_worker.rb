@@ -1,4 +1,4 @@
-class SaniPostSyncWorker
+class SaniPostWorker
   include Sidekiq::Worker
 
   def perform(object, class_name, action)
@@ -8,6 +8,6 @@ class SaniPostSyncWorker
       class_name: class_name,
       object: object
     }
-    RestClient.post url, params.to_json, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\""
+    response = RestClient.post url, params.to_json, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\""
   end
 end
