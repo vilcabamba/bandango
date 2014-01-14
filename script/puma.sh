@@ -66,11 +66,12 @@ fi
 puma_is_running() {
   if [ -S $PUMA_SOCKET ] ; then # if file exist and its a socket
     if [ -r $PUMA_PID_FILE ] ; then # if file exist and readable
-      if cat $PUMA_PID_FILE | xargs pgrep -P > /dev/null ; then
-        return 0
-      else
-        echo "No puma process found"
-      fi
+      # if cat $PUMA_PID_FILE | xargs pgrep -P > /dev/null ; then
+      #   return 0
+      # else
+      #   echo "No puma process found"
+      # fi
+      return 0
     else
       echo "No puma pid file found"
     fi
