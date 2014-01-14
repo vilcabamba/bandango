@@ -1,5 +1,6 @@
 class SaniPostWorker
   include Sidekiq::Worker
+  sidekiq_options backtrace: true
 
   def perform(object, class_name, action)
     url = SANI[:host] + "/api/transacciones.json"
