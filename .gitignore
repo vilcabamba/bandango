@@ -22,3 +22,5 @@ public/index.original.html
 config/email.yml
 db/schema.rb
 config/bandango.yml
+
+config/pusher.yml
