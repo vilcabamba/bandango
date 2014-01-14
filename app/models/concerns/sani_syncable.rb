@@ -9,6 +9,8 @@ module SaniSyncable
     after_destroy :after_destroy_sync
   end
 
+  private
+
   def after_create_sync
     sync_to_sani "create"
   end
@@ -19,6 +21,13 @@ module SaniSyncable
     sync_to_sani "destroy"
   end
   def sync_to_sani(action)
-    SaniPostWorker.perform_async(self.to_json, self.class.name.downcase, action, Time.now.to_json) unless dont_sync
+    SaniPostWorker.perform_async(self.sani_json, self.class.name.downcase, action, Time.now.to_json) unless dont_sync
+  end
+  def sani_json
+    Hash.new.tap { |hash|
+      sani_attributes.each do |attribute|
+        hash[attribute] = attribute
+      end
+    }.to_json
   end
 end
