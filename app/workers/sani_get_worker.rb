@@ -3,11 +3,10 @@ class SaniGetWorker
   sidekiq_options backtrace: true
 
   def perform
-    since = 1
+    since = SaniRequest.last_id
     url = SANI[:host] + "/api/transacciones.json?since=#{since}"
     response = JSON.parse(RestClient.get url, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\"")
-    response["transacciones"].each do |transaccion|
-      puts transaccion["action"]
-    end
+    SaniRequest.parse_transacciones response["transacciones"]
+    SaniRequest.last_id = response["meta"]["max_id"]
   end
 end
