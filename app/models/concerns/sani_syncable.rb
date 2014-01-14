@@ -17,6 +17,6 @@ module SaniSyncable
     sync_to_sani "destroy"
   end
   def sync_to_sani(action)
-    SaniPostWorker.perform_async(self.to_json, self.class.name.downcase, action)
+    SaniPostWorker.perform_async(self.to_json, self.class.name.downcase, action, Time.now.to_json)
   end
 end
