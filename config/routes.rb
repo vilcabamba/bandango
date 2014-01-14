@@ -1,3 +1,6 @@
+require "sidekiq/web"
+require "admin_constraint"
+
 Bandango::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -67,6 +70,10 @@ Bandango::Application.routes.draw do
       end
     end
   end
+
+  # sidekiq:
+  mount Sidekiq::Web, at: "/sidekiq_web", :constraints => AdminConstraint.new
+
 end
 # put next lines before end statement: (route unroutable paths)
 # match '*a', :to => 'application#routing_error'
