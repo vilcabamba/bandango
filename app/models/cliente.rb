@@ -16,8 +16,10 @@
 class Cliente < ActiveRecord::Base
   include Cacheable
   include Validations
+  include SaniSyncable
   include IdValidations
   include GravatarImagen
+  include SaniFormattable
 
 # relationships
   has_many :ventas
