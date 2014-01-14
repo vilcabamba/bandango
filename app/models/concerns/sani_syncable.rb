@@ -26,7 +26,7 @@ module SaniSyncable
   def sani_json
     Hash.new.tap { |hash|
       sani_attributes.each do |attribute|
-        hash[attribute] = attribute
+        hash[attribute] = send(attribute)
       end
     }.to_json
   end
