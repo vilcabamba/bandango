@@ -7,4 +7,7 @@
 #
 
 class SaniRequest < ActiveRecord::Base
+  include Single
+  include Parseable
+  
 end
