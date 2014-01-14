@@ -86,3 +86,6 @@ gem "slim"
 
 # rest-client
 gem "rest-client"
+
+# pusher-client
+gem "pusher-client"
