@@ -15,8 +15,10 @@ class SaniRequest < ActiveRecord::Base
         case transaccion["action"]
         when "destroy"
           record = klass.find_by(identificator => attrs[identificator])
-          record.dont_sync = true
-          record.destroy
+          if record
+            record.dont_sync = true
+            record.destroy
+          end
         else  # create - update
           klass.where(identificator => attrs[identificator]).first_or_initialize.tap do |object|
             object.dont_sync = true
