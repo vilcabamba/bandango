@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114035504) do
+ActiveRecord::Schema.define(version: 20140115040128) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20140114035504) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "sani_requests", force: true do |t|
-    t.integer "last_id", null: false
+    t.integer "last_id", default: 0, null: false
   end
 
   create_table "sustento_comprobantes", force: true do |t|
