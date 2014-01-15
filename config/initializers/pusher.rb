@@ -1,5 +1,7 @@
 key = YAML::load_file(File.join(Rails.root.to_s, "config", "pusher.yml"))["key"]
 
+PusherClient.logger = Rails.logger
+
 socket = PusherClient::Socket.new(key)
 socket.connect(true) # Connect asynchronously
 
