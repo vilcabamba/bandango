@@ -216,7 +216,7 @@
       odd: "%{attribute} debe ser impar"
       even: "%{attribute} debe ser par"
       taken: "%{attribute} ya está en uso"
-      record_invalid: "%{attribute} La validación falló: %{errors}"
+      record_invalid: "La validación falló: %{errors}"
     template: &errors_template
       header:
         one:   "No se pudo guardar este/a %{model} porque se encontró 1 error"
