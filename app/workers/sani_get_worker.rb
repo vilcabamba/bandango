@@ -9,4 +9,7 @@ class SaniGetWorker
     SaniRequest.parse_transacciones response["transacciones"]
     SaniRequest.last_id = response["meta"]["max_id"]
   end
+  def self.schedule
+    perform_async unless Sidekiq::Queue.new.map(&:klass).include?("SaniGetWorker")
+  end
 end
