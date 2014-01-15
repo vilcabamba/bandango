@@ -1,10 +1,12 @@
-# make sure only one of this workers is running
+key = YAML::load_file(File.join(Rails.root.to_s, "config", "pusher.yml"))["key"]
 
-pusher_socket_open = false
-Sidekiq::Workers.new.each do |name, work, started_at|
-  pusher_socket_open = true if work["payload"]["class"] == "PusherWorker"
-end
+socket = PusherClient::Socket.new(key)
+socket.connect(true) # Connect asynchronously
 
-unless pusher_socket_open
-  PusherWorker.perform_async
+# Subscribe to business chanel
+socket.subscribe(SANI[:business_token])
+
+# Bind to a global event
+socket.bind('new_transaccion') do |data|
+  SaniGetWorker.perform_async
 end
