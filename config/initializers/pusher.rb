@@ -8,5 +8,5 @@ socket.subscribe(SANI[:business_token])
 
 # Bind to a global event
 socket.bind('new_transaccion') do |data|
-  SaniGetWorker.perform_async
+  SaniGetWorker.schedule
 end
