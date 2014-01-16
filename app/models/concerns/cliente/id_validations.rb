@@ -14,13 +14,17 @@ class Cliente < ActiveRecord::Base
     end
 
     def validate_id_if_necessary
-      unless identificacion.blank?
+      if not identificacion.blank? and not consumidor_final?
         if tipo_id == "Cédula"
           errors.add(:identificacion, "No es una cédula válida") unless id_validator.valid? and id_validator.tipo_id_sym == :cedula
         elsif tipo_id == "RUC"
           errors.add(:identificacion, "No es un RUC válido") unless id_validator.valid? and id_validator.tipo_id_sym == :ruc
         end
       end
+    end
+
+    def consumidor_final?
+      identificacion === "9999999999999"
     end
   end
 end
