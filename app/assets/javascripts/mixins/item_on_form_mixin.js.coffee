@@ -1,4 +1,12 @@
 Bandango.ItemOnFormMixin = Ember.Mixin.create
+
+  serviceUrl: (->
+    base = "/api/items.json"
+    if @get("parentView.parentView.model.isVenta")
+      base + "?type=venta"
+    else
+      base + "?type=compra"
+  ).property("parentView.parentView.model")
   
   itemSelected: (itemObject) ->
     itemObject.item
@@ -7,7 +15,7 @@ Bandango.ItemOnFormMixin = Ember.Mixin.create
     @_super()
     store = @get("controller.store")
     $(".item_textfield").autocomplete
-      serviceUrl: "/api/items.json"
+      serviceUrl: @get("serviceUrl")
       onSelect: $.proxy(@itemSelected, @)
       transformResult: (response) =>
         response = JSON.parse response, Bandango.jsonCamelizedReviverHelper
