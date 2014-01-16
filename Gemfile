@@ -89,3 +89,6 @@ gem "rest-client"
 
 # pusher-client
 gem "pusher-client"
+
+# cron tasks
+gem 'whenever', :require => false
