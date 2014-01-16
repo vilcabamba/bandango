@@ -716,3 +716,8 @@ concepto_retencion_fuentes = [
     c.update_attributes! concepto
   end
 end
+Cliente.where(identificacion: "9999999999999").first_or_initialize.tap do |cliente|
+  cliente.tipo_id = "RUC"
+  cliente.nombres = "Consumidor Final"
+  cliente.save(validate: false)
+end
