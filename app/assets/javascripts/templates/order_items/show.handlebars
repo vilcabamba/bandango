@@ -13,7 +13,11 @@
     {{/if}}
   </td>
   <td class="valor_unitario">
-    {{number_to_currency valorUnitario}}
+    {{#if view.parentView.venta}}
+      {{number_to_currency valorUnitarioVenta}}
+    {{else}}
+      {{number_to_currency valorUnitarioCompra}}
+    {{/if}}
   </td>
   <td class="valor_total">
     {{number_to_currency valorTotal}}

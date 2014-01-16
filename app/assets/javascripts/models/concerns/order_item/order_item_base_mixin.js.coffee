@@ -3,9 +3,17 @@ Bandango.OrderItemBaseMixin = Ember.Mixin.create
     @get("cachedItemNombre") || @get("item.nombre")
   ).property("cachedItemNombre", "item.descripcion")
 
-  valorUnitario: (->
-    @get("cachedItemPrecio") || @get("item.base")
-  ).property("cachedItemPrecio", "item.base")
+  valorUnitarioVenta: (->
+    valorUnitario = @get("cachedItemPrecio") || @get("item.baseVenta")
+    @set "valorUnitario", valorUnitario
+    valorUnitario
+  ).property("cachedItemPrecio", "item.baseVenta")
+
+  valorUnitarioCompra: (->
+    valorUnitario = @get("cachedItemPrecio") || @get("item.baseCompra")
+    @set "valorUnitario", valorUnitario
+    valorUnitario
+  ).property("cachedItemPrecio", "item.baseCompra")
 
   valorTotal: (->
     @get("cantidad") * @get("valorUnitario")

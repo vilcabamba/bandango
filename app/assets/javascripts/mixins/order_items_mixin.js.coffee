@@ -1,5 +1,10 @@
 Bandango.OrderItemsMixin = Ember.Mixin.create
 
+# isVenta
+  isVenta: (->
+    @constructor is Bandango.Venta
+  ).property()
+
 # orderItem relationships
   orderItemsIds: (->
     Ember.debug "computing orderItemsIds"
@@ -18,19 +23,31 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
 
 # summary operations
   ivaZeroReduceCallback: (prev, orderItem) ->
-    prev + orderItem.get("cantidad") * orderItem.get("item.ivaZero")
+    ivaZero = if @get("isVenta")
+       orderItem.get("item.ivaZeroVenta")
+    else
+      orderItem.get("item.ivaZeroCompra")
+    prev + orderItem.get("cantidad") * ivaZero
   ivaZero: (->
-    @get("orderItems.content").reduce @ivaZeroReduceCallback, 0
+    @get("orderItems.content").reduce $.proxy(@ivaZeroReduceCallback, @), 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
 
   ivaTwelveReduceCallback: (prev, orderItem) ->
-    prev + orderItem.get("cantidad") * orderItem.get("item.ivaTwelve")
+    ivaTwelve = if @get("isVenta")
+      orderItem.get("item.ivaTwelveVenta")
+    else
+      orderItem.get("item.ivaTwelveCompra")
+    prev + orderItem.get("cantidad") * ivaTwelve
   ivaTwelve: (->
-    @get("orderItems.content").reduce @ivaTwelveReduceCallback, 0
+    @get("orderItems.content").reduce $.proxy(@ivaTwelveReduceCallback, @), 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
 
   totalPriceReduceCallback: (prev, orderItem) ->
-    prev + orderItem.get("cantidad") * orderItem.get("item.totalPrice")
+    totalPrice = if @get("isVenta")
+      orderItem.get("item.totalPriceVenta")
+    else
+      orderItem.get("item.totalPriceCompra")
+    prev + orderItem.get("cantidad") * totalPrice
   totalPrice: (->
-    @get("orderItems.content").reduce @totalPriceReduceCallback, 0
+    @get("orderItems.content").reduce $.proxy(@totalPriceReduceCallback, @), 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
