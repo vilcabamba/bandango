@@ -1,8 +1,11 @@
 Bandango.PersonImagen = Ember.Mixin.create
 
   imagen_hexdigest_and_default: (->
-    Bandango.GravatarImagenHelper.hexdigestAndDefault(@get("email"))
-  ).property("email")
+    digest = @get("email")
+    if Ember.isEmpty(email)
+      digest = @get("identificacion")
+    Bandango.GravatarImagenHelper.hexdigestAndDefault(digest)
+  ).property("email", "identificacion")
 
   imagen_url: (->
     Bandango.GravatarImagenHelper.imagenUrlWithDigestAndDefault @get("imagen_hexdigest_and_default")
