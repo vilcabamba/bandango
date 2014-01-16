@@ -5,14 +5,35 @@
   {{view Ember.TextField value=view.descripcion class="form-control" placeholder="Descripción"}}
 </div>
 <div class="form-group row">
-  <div class="col-xs-3">
-    <div {{bind-attr class=":input-group view.errors.base"}}>
-      <span class="input-group-addon">$</span>
-      {{view Ember.TextField value=view.base class="form-control align_right" required="true" placeholder="Base" step="any"}}
+  <div class="col-xs-2 align_right">
+    <span class="little_margin_top">Precio</span>
+  </div>
+  <div class="col-xs-5">
+    <div {{bind-attr class=":input-group view.errors.baseVenta"}}>
+      <span class="input-group-addon">
+        {{view Ember.Checkbox checked=view.seVende name="se_vende"}}
+        <label for="se_vende">Venta</label>
+      </span>
+      <span class="input-group-addon no_border_right">$</span>
+      {{view Ember.TextField value=view.baseVenta class="form-control align_right" placeholder="9.99" enabled=view.seVende enabledProperty=true}}
     </div>
   </div>
-  <div class="col-xs-1"></div>
-  <div class="col-xs-4">
+  <div class="col-xs-5">
+    <div {{bind-attr class=":input-group view.errors.baseCompra"}}>
+      <span class="input-group-addon">
+        {{view Ember.Checkbox checked=view.seCompra name="se_compra"}}
+        <label for="se_compra">Compra</label>
+      </span>
+      <span class="input-group-addon no_border_right">$</span>
+      {{view Ember.TextField value=view.baseCompra class="form-control align_right" placeholder="9.99" enabled=view.seCompra enabledProperty=true}}
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-xs-2 align_right">
+    <span class="little_margin_top">Impuestos</span>
+  </div>
+  <div class="col-xs-5">
     <div {{bind-attr class=":input-group view.errors.ivaTarifa"}}>
       <span class="input-group-addon">
         {{view Ember.Checkbox checked=view.iva name="iva"}}
@@ -24,7 +45,7 @@
       </span>
     </div>
   </div>
-  <div class="col-xs-4">
+  <div class="col-xs-5">
     <div {{bind-attr class=":input-group view.errors.iceTarifa"}}>
       <span class="input-group-addon">
         {{view Ember.Checkbox checked=view.ice name="ice"}}

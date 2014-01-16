@@ -3,6 +3,11 @@
     <div class="primary">
       {{nombre}}
     </div>
-    {{number_to_currency base}}
+    {{#if seVende}}
+      {{number_to_currency baseVenta}}
+    {{/if}}
+    {{#if seCompra}}
+      {{number_to_currency baseCompra}}
+    {{/if}}
   </div>
 {{/with}}

@@ -20,22 +20,31 @@
     <div class="descripcion">
       {{descripcion}}
     </div>
-    <div class="row">
-      <div class="col-xs-4 price">
-        {{number_to_currency base}}
+    <div class="row has_margin">
+      <div class="col-xs-3">
+        {{#if seVende}}
+          <span class="price">{{number_to_currency baseVenta}}</span>
+          <span class="label label-primary">venta</span>
+        {{/if}}
       </div>
-      <div class="col-xs-4">
+      <div class="col-xs-3">
+        {{#if seCompra}}
+          <span class="price">{{number_to_currency baseCompra}}</span>
+          <span class="label label-success">compra</span>
+        {{/if}}
+      </div>
+      <div class="col-xs-3">
         {{#if iva}}
-          IVA <span class="stronger">{{ivaTarifa}}</span>%:
-          {{number_to_currency ivaTwelve}}
+          <span class="price">{{ivaTarifa}}%</span>
+          <span class="label label-info">IVA</span>
         {{else}}
           Sin IVA
         {{/if}}
       </div>
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         {{#if ice}}
-          ICE <span class="stronger">{{iceTarifa}}</span>%
-          {{number_to_currency iceTotal}}
+          <span class="price">{{iceTarifa}}%</span>
+          <span class="label label-info">ICE</span>
         {{/if}}
       </div>
     </div>

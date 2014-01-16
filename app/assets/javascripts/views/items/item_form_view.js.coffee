@@ -1,5 +1,5 @@
 Bandango.ItemFormView = Bandango.ModelBackedView.extend
-  attributes: ["nombre", "descripcion", "base", "iva", "ivaTarifa", "ice", "iceTarifa"]
+  attributes: ["nombre", "descripcion", "seVende", "baseVenta", "seCompra", "baseCompra", "iva", "ivaTarifa", "ice", "iceTarifa"]
 
   successCallback: (item, action) ->
     @_super "#{item.get("nombre")} #{action}"
