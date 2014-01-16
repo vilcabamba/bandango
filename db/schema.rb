@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116181811) do
+ActiveRecord::Schema.define(version: 20140116212447) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20140116181811) do
     t.boolean  "se_compra"
     t.float    "base_compra"
   end
+
+  add_index "items", ["se_compra"], name: "index_items_on_se_compra", using: :btree
+  add_index "items", ["se_vende"], name: "index_items_on_se_vende", using: :btree
 
   create_table "order_items", force: true do |t|
     t.integer  "item_id",            null: false

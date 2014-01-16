@@ -6,13 +6,16 @@
 #  category_id :integer          default(1), not null
 #  nombre      :string(255)      not null
 #  descripcion :string(255)
-#  base        :float            not null
+#  base_venta  :float
 #  created_at  :datetime
 #  updated_at  :datetime
 #  iva         :boolean          default(TRUE)
 #  iva_tarifa  :integer          default(12)
 #  ice         :boolean          default(FALSE)
 #  ice_tarifa  :integer
+#  se_vende    :boolean
+#  se_compra   :boolean
+#  base_compra :float
 #
 
 class Item < ActiveRecord::Base
