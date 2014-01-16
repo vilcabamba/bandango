@@ -719,5 +719,6 @@ end
 Cliente.where(identificacion: "9999999999999").first_or_initialize.tap do |cliente|
   cliente.tipo_id = "RUC"
   cliente.nombres = "Consumidor Final"
+  cliente.dont_sync = true
   cliente.save(validate: false)
 end
