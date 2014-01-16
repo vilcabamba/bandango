@@ -24,6 +24,13 @@ class Item < ActiveRecord::Base
 
 # scopes
   scope :category, ->(category_id) { where(category_id: category_id) }
+  scope :type,     ->(type) {
+    if type == "venta"
+      where(se_vende: true)
+    else
+      where(se_compra: true)
+    end
+  }
 
 # relationships
   belongs_to :category
