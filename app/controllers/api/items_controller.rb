@@ -33,7 +33,10 @@ module Api
     def item_params
       params.require(:item).permit :nombre,
                                    :descripcion,
-                                   :base,
+                                   :se_vende,
+                                   :base_venta,
+                                   :se_compra,
+                                   :base_compra,
                                    :iva,
                                    :iva_tarifa,
                                    :ice,
