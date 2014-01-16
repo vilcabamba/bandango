@@ -5105,7 +5105,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+  font-weight: 300;
   line-height: 1;
   color: #ffffff;
   text-align: center;
