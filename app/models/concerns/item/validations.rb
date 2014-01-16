@@ -5,8 +5,10 @@ class Item < ActiveRecord::Base
     included do
       validates :category_id, presence: true
       validates :nombre,      presence: true
-      validates :base,        presence: true,
-                              numericality: { greater_than: 0 }
+      validates :base_venta,  numericality: { greater_than: 0 },
+                              allow_blank: true
+      validates :base_compra, numericality: { greater_than: 0 },
+                              allow_blank: true
       validates :iva_tarifa,  numericality: { greater_than: 0 },
                               if: :iva
       validates :ice_tarifa,  numericality: { greater_than: 0 },

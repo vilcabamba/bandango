@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115040128) do
+ActiveRecord::Schema.define(version: 20140116181811) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -89,13 +89,16 @@ ActiveRecord::Schema.define(version: 20140115040128) do
     t.integer  "category_id", default: 1,     null: false
     t.string   "nombre",                      null: false
     t.string   "descripcion"
-    t.float    "base",                        null: false
+    t.float    "base_venta"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "iva",         default: true
     t.integer  "iva_tarifa",  default: 12
     t.boolean  "ice",         default: false
     t.integer  "ice_tarifa"
+    t.boolean  "se_vende"
+    t.boolean  "se_compra"
+    t.float    "base_compra"
   end
 
   create_table "order_items", force: true do |t|
