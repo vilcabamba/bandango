@@ -1,5 +1,7 @@
 # Learn more: http://github.com/javan/whenever
 
+set :output, "/home/pi/bandango/log/cron.log"
+
 job_type :bandango, "cd /home/pi/bandango && :task"
 
 # every 1.hour do
