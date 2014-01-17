@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116212447) do
+ActiveRecord::Schema.define(version: 20140117233313) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -84,6 +84,23 @@ ActiveRecord::Schema.define(version: 20140116212447) do
   end
 
   add_index "concepto_retencion_fuentes", ["codigo"], name: "index_concepto_retencion_fuentes_on_codigo", unique: true, using: :btree
+
+  create_table "emisores", force: true do |t|
+    t.string   "ruc",                                      null: false
+    t.string   "razon_social",                             null: false
+    t.string   "nombre_comercial"
+    t.string   "direccion_matriz",                         null: false
+    t.string   "direccion_establecimiento",                null: false
+    t.string   "codigo_establecimiento",                   null: false
+    t.string   "codigo_punto_emision",                     null: false
+    t.string   "contribuyente_especial_numero_resolucion"
+    t.boolean  "obligado_a_llevar_contabilidad"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emisores", ["ruc"], name: "index_emisores_on_ruc", unique: true, using: :btree
 
   create_table "items", force: true do |t|
     t.integer  "category_id", default: 1,     null: false
