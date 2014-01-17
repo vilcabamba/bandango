@@ -24,3 +24,5 @@ db/schema.rb
 config/bandango.yml
 
 config/pusher.yml
+
+dump.rdb
