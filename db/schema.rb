@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117233313) do
+ActiveRecord::Schema.define(version: 20140118211745) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20140117233313) do
     t.string   "codigo_punto_emision",                     null: false
     t.string   "contribuyente_especial_numero_resolucion"
     t.boolean  "obligado_a_llevar_contabilidad"
-    t.string   "logo"
+    t.string   "imagen"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
