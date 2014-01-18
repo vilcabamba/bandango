@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: emisores
@@ -25,5 +26,9 @@ class Emisor < ActiveRecord::Base
 
 # uploaders
   mount_uploader :imagen, EmisorImagenUploader
+
+# validate ruc
+  validates_id :ruc, message: "RUC inválido",
+                        only: [:ruc]
 
 end
