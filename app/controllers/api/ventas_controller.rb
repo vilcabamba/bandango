@@ -14,7 +14,11 @@ module Api
     end
 
     def create
-      respond_with :api, Venta.create_with_order_items(venta_params, order_items_venta_params)
+      if venta = Venta.create_with_order_items(venta_params, order_items_venta_params)
+        respond_with :api, venta
+      else
+        render json: {message: "No se puede enviar sin items"}, status: 422
+      end
     end
 
     def update
