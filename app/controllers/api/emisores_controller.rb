@@ -4,7 +4,7 @@ module Api
     respond_to :json
 
     def show
-      respond_with Emisor.emisor
+      respond_with Emisor.cached_emisor
     end
 
     def create

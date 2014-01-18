@@ -19,6 +19,7 @@
 
 class Emisor < ActiveRecord::Base
   include Single
+  include Cacheable
   include Validations
   include ImagenUploadable
 
