@@ -1,0 +1,83 @@
+<section class="form_section">
+  <div class="section_header">
+    Emisor
+  </div>
+  <div class="section_body">
+    <div class=" row">
+      <div class="col-xs-3">
+        {{#view Ember.View contentBinding="view.imagenUrl"}}
+          <div class="hidden">{{view Bandango.ImagenUploaderView}}</div>
+          {{view Bandango.ImagenUploaderPreview srcBinding="view.content" class="emisor_small_image"}}
+        {{/view}}
+      </div>
+      <div class="col-xs-9">
+        <div {{bind-attr class=":form-group view.errors.ruc"}}>
+          {{view Ember.TextField value=view.ruc class="form-control" required="true" placeholder="RUC"}}
+        </div>
+        <div {{bind-attr class=":form-group view.errors.razonSocial"}}>
+          {{view Ember.TextField value=view.razonSocial class="form-control" required="true" placeholder="Razón Social"}}
+        </div>
+        <div {{bind-attr class=":form-group view.errors.nombreComercial"}}>
+          {{view Ember.TextField value=view.nombreComercial class="form-control" placeholder="Nombre comercial"}}
+        </div>
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.direccionMatriz"}}>
+      <div class="col-xs-3">
+        <label for="direccion_matriz">Dirección Matriz</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.direccionMatriz class="form-control" required="true" name="direccion_matriz"}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.direccionEstablecimiento"}}>
+      <div class="col-xs-3">
+        <label for="direccion_establecimiento">Dirección establecimiento</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.direccionEstablecimiento class="form-control" required="true" name="direccion_establecimiento"}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.codigoEstablecimiento"}}>
+      <div class="col-xs-3">
+        <label for="codigo_establecimiento">Código establecimiento</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.codigoEstablecimiento class="form-control" required="true" name="codigo_establecimiento"}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.codigoPuntoEmision"}}>
+      <div class="col-xs-3">
+        <label for="codigo_punto_emision">Código punto de emisión</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.codigoPuntoEmision class="form-control" required="true" name="codigo_punto_emision"}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.contribuyenteEspecialNumeroResolucion"}}>
+      <div class="col-xs-3">
+        <label for="contribuyente_especial">Contribuyente especial nro. resolución</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.contribuyenteEspecialNumeroResolucion class="form-control" name="contribuyente_especial"}}
+      </div>
+    </div>
+    <div {{bind-attr class=":form-group :row view.errors.obligadoALlevarContabilidad"}}>
+      <div class="col-xs-3">
+        <label for="obligadoLlevarContabilidad">Obligado a llevar contabilidad</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.Checkbox checked=view.obligadoLlevarContabilidad name="obligadoLlevarContabilidad"}}
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row">
+  <div class="col-xs-6 text-danger">
+    {{array_with_lines view.errors_messages}}
+  </div>
+  <div class="col-xs-6 actions">
+    {{link-to "Cancelar" "preferencias.index" class="btn btn-link"}}
+    <input type="submit" value="Actualizar" class="btn btn-primary" {{bind-attr disabled=view.submitting}} />
+  </div>
+</div>
