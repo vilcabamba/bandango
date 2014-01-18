@@ -3,10 +3,14 @@ module Orderable
 
   module ClassMethods
     def create_with_order_items(params, order_items_params)
-      params[:order_items] = order_items_params[:order_items].map do |order_item|
-        OrderItem.new(order_item)
+      unless order_items_params.empty?
+        params[:order_items] = order_items_params[:order_items].map do |order_item|
+          OrderItem.new order_item.merge({tipo: self})
+        end
+        create params
+      else
+        false
       end
-      create params
     end
 
     def update_with_order_items(id, params, order_items_params)
