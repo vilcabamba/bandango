@@ -3,6 +3,7 @@ class Venta < ActiveRecord::Base
     extend ActiveSupport::Concern
 
     included do
+      validates_associated :order_items
     end
   end
 end
