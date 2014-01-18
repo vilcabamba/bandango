@@ -18,6 +18,7 @@
 #
 
 class Emisor < ActiveRecord::Base
+  include Single
   include Validations
 
 # uploaders
