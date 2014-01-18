@@ -20,6 +20,7 @@
 class Emisor < ActiveRecord::Base
   include Single
   include Validations
+  include ImagenUploadable
 
 # uploaders
   mount_uploader :imagen, EmisorImagenUploader
