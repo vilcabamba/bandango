@@ -27,7 +27,7 @@ module Api
                                      :codigo_establecimiento,
                                      :codigo_punto_emision,
                                      :contribuyente_especial_numero_resolucion,
-                                     :obligado_a_llevar_contabilidad,
+                                     :obligado_llevar_contabilidad,
                                      :imagen_url
     end
   end

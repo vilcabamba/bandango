@@ -12,7 +12,7 @@
 #  codigo_establecimiento                   :string(255)      not null
 #  codigo_punto_emision                     :string(255)      not null
 #  contribuyente_especial_numero_resolucion :string(255)
-#  obligado_a_llevar_contabilidad           :boolean
+#  obligado_llevar_contabilidad             :boolean
 #  imagen                                   :string(255)
 #  created_at                               :datetime
 #  updated_at                               :datetime
