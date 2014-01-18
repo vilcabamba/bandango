@@ -8,6 +8,8 @@ module Orderable
           OrderItem.new order_item.merge({tipo: self})
         end
         create params
+      else
+        #que va aquí???
       end
     end
 
