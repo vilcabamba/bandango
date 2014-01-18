@@ -12,12 +12,15 @@
 #  codigo_punto_emision                     :string(255)      not null
 #  contribuyente_especial_numero_resolucion :string(255)
 #  obligado_a_llevar_contabilidad           :boolean
-#  logo                                     :string(255)
+#  imagen                                   :string(255)
 #  created_at                               :datetime
 #  updated_at                               :datetime
 #
 
 class Emisor < ActiveRecord::Base
   include Validations
+
+# uploaders
+  mount_uploader :imagen, EmisorImagenUploader
 
 end
