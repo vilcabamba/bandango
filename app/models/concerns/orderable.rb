@@ -21,7 +21,7 @@ module Orderable
 
     def update_with_order_items(id, params, order_items_params)
       update(id, params).tap do |venta|
-        items_ids = order_items_params[:order_items].map do |order_item|
+        items_ids = Array(order_items_params[:order_items]).map do |order_item|
           order_item[:item_id].tap do |item_id|
             venta.order_items.where(item_id: item_id).first_or_initialize.tap do |new_order_item|
               new_order_item.update_attributes! order_item
