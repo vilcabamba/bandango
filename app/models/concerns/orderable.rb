@@ -20,15 +20,16 @@ module Orderable
     end
 
     def update_with_order_items(id, params, order_items_params)
-      update(id, params).tap do |venta|
+      find(id).tap do |venta|
         items_ids = Array(order_items_params[:order_items]).map do |order_item|
           order_item[:item_id].tap do |item_id|
             venta.order_items.where(item_id: item_id).first_or_initialize.tap do |new_order_item|
-              new_order_item.update_attributes! order_item
+              new_order_item.update order_item
             end
           end
         end
         venta.order_items.where.not(item_id: items_ids).destroy_all
+        venta.update(params)
       end
     end
   end
