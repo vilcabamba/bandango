@@ -7,8 +7,9 @@ Bandango.CategoriaNombreOnHeaderView = Ember.View.extend
   blur: (e) ->
     model = @get("model")
     @originalName = model.get("nombre")
-    unless @originalName is e.target.textContent
-      model.set "nombre", e.target.textContent
+    newName = $.trim e.target.textContent
+    unless @originalName is newName
+      model.set "nombre", newName
       model.save().then $.proxy(@success, @), @failure
 
   failure: ->
