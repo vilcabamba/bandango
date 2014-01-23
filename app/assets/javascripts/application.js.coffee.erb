@@ -27,5 +27,8 @@ window.Bandango = Ember.Application.create({
   LOG_TRANSITIONS_INTERNAL: log,
   LOG_BINDINGS: log,
   LOG_ACTIVE_GENERATION: log,
-  LOG_VIEW_LOOKUPS: log
+  LOG_VIEW_LOOKUPS: log,
+  customEvents: {
+    blur: 'blur'
+  }
 });

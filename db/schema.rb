@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116212447) do
+ActiveRecord::Schema.define(version: 20140121040646) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -85,6 +85,23 @@ ActiveRecord::Schema.define(version: 20140116212447) do
 
   add_index "concepto_retencion_fuentes", ["codigo"], name: "index_concepto_retencion_fuentes_on_codigo", unique: true, using: :btree
 
+  create_table "emisores", force: true do |t|
+    t.string   "ruc",                                      null: false
+    t.string   "razon_social",                             null: false
+    t.string   "nombre_comercial"
+    t.string   "direccion_matriz",                         null: false
+    t.string   "direccion_establecimiento",                null: false
+    t.string   "codigo_establecimiento",                   null: false
+    t.string   "codigo_punto_emision",                     null: false
+    t.string   "contribuyente_especial_numero_resolucion"
+    t.boolean  "obligado_llevar_contabilidad"
+    t.string   "imagen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emisores", ["ruc"], name: "index_emisores_on_ruc", unique: true, using: :btree
+
   create_table "items", force: true do |t|
     t.integer  "category_id", default: 1,     null: false
     t.string   "nombre",                      null: false
@@ -116,6 +133,22 @@ ActiveRecord::Schema.define(version: 20140116212447) do
 
   add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+
+  create_table "retenciones", force: true do |t|
+    t.integer  "order_id",                                            null: false
+    t.integer  "concepto_retencion_fuente_id"
+    t.date     "fecha_emision",                default: '2014-01-20', null: false
+    t.string   "numero_retencion",                                    null: false
+    t.boolean  "iva"
+    t.integer  "tarifa_iva"
+    t.boolean  "ice"
+    t.integer  "tarifa_ice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "retenciones", ["concepto_retencion_fuente_id"], name: "index_retenciones_on_concepto_retencion_fuente_id", using: :btree
+  add_index "retenciones", ["order_id"], name: "index_retenciones_on_order_id", using: :btree
 
   create_table "sani_requests", force: true do |t|
     t.integer "last_id", default: 0, null: false

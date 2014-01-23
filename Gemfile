@@ -91,4 +91,7 @@ gem "rest-client"
 gem "pusher-client"
 
 # cron tasks
-gem 'whenever', :require => false
+gem "whenever", :require => false
+
+# uploads
+gem "carrierwave"

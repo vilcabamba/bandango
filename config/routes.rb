@@ -64,6 +64,7 @@ Bandango::Application.routes.draw do
     resources :concepto_retencion_fuentes
     resources :items
     resources :categories
+    resources :emisores
     resources :current_user do
       collection do
         post "/", to: "current_user#update"

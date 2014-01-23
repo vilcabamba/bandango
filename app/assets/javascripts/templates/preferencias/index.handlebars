@@ -1,0 +1,33 @@
+{{#with model}}
+<section class="form_section">
+  <div class="section_header">Emisor</div>
+  <div class="section_body has_padding">
+    <div class="row">
+      <div class="col-xs-3">
+        <img src="{{unbound imagenUrl}}" class="emisor_small_image">
+      </div>
+      <div class="col-xs-9 emisor_info">
+        <div class="id">{{razonSocial}}</div>
+        <div>
+          <span class="id">{{ruc}}</span>
+          {{#if obligadoLlevarContabilidad}}
+            <span class="label label-default">Obligado a llevar contabilidad</span>
+          {{/if}}
+        </div>
+        <div class="nombre_comercial">{{nombreComercial}}</div>
+        <div>{{direccionMatriz}}</div>
+        <div>{{direccionEstablecimiento}}</div>
+        <div>
+          {{codigoEstablecimiento}}
+          -
+          {{codigoPuntoEmision}}
+        </div>
+        <div>{{contribuyenteEspecialNumeroResolucion}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="actions">
+  {{link-to "Editar" "preferencias.edit" class="btn btn-default"}}
+</div>
+{{/with}}

@@ -11,10 +11,10 @@ Bandango.Venta = DS.Model.extend Bandango.OrderItemsMixin,
   comprobante:   DS.belongsTo("comprobante")
   orderItems:    DS.hasMany("orderItem")
 
-  rollback: ->
-    for orderItem in @get("orderItems.content")
-      orderItem.rollback() if orderItem.get("isDirty")
-    @_super()
+  rollbackAssociations: ->
+    for orderItem in @get("orderItems.content").filterBy("isDirty")
+      orderItem.rollback()
+    @get("cliente").rollback() if @get("cliente.isDirty")
 
 Ember.Inflector.inflector.irregular('venta', 'ventas');
 Ember.Inflector.inflector.singular(/venta/, 'venta');

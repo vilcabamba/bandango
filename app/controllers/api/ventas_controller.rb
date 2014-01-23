@@ -18,7 +18,8 @@ module Api
     end
 
     def update
-      respond_with Venta.update_with_order_items(params[:id], venta_params, order_items_venta_params)
+      venta = Venta.update_with_order_items(params[:id], venta_params, order_items_venta_params)
+      render json: venta
     end
 
     private

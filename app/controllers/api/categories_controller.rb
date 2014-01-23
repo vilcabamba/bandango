@@ -19,6 +19,10 @@ module Api
       respond_with :api, Category.create(category_params)
     end
 
+    def update
+      respond_with Category.update(params[:id], category_params)
+    end
+
     private
 
     def category_params
