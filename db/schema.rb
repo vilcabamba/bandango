@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.string   "concepto",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "porcentaje"
   end
 
   add_index "concepto_retencion_fuentes", ["codigo"], name: "index_concepto_retencion_fuentes_on_codigo", unique: true, using: :btree

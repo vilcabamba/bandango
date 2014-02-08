@@ -2,6 +2,7 @@ class ConceptoRetencionFuenteSerializer < ActiveModel::Serializer
 
   attributes :id,
              :codigo,
-             :concepto
+             :concepto,
+             :porcentaje
 
 end
