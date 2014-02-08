@@ -1,4 +1,4 @@
-Bandango.DatePicker = Ember.TextField.extend
+Bandango.DateField = Ember.TextField.extend
   attributeBindings: ["value", "format", "readonly", "type", "size", "placeholder", "name"]
   format: "dd/mm/yyyy"
 
