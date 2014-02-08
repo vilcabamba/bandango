@@ -13,5 +13,7 @@
  *= require alertify.core
  *= require alertify.default
  *= require chosen
+ *= require datepicker
+ *= require datepicker3
  *= require_tree .
  */
