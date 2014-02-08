@@ -13,6 +13,9 @@
 class ConceptoRetencionFuente < ActiveRecord::Base
   include Caching
 
+# table name
+  self.table_name = :conceptos_retencion_fuente
+
 # relationships
   has_many :compras
 

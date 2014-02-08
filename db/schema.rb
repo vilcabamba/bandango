@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121040646) do
+ActiveRecord::Schema.define(version: 20140208165729) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
 
   add_index "comprobantes", ["codigo"], name: "index_comprobantes_on_codigo", unique: true, using: :btree
 
-  create_table "concepto_retencion_fuentes", force: true do |t|
+  create_table "conceptos_retencion_fuente", force: true do |t|
     t.string   "codigo",     null: false
     t.string   "concepto",   null: false
     t.datetime "created_at"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.float    "porcentaje"
   end
 
-  add_index "concepto_retencion_fuentes", ["codigo"], name: "index_concepto_retencion_fuentes_on_codigo", unique: true, using: :btree
+  add_index "conceptos_retencion_fuente", ["codigo"], name: "index_conceptos_retencion_fuente_on_codigo", unique: true, using: :btree
 
   create_table "emisores", force: true do |t|
     t.string   "ruc",                                      null: false
