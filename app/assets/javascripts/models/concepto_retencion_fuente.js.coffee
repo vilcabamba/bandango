@@ -4,3 +4,8 @@ Bandango.ConceptoRetencionFuente = DS.Model.extend
   porcentaje:  DS.attr()
 
   retenciones: DS.hasMany("retencion")
+
+  porcentajeWithParenthesis: (->
+    porcentaje = @get("porcentaje")
+    "(#{porcentaje}%)" unless Ember.isEmpty(porcentaje)
+  ).property("porcentaje")

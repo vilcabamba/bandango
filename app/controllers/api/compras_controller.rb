@@ -1,11 +1,11 @@
 module Api
   class ComprasController < ApiController
-  
+
     before_action :require_login
     respond_to :json
 
     def index
-      @compras = Compra.includes(:cliente, :comprobante, :order_items => [:item]).page(params[:page])
+      @compras = Compra.includes(:cliente, :comprobante, :retenciones, :order_items => [:item]).page(params[:page])
       render json: @compras, meta: { total_pages: @compras.total_pages, page: @compras.current_page }
     end
 
@@ -30,6 +30,6 @@ module Api
     def order_items_compra_params
       params.require(:compra).permit :order_items => [:cantidad, :item_id]
     end
-    
+
   end
 end

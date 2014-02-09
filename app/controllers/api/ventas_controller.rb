@@ -1,11 +1,11 @@
 module Api
   class VentasController < ApiController
-  
+
     before_action :require_login
     respond_to :json
 
     def index
-      @ventas = Venta.includes(:cliente, :comprobante, :order_items => [:item]).page(params[:page])
+      @ventas = Venta.includes(:cliente, :comprobante, :retenciones, :order_items => [:item]).page(params[:page])
       render json: @ventas, meta: { total_pages: @ventas.total_pages, page: @ventas.current_page }
     end
 
@@ -31,6 +31,6 @@ module Api
     def order_items_venta_params
       params.require(:venta).permit :order_items => [:cantidad, :item_id]
     end
-    
+
   end
 end

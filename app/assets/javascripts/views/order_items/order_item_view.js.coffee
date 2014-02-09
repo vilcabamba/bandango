@@ -9,7 +9,7 @@ Bandango.OrderItemView = Ember.View.extend
 
   removeOrderItem: ->
     @get("model").deleteRecord()
-    @$().addClass("hidden") unless @get("model.isNew") # hacky way to hide view when editing
+    @$().addClass("hidden") if @$() and not @get("model.isNew") # hacky way to hide view when editing
 
   didInsertElement: ->
     @$(".glyphicon").on "click", $.proxy(@removeOrderItem, @)
