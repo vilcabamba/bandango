@@ -16,6 +16,3 @@ Bandango.Venta = DS.Model.extend Bandango.OrderItemsMixin,
     for orderItem in @get("orderItems.content").filterBy("isDirty")
       orderItem.rollback()
     @get("cliente").rollback() if @get("cliente.isDirty")
-
-Ember.Inflector.inflector.irregular('venta', 'ventas');
-Ember.Inflector.inflector.singular(/venta/, 'venta');

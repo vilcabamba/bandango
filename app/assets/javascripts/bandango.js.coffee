@@ -1,3 +1,4 @@
+#= require ./inflections
 #= require ./store
 #= require_tree ./mixins
 #= require_tree ./helpers
