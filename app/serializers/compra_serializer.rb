@@ -1,4 +1,4 @@
-class CompraSerializer < ActiveModel::Serializer
+class CompraSerializer < OrderableSerializer
 
   attributes :id,
              :fecha_registro,
@@ -16,11 +16,7 @@ class CompraSerializer < ActiveModel::Serializer
              :numero_serie_retencion_punto_emision,
              :numero_serie_retencion,
              :numero_autorizacion_retencion,
-             :fecha_emision_retencion,             
+             :fecha_emision_retencion,
              :created_at
-
-  has_one :cliente, key: :cliente_id, embed: :ids, include: true
-  has_one :comprobante, key: :comprobante_id, embed: :ids, include: true
-  has_many :order_items, key: :order_item_ids, embed: :ids, include: true
 
 end

@@ -18,4 +18,8 @@
 class Retencion < ActiveRecord::Base
   include Validations
 
+# relationships
+  belongs_to :compra
+  belongs_to :venta
+
 end
