@@ -1,6 +1,7 @@
 Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin,
   queryForClienteOnIdentificacionChange: true
   modelBinding: "controller.model"
+  includeForm: true
 
   modelSaved: (model) ->
     if @get("removeOrderItemsWithoutIdAfterCommit")
