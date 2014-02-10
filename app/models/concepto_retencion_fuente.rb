@@ -17,6 +17,6 @@ class ConceptoRetencionFuente < ActiveRecord::Base
   self.table_name = :conceptos_retencion_fuente
 
 # relationships
-  has_many :compras
+  has_many :retenciones
 
 end

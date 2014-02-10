@@ -21,5 +21,6 @@ class Retencion < ActiveRecord::Base
 # relationships
   belongs_to :compra
   belongs_to :venta
+  belongs_to :concepto_retencion_fuente
 
 end

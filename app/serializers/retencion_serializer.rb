@@ -3,6 +3,7 @@ class RetencionSerializer < ActiveModel::Serializer
   attributes :id,
              :fecha_emision,
              :numero_retencion,
+             :numero_autorizacion,
              :iva,
              :tarifa_iva,
              :ice,

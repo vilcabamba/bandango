@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208165729) do
+ActiveRecord::Schema.define(version: 20140209232905) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20140208165729) do
     t.integer  "tarifa_ice"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "numero_autorizacion"
   end
 
   add_index "retenciones", ["concepto_retencion_fuente_id"], name: "index_retenciones_on_concepto_retencion_fuente_id", using: :btree
