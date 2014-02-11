@@ -1,6 +1,3 @@
-{{#if view.showDivider}}
-  <div class="bandango_small_divider"></div>
-{{/if}}
 {{#each retencion in persistedRetenciones}}
-  {{retencion}}
+  {{view Bandango.RetencionView model=retencion}}
 {{/each}}
