@@ -1,10 +1,7 @@
 <div class="form-group">
   <select class="form-control retencion_fuente_select">
     {{#each view.conceptosRetencionFuente}}
-      <option value="{{unbound id}}">
-        {{unbound codigo}} - {{unbound concepto}}
-        {{unbound porcentajeWithParenthesis}}
-      </option>
+      <option value="{{unbound id}}">{{unbound to_s}}</option>
     {{/each}}
   </select>
 </div>

@@ -2,10 +2,7 @@ Bandango.OrderItemView = Ember.View.extend
   templateName: "order_items/show"
   classNames: ["order_item_view"]
   tagName: "tr"
-
-  showEdit: (->
-    @get("parentView.includeForm")
-  ).property()
+  includeFormBinding: "parentView.includeForm"
 
   removeOrderItem: ->
     @get("model").deleteRecord()
