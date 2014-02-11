@@ -14,7 +14,7 @@
     <label for="autorizacion_retencion">Número autorización de comprobante retención</label>
   </div>
   <div class="col-xs-8">
-    {{view Ember.TextField value=view.numeroAutorizacionRetencion class="form-control" name="autorizacion_retencion" placeholder="Número de autorización"}}
+    {{view Ember.TextField value=view.numeroAutorizacion class="form-control" name="autorizacion_retencion" placeholder="Número de autorización"}}
   </div>
 </div>
 <div class="form-group row">
@@ -23,15 +23,15 @@
   </div>
   <div class="col-xs-8 form-inline form_numero_serie_comprobante_retencion align_right">
     <div class="form-group">
-      {{view Ember.TextField value=view.numeroSerieRetencionEstablecimiento class="form-control" placeholder="Establecimiento" name="retencion_establecimiento"}}
+      {{view Ember.TextField value=view.numeroSerieEstablecimiento class="form-control" placeholder="Establecimiento" name="retencion_establecimiento"}}
     </div>
     -
     <div class="form-group">
-      {{view Ember.TextField value=view.numeroSerieRetencionPuntoEmision class="form-control" placeholder="Punto emisión"}}
+      {{view Ember.TextField value=view.numeroSeriePuntoEmision class="form-control" placeholder="Punto emisión"}}
     </div>
     -
     <div class="form-group">
-      {{view Ember.TextField value=view.numeroSerieRetencion class="form-control" placeholder="Número secuencial"}}
+      {{view Ember.TextField value=view.numeroSerieSecuencial class="form-control" placeholder="Número secuencial"}}
     </div>
   </div>
 </div>
@@ -40,14 +40,14 @@
     <label for="fecha_retencion">Fecha de emisión del comprobante de retención</label>
   </div>
   <div class="col-xs-8">
-    {{view Bandango.DateField value=view.fechaEmisionRetencion class="form-control" placeholder="DD/MM/AAAA" name="fecha_retencion"}}
+    {{view Bandango.DateField value=view.fechaEmision class="form-control" placeholder="DD/MM/AAAA" name="fecha_retencion"}}
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-6 align_center">
+<div class="form-group row">
+  <div class="col-xs-4 align_center">
     <div>
       {{#if view.model.tarifaIva}}
-        {{view.model.tarifaIva}} %:
+        {{view.model.tarifaIva}}%:
       {{/if}}
       {{number_to_currency view.model.iva}}
     </div>
@@ -55,15 +55,18 @@
       <span class="label label-info">IVA</span>
     </div>
   </div>
-  <div class="col-xs-6 align_center">
+  <div class="col-xs-4 align_center">
     <div>
       {{#if view.model.tarifaIce}}
-        {{view.model.tarifaIce}} %:
+        {{view.model.tarifaIce}}%:
       {{/if}}
       {{number_to_currency view.model.ice}}
     </div>
     <div>
       <span class="label label-info">ICE</span>
     </div>
+  </div>
+  <div class="col-xs-4 actions">
+    <button class="btn btn-default" {{action addRetencion target=view}}>Agregar</button>
   </div>
 </div>
