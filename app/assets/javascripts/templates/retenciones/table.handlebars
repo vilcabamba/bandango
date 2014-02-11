@@ -1,0 +1,6 @@
+{{#if view.includeForm}}
+  {{view Bandango.RetencionFormView}}
+{{/if}}
+{{#each retencion in persistedRetenciones}}
+  {{retencion}}
+{{/each}}
