@@ -1,4 +1,4 @@
-Bandango.Compra = DS.Model.extend Bandango.OrderItemsMixin,
+Bandango.Compra = DS.Model.extend Bandango.OrderItemsMixin, Bandango.RetencionesBaseMixin,
   fechaRegistro: DS.attr()
   numeroSerieEstablecimiento: DS.attr()
   numeroSeriePuntoEmision: DS.attr()

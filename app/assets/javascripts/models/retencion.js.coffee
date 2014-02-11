@@ -1,4 +1,4 @@
-Bandango.Retencion = DS.Model.extend
+Bandango.Retencion = DS.Model.extend Bandango.RetencionBaseMixin,
   fechaEmision:            DS.attr()
   numeroRetencion:         DS.attr()
   numeroAutorizacion:      DS.attr()
@@ -8,3 +8,4 @@ Bandango.Retencion = DS.Model.extend
   tarifaIce:               DS.attr()
 
   conceptoRetencionFuente: DS.belongsTo("conceptoRetencionFuente")
+  compra:                  DS.belongsTo("compra")
