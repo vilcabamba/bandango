@@ -51,3 +51,13 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
   totalPrice: (->
     @get("orderItems.content").reduce $.proxy(@totalPriceReduceCallback, @), 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
+
+  iceReduceCallback: (prev, orderItem) ->
+    ice = if @get("isVenta")
+      orderItem.get("item.iceVenta")
+    else
+      orderItem.get("item.iceCompra")
+    prev + orderItem.get("cantidad") * ice
+  ice: (->
+    @get("orderItems.content").reduce $.proxy(@iceReduceCallback, @), 0
+  ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
