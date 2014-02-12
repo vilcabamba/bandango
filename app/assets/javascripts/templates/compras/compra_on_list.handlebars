@@ -1,1 +1,16 @@
-compra.
+{{#with view.model}}
+  <div class="imagen">
+    <img src="{{unbound cliente.imagen_url_mini}}" class="profile_image mini">
+  </div>
+  <div class="info">
+    <div>
+      <strong>{{comprobante.tipo}}</strong>
+      {{cliente.nombres}}
+    </div>
+    <div>
+      {{cliente.tipoId}}:
+      {{cliente.identificacion}}
+    </div>
+    <div>{{humanize_time createdAt}}</div>
+  </div>
+{{/with}}
