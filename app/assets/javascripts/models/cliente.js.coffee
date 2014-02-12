@@ -7,3 +7,4 @@ Bandango.Cliente = DS.Model.extend Bandango.PersonImagen,
   email:          DS.attr()
 
   ventas:         DS.hasMany("venta")
+  compras:        DS.hasMany("compra")

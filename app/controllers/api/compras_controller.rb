@@ -25,7 +25,8 @@ module Api
 
     def compra_params
       params.require(:compra).permit :cliente_id,
-                                     :comprobante_id
+                                     :comprobante_id,
+                                     :sustento_comprobante_id
     end
     def order_items_compra_params
       params.require(:compra).permit :order_items => [:cantidad, :item_id]
