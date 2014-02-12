@@ -4,7 +4,17 @@ Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTri
 
 # compra
   failureSavingCompra: (response) ->
-    @get("model").rollback()
+    if @get("model.isNew")
+      # allocate new compra
+      store = @get("controller.store")
+      model = store.createRecord "compra",
+        cliente: @get("model.cliente")
+        comprobante: @get("model.comprobante")
+        orderItems: @get("model.orderItems.content")
+      @get("model").deleteRecord()
+      @set "model", model
+    else
+      @get("model").rollback()
     @failureCallback response
 
   compraSaved: (compra) ->

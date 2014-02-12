@@ -36,5 +36,6 @@ class Item < ActiveRecord::Base
   belongs_to :category
   has_many :order_item
   has_many :ventas, through: :order_item
+  has_many :compras, through: :order_item
   
 end
