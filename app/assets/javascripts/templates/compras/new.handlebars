@@ -12,7 +12,7 @@
     {{array_with_lines view.errors_messages}}
   </div>
   <div class="col-xs-6 actions">
-    {{link-to "Cancelar" "ventas.index" class="btn btn-link"}}
-    <input type="submit" value="Crear" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
+    {{link-to "Cancelar" "compras.index" class="btn btn-link"}}
+    <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
   </div>
 </div>
