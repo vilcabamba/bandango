@@ -1,4 +1,5 @@
 Bandango.RetencionFormView = Bandango.ModelBackedView.extend Bandango.RetencionFuenteOnFormMixin,
+  tagName: "div"
   templateName: "retenciones/form"
   compraBinding: "controller.model"
   attributes: [ "numeroAutorizacion",
