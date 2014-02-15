@@ -18,15 +18,8 @@ Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTri
     @failureCallback response
 
   compraSaved: (compra) ->
-    @modelSaved(compra)
+    @modelSaved()
     @get("controller").transitionToRoute "compras.show", compra.get("id")
 
   saveCompra: ->
     @get("model").save().then $.proxy(@compraSaved, @), $.proxy(@failureSavingCompra, @)
-
-# events
-  submit: ->
-    @emptyErrors()
-    @saveCliente()
-    @set "submitting", true
-    false

@@ -3,10 +3,10 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
   modelBinding: "controller.model"
   includeForm: true
 
-  modelSaved: (model) ->
+  modelSaved: ->
     if @get("removeOrderItemsWithoutIdAfterCommit")
       # delete orderItems instantiated and not persisted:
-      for orderItem in model.get("orderItems.content").filterBy("id", null)
+      for orderItem in @get("model").get("orderItems.content").filterBy("id", null)
         orderItem.deleteRecord()
 
 # cliente
@@ -32,3 +32,10 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
       cliente = store.createRecord "cliente", @getFormData()
       @set "model.cliente", cliente
     cliente.save().then $.proxy(@clienteSaved, @), $.proxy(@failureSavingCliente, @)
+
+# events
+  submit: ->
+    @emptyErrors()
+    @saveCliente()
+    @set "submitting", true
+    false

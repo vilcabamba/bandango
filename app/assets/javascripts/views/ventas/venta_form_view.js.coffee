@@ -18,15 +18,8 @@ Bandango.VentaFormView = Bandango.OrderableFormView.extend
     @failureCallback response
 
   ventaSaved: (venta) ->
-    @modelSaved(venta)
+    @modelSaved()
     @get("controller").transitionToRoute "ventas.show", venta.get("id")
 
   saveVenta: ->
     @get("model").save().then $.proxy(@ventaSaved, @), $.proxy(@failureSavingVenta, @)
-
-# events
-  submit: ->
-    @emptyErrors()
-    @saveCliente()
-    @set "submitting", true
-    false
