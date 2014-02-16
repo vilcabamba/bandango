@@ -3,20 +3,20 @@
     <label for="numero_serie_establecimiento">Número de serie del comprobante de venta</label>
   </div>
   <div class="col-xs-8 form-inline form_numero_serie_comprobante_retencion align_right">
-    <div class="form-group">
+    <div {{bind-attr class=":form-group view.errors.numeroSerieEstablecimiento"}}>
       {{view Ember.TextField value=view.numeroSerieEstablecimiento class="form-control" placeholder="Establecimiento" name="numero_serie_establecimiento"}}
     </div>
     -
-    <div class="form-group">
+    <div {{bind-attr class=":form-group view.errors.numeroSeriePuntoEmision"}}>
       {{view Ember.TextField value=view.numeroSeriePuntoEmision class="form-control" placeholder="Punto emisión"}}
     </div>
     -
-    <div class="form-group">
+    <div {{bind-attr class=":form-group view.errors.numeroSerieComprobante"}}>
       {{view Ember.TextField value=view.numeroSerieComprobante class="form-control" placeholder="Número secuencial"}}
     </div>
   </div>
 </div>
-<div class="form-group row">
+<div {{bind-attr class=":form-group :row view.errors.fechaRegistro"}}>
   <div class="col-xs-4">
     <label for="fecha_registro">Fecha de registro contable del comprobante de venta</label>
   </div>
@@ -24,7 +24,7 @@
     {{view Bandango.DateField dateBinding="content.date" value=view.fechaRegistro class="form-control" placeholder="DD/MM/AAAA" name="fecha_registro"}}
   </div>
 </div>
-<div class="form-group row">
+<div {{bind-attr class=":form-group :row view.errors.fechaEmision"}}>
   <div class="col-xs-4">
     <label for="fecha_emision">Fecha de emisión del comprobante de venta</label>
   </div>
@@ -32,7 +32,7 @@
     {{view Bandango.DateField dateBinding="content.date" value=view.fechaEmision class="form-control" placeholder="DD/MM/AAAA" name="fecha_emision"}}
   </div>
 </div>
-<div class="form-group row">
+<div {{bind-attr class=":form-group :row view.errors.autorizacionComprobante"}}>
   <div class="col-xs-4">
     <label for="numero_autorizacion">Número de autorización del comprobante de venta</label>
   </div>
