@@ -10,7 +10,7 @@ Bandango.ClientesNewView = Bandango.ClienteFormView.extend
 
   submit: ->
     @emptyErrors()
-    data = @getFormData()
+    data = @getFormDataFor("cliente")
     store = @get("controller.store")
     @new_cliente = store.createRecord "cliente", data
     @new_cliente.save().then $.proxy(@success, @), $.proxy(@failure, @)

@@ -26,10 +26,10 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
   saveCliente: ->
     cliente = @get "model.cliente"
     if cliente
-      cliente.setProperties @getFormData()
+      cliente.setProperties @getFormDataFor("cliente")
     else
       store = @get "controller.store"
-      cliente = store.createRecord "cliente", @getFormData()
+      cliente = store.createRecord "cliente", @getFormDataFor("cliente")
       @set "model.cliente", cliente
     cliente.save().then $.proxy(@clienteSaved, @), $.proxy(@failureSavingCliente, @)
 
