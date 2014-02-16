@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211175659) do
+ActiveRecord::Schema.define(version: 20140216214522) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140211175659) do
     t.string   "numero_serie_punto_emision",                                        null: false
     t.string   "numero_serie_comprobante",                                          null: false
     t.date     "fecha_emision",                                                     null: false
-    t.integer  "autorizacion_comprobante",                                          null: false
+    t.string   "autorizacion_comprobante",                                          null: false
     t.float    "retencion_iva_bienes",                                default: 0.0, null: false
     t.float    "retencion_iva_servicios",                             default: 0.0, null: false
     t.float    "retencion_iva_cien",                                  default: 0.0, null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140211175659) do
     t.string   "numero_serie_comprobante_modificado_establecimiento"
     t.string   "numero_serie_comprobante_modificado_punto_emision"
     t.string   "numero_serie_comprobante_modificado"
-    t.integer  "numero_autorizacion_comprobante_modificado"
+    t.string   "numero_autorizacion_comprobante_modificado"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
