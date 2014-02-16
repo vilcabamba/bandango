@@ -1,4 +1,6 @@
 Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin,
+  attributesForCompra: ["numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante", "fechaEmision", "fechaRegistro", "autorizacionComprobante"]
+
   clienteSaved: ->
     @saveCompra()
 
@@ -22,4 +24,6 @@ Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTri
     @get("controller").transitionToRoute "compras.show", compra.get("id")
 
   saveCompra: ->
-    @get("model").save().then $.proxy(@compraSaved, @), $.proxy(@failureSavingCompra, @)
+    compra = @get("model")
+    compra.setProperties @getFormDataFor("compra")
+    compra.save().then $.proxy(@compraSaved, @), $.proxy(@failureSavingCompra, @)
