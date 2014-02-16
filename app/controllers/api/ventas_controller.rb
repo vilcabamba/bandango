@@ -14,11 +14,11 @@ module Api
     end
 
     def create
-      respond_with :api, Venta.create_with_order_items(venta_params, order_items_venta_params)
+      respond_with :api, Venta.create(venta_params)
     end
 
     def update
-      venta = Venta.update_with_order_items(params[:id], venta_params, order_items_venta_params)
+      venta = Venta.update(params[:id], venta_params)
       render json: venta
     end
 
@@ -26,11 +26,8 @@ module Api
 
     def venta_params
       params.require(:venta).permit :cliente_id,
-                                    :comprobante_id
+                                    :comprobante_id,
+                                    order_items_params: [:cantidad, :item_id]
     end
-    def order_items_venta_params
-      params.require(:venta).permit :order_items => [:cantidad, :item_id]
-    end
-
   end
 end

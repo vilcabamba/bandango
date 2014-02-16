@@ -14,11 +14,11 @@ module Api
     end
 
     def create
-      respond_with :api, Compra.create_with_order_items(compra_params, order_items_compra_params)
+      respond_with :api, Compra.create(compra_params)
     end
 
     def update
-      respond_with Compra.update_with_order_items(params[:id], compra_params, order_items_compra_params)
+      respond_with Compra.update(params[:id], compra_params)
     end
 
     private
@@ -32,11 +32,8 @@ module Api
                                      :fecha_registro,
                                      :numero_serie_comprobante,
                                      :numero_serie_establecimiento,
-                                     :numero_serie_punto_emision
+                                     :numero_serie_punto_emision,
+                                     order_items_params: [:cantidad, :item_id]
     end
-    def order_items_compra_params
-      params.require(:compra).permit :order_items => [:cantidad, :item_id]
-    end
-
   end
 end
