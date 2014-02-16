@@ -1,5 +1,5 @@
 get = Ember.get
-Bandango.VentaSerializer = DS.ActiveModelSerializer.extend
+Bandango.OrderableSerializer = DS.ActiveModelSerializer.extend
   serializeHasMany: (record, json, relationship) ->
     key = relationship.key
     if key == "orderItems"
