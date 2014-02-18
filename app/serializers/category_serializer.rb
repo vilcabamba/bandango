@@ -1,6 +1,11 @@
 class CategorySerializer < ActiveModel::Serializer
 
   attributes :id,
-             :nombre
+             :nombre,
+             :items_count
+
+  def items_count
+    object.items.count
+  end
 
 end
