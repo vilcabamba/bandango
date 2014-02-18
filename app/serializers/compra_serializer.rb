@@ -19,4 +19,6 @@ class CompraSerializer < OrderableSerializer
              :fecha_emision_retencion,
              :created_at
 
+  has_one :sustento_comprobante, embed: :ids, include: true
+
 end
