@@ -22,6 +22,10 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
       @get("orderItems").addObject orderItem
 
 # summary operations
+  numeroDeSerie: (->
+    "#{@get("numeroSerieEstablecimiento")} - #{@get("numeroSeriePuntoEmision")} - #{@get("numeroSerieComprobante")}"
+  ).property("numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante")
+
   ivaZeroReduceCallback: (prev, orderItem) ->
     ivaZero = if @get("isVenta")
        orderItem.get("item.ivaZeroVenta")

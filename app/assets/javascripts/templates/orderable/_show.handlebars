@@ -1,0 +1,20 @@
+<section class="form_section">
+  <div class="section_header">
+    Cliente
+  </div>
+  <div class="section_body">
+    <div class="has_margin">
+      {{#with cliente}}
+        {{partial "clientes/show"}}
+      {{/with}}
+    </div>
+  </div>
+</section>
+<section class="form_section">
+  <div class="section_header">
+    Ítems
+  </div>
+  <div class="section_body">
+    {{view Bandango.OrderItemsTableView}}
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<ol class="breadcrumb">
+  <li>
+    {{link-to "Compras" "compras.index"}}
+  </li>
+  <li class="active">{{numeroDeSerie}}</li>
+</ol>
+
+<section class="form_section">
+  <div class="section_header">
+    {{comprobante.tipo}}
+  </div>
+  <div class="section_body">
+    <div class="row">
+      <div class="col-xs-3">
+        <span class="stronger">Sustento Tributario</span>
+      </div>
+      <div class="col-xs-9">
+        {{sustentoComprobante.tipo}}
+      </div>
+      <div class="col-xs-3">
+        <span class="stronger">Número de serie</span>
+      </div>
+      <div class="col-xs-9">
+        {{numeroDeSerie}}
+      </div>
+      <div class="col-xs-3">
+        <span class="stronger">Fecha de registro</span>
+      </div>
+      <div class="col-xs-9">
+        {{humanize_time fechaRegistro}}
+      </div>
+      <div class="col-xs-3">
+        <span class="stronger">Fecha de emisión</span>
+      </div>
+      <div class="col-xs-9">
+        {{humanize_time fechaEmision}}
+      </div>
+      <div class="col-xs-3">
+        <span class="stronger">Nº de autorización</span>
+      </div>
+      <div class="col-xs-9">
+        {{autorizacionComprobante}}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{partial "orderable/show"}}

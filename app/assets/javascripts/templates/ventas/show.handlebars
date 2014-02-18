@@ -7,26 +7,7 @@
   </li>
 </ol>
 
-<section class="form_section">
-  <div class="section_header">
-    Cliente
-  </div>
-  <div class="section_body">
-    <div class="has_margin">
-      {{#with cliente}}
-        {{partial "clientes/show"}}
-      {{/with}}
-    </div>
-  </div>
-</section>
-<section class="form_section">
-  <div class="section_header">
-    Ítems
-  </div>
-  <div class="section_body">
-    {{view Bandango.OrderItemsTableView}}
-  </div>
-</section>
+{{partial "orderable/show"}}
 
 <div class="actions">
   {{link-to "Editar" "ventas.edit" model class="btn btn-default"}}
