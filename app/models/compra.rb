@@ -11,7 +11,7 @@
 #  numero_serie_punto_emision                          :string(255)      not null
 #  numero_serie_comprobante                            :string(255)      not null
 #  fecha_emision                                       :date             not null
-#  autorizacion_comprobante                            :integer          not null
+#  autorizacion_comprobante                            :string(255)      not null
 #  retencion_iva_bienes                                :float            default(0.0), not null
 #  retencion_iva_servicios                             :float            default(0.0), not null
 #  retencion_iva_cien                                  :float            default(0.0), not null
@@ -27,7 +27,7 @@
 #  numero_serie_comprobante_modificado_establecimiento :string(255)
 #  numero_serie_comprobante_modificado_punto_emision   :string(255)
 #  numero_serie_comprobante_modificado                 :string(255)
-#  numero_autorizacion_comprobante_modificado          :integer
+#  numero_autorizacion_comprobante_modificado          :string(255)
 #  created_at                                          :datetime
 #  updated_at                                          :datetime
 #

@@ -2,11 +2,17 @@
 #
 # Table name: ventas
 #
-#  id             :integer          not null, primary key
-#  cliente_id     :integer          not null
-#  comprobante_id :integer          not null
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id                           :integer          not null, primary key
+#  cliente_id                   :integer          not null
+#  comprobante_id               :integer          not null
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  numero_serie_establecimiento :string(255)
+#  numero_serie_punto_emision   :string(255)
+#  numero_serie_comprobante     :string(255)
+#  fecha_emision                :date
+#  fecha_registro               :date
+#  autorizacion_comprobante     :string(255)
 #
 
 class Venta < ActiveRecord::Base

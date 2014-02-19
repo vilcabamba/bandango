@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216214522) do
+ActiveRecord::Schema.define(version: 20140219205039) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -184,10 +184,16 @@ ActiveRecord::Schema.define(version: 20140216214522) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "ventas", force: true do |t|
-    t.integer  "cliente_id",     null: false
-    t.integer  "comprobante_id", null: false
+    t.integer  "cliente_id",                   null: false
+    t.integer  "comprobante_id",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "numero_serie_establecimiento"
+    t.string   "numero_serie_punto_emision"
+    t.string   "numero_serie_comprobante"
+    t.date     "fecha_emision"
+    t.date     "fecha_registro"
+    t.string   "autorizacion_comprobante"
   end
 
   add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree
