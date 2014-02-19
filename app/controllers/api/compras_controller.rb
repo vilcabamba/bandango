@@ -1,7 +1,5 @@
 module Api
-  class ComprasController < ApiController
-
-    before_action :require_login
+  class ComprasController < OrderableController
     respond_to :json
 
     def index
@@ -18,7 +16,8 @@ module Api
     end
 
     def update
-      respond_with Compra.update(params[:id], compra_params)
+      compra = Compra.update(params[:id], compra_params)
+      render json: compra
     end
 
     private
@@ -33,7 +32,8 @@ module Api
                                      :numero_serie_comprobante,
                                      :numero_serie_establecimiento,
                                      :numero_serie_punto_emision,
-                                     order_items_params: [:cantidad, :item_id]
+                                     order_items_params: order_items_params,
+                                     retenciones_params: retenciones_params
     end
   end
 end
