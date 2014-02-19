@@ -8,17 +8,7 @@ Bandango.VentaFormView = Bandango.OrderableFormView.extend
 
 # venta
   failureSavingVenta: (response) ->
-    if @get("model.isNew")
-      # allocate new venta
-      store = @get("controller.store")
-      model = store.createRecord "venta",
-        cliente: @get("model.cliente")
-        comprobante: @get("model.comprobante")
-        orderItems: @get("model.orderItems.content")
-      @get("model").deleteRecord()
-      @set "model", model
-    else
-      @get("model").rollback()
+    @failureSaving "venta"
     @failureCallback response
 
   ventaSaved: (venta) ->

@@ -1,5 +1,11 @@
 Bandango.OrderItemsMixin = Ember.Mixin.create
 
+# methods
+  rollbackAssociations: ->
+    for orderItem in @get("orderItems.content").filterBy("isDirty")
+      orderItem.rollback()
+    @get("cliente").rollback() if @get("cliente.isDirty")
+
 # isVenta
   isVenta: (->
     @constructor is Bandango.Venta

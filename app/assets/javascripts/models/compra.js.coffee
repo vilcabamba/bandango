@@ -21,8 +21,3 @@ Bandango.Compra = DS.Model.extend Bandango.OrderItemsMixin, Bandango.Retenciones
   retenciones:             DS.hasMany("retencion")
   orderItems:              DS.hasMany("orderItem")
   cliente:                 DS.belongsTo("cliente")
-
-  rollbackAssociations: ->
-    for orderItem in @get("orderItems.content").filterBy("isDirty")
-      orderItem.rollback()
-    @get("cliente").rollback() if @get("cliente.isDirty")
