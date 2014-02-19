@@ -8,7 +8,6 @@ Bandango.RetencionBaseMixin = Ember.Mixin.create
   ).property()
 
   iva: (->
-    console.log "iva"
     @get("parent.ivaTwelve") * (@get("tarifaIva") / 100)
   ).property("tarifaIva", "parent.ivaTwelve")
 

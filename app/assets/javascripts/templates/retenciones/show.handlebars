@@ -1,4 +1,6 @@
-<div class="bandango_small_divider"></div>
+{{#if view.parentView.includeForm}}
+  <div class="bandango_small_divider"></div>
+{{/if}}
 {{#with view.model}}
   <div class="retencion_title">
     <span class="retencion_concepto">{{conceptoRetencionFuente.to_s}}</span>

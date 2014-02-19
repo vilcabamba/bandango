@@ -7,4 +7,5 @@ Bandango.RetencionSerializer = DS.ActiveModelSerializer.extend
         numero_serie_establecimiento: retencion.get("numeroSerieEstablecimiento")
         numero_serie_punto_emision: retencion.get("numeroSeriePuntoEmision")
         numero_serie_secuencial: retencion.get("numeroSerieSecuencial")
+        fecha_emision: retencion.get("fechaEmision")
       }

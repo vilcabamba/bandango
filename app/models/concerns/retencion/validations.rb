@@ -3,7 +3,6 @@ class Retencion < ActiveRecord::Base
     extend ActiveSupport::Concern
 
     included do
-      validates :order_id,                     presence: true
       validates :concepto_retencion_fuente_id, presence: true
       validates :fecha_emision,                presence: true
     end
