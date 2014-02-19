@@ -41,7 +41,7 @@ class Compra < ActiveRecord::Base
   belongs_to :comprobante
   belongs_to :sustento_comprobante
   belongs_to :comprobante_modificado, class_name: Comprobante, foreign_key: :comprobante_modificado_id
-  has_many :order_items, foreign_key: :order_id
+  has_many :order_items, as: :order, dependent: :destroy
   has_many :items, through: :order_items
   has_many :retenciones, foreign_key: :order_id
 end

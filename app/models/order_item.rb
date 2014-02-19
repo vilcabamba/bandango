@@ -10,6 +10,7 @@
 #  cached_item_nombre :string(255)      not null
 #  created_at         :datetime
 #  updated_at         :datetime
+#  order_type         :string(255)      not null
 #
 
 class OrderItem < ActiveRecord::Base
@@ -18,7 +19,6 @@ class OrderItem < ActiveRecord::Base
 
 # relationships
   belongs_to :item
-  belongs_to :venta,  foreign_key: :order_id
-  belongs_to :compra, foreign_key: :order_id
+  belongs_to :order, polymorphic: true
 
 end

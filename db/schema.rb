@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219210611) do
+ActiveRecord::Schema.define(version: 20140219212252) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -131,9 +131,11 @@ ActiveRecord::Schema.define(version: 20140219210611) do
     t.string   "cached_item_nombre", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "order_type",         null: false
   end
 
   add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
+  add_index "order_items", ["order_id", "order_type"], name: "index_order_items_on_order_id_and_order_type", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "retenciones", force: true do |t|
