@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219205039) do
+ActiveRecord::Schema.define(version: 20140219210611) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20140219205039) do
     t.string   "imagen"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "autorizacion_comprobantes"
   end
 
   add_index "emisores", ["ruc"], name: "index_emisores_on_ruc", unique: true, using: :btree
