@@ -3,12 +3,12 @@ module Api
     respond_to :json
 
     def index
-      @compras = Compra.includes(:cliente, :comprobante, :retenciones, :order_items => [:item]).page(params[:page])
+      @compras = Compra.includes(:cliente, :comprobante, :sustento_comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item]).page(params[:page])
       render json: @compras, meta: { total_pages: @compras.total_pages, page: @compras.current_page }
     end
 
     def show
-      respond_with Compra.includes(:order_items => [:item]).cached_find(params[:id])
+      respond_with Compra.includes(:cliente, :comprobante, :sustento_comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item]).cached_find(params[:id])
     end
 
     def create
