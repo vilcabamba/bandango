@@ -27,7 +27,14 @@ module Api
     def venta_params
       params.require(:venta).permit :cliente_id,
                                     :comprobante_id,
-                                    order_items_params: [:cantidad, :item_id]
+                                    order_items_params: [:cantidad, :item_id],
+                                    retenciones_params: [
+                                      :numero_autorizacion,
+                                      :numero_serie_secuencial,
+                                      :numero_serie_punto_emision,
+                                      :concepto_retencion_fuente_id,
+                                      :numero_serie_establecimiento
+                                    ]
     end
   end
 end

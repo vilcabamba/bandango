@@ -17,4 +17,11 @@ module Orderable
       OrderItem.new order_item.merge(tipo: self)
     end
   end
+
+  def retenciones_params=(retenciones_params)
+    retenciones.destroy_all
+    self.retenciones = Array(retenciones_params).map do |retencion|
+      Retencion.new retencion
+    end
+  end
 end
