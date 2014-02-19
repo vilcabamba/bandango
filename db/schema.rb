@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219213338) do
+ActiveRecord::Schema.define(version: 20140219221304) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -142,10 +142,6 @@ ActiveRecord::Schema.define(version: 20140219213338) do
     t.integer  "order_id",                                            null: false
     t.integer  "concepto_retencion_fuente_id"
     t.date     "fecha_emision",                default: '2014-01-20', null: false
-    t.boolean  "iva"
-    t.integer  "tarifa_iva"
-    t.boolean  "ice"
-    t.integer  "tarifa_ice"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "numero_autorizacion"

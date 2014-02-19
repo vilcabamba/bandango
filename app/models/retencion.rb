@@ -6,10 +6,6 @@
 #  order_id                     :integer          not null
 #  concepto_retencion_fuente_id :integer
 #  fecha_emision                :date             default(Mon, 20 Jan 2014), not null
-#  iva                          :boolean
-#  tarifa_iva                   :integer
-#  ice                          :boolean
-#  tarifa_ice                   :integer
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  numero_autorizacion          :string(255)

@@ -7,18 +7,19 @@ Bandango.RetencionBaseMixin = Ember.Mixin.create
     "#{@get("numeroSerieEstablecimiento")}-#{@get("numeroSeriePuntoEmision")}-#{@get("numeroSerieSecuencial")}"
   ).property()
 
-  setIva: (->
-    iva = @get("parent.ivaTwelve") * (@get("tarifaIva") / 100)
-    @set "iva", iva
-  ).observes("tarifaIva", "parent.ivaTwelve")
+  iva: (->
+    console.log "iva"
+    @get("parent.ivaTwelve") * (@get("tarifaIva") / 100)
+  ).property("tarifaIva", "parent.ivaTwelve")
 
-  setIce: (->
-    ice = @get("parent.ice") * (@get("tarifaIce") / 100)
-    @set "ice", ice
-  ).observes("tarifaIce", "parent.ice")
+  ice: (->
+    @get("parent.ice") * (@get("tarifaIce") / 100)
+  ).property("tarifaIce", "parent.ice")
 
-  setTarifas: (->
-    porcentaje = @get("conceptoRetencionFuente.porcentaje")
-    @set "tarifaIva", porcentaje
-    @set "tarifaIce", porcentaje
-  ).observes("conceptoRetencionFuente")
+  tarifaIva: (->
+    @get("conceptoRetencionFuente.porcentaje")
+  ).property("conceptoRetencionFuente.porcentaje")
+
+  tarifaIce: (->
+    @get("tarifaIva")
+  ).property("tarifaIva")
