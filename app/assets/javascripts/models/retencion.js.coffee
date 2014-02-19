@@ -11,3 +11,4 @@ Bandango.Retencion = DS.Model.extend Bandango.RetencionBaseMixin,
 
   conceptoRetencionFuente:    DS.belongsTo("conceptoRetencionFuente")
   compra:                     DS.belongsTo("compra")
+  venta:                      DS.belongsTo("venta")
