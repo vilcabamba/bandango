@@ -3,6 +3,10 @@ Bandango.RetencionBaseMixin = Ember.Mixin.create
     @get("compra") or @get("venta")
   ).property("compra", "venta")
 
+  numeroDeSerie: (->
+    "#{@get("numeroSerieEstablecimiento")}-#{@get("numeroSeriePuntoEmision")}-#{@get("numeroSerieSecuencial")}"
+  ).property()
+
   setIva: (->
     iva = @get("parent.ivaTwelve") * (@get("tarifaIva") / 100)
     @set "iva", iva
