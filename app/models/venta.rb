@@ -31,6 +31,6 @@ class Venta < ActiveRecord::Base
   belongs_to :comprobante
   has_many :order_items, as: :order, dependent: :destroy
   has_many :items, through: :order_items
-  has_many :retenciones, foreign_key: :order_id
+  has_many :retenciones, as: :order
 
 end
