@@ -10,6 +10,12 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
     @constructor is Bandango.Venta
   ).property()
 
+# retenciones
+  persistedRetenciones: (->
+    Ember.debug "computing persistedRetenciones"
+    @get("retenciones").rejectBy "inForm"
+  ).property("retenciones.@each")
+
 # orderItem relationships
   orderItemsIds: (->
     Ember.debug "computing orderItemsIds"
