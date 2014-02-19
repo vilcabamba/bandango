@@ -15,29 +15,5 @@
     {{partial "compras/comprobante_form"}}
   </div>
 </section>
-<section class="form_section">
-  <div class="section_header">
-    Proveedor
-    {{view Bandango.SpinnerView size="mini" show=view.isFetchingCliente}}
-  </div>
-  <div class="section_body">
-    {{partial "clientes/form"}}
-  </div>
-</section>
-<section class="form_section">
-  <div class="section_header">
-    Ítems
-  </div>
-  <div class="section_body">
-    {{view Bandango.OrderItemsTableView}}
-  </div>
-</section>
-<section class="form_section">
-  <div class="section_header">
-    Retenciones
-  </div>
-  <div class="section_body">
-    {{view Bandango.RetencionFormView}}
-    {{view Bandango.RetencionesTableView}}
-  </div>
-</section>
+
+{{partial "orderable/form"}}
