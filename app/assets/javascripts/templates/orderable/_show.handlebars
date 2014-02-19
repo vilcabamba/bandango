@@ -1,6 +1,10 @@
 <section class="form_section">
   <div class="section_header">
-    Cliente
+    {{#if isVenta}}
+      Cliente
+    {{else}}
+      Proveedor
+    {{/if}}
   </div>
   <div class="section_body">
     <div class="has_margin">
