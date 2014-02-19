@@ -16,15 +16,13 @@
 #
 
 class Venta < ActiveRecord::Base
+  include Sellable
   include VentaInfo
   include Orderable
   include Validations
 
 # default scope
   default_scope { order("id DESC") }
-
-# table name
-  self.table_name = :ventas
 
 # relationships
   belongs_to :cliente
