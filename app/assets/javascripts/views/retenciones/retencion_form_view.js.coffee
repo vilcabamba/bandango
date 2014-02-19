@@ -15,9 +15,11 @@ Bandango.RetencionFormView = Bandango.ModelBackedView.extend Bandango.RetencionF
     @set "conceptoRetencionFuente", conceptoRetencionFuente
 
   model: (->
-    compra = @get("controller.model")
+    model = @get("controller.model")
     store = @get("controller.store")
-    store.createRecord("retencion", compra: compra, inForm: true)
+    properties = { inForm: true }
+    properties[model.get("modelName").decamelize()] = model
+    store.createRecord "retencion", properties
   ).property("controller.model")
 
   actions:
