@@ -1,5 +1,4 @@
 Bandango.OrderItemsMixin = Ember.Mixin.create
-
 # methods
   rollbackAssociations: ->
     for orderItem in @get("orderItems.content").filterBy("isDirty")
@@ -32,42 +31,30 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
     "#{@get("numeroSerieEstablecimiento")} - #{@get("numeroSeriePuntoEmision")} - #{@get("numeroSerieComprobante")}"
   ).property("numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante")
 
-  ivaZeroReduceCallback: (prev, orderItem) ->
-    ivaZero = if @get("isVenta")
-       orderItem.get("item.ivaZeroVenta")
-    else
-      orderItem.get("item.ivaZeroCompra")
-    prev + orderItem.get("cantidad") * ivaZero
   ivaZero: (->
-    @get("orderItems.content").reduce $.proxy(@ivaZeroReduceCallback, @), 0
+    @get("orderItems.content").reduce (prev, orderItem) =>
+      ivaZero = orderItem.get "item.ivaZero#{@get("modelName")}"
+      prev + orderItem.get("cantidad") * ivaZero
+    , 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
 
-  ivaTwelveReduceCallback: (prev, orderItem) ->
-    ivaTwelve = if @get("isVenta")
-      orderItem.get("item.ivaTwelveVenta")
-    else
-      orderItem.get("item.ivaTwelveCompra")
-    prev + orderItem.get("cantidad") * ivaTwelve
   ivaTwelve: (->
-    @get("orderItems.content").reduce $.proxy(@ivaTwelveReduceCallback, @), 0
+    @get("orderItems.content").reduce (prev, orderItem) =>
+      ivaTwelve = orderItem.get "item.ivaTwelve#{@get("modelName")}"
+      prev + orderItem.get("cantidad") * ivaTwelve
+    , 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
 
-  totalPriceReduceCallback: (prev, orderItem) ->
-    totalPrice = if @get("isVenta")
-      orderItem.get("item.totalPriceVenta")
-    else
-      orderItem.get("item.totalPriceCompra")
-    prev + orderItem.get("cantidad") * totalPrice
   totalPrice: (->
-    @get("orderItems.content").reduce $.proxy(@totalPriceReduceCallback, @), 0
+    @get("orderItems.content").reduce (prev, orderItem) =>
+      totalPrice = orderItem.get "item.totalPrice#{@get("modelName")}"
+      prev + orderItem.get("cantidad") * totalPrice
+    , 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
 
-  iceReduceCallback: (prev, orderItem) ->
-    ice = if @get("isVenta")
-      orderItem.get("item.iceVenta")
-    else
-      orderItem.get("item.iceCompra")
-    prev + orderItem.get("cantidad") * ice
   ice: (->
-    @get("orderItems.content").reduce $.proxy(@iceReduceCallback, @), 0
+    @get("orderItems.content").reduce (prev, orderItem) =>
+      ice = orderItem.get "item.ice#{@get("modelName")}"
+      prev + orderItem.get("cantidad") * ice
+    , 0
   ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
