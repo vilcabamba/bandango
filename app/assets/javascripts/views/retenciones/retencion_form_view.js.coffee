@@ -1,14 +1,23 @@
 Bandango.RetencionFormView = Bandango.ModelBackedView.extend Bandango.RetencionFuenteOnFormMixin,
   tagName: "div"
   templateName: "retenciones/form"
-  compraBinding: "controller.model"
+  controllerModelBinding: "controller.model"
   attributes: [ "numeroAutorizacion",
                 "numeroSerieEstablecimiento",
                 "numeroSeriePuntoEmision",
                 "numeroSerieSecuencial",
                 "fechaEmision",
                 "conceptoRetencionFuente",
-                "compra" ]
+                "compra",
+                "venta" ]
+
+  compra: (->
+    @get("controllerModel") unless @get("controllerModel.isVenta")
+  ).property("controllerModel")
+
+  venta: (->
+    @get("controllerModel") if @get("controllerModel.isVenta")
+  ).property("controllerModel")
 
   newConceptoRetencion: (conceptoRetencionFuente) ->
     @_super conceptoRetencionFuente
