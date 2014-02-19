@@ -4,13 +4,18 @@
   </div>
   <div class="info">
     <div>
-      <strong>{{comprobante.tipo}}</strong>
+      <span class="stronger">{{comprobante.tipo}}</span>
+      {{numeroDeSerie}}
+    </div>
+    <div class="stronger">
       {{cliente.nombres}}
     </div>
     <div>
       {{cliente.tipoId}}:
       {{cliente.identificacion}}
     </div>
-    <div>{{humanize_time createdAt}}</div>
+    <div class="before_chevron">
+      {{humanize_time createdAt}}
+    </div>
   </div>
 {{/with}}
