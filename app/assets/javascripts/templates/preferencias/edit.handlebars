@@ -38,6 +38,14 @@
         {{view Ember.TextField value=view.direccionEstablecimiento class="form-control" required="true" name="direccion_establecimiento"}}
       </div>
     </div>
+    <div {{bind-attr class=":form-group :row view.errors.autorizacionComprobantes"}}>
+      <div class="col-xs-3">
+        <label for="autorizacion_comprobantes">Número autorización comprobantes</label>
+      </div>
+      <div class="col-xs-9">
+        {{view Ember.TextField value=view.autorizacionComprobantes class="form-control" required="true" name="autorizacion_comprobantes"}}
+      </div>
+    </div>
     <div {{bind-attr class=":form-group :row view.errors.codigoEstablecimiento"}}>
       <div class="col-xs-3">
         <label for="codigo_establecimiento">Código establecimiento</label>

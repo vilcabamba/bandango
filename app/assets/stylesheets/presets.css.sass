@@ -1,3 +1,5 @@
+$default_border_bottom: 1px solid #eee
+
 .align_center
   text-align: center
 
@@ -6,7 +8,7 @@
 
 .align_right
   text-align: right
-  
+
 .actions
   text-align: right
 
@@ -44,7 +46,12 @@
 .bandango_divider
   padding: 0.25em 0
   margin: 0.25em 0
-  border-bottom: 1px solid #eee
+  border-bottom: $default_border_bottom
+
+.bandango_small_divider
+  padding: 0.25em 0
+  margin: 0.25em 3em
+  border-bottom: $default_border_bottom
 
 .cursor_pointer
   cursor: pointer

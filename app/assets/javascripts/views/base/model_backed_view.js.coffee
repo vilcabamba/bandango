@@ -30,6 +30,9 @@ Bandango.ModelBackedView = Ember.View.extend
   getFormData: ->
     @getProperties @get("attributes")
 
+  getFormDataFor: (modelName) ->
+    @getProperties @get("attributesFor#{modelName.capitalize()}")
+
   defineComputedPropertiesForAttributes: ->
     if bindTo = @get("bindAttributesTo")
       for attribute in @get("attributes")

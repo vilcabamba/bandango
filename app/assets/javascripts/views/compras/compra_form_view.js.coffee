@@ -1,22 +1,19 @@
-Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin, Bandango.RetencionFuenteOnFormMixin,
+Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin,
+  attributesForCompra: ["numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante", "fechaEmision", "fechaRegistro", "autorizacionComprobante"]
+
   clienteSaved: ->
     @saveCompra()
 
 # compra
   failureSavingCompra: (response) ->
-    @get("model").rollback()
+    @failureSaving "compra"
     @failureCallback response
 
   compraSaved: (compra) ->
-    @modelSaved(compra)
+    @modelSaved()
     @get("controller").transitionToRoute "compras.show", compra.get("id")
 
   saveCompra: ->
-    @get("model").save().then $.proxy(@compraSaved, @), $.proxy(@failureSavingCompra, @)
-
-# events
-  submit: ->
-    @emptyErrors()
-    @saveCliente()
-    @set "submitting", true
-    false
+    compra = @get("model")
+    compra.setProperties @getFormDataFor("compra")
+    compra.save().then $.proxy(@compraSaved, @), $.proxy(@failureSavingCompra, @)

@@ -4,10 +4,9 @@ Bandango.Emisor = DS.Model.extend
   nombreComercial:                       DS.attr()
   direccionMatriz:                       DS.attr()
   direccionEstablecimiento:              DS.attr()
+  autorizacionComprobantes:              DS.attr()
   codigoEstablecimiento:                 DS.attr()
   codigoPuntoEmision:                    DS.attr()
   contribuyenteEspecialNumeroResolucion: DS.attr()
-  obligadoLlevarContabilidad:           DS.attr()
+  obligadoLlevarContabilidad:            DS.attr()
   imagenUrl:                             DS.attr()
-
-Ember.Inflector.inflector.irregular("emisor", "emisores")

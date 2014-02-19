@@ -44,6 +44,9 @@ gem "puma"
 gem "kaminari"
 gem "exception_notification"
 gem "rb-fsevent"
+
+gem "foreman"
+
 group :test, :development do
   gem "factory_girl_rails"
   gem "capybara"

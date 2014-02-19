@@ -1,11 +1,11 @@
 module Api
   class VentasController < ApiController
-  
+
     before_action :require_login
     respond_to :json
 
     def index
-      @ventas = Venta.includes(:cliente, :comprobante, :order_items => [:item]).page(params[:page])
+      @ventas = Venta.includes(:cliente, :comprobante, :retenciones, :order_items => [:item]).page(params[:page])
       render json: @ventas, meta: { total_pages: @ventas.total_pages, page: @ventas.current_page }
     end
 
@@ -14,11 +14,11 @@ module Api
     end
 
     def create
-      respond_with :api, Venta.create_with_order_items(venta_params, order_items_venta_params)
+      respond_with :api, Venta.create(venta_params)
     end
 
     def update
-      venta = Venta.update_with_order_items(params[:id], venta_params, order_items_venta_params)
+      venta = Venta.update(params[:id], venta_params)
       render json: venta
     end
 
@@ -26,11 +26,15 @@ module Api
 
     def venta_params
       params.require(:venta).permit :cliente_id,
-                                    :comprobante_id
+                                    :comprobante_id,
+                                    order_items_params: [:cantidad, :item_id],
+                                    retenciones_params: [
+                                      :numero_autorizacion,
+                                      :numero_serie_secuencial,
+                                      :numero_serie_punto_emision,
+                                      :concepto_retencion_fuente_id,
+                                      :numero_serie_establecimiento
+                                    ]
     end
-    def order_items_venta_params
-      params.require(:venta).permit :order_items => [:cantidad, :item_id]
-    end
-    
   end
 end

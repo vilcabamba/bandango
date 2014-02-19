@@ -1,5 +1,5 @@
 Bandango.PreferenciasEditView = Bandango.ModelBackedView.extend
-  attributes: ["ruc", "razonSocial", "nombreComercial", "direccionMatriz", "direccionEstablecimiento", "codigoEstablecimiento", "codigoPuntoEmision", "contribuyenteEspecialNumeroResolucion", "obligadoLlevarContabilidad", "imagenUrl"]
+  attributes: ["ruc", "razonSocial", "nombreComercial", "direccionMatriz", "direccionEstablecimiento", "autorizacionComprobantes", "codigoEstablecimiento", "codigoPuntoEmision", "contribuyenteEspecialNumeroResolucion", "obligadoLlevarContabilidad", "imagenUrl"]
   modelBinding: "controller.model"
 
   success: ->

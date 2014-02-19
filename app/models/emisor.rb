@@ -16,10 +16,12 @@
 #  imagen                                   :string(255)
 #  created_at                               :datetime
 #  updated_at                               :datetime
+#  autorizacion_comprobantes                :string(255)
 #
 
 class Emisor < ActiveRecord::Base
   include Single
+  include Emittable
   include Cacheable
   include Validations
   include ImagenUploadable

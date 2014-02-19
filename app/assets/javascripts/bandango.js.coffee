@@ -1,4 +1,7 @@
+#= require ./model
+#= require ./inflections
 #= require ./store
+#= require_tree ./serializers
 #= require_tree ./mixins
 #= require_tree ./helpers
 #= require_tree ./models

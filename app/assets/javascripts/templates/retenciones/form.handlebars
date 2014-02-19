@@ -1,0 +1,51 @@
+<div class="form-group">
+  <select class="form-control retencion_fuente_select">
+    {{#each view.conceptosRetencionFuente}}
+      <option value="{{unbound id}}">
+        {{unbound codigo}} - {{unbound concepto}}
+        {{unbound porcentajeWithParenthesis}}
+      </option>
+    {{/each}}
+  </select>
+</div>
+
+<div class="form-group row">
+  <div class="col-xs-4">
+    <label for="autorizacion_retencion">Número autorización de comprobante retención</label>
+  </div>
+  <div class="col-xs-8">
+    {{view Ember.TextField value=view.numeroAutorizacion class="form-control" name="autorizacion_retencion" placeholder="Número de autorización"}}
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-xs-4">
+    <label for="retencion_establecimiento">Número de serie del comprobante de retención</label>
+  </div>
+  <div class="col-xs-8 form-inline form_numero_serie_comprobante_retencion align_right">
+    <div class="form-group">
+      {{view Ember.TextField value=view.numeroSerieEstablecimiento class="form-control" placeholder="Establecimiento" name="retencion_establecimiento"}}
+    </div>
+    -
+    <div class="form-group">
+      {{view Ember.TextField value=view.numeroSeriePuntoEmision class="form-control" placeholder="Punto emisión"}}
+    </div>
+    -
+    <div class="form-group">
+      {{view Ember.TextField value=view.numeroSerieSecuencial class="form-control" placeholder="Número secuencial"}}
+    </div>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-xs-4">
+    <label for="fecha_retencion">Fecha de emisión del comprobante de retención</label>
+  </div>
+  <div class="col-xs-8">
+    {{view Bandango.DateField value=view.fechaEmision class="form-control" placeholder="DD/MM/AAAA" name="fecha_retencion"}}
+  </div>
+</div>
+<div class="form-group row">
+  {{partial "retenciones/taxes"}}
+  <div class="col-xs-4 actions">
+    <button class="btn btn-default" {{action addRetencion target=view}}>Agregar</button>
+  </div>
+</div>

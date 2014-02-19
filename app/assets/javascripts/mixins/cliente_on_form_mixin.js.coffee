@@ -1,6 +1,6 @@
 Bandango.ClienteOnFormMixin = Ember.Mixin.create
   tiposIds: ["RUC", "Cédula", "Pasaporte - otro"]
-  attributes: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
+  attributesForCliente: ["tipoId", "identificacion", "nombres", "direccion", "telefono", "email"]
 
   queryForClienteOnIdentificacionChange: false
 
@@ -50,7 +50,7 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
     if @get("queryForClienteOnIdentificacionChange")
       @$(".identificacion_input").on("keyup" , $.proxy(@identificacionKeyUpped, @))
                                  .on("change", $.proxy(@identificacionChanged, @))
-  
+
   willDestroyElement: ->
     @_super()
     if @get("queryForClienteOnIdentificacionChange")

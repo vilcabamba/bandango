@@ -12,7 +12,7 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
 
   submit: ->
     @emptyErrors()
-    data = @getFormData()
+    data = @getFormDataFor("cliente")
     cliente = @get("model")
     cliente.setProperties data
     cliente.save().then $.proxy(@successEditing, @), $.proxy(@failureEditing, @)

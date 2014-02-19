@@ -1,11 +1,12 @@
-Bandango.CompraBaseRoute = Bandango.AuthenticationRequiredRoute.extend
+#= require_tree ../orderable
+
+Bandango.CompraBaseRoute = Bandango.OrderableBaseRoute.extend
   beforeModel: ->
-    @_super()
+    orderablePromises = @_super()
     store = @get("store")
     filters = [
-      Bandango.comprobantesHelper.loadComprobantes(store),
-      Bandango.sustentoTributarioComprobantesHelper.loadComprobantes(store),
-      Bandango.conceptoRetencionFuenteHelper.loadComprobantes(store)
+      orderablePromises,
+      Bandango.sustentoTributarioComprobantesHelper.loadComprobantes(store)
     ]
     Ember.RSVP.all filters
 

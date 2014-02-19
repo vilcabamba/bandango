@@ -3,9 +3,11 @@ Bandango.RetencionFuenteOnFormMixin = Ember.Mixin.create
     Bandango.conceptoRetencionFuenteHelper.comprobantes
   ).property()
 
+  newConceptoRetencion: (conceptoRetencionFuente) ->
+    @set "model.conceptoRetencionFuente", conceptoRetencionFuente
+
   conceptoSelectChanged: (e) ->
-    @get("controller.store").find("conceptoRetencionFuente", e.target.value).then (retencionFuente) =>
-      @set "model.conceptoRetencionFuente", retencionFuente
+    @get("controller.store").find("conceptoRetencionFuente", e.target.value).then $.proxy(@newConceptoRetencion, @)
 
   didInsertElement: ->
     @_super()

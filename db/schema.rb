@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121040646) do
+ActiveRecord::Schema.define(version: 20140219221304) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.string   "numero_serie_punto_emision",                                        null: false
     t.string   "numero_serie_comprobante",                                          null: false
     t.date     "fecha_emision",                                                     null: false
-    t.integer  "autorizacion_comprobante",                                          null: false
+    t.string   "autorizacion_comprobante",                                          null: false
     t.float    "retencion_iva_bienes",                                default: 0.0, null: false
     t.float    "retencion_iva_servicios",                             default: 0.0, null: false
     t.float    "retencion_iva_cien",                                  default: 0.0, null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.string   "numero_serie_comprobante_modificado_establecimiento"
     t.string   "numero_serie_comprobante_modificado_punto_emision"
     t.string   "numero_serie_comprobante_modificado"
-    t.integer  "numero_autorizacion_comprobante_modificado"
+    t.string   "numero_autorizacion_comprobante_modificado"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,14 +76,15 @@ ActiveRecord::Schema.define(version: 20140121040646) do
 
   add_index "comprobantes", ["codigo"], name: "index_comprobantes_on_codigo", unique: true, using: :btree
 
-  create_table "concepto_retencion_fuentes", force: true do |t|
+  create_table "conceptos_retencion_fuente", force: true do |t|
     t.string   "codigo",     null: false
     t.string   "concepto",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "porcentaje"
   end
 
-  add_index "concepto_retencion_fuentes", ["codigo"], name: "index_concepto_retencion_fuentes_on_codigo", unique: true, using: :btree
+  add_index "conceptos_retencion_fuente", ["codigo"], name: "index_conceptos_retencion_fuente_on_codigo", unique: true, using: :btree
 
   create_table "emisores", force: true do |t|
     t.string   "ruc",                                      null: false
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.string   "imagen"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "autorizacion_comprobantes"
   end
 
   add_index "emisores", ["ruc"], name: "index_emisores_on_ruc", unique: true, using: :btree
@@ -129,25 +131,28 @@ ActiveRecord::Schema.define(version: 20140121040646) do
     t.string   "cached_item_nombre", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "order_type",         null: false
   end
 
   add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
+  add_index "order_items", ["order_id", "order_type"], name: "index_order_items_on_order_id_and_order_type", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "retenciones", force: true do |t|
     t.integer  "order_id",                                            null: false
     t.integer  "concepto_retencion_fuente_id"
     t.date     "fecha_emision",                default: '2014-01-20', null: false
-    t.string   "numero_retencion",                                    null: false
-    t.boolean  "iva"
-    t.integer  "tarifa_iva"
-    t.boolean  "ice"
-    t.integer  "tarifa_ice"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "numero_autorizacion"
+    t.string   "numero_serie_establecimiento"
+    t.string   "numero_serie_punto_emision"
+    t.string   "numero_serie_secuencial"
+    t.string   "order_type",                                          null: false
   end
 
   add_index "retenciones", ["concepto_retencion_fuente_id"], name: "index_retenciones_on_concepto_retencion_fuente_id", using: :btree
+  add_index "retenciones", ["order_id", "order_type"], name: "index_retenciones_on_order_id_and_order_type", using: :btree
   add_index "retenciones", ["order_id"], name: "index_retenciones_on_order_id", using: :btree
 
   create_table "sani_requests", force: true do |t|
@@ -180,10 +185,16 @@ ActiveRecord::Schema.define(version: 20140121040646) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "ventas", force: true do |t|
-    t.integer  "cliente_id",     null: false
-    t.integer  "comprobante_id", null: false
+    t.integer  "cliente_id",                   null: false
+    t.integer  "comprobante_id",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "numero_serie_establecimiento"
+    t.string   "numero_serie_punto_emision"
+    t.string   "numero_serie_comprobante"
+    t.date     "fecha_emision"
+    t.date     "fecha_registro"
+    t.string   "autorizacion_comprobante"
   end
 
   add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree

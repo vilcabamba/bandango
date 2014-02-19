@@ -1,6 +1,6 @@
 {{#with view.model}}
   <td class="cantidad">
-    {{#if view.showEdit}}
+    {{#if view.includeForm}}
       {{view Bandango.NumberField class="align_right small_padding form-control minimal_input" value=cantidad}}
     {{else}}
       {{cantidad}}
@@ -8,12 +8,12 @@
   </td>
   <td class="descripcion">
     {{descripcion}}
-    {{#if view.showEdit}}
+    {{#if view.includeForm}}
       <span class="glyphicon pull-right glyphicon-remove"></span>
     {{/if}}
   </td>
   <td class="valor_unitario">
-    {{#if view.parentView.venta}}
+    {{#if view.parentView.parentView.model.isVenta}}
       {{number_to_currency valorUnitarioVenta}}
     {{else}}
       {{number_to_currency valorUnitarioCompra}}

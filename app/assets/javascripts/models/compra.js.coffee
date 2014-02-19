@@ -17,5 +17,7 @@ Bandango.Compra = DS.Model.extend Bandango.OrderItemsMixin,
   fechaEmisionRetencion: DS.attr()
 
   sustentoComprobante:     DS.belongsTo("sustentoComprobante")
+  comprobante:             DS.belongsTo("comprobante")
+  retenciones:             DS.hasMany("retencion")
   orderItems:              DS.hasMany("orderItem")
-  conceptoRetencionFuente: DS.belongsTo("conceptoRetencionFuente")
+  cliente:                 DS.belongsTo("cliente")

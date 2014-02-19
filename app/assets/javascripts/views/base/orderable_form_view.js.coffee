@@ -1,11 +1,26 @@
 Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin,
   queryForClienteOnIdentificacionChange: true
   modelBinding: "controller.model"
+  includeForm: true
 
-  modelSaved: (model) ->
+# model
+  failureSaving: (modelName) ->
+    if @get("model.isNew")
+      store = @get("controller.store")
+      model = store.createRecord modelName,
+                                 cliente: @get("model.cliente")
+                                 comprobante: @get("model.comprobante")
+                                 orderItems: @get("model.orderItems.content")
+      @get("model").deleteRecord()
+      @set "model", model
+    else
+      @get("model").rollback()
+    null
+
+  modelSaved: ->
     if @get("removeOrderItemsWithoutIdAfterCommit")
       # delete orderItems instantiated and not persisted:
-      for orderItem in model.get("orderItems.content").filterBy("id", null)
+      for orderItem in @get("model").get("orderItems.content").filterBy("id", null)
         orderItem.deleteRecord()
 
 # cliente
@@ -25,9 +40,16 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
   saveCliente: ->
     cliente = @get "model.cliente"
     if cliente
-      cliente.setProperties @getFormData()
+      cliente.setProperties @getFormDataFor("cliente")
     else
       store = @get "controller.store"
-      cliente = store.createRecord "cliente", @getFormData()
+      cliente = store.createRecord "cliente", @getFormDataFor("cliente")
       @set "model.cliente", cliente
     cliente.save().then $.proxy(@clienteSaved, @), $.proxy(@failureSavingCliente, @)
+
+# events
+  submit: ->
+    @emptyErrors()
+    @saveCliente()
+    @set "submitting", true
+    false

@@ -1,0 +1,28 @@
+<div class="bandango_small_divider"></div>
+{{#with view.model}}
+  <div class="retencion_title">
+    <span class="retencion_concepto">{{conceptoRetencionFuente.to_s}}</span>
+    {{#if view.includeForm}}
+      <span class="glyphicon glyphicon-remove"></span>
+    {{/if}}
+  </div>
+  <div class="retencion_content">
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="stronger">Número autorización</div>
+        <div>{{numeroAutorizacion}}</div>
+      </div>
+      <div class="col-xs-4">
+        <div class="stronger">Número de serie</div>
+        <div>{{numeroDeSerie}}</div>
+      </div>
+      <div class="col-xs-4">
+        <div class="stronger">Fecha emisión</div>
+        <div>{{fechaEmision}}</div>
+      </div>
+    </div>
+    <div class="row">
+      {{partial "retenciones/taxes"}}
+    </div>
+  </div>
+{{/with}}

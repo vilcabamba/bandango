@@ -6,16 +6,20 @@
 #  order_id                     :integer          not null
 #  concepto_retencion_fuente_id :integer
 #  fecha_emision                :date             default(Mon, 20 Jan 2014), not null
-#  numero_retencion             :string(255)      not null
-#  iva                          :boolean
-#  tarifa_iva                   :integer
-#  ice                          :boolean
-#  tarifa_ice                   :integer
 #  created_at                   :datetime
 #  updated_at                   :datetime
+#  numero_autorizacion          :string(255)
+#  numero_serie_establecimiento :string(255)
+#  numero_serie_punto_emision   :string(255)
+#  numero_serie_secuencial      :string(255)
+#  order_type                   :string(255)      not null
 #
 
 class Retencion < ActiveRecord::Base
   include Validations
+
+# relationships
+  belongs_to :order, polymorphic: true
+  belongs_to :concepto_retencion_fuente
 
 end

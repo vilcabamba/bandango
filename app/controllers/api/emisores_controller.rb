@@ -24,6 +24,7 @@ module Api
                                      :nombre_comercial,
                                      :direccion_matriz,
                                      :direccion_establecimiento,
+                                     :autorizacion_comprobantes,
                                      :codigo_establecimiento,
                                      :codigo_punto_emision,
                                      :contribuyente_especial_numero_resolucion,

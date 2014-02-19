@@ -14,3 +14,7 @@ Bandango.SustentoTributarioOnFormMixin = Ember.Mixin.create
   willDestroyElement: ->
     @_super()
     @$(".sustento_tributario_select").chosen("destroy").off("change")
+
+  failureCallback: ->
+    @$(".sustento_tributario_select").trigger "change"
+    @_super.apply @, arguments
