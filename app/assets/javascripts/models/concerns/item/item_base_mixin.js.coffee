@@ -1,54 +1,46 @@
 Bandango.ItemBaseMixin = Ember.Mixin.create
 # summary enumerables
-  ivaZeroVenta: (->
+  ivaZeroFor: (orderType) ->
     return 0 if @get("iva")
-    @get("baseVenta")
-  ).property("baseVenta", "iva")
-  ivaZeroCompra: (->
-    return 0 if @get("iva")
-    @get("baseCompra")
-  ).property("baseCompra", "iva")
+    @get("base#{orderType}")
 
-  iceVenta: (->
-    return 0 unless @get("ice")
-    @get("baseVenta") * (@get("iceTarifa") / 100)
-  ).property("baseVenta", "ice")
-  iceCompra: (->
-    return 0 unless @get("ice")
-    @get("baseCompra") * (@get("iceTarifa") / 100)
-  ).property("baseCompra", "ice")
+  ivaZeroVenta: (-> @ivaZeroFor("Venta") ).property("baseVenta", "iva")
+  ivaZeroCompra: (-> @ivaZeroFor("Compra") ).property("baseCompra", "iva")
 
-  ivaTwelveVenta: (->
+  iceFor: (orderType) ->
+    return 0 unless @get("ice")
+    base = @get("base#{orderType}")
+    ice = base * (@get("iceTarifa") / 100)
+    Bandango.numberForCurrencyHelper ice
+
+  iceVenta: (-> @iceFor("Venta") ).property("baseVenta", "ice", "iceTarifa")
+  iceCompra: (-> @iceFor("Compra") ).property("baseCompra", "ice", "iceTarifa")
+
+  ivaTwelveFor: (orderType) ->
     return 0 unless @get("iva")
-    @get("baseVenta") * (@get("ivaTarifa") / 100)
-  ).property("baseVenta", "iva", "ivaTarifa")
-  ivaTwelveCompra: (->
-    return 0 unless @get("iva")
-    @get("baseCompra") * (@get("ivaTarifa") / 100)
-  ).property("baseCompra", "iva", "ivaTarifa")
+    base = @get("base#{orderType}")
+    iva = base * (@get("ivaTarifa") / 100)
+    Bandango.numberForCurrencyHelper iva
 
-  iceTotalVenta: (->
-    return 0 unless @get("ice")
-    @get("baseVenta") * (@get("iceTarifa") / 100)
-  ).property("baseVenta", "ice", "iceTarifa")
-  iceTotalCompra: (->
-    return 0 unless @get("ice")
-    @get("baseCompra") * (@get("iceTarifa") / 100)
-  ).property("baseCompra", "ice", "iceTarifa")
+  ivaTwelveVenta: (-> @ivaTwelveFor("Venta") ).property("baseVenta", "iva", "ivaTarifa")
+  ivaTwelveCompra: (-> @ivaTwelveFor("Compra") ).property("baseCompra", "iva", "ivaTarifa")
 
-  totalPriceVenta: (->
-    price = @get("baseVenta")
+  iceTotalFor: (orderType) ->
+    return 0 unless @get("ice")
+    base = @get("base#{orderType}")
+    ice = base * (@get("iceTarifa") / 100)
+    Bandango.numberForCurrencyHelper ice
+
+  iceTotalVenta: (-> @iceTotalFor("Venta") ).property("baseVenta", "ice", "iceTarifa")
+  iceTotalCompra: (-> @iceTotalFor("Compra") ).property("baseCompra", "ice", "iceTarifa")
+
+  totalPriceFor: (orderType) ->
+    price = @get("base#{orderType}")
     if @get("iva")
-      price += @get("ivaTwelveVenta")
+      price += @get("ivaTwelve#{orderType}")
     if @get("ice")
-      price += @get("iceTotalVenta")
-    price
-  ).property("baseVenta", "iva", "ivaTarifa", "ice", "iceTarifa")
-  totalPriceCompra: (->
-    price = @get("baseCompra")
-    if @get("iva")
-      price += @get("ivaTwelveVenta")
-    if @get("ice")
-      price += @get("iceTotalVenta")
-    price
-  ).property("baseCompra", "iva", "ivaTarifa", "ice", "iceTarifa")
+      price += @get("iceTotal#{orderType}")
+    Bandango.numberForCurrencyHelper price
+
+  totalPriceVenta: (-> @totalPriceFor("Venta") ).property("baseVenta", "iva", "ivaTarifa", "ice", "iceTarifa")
+  totalPriceCompra: (-> @totalPriceFor("Compra") ).property("baseCompra", "iva", "ivaTarifa", "ice", "iceTarifa")
