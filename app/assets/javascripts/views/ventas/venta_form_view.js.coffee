@@ -1,8 +1,4 @@
 Bandango.VentaFormView = Bandango.OrderableFormView.extend
-  attributes: (->
-    @get("attributesForCliente")
-  ).property()
-
   clienteSaved: ->
     @saveVenta()
 

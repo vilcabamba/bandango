@@ -34,12 +34,25 @@ Bandango.ModelBackedView = Ember.View.extend
     @getProperties @get("attributesFor#{modelName.capitalize()}")
 
   defineComputedPropertiesForAttributes: ->
-    if bindTo = @get("bindAttributesTo")
-      for attribute in @get("attributes")
-        Ember.defineProperty @, attribute, (->
-          @get(bindTo).get(arguments[0])
-        ).property()
+    attributes = @get("attributes")
+    if attributes.constructor is Array
+      if bindTo = @get("bindAttributesTo")
+        for attribute in attributes
+          Ember.defineProperty @, attribute, (->
+            @get(bindTo).get(arguments[0])
+          ).property()
+    else if attributes.constructor is Object
+      for key, value of attributes
+        for attribute in value
+          Ember.defineProperty @, attribute, (->
+            bindTo = @findBindingAttributeTo(arguments[0])
+            @get(bindTo).get(arguments[0])
+          ).property()
     null
+
+  findBindingAttributeTo: (name) ->
+    for key, value of @get("attributes")
+      return key if name in value
 
 # errors:
   emptyErrors: ->
