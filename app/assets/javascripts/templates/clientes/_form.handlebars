@@ -1,6 +1,6 @@
 <div class="row form-group">
   <div {{bind-attr class=":col-xs-3 view.errors.tipoId"}}>
-    {{view Ember.Select content=view.tiposIds class="form-control" value=view.tipoId}}
+    {{view Ember.Select content=view.tiposIds class="form-control tiposIdsSelect" value=view.tipoId}}
   </div>
   <div {{bind-attr class=":col-xs-9 view.errors.identificacion"}}>
     {{view Ember.TextField value=view.identificacion class="form-control identificacion_input" placeholder="Número de identificación" required="true"}}

@@ -47,14 +47,27 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
     if value.length is 10 or value.length is 13
       @queryForCliente value
 
+# chosen
+  applyChosen: ->
+    $select = @$(".tiposIdsSelect")
+    $select.chosen disable_search: true
+    if tipoId = @get("tipoId")
+      $select.val tipoId
+      $select.trigger "chosen:updated"
+
+  destroyChosen: ->
+    @$(".tiposIdsSelect").chosen("destroy")
+
 # inherited events
   didInsertElement: ->
     @_super()
+    @applyChosen()
     if @get("queryForClienteOnIdentificacionChange")
       @$(".identificacion_input").on("keyup" , $.proxy(@identificacionKeyUpped, @))
                                  .on("change", $.proxy(@identificacionChanged, @))
 
   willDestroyElement: ->
     @_super()
+    @destroyChosen()
     if @get("queryForClienteOnIdentificacionChange")
       @$(".identificacion_input").off("keyup").off("change")
