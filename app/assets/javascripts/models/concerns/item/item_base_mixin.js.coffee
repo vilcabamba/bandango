@@ -1,9 +1,4 @@
 Bandango.ItemBaseMixin = Ember.Mixin.create
-# support for `base`
-  triggerBaseChange: (->
-    @set "base", Math.random()         # only trigger listeners
-  ).observes("baseCompra", "baseVenta")
-
 # summary enumerables
   ivaZeroVenta: (->
     return 0 if @get("iva")

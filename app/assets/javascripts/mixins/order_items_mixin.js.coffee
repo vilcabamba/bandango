@@ -42,25 +42,25 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
       ivaZero = orderItem.get "item.ivaZero#{@get("modelName")}"
       prev + orderItem.get("cantidad") * ivaZero
     , 0
-  ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   ivaTwelve: (->
     @get("orderItems.content").reduce (prev, orderItem) =>
       ivaTwelve = orderItem.get "item.ivaTwelve#{@get("modelName")}"
       prev + orderItem.get("cantidad") * ivaTwelve
     , 0
-  ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   totalPrice: (->
     @get("orderItems.content").reduce (prev, orderItem) =>
       totalPrice = orderItem.get "item.totalPrice#{@get("modelName")}"
       prev + orderItem.get("cantidad") * totalPrice
     , 0
-  ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   ice: (->
     @get("orderItems.content").reduce (prev, orderItem) =>
       ice = orderItem.get "item.ice#{@get("modelName")}"
       prev + orderItem.get("cantidad") * ice
     , 0
-  ).property("orderItems.@each.item.base", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
