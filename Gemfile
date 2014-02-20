@@ -53,6 +53,7 @@ group :test, :development do
   gem "guard-rspec"
   gem "terminal-notifier-guard"
   gem "rspec-rails"
+  gem "pry-rails"
 end
 
 group :development do
