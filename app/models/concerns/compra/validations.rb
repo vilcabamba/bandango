@@ -13,6 +13,11 @@ class Compra < ActiveRecord::Base
       validates :retencion_iva_bienes,         presence: true
       validates :retencion_iva_servicios,      presence: true
       validates :retencion_iva_cien,           presence: true
+      validate :cliente_is_not_consumidor_final
+    end
+
+    def cliente_is_not_consumidor_final
+      errors.add :cliente, "Proveedor no puede ser consumidor final" if cliente.consumidor_final?
     end
   end
 end
