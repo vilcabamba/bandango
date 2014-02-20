@@ -9,7 +9,10 @@ Bandango.ComprobanteOnFormMixin = Ember.Mixin.create
 
   didInsertElement: ->
     @_super()
-    @$(".comprobante_select").chosen().on("change", $.proxy(@comprobanteSelectChanged, @)).trigger("change")
+    $select = @$(".comprobante_select")
+    if @get("model") and id = @get("model.comprobante.id")
+      $select.val id
+    $select.chosen().on("change", $.proxy(@comprobanteSelectChanged, @)).trigger("change")
 
   willDestroyElement: ->
     @_super()
