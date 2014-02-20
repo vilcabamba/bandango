@@ -25,9 +25,10 @@ Bandango.ClientesEditView = Bandango.ClienteFormView.extend
     @get("controller").transitionToRoute "clientes.index"
     @set "submitting", false
 
-  failureDestroying: ->
-    @get("model").rollback()
-    alertify.log "Algo salió mal. Por favor vuelve a intentar"
+  failureDestroying: (response) ->
+    error = if response.errors.base then response.errors.base else "Algo salió mal. Por favor vuelve a intentar"
+    alertify.log error
+    @get("model").transitionTo "loaded.saved"
     @set "submitting", false
 
   actions:
