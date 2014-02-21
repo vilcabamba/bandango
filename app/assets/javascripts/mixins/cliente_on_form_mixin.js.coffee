@@ -11,9 +11,6 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
     attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
     for attribute in attributes
       @set attribute, cliente.get(attribute)
-    if Ember.isEmpty(cliente.get("tipoId")) # set tipoId picker if it's unset:
-      tipoId = if @get("identificacion").length is 10 then "Cédula" else "RUC"
-      @set "tipoId", tipoId
 
 # query callbacks
   gotClientes: (clientes) ->
@@ -49,11 +46,15 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
 
 # chosen
   applyChosen: ->
+    @$(".tiposIdsSelect").chosen disable_search: true
+
+  observeChosen: (->
     $select = @$(".tiposIdsSelect")
-    $select.chosen disable_search: true
-    if tipoId = @get("tipoId")
-      $select.val tipoId
-      $select.trigger "chosen:updated"
+    tipoId = @get("tipoId")
+    tipoId = if @get("identificacion").length is 10 then "Cédula" else "RUC" if Ember.isEmpty(tipoId)
+    $select.val tipoId
+    $select.trigger "chosen:updated"
+  ).observes("tipoId")
 
   destroyChosen: ->
     @$(".tiposIdsSelect").chosen("destroy")

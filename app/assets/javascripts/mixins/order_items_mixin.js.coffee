@@ -38,24 +38,24 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
   ).property("numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante")
 
   ivaZero: (->
-    @get("orderItems.content").reduce (prev, orderItem) =>
-      ivaZero = orderItem.get "item.ivaZero#{@get("modelName")}"
-      prev + orderItem.get("cantidad") * ivaZero
+    ivaZero = @get("orderItems.content").reduce (prev, orderItem) =>
+      prev + orderItem.get("ivaZero#{@get("modelName")}")
     , 0
+    Bandango.numberForCurrencyHelper ivaZero
   ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   ivaTwelve: (->
-    @get("orderItems.content").reduce (prev, orderItem) =>
-      ivaTwelve = orderItem.get "item.ivaTwelve#{@get("modelName")}"
-      prev + orderItem.get("cantidad") * ivaTwelve
+    ivaTwelve = @get("orderItems.content").reduce (prev, orderItem) =>
+      prev + orderItem.get("ivaTwelve#{@get("modelName")}")
     , 0
+    Bandango.numberForCurrencyHelper ivaTwelve
   ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   totalPrice: (->
-    @get("orderItems.content").reduce (prev, orderItem) =>
-      totalPrice = orderItem.get "item.totalPrice#{@get("modelName")}"
-      prev + orderItem.get("cantidad") * totalPrice
+    totalPrice = @get("orderItems.content").reduce (prev, orderItem) =>
+      prev + orderItem.get("totalPrice#{@get("modelName")}")
     , 0
+    Bandango.numberForCurrencyHelper totalPrice
   ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
 
   ice: (->
