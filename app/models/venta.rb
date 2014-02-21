@@ -17,7 +17,6 @@
 
 class Venta < ActiveRecord::Base
   include Sellable
-  include VentaInfo
   include Orderable
   include Validations
 

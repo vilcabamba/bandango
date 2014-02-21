@@ -25,5 +25,32 @@ class OrderItem < ActiveRecord::Base
         end
       end
     end
+
+    def unit_price
+      price = cached_item_precio
+      price += iva_twelve
+      price += ice_total
+      price
+    end
+
+    def iva_twelve
+      return 0 unless cached_item_iva
+      iva = price * (cached_item_iva_tarifa / 100.0)
+      iva.round(2)
+    end
+
+    def ice_total
+      return 0 unless cached_item_ice
+      ice = price * (cached_item_ice_tarifa / 100.0)
+      ice.round(2)
+    end
+
+    def price
+      @price ||= cantidad * cached_item_precio
+    end
+
+    def total_price
+      @total_price ||= cantidad * unit_price
+    end
   end
 end
