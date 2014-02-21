@@ -60,7 +60,6 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
 
   ice: (->
     @get("orderItems.content").reduce (prev, orderItem) =>
-      ice = orderItem.get "item.ice#{@get("modelName")}"
-      prev + orderItem.get("cantidad") * ice
+      prev + orderItem.get("ice#{@get("modelName")}")
     , 0
   ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
