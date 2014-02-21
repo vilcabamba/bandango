@@ -14,7 +14,7 @@ module Orderable
   def order_items_params=(order_items_params)
     order_items.destroy_all
     self.order_items = Array(order_items_params).map do |order_item|
-      OrderItem.new order_item.merge(tipo: self)
+      OrderItem.new order_item.merge(order: self)
     end
   end
 
