@@ -19,6 +19,7 @@ class Venta < ActiveRecord::Base
   include Sellable
   include Orderable
   include Validations
+  include OrderableInfo
 
 # default scope
   default_scope { order("id DESC") }
