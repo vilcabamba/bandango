@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221184610) do
+ActiveRecord::Schema.define(version: 20140222195527) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -106,16 +106,16 @@ ActiveRecord::Schema.define(version: 20140221184610) do
   add_index "emisores", ["ruc"], name: "index_emisores_on_ruc", unique: true, using: :btree
 
   create_table "items", force: true do |t|
-    t.integer  "category_id", default: 1,     null: false
-    t.string   "nombre",                      null: false
+    t.integer  "category_id", default: 1,  null: false
+    t.string   "nombre",                   null: false
     t.string   "descripcion"
     t.float    "base_venta"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "iva",         default: true
+    t.boolean  "iva"
     t.integer  "iva_tarifa",  default: 12
-    t.boolean  "ice",         default: false
-    t.integer  "ice_tarifa"
+    t.boolean  "ice"
+    t.integer  "ice_tarifa",  default: 15
     t.boolean  "se_vende"
     t.boolean  "se_compra"
     t.float    "base_compra"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20140221184610) do
   create_table "retenciones", force: true do |t|
     t.integer  "order_id",                                            null: false
     t.integer  "concepto_retencion_fuente_id"
-    t.date     "fecha_emision",                default: '2014-01-20', null: false
+    t.date     "fecha_emision",                default: '2014-02-22', null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "numero_autorizacion"
