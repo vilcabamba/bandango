@@ -55,6 +55,7 @@ Bandango::Application.routes.draw do
   namespace :api do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
+    resources :stats, only: [:index]
     resources :clientes
     resources :users
     resources :ventas
