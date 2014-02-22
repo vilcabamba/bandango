@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222195527) do
+ActiveRecord::Schema.define(version: 20140222200607) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -144,16 +144,16 @@ ActiveRecord::Schema.define(version: 20140222195527) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "retenciones", force: true do |t|
-    t.integer  "order_id",                                            null: false
+    t.integer  "order_id",                     null: false
     t.integer  "concepto_retencion_fuente_id"
-    t.date     "fecha_emision",                default: '2014-02-22', null: false
+    t.date     "fecha_emision",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "numero_autorizacion"
     t.string   "numero_serie_establecimiento"
     t.string   "numero_serie_punto_emision"
     t.string   "numero_serie_secuencial"
-    t.string   "order_type",                                          null: false
+    t.string   "order_type",                   null: false
   end
 
   add_index "retenciones", ["concepto_retencion_fuente_id"], name: "index_retenciones_on_concepto_retencion_fuente_id", using: :btree
