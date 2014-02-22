@@ -13,11 +13,14 @@
       last: "&uacute;ltimo"
       first: "primero"
   date:
+    today: "Hoy"
+    yesterday: "Ayer"
+
     formats:
       default: "%d/%m/%Y"
       short: "%d de %b"
       long: "%d de %B de %Y"
-      s_pagos_month: "%B, %Y"
+      highcharts: "%d %b"
 
     day_names:
       - domingo

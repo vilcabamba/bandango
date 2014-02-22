@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221151803) do
+ActiveRecord::Schema.define(version: 20140221184610) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140221151803) do
   add_index "compras", ["cliente_id"], name: "index_compras_on_cliente_id", using: :btree
   add_index "compras", ["comprobante_id"], name: "index_compras_on_comprobante_id", using: :btree
   add_index "compras", ["concepto_retencion_fuente_id"], name: "index_compras_on_concepto_retencion_fuente_id", using: :btree
+  add_index "compras", ["fecha_emision"], name: "index_compras_on_fecha_emision", using: :btree
   add_index "compras", ["sustento_comprobante_id"], name: "index_compras_on_sustento_comprobante_id", using: :btree
 
   create_table "comprobantes", force: true do |t|
@@ -203,5 +204,6 @@ ActiveRecord::Schema.define(version: 20140221151803) do
 
   add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree
   add_index "ventas", ["comprobante_id"], name: "index_ventas_on_comprobante_id", using: :btree
+  add_index "ventas", ["fecha_emision"], name: "index_ventas_on_fecha_emision", using: :btree
 
 end

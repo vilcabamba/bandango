@@ -44,7 +44,6 @@ class Stats
       "rgb(188,217,147)"
     when "balance"
       "rgb(16,73,106)"
-
     end
   end
 

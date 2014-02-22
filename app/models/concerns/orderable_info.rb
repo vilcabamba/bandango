@@ -2,8 +2,9 @@ module OrderableInfo
   extend ActiveSupport::Concern
 
   included do
-    scope :today, -> { where(fecha_emision: Date.today) }
-    scope :yesterday, -> { where(fecha_emision: Date.yesterday) }
+    scope :at, ->(date) { where fecha_emision: date }
+    scope :today, -> { at Date.today }
+    scope :yesterday, -> { at Date.yesterday }
   end
 
   def total_price
@@ -14,7 +15,7 @@ module OrderableInfo
 
   module ClassMethods
     def total
-      all.map(&:total_price).reduce(:+).round(2)
+      all.map(&:total_price).reduce(:+).to_f.round 2
     end
   end
 end
