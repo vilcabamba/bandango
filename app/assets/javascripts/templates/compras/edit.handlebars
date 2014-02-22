@@ -1,21 +1,21 @@
 <ol class="breadcrumb">
   <li>
-    {{link-to "Ventas" "ventas.index"}}
+    {{link-to "Compras" "compras.index"}}
   </li>
   <li>
-    {{link-to numeroDeSerie "ventas.show" model}}
+    {{link-to numeroDeSerie "compras.show" model}}
   </li>
   <li class="active">Editar</li>
 </ol>
 
-{{partial "ventas/form"}}
+{{partial "compras/form"}}
 
 <div class="row">
   <div class="col-xs-6 text-danger">
     {{array_with_lines view.errors_messages}}
   </div>
   <div class="col-xs-6 actions">
-    {{link-to "Cancelar" "ventas.show" model class="btn btn-link"}}
+    {{link-to "Cancelar" "compras.show" model class="btn btn-link"}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
   </div>
 </div>

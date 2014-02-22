@@ -28,7 +28,12 @@ module Api
     end
 
     def destroy
-      respond_with Cliente.destroy(params[:id])
+      cliente = Cliente.cached_find(params[:id])
+      if cliente.can_destroy?
+        respond_with cliente.destroy
+      else
+        render json: { cliente: "", errors: { base: cliente.why_cant_destroy } }, status: 422
+      end
     end
 
     private

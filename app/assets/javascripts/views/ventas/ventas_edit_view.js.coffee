@@ -1,5 +1,7 @@
 Bandango.VentasEditView = Bandango.VentaFormView.extend
-  bindAttributesTo: "model.cliente"
+  attributes: (->
+    "model.cliente": @get("attributesForCliente")
+  ).property()
   removeOrderItemsWithoutIdAfterCommit: false
 
   ventaSaved: (venta) ->

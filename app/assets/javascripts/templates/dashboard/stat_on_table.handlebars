@@ -1,0 +1,17 @@
+{{#with view.model}}
+  <td class="col-xs-3">
+    <div class="stats-date">{{name}}</div>
+  </td>
+  <td class="col-xs-6">
+    <div >
+      <div class="stats-title">{{ventas.count}} ventas</div>
+      <div class="stats-number">{{number_to_currency ventas.total}}</div>
+    </div>
+  </td>
+  <td class="col-xs-6">
+    <div >
+      <div class="stats-title">{{compras.count}} Compras</div>
+      <div class="stats-number">{{number_to_currency compras.total}}</div>
+    </div>
+  </td>
+{{/with}}

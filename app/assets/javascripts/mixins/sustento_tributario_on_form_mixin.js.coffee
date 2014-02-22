@@ -9,7 +9,10 @@ Bandango.SustentoTributarioOnFormMixin = Ember.Mixin.create
 
   didInsertElement: ->
     @_super()
-    @$(".sustento_tributario_select").chosen().on("change", $.proxy(@sustentoTributarioSelectChanged, @)).trigger("change")
+    $select = @$(".sustento_tributario_select")
+    if @get("model") and id = @get("model.sustentoComprobante.id")
+      $select.val id
+    $select.chosen().on("change", $.proxy(@sustentoTributarioSelectChanged, @)).trigger("change")
 
   willDestroyElement: ->
     @_super()

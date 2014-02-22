@@ -1,5 +1,5 @@
 <section class="form_section">
-  <div class="section_header">
+  <div {{bind-attr class=":section_header view.errors.cliente:text-danger"}}>
     {{#if isVenta}}
       Cliente
     {{else}}

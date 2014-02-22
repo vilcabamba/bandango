@@ -53,6 +53,7 @@ group :test, :development do
   gem "guard-rspec"
   gem "terminal-notifier-guard"
   gem "rspec-rails"
+  gem "pry-rails"
 end
 
 group :development do
@@ -61,6 +62,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "meta_request"
+  gem "newrelic_rpm"
 end
 
 group :test do
@@ -98,3 +100,6 @@ gem "whenever", :require => false
 
 # uploads
 gem "carrierwave"
+
+# highcharts
+gem "highcharts-rails", "~> 3.0.0"

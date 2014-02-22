@@ -1,4 +1,4 @@
-Bandango.Item = DS.Model.extend Bandango.ItemBaseMixin,
+Bandango.Item = DS.Model.extend
   nombre:      DS.attr()
   descripcion: DS.attr()
   seVende:     DS.attr()

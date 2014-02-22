@@ -1,3 +1,7 @@
+Bandango.numberForCurrencyHelper = (number) ->
+  # returns a float of two decimals (to use on currencies)
+  parseFloat number.toFixed(2), 10
+
 Bandango.numberToCurrencyHelper = (number) ->
   accounting.formatMoney number, "$ "
 

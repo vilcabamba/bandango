@@ -4,13 +4,23 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
   includeForm: true
 
 # model
+  reSetAssociations: (model) ->
+    # orderItems
+    newOrderItems = model.get("orderItems")
+    while orderItem = @get("model.orderItems.firstObject")
+      newOrderItems.addObject orderItem
+    # retenciones
+    newRetenciones = model.get("retenciones")
+    while retencion = @get("model.retenciones.firstObject")
+      newRetenciones.addObject retencion
+
   failureSaving: (modelName) ->
     if @get("model.isNew")
       store = @get("controller.store")
       model = store.createRecord modelName,
                                  cliente: @get("model.cliente")
                                  comprobante: @get("model.comprobante")
-                                 orderItems: @get("model.orderItems.content")
+      @reSetAssociations model
       @get("model").deleteRecord()
       @set "model", model
     else

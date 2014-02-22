@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219221304) do
+ActiveRecord::Schema.define(version: 20140221184610) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140219221304) do
   add_index "compras", ["cliente_id"], name: "index_compras_on_cliente_id", using: :btree
   add_index "compras", ["comprobante_id"], name: "index_compras_on_comprobante_id", using: :btree
   add_index "compras", ["concepto_retencion_fuente_id"], name: "index_compras_on_concepto_retencion_fuente_id", using: :btree
+  add_index "compras", ["fecha_emision"], name: "index_compras_on_fecha_emision", using: :btree
   add_index "compras", ["sustento_comprobante_id"], name: "index_compras_on_sustento_comprobante_id", using: :btree
 
   create_table "comprobantes", force: true do |t|
@@ -124,14 +125,18 @@ ActiveRecord::Schema.define(version: 20140219221304) do
   add_index "items", ["se_vende"], name: "index_items_on_se_vende", using: :btree
 
   create_table "order_items", force: true do |t|
-    t.integer  "item_id",            null: false
-    t.integer  "order_id",           null: false
-    t.integer  "cantidad",           null: false
-    t.float    "cached_item_precio", null: false
-    t.string   "cached_item_nombre", null: false
+    t.integer  "item_id",                null: false
+    t.integer  "order_id",               null: false
+    t.integer  "cantidad",               null: false
+    t.float    "cached_item_precio",     null: false
+    t.string   "cached_item_nombre",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "order_type",         null: false
+    t.string   "order_type",             null: false
+    t.boolean  "cached_item_iva"
+    t.boolean  "cached_item_ice"
+    t.integer  "cached_item_iva_tarifa"
+    t.integer  "cached_item_ice_tarifa"
   end
 
   add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
@@ -199,5 +204,6 @@ ActiveRecord::Schema.define(version: 20140219221304) do
 
   add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree
   add_index "ventas", ["comprobante_id"], name: "index_ventas_on_comprobante_id", using: :btree
+  add_index "ventas", ["fecha_emision"], name: "index_ventas_on_fecha_emision", using: :btree
 
 end
