@@ -1,26 +1,16 @@
 class Balance
-  include ActiveModel::Model
-
-  def self.methods(*args)
-    args.each do |arg|
-      self.class.instance_eval do
-        method_name = "#{arg}"
-        define_method method_name do |*args|
-          self
-        end
-      end
-    end
+  def self.total
+    date = Thread.current[:date]
+    total = Venta.at(date).total - Compra.at(date).total
+    total.to_f.round 2
   end
 
   def self.at(date)
-    @@date = date
+    Thread.current[:date] = date
     self
   end
 
-  def self.total
-    total = Venta.at(@@date).total - Compra.at(@@date).total
-    total.round(2)
+  def self.includes(*args)
+    self
   end
-
-  methods :includes
 end
