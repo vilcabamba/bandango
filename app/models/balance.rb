@@ -10,7 +10,7 @@ class Balance
     self
   end
 
-  def self.includes=(*args)
+  def self.includes(*args)
     self
   end
 end
