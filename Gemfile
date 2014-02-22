@@ -99,3 +99,6 @@ gem "whenever", :require => false
 
 # uploads
 gem "carrierwave"
+
+# highcharts
+gem "highcharts-rails", "~> 3.0.0"

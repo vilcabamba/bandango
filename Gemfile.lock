@@ -129,6 +129,8 @@ GEM
       guard (>= 2.1.1)
       rspec (>= 2.14, < 4.0)
     handlebars-source (1.1.1)
+    highcharts-rails (3.0.7)
+      railties (>= 3.1)
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.9)
@@ -314,6 +316,7 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   guard-rspec
+  highcharts-rails (~> 3.0.0)
   id_ecuador (>= 0.0.2.alpha)
   jbuilder (~> 1.2)
   jquery-rails
