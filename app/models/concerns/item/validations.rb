@@ -13,6 +13,11 @@ class Item < ActiveRecord::Base
                               if: :iva
       validates :ice_tarifa,  numericality: { greater_than: 0 },
                               if: :ice
+      validate :validate_nombre_is_unique_on_category
+    end
+
+    def validate_nombre_is_unique_on_category
+      errors.add(:nombre, "Ya existe un ítem con ese nombre") if category.items.exists?(nombre: nombre)
     end
   end
 end

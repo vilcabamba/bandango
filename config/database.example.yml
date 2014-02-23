@@ -29,6 +29,14 @@ test:
   password:
   socket: /tmp/mysql.sock
 
+dummy:
+  adapter: mysql2
+  encoding: utf8
+  database: bandango_dummy
+  pool: 5
+  username: root
+  password:
+
 production:
   adapter: mysql2
   encoding: utf8
