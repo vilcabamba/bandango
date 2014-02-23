@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
     extend ActiveSupport::Concern
 
     included do
-      validates :nombre, presence: true
+      validates :nombre, presence: true, uniqueness: true
     end
   end
 end

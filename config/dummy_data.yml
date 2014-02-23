@@ -1,0 +1,78 @@
+admin:
+  username: admin
+  email: admin@example.com
+  password: Admin123
+
+emisor:
+  razon_social: Mario Andrés Correa
+  ruc: "1104680135001"
+  direccion_establecimiento: "Av. Universitaria y Colón"
+  direccion_matriz: "Loja, Ecuador"
+  codigo_establecimiento: 001
+  codigo_punto_emision: 001
+
+clientes:
+  - identificacion: "1104680135001"
+    tipo_id: RUC
+    nombres: Mario Andrés Correa
+    email: a@macool.me
+  - identificacion: "1104015936"
+    nombres: Fabricio Flores Gallardo
+    email: fabrifloresg@gmail.com
+  - identificacion: "1104706922"
+    nombres: Lenin Capa
+    email: leviskp87@gmail.com
+  - identificacion: "1100867900"
+    nombres: Angel Valdez
+  - identificacion: 73425823412-134
+    tipo_id: Pasaporte - otro
+    nombres: Tomster
+    email: tomster@emberjs.com
+  - identificacion: 122341-2134-3214
+    tipo_id: Pasaporte - otro
+    nombres: Tilde
+    email: info@tilde.io
+  - identificacion: 345-234576-934
+    tipo_id: Pasaporte - otro
+    nombres: New Relic
+    email: info@newrelic.com
+  - identificacion: 874563-345
+    tipo_id: Pasaporte - otro
+    nombres: qoloquio
+    email: hola@qoloquio.com
+
+categories:
+  bebidas:
+    - nombre: Coca cola 1/2 litro
+      base_venta: 0.8
+      base_compra: 0.7
+    - nombre: Coca cola 1 litro
+      base_venta: 1
+      base_compra: 0.8
+    - nombre: Coca cola 2 litros
+      base_venta: 1.5
+      base_compra: 1.3
+    - nombre: Coca cola 3 litros
+      base_venta: 2
+      base_compra: 1.6
+    - nombre: Fuze tea
+      descripcion: Té frío
+      base_venta: 0.6
+      base_compra: 0.4
+    - nombre: Nestea
+      descripcion: Té frío
+      base_venta: 0.55
+      base_compra: 0.35
+  snacks:
+    - nombre: Papas ruffles
+      base_venta: 0.4
+      base_compra: 0.3
+    - nombre: Doritos
+      base_venta: 0.45
+      base_compra: 0.35
+    - nombre: Chifles cerveceros
+      base_venta: 0.4
+      base_compra: 0.3
+    - nombre: Tostachos
+      base_venta: 0.45
+      base_compra: 0.4
