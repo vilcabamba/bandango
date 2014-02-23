@@ -28,3 +28,9 @@ end
 every :day, :at => "04:10am" do
   command "sudo service sidekiq start"
 end
+
+if ENV["DUMMY_DB"]
+  every :day, at: "01:00am" do
+    rake "db:dummy"
+  end
+end
