@@ -3,6 +3,7 @@ require 'dotenv'
 Dotenv.load
 
 set :output, "log/cron.log"
+set :environment, ENV["RAILS_ENV"] if ENV["RAILS_ENV"]
 
 job_type :bandango, "cd #{Dir.pwd} && :task"
 
