@@ -85,7 +85,7 @@ gem "id_ecuador", ">= 0.0.2.alpha"
 gem "actionpack-action_caching", github: "rails/actionpack-action_caching"
 
 # backgrounding:
-gem "sidekiq"
+gem "sidekiq", "~> 2.17.4"
 gem "sinatra", require: false
 gem "slim"
 
