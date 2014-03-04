@@ -5,8 +5,10 @@ module Api
     respond_to :json
 
     def index
-      if params[:identificacion]
+      if params[:identificacion].present?
         respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
+      elsif params[:search].present?
+        render json: Cliente.search(params[:search]).limit(10)
       else
         @clientes = Cliente.page(params[:page])
         render json: @clientes,
