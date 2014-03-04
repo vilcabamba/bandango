@@ -12,7 +12,11 @@ every 15.minutes do
 end
 
 every :day, at: "03:00am" do
-  bandango "git pull && bundle install --deployment"
+  bandango "git pull"
+end
+
+every :day, at: "03:03am" do
+  bandango "bundle install --deployment"
 end
 
 every :day, at: "03:10am" do
