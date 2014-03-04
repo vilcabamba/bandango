@@ -47,17 +47,30 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
 # chosen
   applyChosen: ->
     @$(".tiposIdsSelect").chosen disable_search: true
+    @observeChosen()
 
   observeChosen: (->
     $select = @$(".tiposIdsSelect")
-    tipoId = @get("tipoId")
-    tipoId = if @get("identificacion").length is 10 then "Cédula" else "RUC" if Ember.isEmpty(tipoId)
+    identificacion = @get("identificacion") || ""
+    tipoId = switch identificacion.length
+      when 10
+        "Cédula"
+      when 13
+        "RUC"
+      else
+        "Pasaporte - otro"
     $select.val tipoId
     $select.trigger "chosen:updated"
-  ).observes("tipoId")
+  ).observes("identificacion")
 
   destroyChosen: ->
     @$(".tiposIdsSelect").chosen("destroy")
+
+# actions
+  actions:
+    searchCliente: ->
+      # Bandango.ClienteSearchComponent.create().appendTo "body"
+      Bandango.ClienteSearchView.create(container: @get("container"), controller: @get("controller")).append()
 
 # inherited events
   didInsertElement: ->
