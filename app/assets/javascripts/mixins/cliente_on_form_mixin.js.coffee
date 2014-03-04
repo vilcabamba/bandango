@@ -69,8 +69,7 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
 # actions
   actions:
     searchCliente: ->
-      # Bandango.ClienteSearchComponent.create().appendTo "body"
-      Bandango.ClienteSearchView.create(container: @get("container"), controller: @get("controller")).append()
+      Bandango.ClienteSearchView.create(container: @get("container"), controller: @get("controller"), parentView: @).append()
 
 # inherited events
   didInsertElement: ->

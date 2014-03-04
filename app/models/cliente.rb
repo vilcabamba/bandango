@@ -15,6 +15,7 @@
 
 class Cliente < ActiveRecord::Base
   include Cacheable
+  include Searchable
   include Validations
   include SaniSyncable
   include IdValidations

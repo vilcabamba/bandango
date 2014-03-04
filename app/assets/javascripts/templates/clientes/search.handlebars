@@ -1,0 +1,28 @@
+{{#view Bandango.ModalView title="Buscar cliente o proveedor"}}
+  <div class="row">
+    <div class="col-xs-12 form-group search-input">
+      <input type="search" placeholder="Buscar" class="form-control" id="cliente-search-query" />
+      {{view Bandango.SpinnerView size="mini" show=view.queryingCliente}}
+    </div>
+    <div class="col-xs-4 search-results">
+      {{#each cliente in view.clientes}}
+        {{view Bandango.ClienteSearchResultView cliente=cliente}}
+      {{/each}}
+    </div>
+    <div class="col-xs-8 current-client">
+      {{#with view.currentClient}}
+        {{partial "clientes/show"}}
+      {{/with}}
+    </div>
+    <div class="col-xs-12 align_center">
+      <h4>
+        {{#if view.parentView.queryEmpty}}
+          Introduce un término de búsqueda
+        {{/if}}
+        {{#if view.parentView.noResults}}
+          No hay resultados que coincidan con <em>{{view.parentView.query}}</em>
+        {{/if}}
+      </h4>
+    </div>
+  </div>
+{{/view}}

@@ -9,10 +9,10 @@
 #  base_venta  :float
 #  created_at  :datetime
 #  updated_at  :datetime
-#  iva         :boolean          default(TRUE)
+#  iva         :boolean
 #  iva_tarifa  :integer          default(12)
-#  ice         :boolean          default(FALSE)
-#  ice_tarifa  :integer
+#  ice         :boolean
+#  ice_tarifa  :integer          default(15)
 #  se_vende    :boolean
 #  se_compra   :boolean
 #  base_compra :float

@@ -3,6 +3,8 @@ Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarIm
   modelBinding: "controller.model"
   includeForm: true
 
+  includeSearchClienteButton: true
+
 # model
   reSetAssociations: (model) ->
     # orderItems
