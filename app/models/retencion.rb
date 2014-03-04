@@ -5,7 +5,7 @@
 #  id                           :integer          not null, primary key
 #  order_id                     :integer          not null
 #  concepto_retencion_fuente_id :integer
-#  fecha_emision                :date             default(Mon, 20 Jan 2014), not null
+#  fecha_emision                :date             not null
 #  created_at                   :datetime
 #  updated_at                   :datetime
 #  numero_autorizacion          :string(255)
