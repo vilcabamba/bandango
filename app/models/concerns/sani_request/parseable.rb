@@ -9,7 +9,7 @@ class SaniRequest < ActiveRecord::Base
         end
       end
       def parse_transaccion(transaccion)
-        klass = Object.const_get transaccion["model"].capitalize
+        klass = Object.const_get transaccion["model"].camelize
         attrs = JSON.parse transaccion["attrs"]
         identificator = transaccion["identificator"]
         case transaccion["action"]

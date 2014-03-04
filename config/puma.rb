@@ -4,7 +4,7 @@
 #
 # The default is the current directory.
 #
-directory '/home/pi/bandango'
+directory "/home/pi/bandango"
 
 # Use an object or block as the rack application. This allows the
 # config file to be the application itself.
@@ -39,7 +39,7 @@ daemonize
 
 # Store the pid of the server in the file at “path”.
 #
-pidfile '/tmp/bandango.pid'
+pidfile "/tmp/bandango.pid"
 
 # Use “path” as the file to store the server info state. This is
 # used by “pumactl” to query and control the server.
