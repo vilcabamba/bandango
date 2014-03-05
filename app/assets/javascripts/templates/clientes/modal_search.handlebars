@@ -16,11 +16,11 @@
     </div>
     <div class="col-xs-12 align_center">
       <h4>
-        {{#if view.parentView.queryEmpty}}
+        {{#if view.parentView.searchQueryEmpty}}
           Introduce un término de búsqueda
         {{/if}}
-        {{#if view.parentView.noResults}}
-          No hay resultados que coincidan con <em>{{view.parentView.query}}</em>
+        {{#if view.parentView.searchResultsEmpty}}
+          No hay resultados que coincidan con <em>{{view.parentView.currentQuery}}</em>
         {{/if}}
       </h4>
     </div>
