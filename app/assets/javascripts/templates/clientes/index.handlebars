@@ -1,8 +1,14 @@
-{{#view Bandango.ModelAddButtonView route="clientes"}}
+<ol class="breadcrumb">
   <li class="active">
     Clientes
   </li>
-{{/view}}
+  <div class="pull-right">
+    {{render "clientesSearch"}}
+    <div class="btn-group">
+      {{#link-to "clientes.new" class="btn btn-xs btn-default"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}
+    </div>
+  </div>
+</ol>
 
 {{#each cliente in controller}}
   {{view Bandango.ClienteOnListView model=cliente}}
