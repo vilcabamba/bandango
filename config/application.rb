@@ -6,6 +6,17 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+module Rake
+  class Task
+    alias_method :origin_invoke, :invoke if method_defined?(:invoke)
+    def invoke(*args)
+      logger = Logger.new("log/rake.log")
+      logger.info "#{Time.now} -- #{name}"
+      origin_invoke(*args)
+    end
+  end
+end
+
 module Bandango
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
