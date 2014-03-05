@@ -11,33 +11,28 @@ every 15.minutes do
   runner "SaniGetWorker.schedule"
 end
 
-every :day, at: "03:00am" do
+every :day, at: "02:30am" do
   bandango "git pull"
 end
 
-every :day, at: "03:03am" do
+every :day, at: "02:35am" do
   bandango "bundle install --deployment"
 end
 
-every :day, at: "03:10am" do
+every :day, at: "02:50am" do
+  bandango "bundle exec whenever --update-crontab"
+end
+
+every :day, at: "03:00am" do
   rake "db:migrate"
 end
 
-every :day, at: "03:20am" do
+every :day, at: "03:10am" do
   rake "db:seed"
 end
 
-every :day, at: "03:30am" do
+every :day, at: "03:20am" do
   rake "assets:precompile"
-end
-
-every :day, at: "04:00am" do
-  command "sudo service bandango restart"
-  command "sudo service sidekiq stop"
-end
-
-every :day, at: "04:10am" do
-  command "sudo service sidekiq start"
 end
 
 if ENV["DUMMY_DB"]
