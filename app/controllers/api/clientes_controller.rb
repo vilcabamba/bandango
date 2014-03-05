@@ -8,7 +8,8 @@ module Api
       if params[:identificacion].present?
         respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
       elsif params[:search].present?
-        render json: Cliente.search(params[:search]).limit(10)
+        render json: Cliente.search(params[:search]).limit(10),
+               meta: { query: params[:search] }
       else
         @clientes = Cliente.page(params[:page])
         render json: @clientes,
