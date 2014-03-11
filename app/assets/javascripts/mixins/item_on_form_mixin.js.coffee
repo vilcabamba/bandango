@@ -1,12 +1,18 @@
 Bandango.ItemOnFormMixin = Ember.Mixin.create
 
   serviceUrl: (->
-    type = if @get("parentView.parentView.model.isVenta") then "venta" else "compra"
-    "/api/items.json?type=#{type}"
+    "/api/items.json?type=#{@get("type")}"
   ).property("parentView.parentView.model")
+
+  type: (->
+    if @get("parentView.parentView.model.isVenta") then "venta" else "compra"
+  ).property("parentView.parentView.model.isVenta")
 
   itemSelected: (itemObject) ->
     itemObject.item
+
+  priceFor: (itemObject) ->
+    Bandango.numberToCurrencyHelper itemObject["base_#{@get("type")}"]
 
   didInsertElement: ->
     @_super()
@@ -16,10 +22,9 @@ Bandango.ItemOnFormMixin = Ember.Mixin.create
       onSelect: $.proxy(@itemSelected, @)
       transformResult: (response) =>
         response = JSON.parse response, Bandango.jsonCamelizedReviverHelper
-        {
-          suggestions: response.items.map (itemObject) ->
+        { suggestions: response.items.map (itemObject) =>
             item = store.push "item", itemObject
-            { value: itemObject.nombre, item: item }
+            { value: "#{itemObject.nombre} - #{@priceFor(itemObject)}", item: item }
         }
 
   willDestroyElement: ->
