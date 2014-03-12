@@ -3,9 +3,9 @@
     <h1 class="form-signin-heading">Inicia sesión</h1>
     {{view Ember.TextField value=view.username placeholder="Nombre de usuario" class="form-control"}}
     {{view Ember.TextField value=view.password type="password" placeholder="Contraseña" class="form-control"}}
+    <input type="submit" value="Iniciar sesión" class="btn btn-lg btn-primary btn-block" {{bind-attr disabled=view.sendingRequest}}/>
     <div class="text-danger align_center">
       {{view.error}}
     </div>
-    <input type="submit" value="Iniciar sesión" class="btn btn-lg btn-primary btn-block" {{bind-attr disabled=view.sendingRequest}}/>
   </div>
 </div>
