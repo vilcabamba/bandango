@@ -19,13 +19,12 @@ Bandango.SearchMixin = Ember.Mixin.create
   getCacheKey: (results) ->
     if results and results.meta and results.meta.query
       results.meta.query.underscore()
-    else
-      @get("currentQuery")
 
   gotResults: (searchResults) ->
     @set "isQuerying", false
     cacheKey = @getCacheKey(searchResults)
-    @cached[cacheKey] = searchResults
+    if cacheKey
+      @cached[cacheKey] = searchResults
     @set "searchResults", searchResults
 
   stopScheduledSearch: ->
@@ -47,6 +46,7 @@ Bandango.SearchMixin = Ember.Mixin.create
       @stopScheduledSearch()
       @emptyQuerySearch()
     else if !!@cachedQueryResults(newQuery)
+      @stopScheduledSearch()
       @gotResults @cachedQueryResults(newQuery)
     else
       @scheduleSearch()
