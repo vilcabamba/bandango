@@ -1,9 +1,10 @@
-<ol class="breadcrumb">
+<ol class="breadcrumb breadcrumb-with-search">
   <li class="active">
     Clientes
   </li>
   <div class="pull-right">
     {{render "clientesSearch"}}
+    {{view Bandango.SpinnerView size="mini" show=isFetching}}
     <div class="btn-group">
       {{#link-to "clientes.new" class="btn btn-xs btn-default"}}<span class="glyphicon glyphicon-plus"></span>{{/link-to}}
     </div>

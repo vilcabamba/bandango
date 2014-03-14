@@ -1,6 +1,6 @@
 Bandango.ClientesSearchView = Ember.TextField.extend
   type: "search"
-  placeholder: "Buscar"
+  placeholder: "Todos"
   classNames: "form-control breadcrumb-search-filter"
 
   valueChanged: (->

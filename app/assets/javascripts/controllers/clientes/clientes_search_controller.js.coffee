@@ -7,6 +7,7 @@ Bandango.ClientesSearchController = Ember.ArrayController.extend Bandango.Search
     controller.set "showingSearchResults", false
 
   gotResults: (clientes) ->
+    @set "controllers.clientesIndex.isFetching", false
     @_super clientes
     controller = @get("controllers.clientesIndex")
     unless controller.get("showingSearchResults")
@@ -15,6 +16,7 @@ Bandango.ClientesSearchController = Ember.ArrayController.extend Bandango.Search
     controller.set "model", clientes
 
   executeSearch: ->
+    @set "controllers.clientesIndex.isFetching", true
     @get("store").find("cliente", search: @get("currentQuery")).then $.proxy(@gotResults, @)
 
   actions:
