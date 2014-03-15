@@ -1,2 +1,2 @@
 Bandango.CompraOnListView = Bandango.ModelOnListView.extend
-  templateName: "compras/compra_on_list"
+  templateName: "orderable/order_on_list"
