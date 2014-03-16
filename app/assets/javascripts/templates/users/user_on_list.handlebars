@@ -6,5 +6,8 @@
     <div class="primary">
       {{firstNames}}
     </div>
+    {{#if isCurrentUser}}
+      <span class="label label-info">tú</span>
+    {{/if}}
   </div>
 {{/with}}
