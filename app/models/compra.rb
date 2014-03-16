@@ -30,6 +30,7 @@
 #  numero_autorizacion_comprobante_modificado          :string(255)
 #  created_at                                          :datetime
 #  updated_at                                          :datetime
+#  forma_de_pago                                       :string(255)      default("Efectivo"), not null
 #
 
 class Compra < ActiveRecord::Base

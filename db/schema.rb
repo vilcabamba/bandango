@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222200607) do
+ActiveRecord::Schema.define(version: 20140316172805) do
 
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
@@ -33,18 +33,18 @@ ActiveRecord::Schema.define(version: 20140222200607) do
   add_index "clientes", ["identificacion"], name: "index_clientes_on_identificacion", unique: true, using: :btree
 
   create_table "compras", force: true do |t|
-    t.integer  "sustento_comprobante_id",                                           null: false
-    t.integer  "cliente_id",                                                        null: false
-    t.integer  "comprobante_id",                                                    null: false
-    t.date     "fecha_registro",                                                    null: false
-    t.string   "numero_serie_establecimiento",                                      null: false
-    t.string   "numero_serie_punto_emision",                                        null: false
-    t.string   "numero_serie_comprobante",                                          null: false
-    t.date     "fecha_emision",                                                     null: false
-    t.string   "autorizacion_comprobante",                                          null: false
-    t.float    "retencion_iva_bienes",                                default: 0.0, null: false
-    t.float    "retencion_iva_servicios",                             default: 0.0, null: false
-    t.float    "retencion_iva_cien",                                  default: 0.0, null: false
+    t.integer  "sustento_comprobante_id",                                                  null: false
+    t.integer  "cliente_id",                                                               null: false
+    t.integer  "comprobante_id",                                                           null: false
+    t.date     "fecha_registro",                                                           null: false
+    t.string   "numero_serie_establecimiento",                                             null: false
+    t.string   "numero_serie_punto_emision",                                               null: false
+    t.string   "numero_serie_comprobante",                                                 null: false
+    t.date     "fecha_emision",                                                            null: false
+    t.string   "autorizacion_comprobante",                                                 null: false
+    t.float    "retencion_iva_bienes",                                default: 0.0,        null: false
+    t.float    "retencion_iva_servicios",                             default: 0.0,        null: false
+    t.float    "retencion_iva_cien",                                  default: 0.0,        null: false
     t.integer  "concepto_retencion_fuente_id"
     t.float    "base_imponible_renta"
     t.integer  "porcentaje_retencion_fuente"
@@ -60,12 +60,14 @@ ActiveRecord::Schema.define(version: 20140222200607) do
     t.string   "numero_autorizacion_comprobante_modificado"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "forma_de_pago",                                       default: "Efectivo", null: false
   end
 
   add_index "compras", ["cliente_id"], name: "index_compras_on_cliente_id", using: :btree
   add_index "compras", ["comprobante_id"], name: "index_compras_on_comprobante_id", using: :btree
   add_index "compras", ["concepto_retencion_fuente_id"], name: "index_compras_on_concepto_retencion_fuente_id", using: :btree
   add_index "compras", ["fecha_emision"], name: "index_compras_on_fecha_emision", using: :btree
+  add_index "compras", ["forma_de_pago"], name: "index_compras_on_forma_de_pago", using: :btree
   add_index "compras", ["sustento_comprobante_id"], name: "index_compras_on_sustento_comprobante_id", using: :btree
 
   create_table "comprobantes", force: true do |t|
@@ -190,8 +192,8 @@ ActiveRecord::Schema.define(version: 20140222200607) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "ventas", force: true do |t|
-    t.integer  "cliente_id",                   null: false
-    t.integer  "comprobante_id",               null: false
+    t.integer  "cliente_id",                                        null: false
+    t.integer  "comprobante_id",                                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "numero_serie_establecimiento"
@@ -200,10 +202,12 @@ ActiveRecord::Schema.define(version: 20140222200607) do
     t.date     "fecha_emision"
     t.date     "fecha_registro"
     t.string   "autorizacion_comprobante"
+    t.string   "forma_de_pago",                default: "Efectivo", null: false
   end
 
   add_index "ventas", ["cliente_id"], name: "index_ventas_on_cliente_id", using: :btree
   add_index "ventas", ["comprobante_id"], name: "index_ventas_on_comprobante_id", using: :btree
   add_index "ventas", ["fecha_emision"], name: "index_ventas_on_fecha_emision", using: :btree
+  add_index "ventas", ["forma_de_pago"], name: "index_ventas_on_forma_de_pago", using: :btree
 
 end

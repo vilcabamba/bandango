@@ -7,7 +7,8 @@ class OrderableSerializer < ActiveModel::Serializer
              :numero_serie_establecimiento,
              :numero_serie_punto_emision,
              :numero_serie_comprobante,
-             :autorizacion_comprobante
+             :autorizacion_comprobante,
+             :forma_de_pago
 
 
   has_one :cliente, embed: :ids, include: true

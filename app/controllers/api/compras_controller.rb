@@ -32,6 +32,7 @@ module Api
                                      :numero_serie_comprobante,
                                      :numero_serie_establecimiento,
                                      :numero_serie_punto_emision,
+                                     :forma_de_pago,
                                      order_items_params: order_items_params,
                                      retenciones_params: retenciones_params
     end

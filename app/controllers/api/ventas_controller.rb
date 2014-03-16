@@ -25,6 +25,7 @@ module Api
     def venta_params
       params.require(:venta).permit :cliente_id,
                                     :comprobante_id,
+                                    :forma_de_pago,
                                     order_items_params: order_items_params,
                                     retenciones_params: retenciones_params
     end

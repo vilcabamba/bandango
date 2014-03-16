@@ -13,6 +13,7 @@
 #  fecha_emision                :date
 #  fecha_registro               :date
 #  autorizacion_comprobante     :string(255)
+#  forma_de_pago                :string(255)      default("Efectivo"), not null
 #
 
 class Venta < ActiveRecord::Base
