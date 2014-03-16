@@ -1,7 +1,7 @@
 module Api
   class ClientesController < ApiController
-
     before_action :require_login
+
     respond_to :json
 
     def index

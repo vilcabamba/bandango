@@ -1,6 +1,7 @@
 module Api
   class EmisoresController < ApiController
     before_action :require_login
+
     respond_to :json
 
     def show

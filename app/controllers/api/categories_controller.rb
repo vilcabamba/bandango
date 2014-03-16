@@ -1,7 +1,7 @@
 module Api
   class CategoriesController < ApiController
-
     before_action :require_login
+
     respond_to :json
 
     def index
@@ -28,6 +28,5 @@ module Api
     def category_params
       params.require(:category).permit :nombre
     end
-
   end
 end

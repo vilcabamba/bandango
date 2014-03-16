@@ -1,6 +1,7 @@
 module Api
   class ComprobantesController < ApiController
     before_action :require_login
+
     respond_to :json
 
     caches_action :index, cache_path: proc {

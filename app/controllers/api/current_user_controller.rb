@@ -1,7 +1,7 @@
 module Api
   class CurrentUserController < ApiController
-    
     before_action :require_login
+
     respond_to :json
 
     def update
@@ -13,9 +13,9 @@ module Api
     end
 
     private
+
     def user_params
       params.require(:user).permit :nombres, :username, :email, :password
     end
-    
   end
 end

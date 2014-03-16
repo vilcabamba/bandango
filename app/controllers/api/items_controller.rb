@@ -1,7 +1,7 @@
 module Api
   class ItemsController < ApiController
-
     before_action :require_login
+
     respond_to :json
 
     def index
@@ -43,6 +43,5 @@ module Api
                                    :ice_tarifa,
                                    :category_id
     end
-
   end
 end
