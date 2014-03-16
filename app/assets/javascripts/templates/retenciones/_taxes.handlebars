@@ -1,22 +1,22 @@
 <div class="col-xs-4 align_center">
-  <div class="stronger">
-    IVA
+  <div>
+    <span class="stronger">IVA</span>
+    {{#if view.model.tarifaIva}}
+      - {{view.model.tarifaIva}}%
+    {{/if}}
   </div>
   <div>
-    {{#if view.model.tarifaIva}}
-      {{view.model.tarifaIva}}%:
-    {{/if}}
     {{number_to_currency view.model.iva}}
   </div>
 </div>
 <div class="col-xs-4 align_center">
-  <div class="stronger">
-    ICE
+  <div>
+    <span class="stronger">ICE</span>
+    {{#if view.model.tarifaIce}}
+      - {{view.model.tarifaIce}}%
+    {{/if}}
   </div>
   <div>
-    {{#if view.model.tarifaIce}}
-      {{view.model.tarifaIce}}%:
-    {{/if}}
     {{number_to_currency view.model.ice}}
   </div>
 </div>
