@@ -1,5 +1,5 @@
 Bandango.CompraFormView = Bandango.OrderableFormView.extend Bandango.SustentoTributarioOnFormMixin,
-  attributesForCompra: ["numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante", "fechaEmision", "fechaRegistro", "autorizacionComprobante"]
+  attributesForCompra: ["numeroSerieEstablecimiento", "numeroSeriePuntoEmision", "numeroSerieComprobante", "fechaEmision", "fechaRegistro", "autorizacionComprobante", "formaDePago"]
 
   clienteSaved: ->
     @saveCompra()

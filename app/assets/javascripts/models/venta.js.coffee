@@ -6,6 +6,7 @@ Bandango.Venta = DS.Model.extend Bandango.OrderItemsMixin,
   fechaRegistro:              DS.attr()
   createdAt:                  DS.attr()
   autorizacionComprobante:    DS.attr()
+  formaDePago:                DS.attr()
 
   cliente:                    DS.belongsTo("cliente")
   comprobante:                DS.belongsTo("comprobante")

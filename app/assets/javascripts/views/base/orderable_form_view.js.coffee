@@ -1,4 +1,4 @@
-Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin,
+Bandango.OrderableFormView = Bandango.ModelBackedView.extend Bandango.GravatarImagenOnForm, Bandango.ClienteOnFormMixin, Bandango.ComprobanteOnFormMixin, Bandango.FormasDePagoOnFormMixin,
   queryForClienteOnIdentificacionChange: true
   modelBinding: "controller.model"
   includeForm: true

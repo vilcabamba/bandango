@@ -15,6 +15,7 @@ Bandango.Compra = DS.Model.extend Bandango.OrderItemsMixin,
   numeroSerieRetencion:                DS.attr()
   numeroAutorizacionRetencion:         DS.attr()
   fechaEmisionRetencion:               DS.attr()
+  formaDePago:                         DS.attr()
 
   sustentoComprobante:                 DS.belongsTo("sustentoComprobante")
   comprobante:                         DS.belongsTo("comprobante")
