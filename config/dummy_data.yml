@@ -1,7 +1,9 @@
-admin:
-  username: admin
-  email: admin@example.com
-  password: Admin123
+users:
+  - username: admin
+    email: admin@example.com
+    password: Admin123
+  - username: macool
+    email: a@macool.me
 
 emisor:
   razon_social: Mario Andrés Correa
