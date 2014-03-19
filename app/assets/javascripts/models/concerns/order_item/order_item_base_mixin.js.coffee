@@ -48,7 +48,6 @@ Bandango.OrderItemBaseMixin = Ember.Mixin.create
   ivaZeroFor: (orderType) ->
     return 0 if @get("item.iva") or @get("item.ice")
     @get("price#{orderType}") * (@get("item.iceTarifa") / 100)
-  ivaZeroCompra: (-> @ivaZeroFor("Compra") )
 
   ivaZeroCompra: (-> @ivaZeroFor("Compra") )
   .property("item.iva", "item.ice", "priceCompra", "item.iceTarifa")
