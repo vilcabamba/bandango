@@ -20,11 +20,13 @@ input:focus:invalid
   @include red_placeholder_color
 
 .minimal_input
-  border-top: 0
-  border-left: 0
-  border-right: 0
   border-radius: 4px 4px 1px 1px
   box-shadow: none
+  border-top: 1px solid transparent
+  border-left: 1px solid transparent
+  border-right: 1px solid transparent
+  &:focus
+    border: 1px solid #66afe9
 
 .small_padding
   padding: 2px
