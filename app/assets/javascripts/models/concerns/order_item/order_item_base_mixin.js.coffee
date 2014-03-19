@@ -50,10 +50,10 @@ Bandango.OrderItemBaseMixin = Ember.Mixin.create
     @get("price#{orderType}") * (@get("item.iceTarifa") / 100)
 
   ivaZeroCompra: (-> @ivaZeroFor("Compra") )
-  .property("item.iva", "item.ice", "priceCompra", "item.iceTarifa")
+  .property("item.{iva,ice,iceTarifa}", "priceCompra")
 
   ivaZeroVenta: (-> @ivaZeroFor("Venta") )
-  .property("item.iva", "item.ice", "priceVenta", "item.iceTarifa")
+  .property("item.{iva,ice,iceTarifa}", "priceVenta")
 
 # ivaTwelve
   ivaTwelveFor: (orderType) ->
@@ -61,10 +61,10 @@ Bandango.OrderItemBaseMixin = Ember.Mixin.create
     @get("price#{orderType}") * (@get("item.ivaTarifa") / 100)
 
   ivaTwelveCompra: (-> @ivaTwelveFor("Compra") )
-  .property("item.iva", "priceCompra", "item.ivaTarifa")
+  .property("item.{iva,ivaTarifa}", "priceCompra")
 
   ivaTwelveVenta: (-> @ivaTwelveFor("Venta") )
-  .property("item.iva", "priceVenta", "item.ivaTarifa")
+  .property("item.{iva,ivaTarifa}", "priceVenta")
 
 # ice
   iceFor: (orderType) ->
@@ -72,7 +72,7 @@ Bandango.OrderItemBaseMixin = Ember.Mixin.create
     @get("price#{orderType}") * (@get("item.iceTarifa") / 100)
 
   iceCompra: (-> @iceFor("Compra") )
-  .property("item.ice", "priceCompra", "item.iceTarifa")
+  .property("item.{ice,iceTarifa}", "priceCompra")
 
   iceVenta: (-> @iceFor("Venta") )
-  .property("item.ice", "priceVenta", "item.iceTarifa")
+  .property("item.{ice,iceTarifa}", "priceVenta")

@@ -49,17 +49,17 @@ Bandango.OrderItemsMixin = Ember.Mixin.create
       prev + orderItem.get("ivaTwelve#{@get("modelName")}")
     , 0
     Bandango.numberForCurrencyHelper ivaTwelve
-  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.{baseCompra,baseVenta}", "orderItems.@each.cantidad")
 
   totalPrice: (->
     totalPrice = @get("orderItems.content").reduce (prev, orderItem) =>
       prev + orderItem.get("totalPrice#{@get("modelName")}")
     , 0
     Bandango.numberForCurrencyHelper totalPrice
-  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.{baseCompra,baseVenta}", "orderItems.@each.cantidad")
 
   ice: (->
     @get("orderItems.content").reduce (prev, orderItem) =>
       prev + orderItem.get("ice#{@get("modelName")}")
     , 0
-  ).property("orderItems.@each.item.baseCompra", "orderItems.@each.item.baseVenta", "orderItems.@each.cantidad")
+  ).property("orderItems.@each.item.{baseCompra,baseVenta}", "orderItems.@each.cantidad")
