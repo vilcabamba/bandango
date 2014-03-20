@@ -9,5 +9,5 @@ Bandango.UserMixin = Ember.Mixin.create
   ).property("nombres")
 
   isCurrentUser: (->
-    parseInt(@get("id"), 10) == Bandango.currentSession.get("user").get("id") and this != Bandango.currentSession.get("user")
+    this == Bandango.currentSession.get("user")
   ).property()
