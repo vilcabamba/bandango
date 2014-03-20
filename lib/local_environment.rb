@@ -1,3 +1,5 @@
+# We are not using this class
+
 # taken New Relic's rpm as example:
 # https://github.com/newrelic/rpm/blob/master/lib/new_relic/local_environment.rb
 class LocalEnvironment

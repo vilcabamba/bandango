@@ -1,2 +1,3 @@
 web: bundle exec puma -C /home/pi/bandango/config/puma.rb
 worker: bundle exec sidekiq -e production -C config/sidekiq.yml
+pusher: bundle exec rake pusher:connect
