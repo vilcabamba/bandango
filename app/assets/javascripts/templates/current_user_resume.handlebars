@@ -5,9 +5,9 @@
       {{firstNames}}
       <span class="caret"></span>
     </button>
-    
+
     <ul class="dropdown-menu" role="menu">
-      <li>{{link-to "Mi perfil" "me"}}</li>
+      <li>{{link-to "Mi perfil" "users.show" Bandango.currentSession.user}}</li>
       <li class="divider"></li>
       <li><a href="/logout">Cerrar sesión</a></li>
     </ul>
