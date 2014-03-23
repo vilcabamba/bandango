@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316172805) do
+ActiveRecord::Schema.define(version: 20140317014640) do
 
   create_table "cash_denomination_items", force: true do |t|
     t.integer  "cash_denomination_id", null: false
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20140316172805) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "cierre_caja_orders", force: true do |t|
+    t.integer  "cierre_caja_id", null: false
+    t.integer  "order_id",       null: false
+    t.string   "order_type",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cierre_caja_orders", ["cierre_caja_id", "order_id", "order_type"], name: "cierre_cajas_orders", using: :btree
+  add_index "cierre_caja_orders", ["order_id", "order_type"], name: "cierre_caja_orderable", using: :btree
 
   create_table "cierres_caja", force: true do |t|
     t.integer  "user_id",                            null: false
