@@ -1,5 +1,5 @@
 onlyNumberHelper = (input) ->
-  Number input.toString().replace(/[^\d.]/g, "")
+  Number String(input).replace(/[^\d.]/g, "")
 
 Bandango.NumberField = Ember.TextField.extend
   type: "number"

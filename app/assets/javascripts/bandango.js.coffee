@@ -4,6 +4,7 @@
 #= require_tree ./serializers
 #= require_tree ./mixins
 #= require_tree ./helpers
+#= require_tree ./models/concerns
 #= require_tree ./models
 #= require_tree ./controllers
 #= require_tree ./views
