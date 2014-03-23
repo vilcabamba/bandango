@@ -2,8 +2,8 @@ class Stats
   DAYS = 7
 
   def self.for(scope)
-    venta_scope = Venta.includes(:order_items).send(scope)
-    compra_scope = Compra.includes(:order_items).send(scope)
+    venta_scope = Venta.send(scope)
+    compra_scope = Compra.send(scope)
 
     {
       name: I18n.t("date.#{scope}").capitalize,
@@ -49,7 +49,7 @@ class Stats
 
   def self.data_for(name)
     categories.map do |date|
-      name.capitalize.constantize.includes(:order_items).at(date).total
+      name.capitalize.constantize.at(date).total
     end
   end
 

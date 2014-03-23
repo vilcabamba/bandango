@@ -22,9 +22,6 @@ class Venta < ActiveRecord::Base
   include Validations
   include OrderableInfo
 
-# default scope
-  default_scope { order("id DESC") }
-
 # relationships
   belongs_to :cliente
   belongs_to :comprobante

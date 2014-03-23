@@ -2,9 +2,15 @@ module Orderable
   extend ActiveSupport::Concern
 
   included do
+  # validations
     validates :cliente_id,     presence: true
     validates :comprobante_id, presence: true
     validate  :has_order_items
+
+  # scopes
+    scope :recent, -> { order("id DESC") }
+    scope :pago, ->(forma_de_pago) { where(forma_de_pago: forma_de_pago) }
+    scope :efectivo, -> { pago("Efectivo") }
   end
 
   def has_order_items

@@ -19,4 +19,7 @@ class User < ActiveRecord::Base
   include Tokenizable
   include GravatarImagen
 
+# relationships
+  has_many :cierres_caja
+
 end

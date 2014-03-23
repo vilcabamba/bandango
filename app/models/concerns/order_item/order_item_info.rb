@@ -31,15 +31,19 @@ class OrderItem < ActiveRecord::Base
     end
 
     def iva_twelve
-      return 0 unless cached_item_iva
-      iva = price * (cached_item_iva_tarifa / 100.0)
-      iva.round(2)
+      @iva_twelve ||= begin
+        return 0 unless cached_item_iva
+        iva = price * (cached_item_iva_tarifa / 100.0)
+        iva.round(2)
+      end
     end
 
     def ice_total
-      return 0 unless cached_item_ice
-      ice = price * (cached_item_ice_tarifa / 100.0)
-      ice.round(2)
+      @ice_total ||= begin
+        return 0 unless cached_item_ice
+        ice = price * (cached_item_ice_tarifa / 100.0)
+        ice.round(2)
+      end
     end
 
     def price
