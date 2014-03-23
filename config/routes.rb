@@ -66,6 +66,7 @@ Bandango::Application.routes.draw do
     resources :items
     resources :categories
     resources :emisores
+    resources :cierres_caja
     resources :current_user do
       collection do
         post "/", to: "current_user#update"

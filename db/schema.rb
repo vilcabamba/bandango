@@ -19,6 +19,25 @@ ActiveRecord::Schema.define(version: 20140316172805) do
     t.datetime "updated_at"
   end
 
+  create_table "cierres_caja", force: true do |t|
+    t.integer  "user_id",                            null: false
+    t.text     "totales"
+    t.integer  "fondo_anterior_cents",   default: 0, null: false
+    t.integer  "efectivo_compras_cents", default: 0, null: false
+    t.integer  "iva_compras_cents",      default: 0, null: false
+    t.integer  "ice_compras_cents",      default: 0, null: false
+    t.integer  "efectivo_ventas_cents",  default: 0, null: false
+    t.integer  "iva_ventas_cents",       default: 0, null: false
+    t.integer  "ice_ventas_cents",       default: 0, null: false
+    t.integer  "efectivo_teorico_cents", default: 0, null: false
+    t.integer  "efectivo_real_cents",    default: 0, null: false
+    t.integer  "retiro_cents",           default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cierres_caja", ["user_id"], name: "index_cierres_caja_on_user_id", using: :btree
+
   create_table "clientes", force: true do |t|
     t.string   "tipo_id",        default: "Cédula", null: false
     t.string   "identificacion",                    null: false

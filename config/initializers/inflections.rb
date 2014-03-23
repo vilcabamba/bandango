@@ -9,6 +9,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'venta', 'ventas'
   inflect.irregular 'emisor', 'emisores'
   inflect.irregular 'retencion', 'retenciones'
+  inflect.irregular "cierre_caja", "cierres_caja"
 #   inflect.uncountable %w( fish sheep )
 end
 
