@@ -13,6 +13,22 @@
 
 ActiveRecord::Schema.define(version: 20140316172805) do
 
+  create_table "cash_denomination_items", force: true do |t|
+    t.integer  "cash_denomination_id", null: false
+    t.integer  "cierre_caja_id",       null: false
+    t.integer  "cantidad",             null: false
+    t.datetime "created_at"
+  end
+
+  add_index "cash_denomination_items", ["cash_denomination_id", "cierre_caja_id"], name: "cash_denomination_items", using: :btree
+
+  create_table "cash_denominations", force: true do |t|
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.string  "kind",                           null: false
+  end
+
+  add_index "cash_denominations", ["price", "kind"], name: "index_cash_denominations_on_price_and_kind", unique: true, using: :btree
+
   create_table "categories", force: true do |t|
     t.string   "nombre",     null: false
     t.datetime "created_at"

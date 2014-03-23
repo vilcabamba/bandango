@@ -8,6 +8,8 @@
 #
 
 class CashDenomination < ActiveRecord::Base
+  include Cacheable
+
 # validations
   validates :price, presence: true
   validates :kind, presence: true
