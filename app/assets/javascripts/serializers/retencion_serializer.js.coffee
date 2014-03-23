@@ -1,4 +1,4 @@
-Bandango.RetencionSerializer = DS.ActiveModelSerializer.extend
+Bandango.RetencionSerializer = Bandango.ApplicationSerializer.extend
   serialize: (retencion, options) ->
     unless retencion.get("inForm")
       {
