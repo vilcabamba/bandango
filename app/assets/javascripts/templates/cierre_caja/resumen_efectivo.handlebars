@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-xs-6">
+    <table class="default_table cash-summary-table">
+      <tbody>
+
+        {{!-- ventas --}}
+        <tr>
+          <th colspan="2">Efectivo ventas</th>
+        </tr>
+        <tr class="row_divider">
+          <td>Base</td>
+          <td>{{number_to_currency model.efectivoVentas}}</td>
+        </tr>
+        <tr>
+          <td>IVA</td>
+          <td>{{number_to_currency model.ivaVentas}}</td>
+        </tr>
+        <tr>
+          <td>ICE</td>
+          <td>{{number_to_currency model.iceVentas}}</td>
+        </tr>
+
+        {{!-- compras --}}
+        <tr>
+          <th colspan="2">Efectivo compras</th>
+        </tr>
+        <tr class="row_divider">
+          <td>Base</td>
+          <td>{{number_to_currency model.efectivoCompras}}</td>
+        </tr>
+        <tr>
+          <td>IVA</td>
+          <td>{{number_to_currency model.ivaCompras}}</td>
+        </tr>
+        <tr>
+          <td>ICE</td>
+          <td>{{number_to_currency model.iceCompras}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6">
+    <table class="default_table cash-summary-table">
+      <tbody>
+        <tr>
+          <th colspan="2">Efectivo total en caja</th>
+        </tr>
+        <tr class="row_divider">
+          <td>Fondo anterior</td>
+          <td>{{number_to_currency model.fondoAnterior}}</td>
+        </tr>
+        <tr>
+          <td>Ventas</td>
+          <td>{{number_to_currency model.totalVentas}}</td>
+        </tr>
+        <tr>
+          <td>Compras</td>
+          <td>{{number_to_currency model.totalCompras}}</td>
+        </tr>
+        <tr class="row_divider">
+          <td>Efectivo teórico</td>
+          <td>{{number_to_currency model.efectivoTeorico}}</td>
+        </tr>
+        <tr>
+          <td>Efectivo real</td>
+          <td>{{number_to_currency model.efectivoReal}}</td>
+        </tr>
+        <tr class="row_divider">
+          <td>Descuadre</td>
+          <td {{bind-attr class="descuadreClass"}}>{{number_to_currency model.descuadre}}</td>
+        </tr>
+        <tr>
+          <td>Retiro</td>
+          <td class="align_right">
+            {{view Ember.TextField type="number" step="any" value=model.retiro class="small_padding form-control minimal_input"}}
+          </td>
+        </tr>
+        <tr class="row_divider">
+          <td>Nuevo fondo de caja</td>
+          <td>{{number_to_currency model.nuevoFondo}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

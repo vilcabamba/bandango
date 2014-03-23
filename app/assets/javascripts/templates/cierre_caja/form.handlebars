@@ -1,0 +1,34 @@
+<section class="form_section">
+  <div class="section_header">
+    Totales por forma de pago
+  </div>
+  <div class="section_body">
+    {{partial "cierre_caja/totales"}}
+  </div>
+</section>
+<section class="form_section">
+  <div class="section_header">
+    Cuadrar efectivo
+  </div>
+  <div class="section_body">
+    {{partial "cierre_caja/efectivo_form"}}
+  </div>
+</section>
+<section class="form_section">
+  <div class="section_header">
+    Resumen de efectivo en caja
+  </div>
+  <div class="section_body">
+    {{partial "cierre_caja/resumen_efectivo"}}
+  </div>
+</section>
+<section class="form_section">
+  <div class="section_header">
+    Cajero
+  </div>
+  <div class="section_body">
+    {{#with Bandango.currentSession.user}}
+      {{partial "users/show"}}
+    {{/with}}
+  </div>
+</section>

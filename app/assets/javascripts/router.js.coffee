@@ -26,6 +26,9 @@ Bandango.Router.map ()->
   @resource "preferencias", ->
     @route "index", path: "/"
     @route "edit"
+  @resource "cierre_caja", ->
+    @route "index", path: "/"
+    @route "new"
   @resource "categorias", ->
     @route "index", path: "/"
     @route "new"

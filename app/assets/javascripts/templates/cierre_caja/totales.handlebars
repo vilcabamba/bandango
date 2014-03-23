@@ -1,0 +1,24 @@
+<table class="default_table full_width">
+  <thead>
+    <tr>
+      <th>Forma de pago</th>
+      <th>Número de operaciones</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.totales}}
+      <tr>
+        <td>
+          {{name}}
+        </td>
+        <td class="align_right">
+          {{qty}}
+        </td>
+        <td class="align_right">
+          {{number_to_currency sum}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

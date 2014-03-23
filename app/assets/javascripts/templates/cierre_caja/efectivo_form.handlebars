@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-6">
+    <table class="default_table cash-denomination-table">
+      <thead>
+        <tr>
+          <th>Monedas</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cashDenomination in coins}}
+          {{view Bandango.CashDenominationItemRowView cashDenomination=cashDenomination}}
+        {{/each}}
+        <tr class="row_divider stronger">
+          <td>
+            <span class="total-text">Total:</span>
+            {{number_to_currency coinTotalValue}}
+          </td>
+          <td class="total-count">
+            {{coinCount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6">
+    <table class="default_table cash-denomination-table">
+      <thead>
+        <tr>
+          <th>Billetes</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cashDenomination in bills}}
+          {{view Bandango.CashDenominationItemRowView cashDenomination=cashDenomination}}
+        {{/each}}
+        <tr class="row_divider stronger">
+          <td>
+            <span class="total-text">Total:</span>
+            {{number_to_currency billTotalValue}}
+          </td>
+          <td class="total-count">
+            {{billCount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
