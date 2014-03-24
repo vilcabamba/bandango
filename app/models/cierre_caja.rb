@@ -20,7 +20,6 @@
 #
 
 class CierreCaja < ActiveRecord::Base
-  include Reportable
   register_currency :usd
 
 # relationships
