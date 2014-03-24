@@ -1,0 +1,8 @@
+{{#with view.model}}
+  <div class="imagen">
+    <img src="{{unbound user.imagen_url_mini}}" class="profile_image mini"></img>
+  </div>
+  <div class="info">
+    <div class="title">{{humanize_time createdAt format="long"}}</div>
+  </div>
+{{/with}}

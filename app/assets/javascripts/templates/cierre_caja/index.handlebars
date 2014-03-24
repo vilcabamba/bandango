@@ -2,4 +2,8 @@
   <li class="active">Cierres de caja</li>
 {{/view}}
 
-(Ninguno aún)
+{{#each cierreCaja in controller}}
+  {{view Bandango.CierreCajaOnListView model=cierreCaja}}
+{{/each}}
+
+{{view Bandango.IndexBottomLoadMoreView name="cierres de caja"}}
