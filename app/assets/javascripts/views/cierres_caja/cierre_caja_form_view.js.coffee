@@ -3,7 +3,7 @@ Bandango.CierreCajaFormView = Bandango.ModelBackedView.extend
 
   cierreCajaSaved: (cierreCaja) ->
     @successCallback "Cierre de caja guardado"
-    @get("controller").transitionToRoute "cierre_caja.show", cierreCaja.get("id")
+    @get("controller").transitionToRoute "cierres_caja.show", cierreCaja.get("id")
 
   reSetAssociations: (model) ->
     # cashDenominationItems

@@ -1,3 +1,5 @@
+Bandango.currencyPrefix = "$ "
+
 Bandango.numberForCurrencyHelper = (number=0) ->
   # to float if string
   number = parseFloat number, 10 if number.constructor == String
@@ -5,7 +7,7 @@ Bandango.numberForCurrencyHelper = (number=0) ->
   parseFloat number.toFixed(2), 10
 
 Bandango.numberToCurrencyHelper = (number) ->
-  accounting.formatMoney number, "$ "
+  accounting.formatMoney number, Bandango.currencyPrefix
 
 Ember.Handlebars.helper "number_to_currency", (number) ->
   Bandango.numberToCurrencyHelper number

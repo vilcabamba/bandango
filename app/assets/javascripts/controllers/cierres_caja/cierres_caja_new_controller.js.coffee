@@ -1,9 +1,4 @@
 Bandango.CierresCajaNewController = Ember.Controller.extend
-# template properties
-  descuadreClass: (->
-    "text-danger" if @get("model.descuadre") != 0
-  ).property("model.descuadre")
-
 # bills or coins
   bills: (->
     @get("cashDenominations").filterBy "kind", "bill"
