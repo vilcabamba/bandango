@@ -1,5 +1,5 @@
 class CierreCajaSerializer < ActiveModel::Serializer
-  attributes :user_id,
+  attributes :id,
              :totales,
              :fondo_anterior,
              :efectivo_compras,
@@ -31,4 +31,6 @@ class CierreCajaSerializer < ActiveModel::Serializer
     end
     hash
   end
+
+  has_one :user, embed: :ids, include: true
 end

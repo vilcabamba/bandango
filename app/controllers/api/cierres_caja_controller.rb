@@ -4,6 +4,11 @@ module Api
 
     respond_to :json
 
+    def index
+      @cierres_caja = CierreCaja.includes(:user).page(params[:page])
+      render json: @cierres_caja, meta: { total_pages: @cierres_caja.total_pages, page: @cierres_caja.current_page }
+    end
+
     def new
       respond_with CierreCaja.new.prepare!
     end
