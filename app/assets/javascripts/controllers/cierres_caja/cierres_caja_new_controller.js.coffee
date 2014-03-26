@@ -1,4 +1,4 @@
-Bandango.CierreCajaNewController = Ember.Controller.extend
+Bandango.CierresCajaNewController = Ember.Controller.extend
 # template properties
   descuadreClass: (->
     "text-danger" if @get("model.descuadre") != 0

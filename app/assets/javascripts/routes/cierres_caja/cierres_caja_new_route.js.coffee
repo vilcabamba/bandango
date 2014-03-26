@@ -1,4 +1,4 @@
-Bandango.CierreCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
+Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
   beforeModel: ->
     @_super()
     promises = []

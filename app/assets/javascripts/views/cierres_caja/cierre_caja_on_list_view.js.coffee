@@ -1,2 +1,2 @@
 Bandango.CierreCajaOnListView = Bandango.ModelOnListView.extend
-  templateName: "cierre_caja/cierre_caja_on_list"
+  templateName: "cierres_caja/cierre_caja_on_list"
