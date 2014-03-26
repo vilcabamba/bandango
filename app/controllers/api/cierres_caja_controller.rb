@@ -9,6 +9,10 @@ module Api
       render json: @cierres_caja, meta: { total_pages: @cierres_caja.total_pages, page: @cierres_caja.current_page }
     end
 
+    def show
+      respond_with CierreCaja.find(params[:id])
+    end
+
     def new
       respond_with CierreCaja.new.prepare!
     end

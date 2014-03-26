@@ -18,3 +18,9 @@ Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
   setupController: (controller) ->
     controller.set "model", @get("store").createRecord("cierreCaja", @get("cierre_caja"))
     controller.set "cashDenominations", @get("cashDenominations")
+
+  actions:
+    willTransition: (transition) ->
+      model = @get("controller.model")
+      if model.get("isDirty")
+        model.rollback()

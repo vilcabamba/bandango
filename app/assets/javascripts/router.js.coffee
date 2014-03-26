@@ -29,6 +29,7 @@ Bandango.Router.map ()->
   @resource "cierres_caja", ->
     @route "index", path: "/"
     @route "new"
+    @route "show", path: "/:cierre_caja_id"
   @resource "categorias", ->
     @route "index", path: "/"
     @route "new"
