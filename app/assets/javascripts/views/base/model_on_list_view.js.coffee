@@ -11,5 +11,5 @@ Bandango.ModelOnListView = Ember.View.extend
   baseRoute: (->
     # default baseRoute based on model's name
     modelName = String(@get("model").constructor).split(".")[1]
-    modelName.toLowerCase().pluralize()
+    modelName.decamelize().pluralize()
   ).property()
