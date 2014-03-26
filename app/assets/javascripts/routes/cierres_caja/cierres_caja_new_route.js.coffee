@@ -12,6 +12,7 @@ Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
         for key, value of response.cierre_caja
           cierreCaja[key.camelize()] = value
         @set "cierre_caja", cierreCaja
+        @set "cierre_caja.user", Bandango.currentSession.get("user")
     Ember.RSVP.all promises
 
   setupController: (controller) ->

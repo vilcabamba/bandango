@@ -8,7 +8,7 @@
 </section>
 <section class="form_section">
   <div class="section_header">
-    Cuadrar efectivo
+    Cuadre de efectivo
   </div>
   <div class="section_body">
     {{partial "cierres_caja/efectivo_form"}}
@@ -27,7 +27,7 @@
     Cajero
   </div>
   <div class="section_body">
-    {{#with Bandango.currentSession.user}}
+    {{#with model.user}}
       {{partial "users/show"}}
     {{/with}}
   </div>
