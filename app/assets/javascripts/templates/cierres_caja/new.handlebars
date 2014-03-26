@@ -1,18 +1,18 @@
 <ol class="breadcrumb">
   <li>
-    {{link-to "Cierres de caja" "cierre_caja.index"}}
+    {{link-to "Cierres de caja" "cierres_caja.index"}}
   </li>
   <li class="active">Nuevo</li>
 </ol>
 
-{{partial "cierre_caja/form"}}
+{{partial "cierres_caja/form"}}
 
 <div class="row">
   <div class="col-xs-6 text-danger">
     {{array_with_lines view.errors_messages}}
   </div>
   <div class="col-xs-6 actions">
-    {{link-to "Cancelar" "cierre_caja.index" class="btn btn-link"}}
+    {{link-to "Cancelar" "cierres_caja.index" class="btn btn-link"}}
     <input type="submit" value="{{unbound view.submitButtonText}}" class="btn btn-primary" {{bind-attr disabled=view.submitting}}>
   </div>
 </div>
