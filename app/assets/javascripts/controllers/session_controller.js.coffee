@@ -1,6 +1,7 @@
 Bandango.SessionController = Ember.Controller.extend
   initializeWithStore: (store) ->
-    @set "user", store.push("user", @get("userProperties"))
+    if userProperties = @get("userProperties")
+      @set "user", store.push("user", userProperties)
 
   willLoginAs: (userProperties) ->
     @set "userProperties", userProperties
