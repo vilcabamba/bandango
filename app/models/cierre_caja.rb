@@ -29,6 +29,7 @@ class CierreCaja < ActiveRecord::Base
   # has_many :orders, through: :cierre_caja_orders
 
 # validations
+  validate :has_transacciones
   validates :fondo_anterior,
             :retiro,
             :nuevo_fondo,
@@ -67,6 +68,10 @@ class CierreCaja < ActiveRecord::Base
   attr_accessor :ventas_efectivo
 
 # methods
+  def has_transacciones
+    errors.add(:cierre_caja_orders, "No puedes cerrar una caja sin transacciones") if cierre_caja_orders.empty?
+  end
+
   def assign_orders!
     self.compras = Compra.where "id > :id", id: CierreCajaOrder.last_order_id_for("Compra")
     self.compras_efectivo = compras.efectivo.includes(:order_items)
