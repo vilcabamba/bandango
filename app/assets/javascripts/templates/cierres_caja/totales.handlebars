@@ -1,24 +1,30 @@
-<table class="default_table full_width">
-  <thead>
-    <tr>
-      <th>Forma de pago</th>
-      <th>Número de operaciones</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model.totales}}
+{{#if model.totales}}
+  <table class="default_table full_width">
+    <thead>
       <tr>
-        <td>
-          {{name}}
-        </td>
-        <td class="align_right">
-          {{qty}}
-        </td>
-        <td class="align_right">
-          {{number_to_currency sum}}
-        </td>
+        <th>Forma de pago</th>
+        <th>Número de operaciones</th>
+        <th>Total</th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each model.totales}}
+        <tr>
+          <td>
+            {{name}}
+          </td>
+          <td class="align_right">
+            {{qty}}
+          </td>
+          <td class="align_right">
+            {{number_to_currency sum}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <h5 class="align_center lighter">
+    No existen operaciones
+  </h5>
+{{/if}}
