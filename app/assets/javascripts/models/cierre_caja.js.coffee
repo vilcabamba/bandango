@@ -40,3 +40,8 @@ Bandango.CierreCaja = DS.Model.extend
     , 0
     @set "efectivoReal", efectivoReal
   ).observes("cashDenominationItems.@each.cantidad")
+
+# methods
+  rollbackAssociations: ->
+    for cashDenominationItem in @get("cashDenominationItems.content").filterBy("isNew")
+      cashDenominationItem.deleteRecord()
