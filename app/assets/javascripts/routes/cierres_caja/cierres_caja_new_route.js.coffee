@@ -24,4 +24,6 @@ Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
       model = @get("controller.model")
       if model.get("isDirty")
         model.rollback()
+      if model.get("isNew")
+        model.deleteRecord()
       model.rollbackAssociations()
