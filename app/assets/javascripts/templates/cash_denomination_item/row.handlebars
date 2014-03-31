@@ -1,2 +1,8 @@
-<td>{{number_to_currency view.cashDenomination.price}}</td>
-<td>{{view Bandango.NumberField value=view.model.cantidad class=" small_padding form-control minimal_input"}}</td>
+<td>{{number_to_currency view.cashDenominationItem.cashDenomination.price}}</td>
+<td>
+  {{#if view.parentView.includeForm}}
+    {{view Bandango.NumberField value=view.cashDenominationItem.cantidad class="small_padding form-control minimal_input"}}
+  {{else}}
+    <div class="align_center">{{view.cashDenominationItem.cantidad}}</div>
+  {{/if}}
+</td>

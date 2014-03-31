@@ -8,8 +8,8 @@
         </tr>
       </thead>
       <tbody>
-        {{#each cashDenomination in coins}}
-          {{view Bandango.CashDenominationItemRowView cashDenomination=cashDenomination}}
+        {{#each coinDenominationItems}}
+          {{view Bandango.CashDenominationItemRowView cashDenominationItem=this}}
         {{/each}}
         <tr class="row_divider stronger">
           <td>
@@ -32,8 +32,8 @@
         </tr>
       </thead>
       <tbody>
-        {{#each cashDenomination in bills}}
-          {{view Bandango.CashDenominationItemRowView cashDenomination=cashDenomination}}
+        {{#each billDenominationItems}}
+          {{view Bandango.CashDenominationItemRowView cashDenominationItem=this}}
         {{/each}}
         <tr class="row_divider stronger">
           <td>

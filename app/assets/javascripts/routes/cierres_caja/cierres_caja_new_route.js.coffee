@@ -1,3 +1,5 @@
+prepareCierreCaja = Bandango.cierreCajaInteractorHelper.prepareCierreCaja
+
 Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
   beforeModel: ->
     @_super()
@@ -11,19 +13,17 @@ Bandango.CierresCajaNewRoute = Bandango.AuthenticationRequiredRoute.extend
         cierreCaja = {}
         for key, value of response.cierre_caja
           cierreCaja[key.camelize()] = value
-        @set "cierre_caja", cierreCaja
-        @set "cierre_caja.user", Bandango.currentSession.get("user")
+        @set "cierreCajaProperties", cierreCaja
+        @set "cierreCajaProperties.user", Bandango.currentSession.get("user")
     Ember.RSVP.all promises
 
   setupController: (controller) ->
-    controller.set "model", @get("store").createRecord("cierreCaja", @get("cierre_caja"))
-    controller.set "cashDenominations", @get("cashDenominations")
+    cierreCaja = @get("store").createRecord("cierreCaja", @get("cierreCajaProperties"))
+    controller.set "model", cierreCaja
+    prepareCierreCaja(cierreCaja: cierreCaja, cashDenominations: @get("cashDenominations"), store: @get("store"))
 
   actions:
     willTransition: (transition) ->
       model = @get("controller.model")
-      if model.get("isDirty")
-        model.rollback()
-      if model.get("isNew")
-        model.deleteRecord()
       model.rollbackAssociations()
+      model.deleteRecord()

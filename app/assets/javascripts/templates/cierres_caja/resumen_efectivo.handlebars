@@ -72,7 +72,11 @@
         <tr>
           <td>Retiro</td>
           <td class="align_right">
-            {{view Ember.TextField type="number" step="any" value=model.retiro class="small_padding form-control minimal_input"}}
+            {{#if view.includeForm}}
+              {{view Ember.TextField type="number" step="any" value=model.retiro class="small_padding form-control minimal_input"}}
+            {{else}}
+              {{number_to_currency model.retiro}}
+            {{/if}}
           </td>
         </tr>
         <tr class="row_divider">
