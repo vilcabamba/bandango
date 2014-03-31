@@ -29,7 +29,8 @@ class CierreCaja < ActiveRecord::Base
   # has_many :orders, through: :cierre_caja_orders
 
 # validations
-  validate :has_transacciones
+  validate :validate_has_transacciones
+  validate :validate_has_info
   validates :fondo_anterior,
             :retiro,
             :nuevo_fondo,
@@ -68,8 +69,20 @@ class CierreCaja < ActiveRecord::Base
   attr_accessor :ventas_efectivo
 
 # methods
-  def has_transacciones
+  def validate_has_transacciones
     errors.add(:cierre_caja_orders, "No puedes cerrar una caja sin transacciones") if cierre_caja_orders.empty?
+  end
+
+  def validate_has_info
+    errors.add(:base, "No puedes cerrar una caja sin retiro o detalle de efectivo") if without_cash_denomination_items? and without_retiro?
+  end
+
+  def without_retiro?
+    retiro.blank? or not retiro.to_f > 0
+  end
+
+  def without_cash_denomination_items?
+    cash_denomination_items.empty? or cash_denomination_items.all? { |c| c.cantidad == 0 }
   end
 
   def assign_orders!
