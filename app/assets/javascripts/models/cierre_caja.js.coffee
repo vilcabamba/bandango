@@ -1,4 +1,5 @@
 money = Bandango.numberForCurrencyHelper
+humanize = Bandango.humanizeTimeFormatHelper.humanize
 
 Bandango.CierreCaja = DS.Model.extend
   totales:               DS.attr()
@@ -12,11 +13,16 @@ Bandango.CierreCaja = DS.Model.extend
   efectivoTeorico:       DS.attr("number")
   efectivoReal:          DS.attr("number")
   retiro:                DS.attr("number")
+  createdAt:             DS.attr()
 
   user:                  DS.belongsTo("user")
   cashDenominationItems: DS.hasMany("cashDenominationItem")
 
 # properties
+  toS: (->
+    "#{humanize(@get("createdAt"), "short_full")} - #{@get("user.firstNames")}"
+  ).property("createdAt", "user.firstNames")
+
   totalVentas: (->
     money(@get("efectivoVentas")) + money(@get("ivaVentas")) + money(@get("iceVentas"))
   ).property("efectivoVentas", "ivaVentas", "iceVentas")
