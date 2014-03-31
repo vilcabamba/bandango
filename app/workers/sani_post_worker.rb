@@ -12,6 +12,10 @@ class SaniPostWorker
         time: time
       }
     }
-    RestClient.post url, params.to_json, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\""
+    begin
+      RestClient.post url, params.to_json, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\""
+    rescue Errno::ETIMEDOUT
+      # handle error here
+    end
   end
 end
