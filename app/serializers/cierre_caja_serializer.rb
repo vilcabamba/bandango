@@ -10,7 +10,8 @@ class CierreCajaSerializer < ActiveModel::Serializer
              :ice_ventas,
              :efectivo_teorico,
              :efectivo_real,
-             :retiro
+             :retiro,
+             :created_at
 
   def fondo_anterior
     object.fondo_anterior
@@ -33,4 +34,5 @@ class CierreCajaSerializer < ActiveModel::Serializer
   end
 
   has_one :user, embed: :ids, include: true
+  has_many :cash_denomination_items, embed: :ids, include: true
 end
