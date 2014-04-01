@@ -2,7 +2,7 @@
 class SeedDummyData
   class << self
     def run
-      Rails.logger.info "populating with dummy data.."
+      puts "Populating with dummy data"
       wipe_db!
       load_yml_data!
       add_users!
@@ -13,7 +13,7 @@ class SeedDummyData
     end
 
     def wipe_db!
-      Rails.logger.info "wiping db..."
+      Rails.logger.info "- wiping db"
       User.destroy_all
       Emisor.destroy_all
       Cliente.destroy_all
@@ -27,14 +27,14 @@ class SeedDummyData
     end
 
     def add_users!
-      Rails.logger.info "adding users..."
+      Rails.logger.info "- adding users"
       @@data[:users].each do |user|
         User.create! user
       end
     end
 
     def add_emisor!
-      Rails.logger.info "adding emisor..."
+      Rails.logger.info "- adding emisor"
       Emisor.create! @@data[:emisor]
     end
 
@@ -42,7 +42,7 @@ class SeedDummyData
       @@data[:clientes].each do |cliente|
         Cliente.create! cliente
       end
-      Rails.logger.info "added #{@@data[:clientes].count} clientes"
+      Rails.logger.info "- added #{@@data[:clientes].count} clientes"
     end
 
     def add_categories!
@@ -52,7 +52,7 @@ class SeedDummyData
           Item.create! item_params.merge category: category, iva: true, se_compra: true, se_vende: true
         end
       end
-      Rails.logger.info "added #{@@data[:categories].count} categories"
+      Rails.logger.info "- added #{@@data[:categories].count} categories"
     end
 
     def add_compras_and_ventas!

@@ -1,7 +1,6 @@
 # encoding: utf-8
-puts "Seeding.."
+puts "Seeding"
 
-puts "Comprobantes.."
 comprobantes = [
   { codigo: 1,
     tipo: "Factura",
@@ -114,15 +113,15 @@ comprobantes = [
     c.update_attributes! comprobante
   end
 end
+Rails.logger.info "- comprobantes"
 
-puts "Categorías.."
 if Category.count == 0
   Category.where(id: 1).first_or_initialize.tap do |c|
     c.update_attributes! nombre: "General"
   end
 end
+Rails.logger.info "- categorías"
 
-puts "Sustentos comprobantes.."
 sustento_comprobantes = [
   { codigo: 0,
     tipo: "No aplica",
@@ -159,8 +158,8 @@ sustento_comprobantes = [
     s.update_attributes! sustento
   end
 end
+Rails.logger.info "- sustentos comprobantes"
 
-puts "Conceptos retención fuente.."
 concepto_retencion_fuentes = [
   { codigo: 303,
     concepto: "Honorarios profesionales",
@@ -760,19 +759,20 @@ concepto_retencion_fuentes = [
     c.update_attributes! concepto
   end
 end
+Rails.logger.info "- conceptos retención fuente"
 
-puts "Consumidor final.."
 Cliente.where(identificacion: "9999999999999").first_or_initialize.tap do |cliente|
   cliente.tipo_id = "RUC"
   cliente.nombres = "Consumidor Final"
   cliente.dont_sync = true
   cliente.save(validate: false)
 end
+Rails.logger.info "- consumidor final"
 
-puts "Dinero en efectivo.."
 cash_denominations = { bill: [100, 50, 20, 10, 5, 2, 1],
                        coin: [1, 0.5, 0.25, 0.1, 0.05, 0.01] }.each do |kind, prices|
   prices.each do |price|
     CashDenomination.where(price: BigDecimal.new(price.to_s), kind: kind).first_or_create
   end
 end
+Rails.logger.info "- dinero en efectivo"
