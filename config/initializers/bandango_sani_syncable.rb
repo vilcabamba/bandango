@@ -1,1 +1,5 @@
-SANI = YAML::load_file(File.join(Rails.root.to_s, "config", "bandango.yml")).symbolize_keys
+SANI = {
+  host: ENV["SANI_HOST"],
+  token: ENV["SANI_BANDANGO_TOKEN"],
+  business_token: ENV["SANI_BUSINESS_TOKEN"]
+}
