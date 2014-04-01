@@ -11,9 +11,8 @@ class BandangoPusher
   end
 
   def load_pusher_credentials
-    yaml = YAML::load_file(File.join(Rails.root.to_s, "config", "pusher.yml"))
-    @key = yaml["key"]
-    @secret = yaml["secret"]
+    @key = ENV["PUSHER_KEY"]
+    @secret = ENV["PUSHER_SECRET"]
   end
 
   def schedule_sani_workers
