@@ -12,6 +12,9 @@ module Rake
     def invoke(*args)
       logger = Logger.new("log/rake.log")
       logger.info name
+    rescue
+      puts "Can't log rake task"
+    ensure
       origin_invoke(*args)
     end
   end
