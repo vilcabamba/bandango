@@ -1,4 +1,5 @@
-base_conf = { url: "redis://localhost:6379", namespace: "#{Rails.application.class.parent_name}_#{Rails.env}" }
+redis_host = ENV["REDIS_HOST"] || "redis://localhost:6379"
+base_conf = { url: redis_host, namespace: "#{Rails.application.class.parent_name}_#{Rails.env}" }
 
 Sidekiq.configure_server do |config|
   config.redis = base_conf
