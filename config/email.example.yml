@@ -1,7 +1,0 @@
-address: "smtp.gmail.com"
-port: 587
-domain: "shiriculapo.com"
-user_name: "user@shiriculapo.com"
-password: "password"
-authentication: "plain"
-enable_starttls_auto: true

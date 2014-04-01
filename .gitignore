@@ -24,3 +24,4 @@ config/bandango.yml
 config/pusher.yml
 dump.rdb
 public/uploads/*
+.env
