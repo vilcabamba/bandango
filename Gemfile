@@ -68,6 +68,10 @@ end
 group :test do
 end
 
+group :production do
+  gem "rails_12factor"
+end
+
 # ember
 gem "ember-rails", github: "emberjs/ember-rails"
 gem "ember-source", "1.2.0"
