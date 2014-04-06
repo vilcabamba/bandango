@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @current_user ||= User.cached_find(session[:user_id]) if session[:user_id]
+    rescue ActiveRecord::RecordNotFound
+      session[:user_id] = nil
     end
 
     def confirm_logged_in
