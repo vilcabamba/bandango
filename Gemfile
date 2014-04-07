@@ -107,3 +107,6 @@ gem "highcharts-rails", "~> 3.0.0"
 gem "dotenv-rails"
 
 gem "money-rails"
+
+# errbit
+gem "airbrake"
