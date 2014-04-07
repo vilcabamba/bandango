@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317014640) do
+ActiveRecord::Schema.define(version: 20140407120140) do
 
   create_table "cash_denomination_items", force: true do |t|
-    t.integer  "cash_denomination_id", null: false
-    t.integer  "cierre_caja_id",       null: false
-    t.integer  "cantidad",             null: false
+    t.integer  "cash_denomination_id",             null: false
+    t.integer  "cierre_caja_id",                   null: false
+    t.integer  "cantidad",             default: 0, null: false
     t.datetime "created_at"
   end
 

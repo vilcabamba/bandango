@@ -31,6 +31,7 @@ class CierreCaja < ActiveRecord::Base
 # validations
   validate :validate_has_transacciones
   validate :validate_has_info
+  validates :user_id, presence: true
   validates :fondo_anterior,
             :retiro,
             :nuevo_fondo,
@@ -86,10 +87,10 @@ class CierreCaja < ActiveRecord::Base
   end
 
   def assign_orders!
-    self.compras = Compra.where "id > :id", id: CierreCajaOrder.last_order_id_for("Compra")
-    self.compras_efectivo = compras.efectivo.includes(:order_items)
-    self.ventas = Venta.where "id > :id", id: CierreCajaOrder.last_order_id_for("Venta")
-    self.ventas_efectivo = ventas.efectivo.includes(:order_items)
+    self.compras ||= Compra.where "id > :id", id: CierreCajaOrder.last_order_id_for("Compra")
+    self.compras_efectivo ||= compras.efectivo.includes(:order_items)
+    self.ventas ||= Venta.where "id > :id", id: CierreCajaOrder.last_order_id_for("Venta")
+    self.ventas_efectivo ||= ventas.efectivo.includes(:order_items)
     self.cierre_caja_orders = (compras + ventas).map do |order|
       CierreCajaOrder.new order: order, cierre_caja: self
     end
@@ -106,7 +107,7 @@ class CierreCaja < ActiveRecord::Base
     self.ice_ventas = ventas_efectivo.map(&:total_ice).reduce(:+).to_f.round 2
     self.efectivo_teorico = total_ventas - total_compras
     self.efectivo_real = calculate_efectivo_real
-    self.totales = calculate_totales
+    self.totales ||= calculate_totales
     self
   end
 

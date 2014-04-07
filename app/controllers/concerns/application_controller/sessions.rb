@@ -10,11 +10,13 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @current_user ||= User.cached_find(session[:user_id]) if session[:user_id]
+    rescue ActiveRecord::RecordNotFound
+      session[:user_id] = nil
     end
 
-    def confirm_logged_in
+    def require_login
       unless current_user
-        redirect_to root_url
+        redirect_to root_url, status: 401
         false
       end
     end

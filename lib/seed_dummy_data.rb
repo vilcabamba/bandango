@@ -20,6 +20,7 @@ class SeedDummyData
       Category.destroy_all
       Compra.destroy_all
       Venta.destroy_all
+      CierreCaja.destroy_all
     end
 
     def load_yml_data!
@@ -76,7 +77,33 @@ class SeedDummyData
             order.update!(fecha_emision: date) if klass == Venta
           end
         end
+        create_cierre_caja_for!(date)
       end
+    end
+
+    def create_cierre_caja_for!(date)
+      cierre_caja = CierreCaja.new.prepare!
+      efectivo = cierre_caja.efectivo_teorico.to_f
+      return if efectivo <= 0
+      cantidades = %w(20.0 10.0 5.0 0.25 0.01).inject({}) do |hash, cash_denomination|
+        hash.tap do |hash|
+          qty = (efectivo / cash_denomination.to_f).floor
+          hash[cash_denomination] = qty
+          efectivo -= (cash_denomination.to_f * qty).round(2)
+        end
+      end
+      if rand(6) > 4 # randomly set descuadre
+        cantidades.each do |k, v|
+          cantidades[k] -= rand(v) if v > 1
+        end
+      end
+      cierre_caja.cash_denomination_items = CashDenomination.all.map do |cash_denomination|
+        CashDenominationItem.new(cash_denomination: cash_denomination, cantidad: cantidades[cash_denomination.price.to_s].to_i)
+      end
+      cierre_caja.retiro = cierre_caja.efectivo_real
+      cierre_caja.created_at = date
+      cierre_caja.user = User.first
+      cierre_caja.save!
     end
 
     def times_for(klass)
