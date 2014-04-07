@@ -11,6 +11,7 @@
 #= require ember
 #= require ember-data
 #= require ember-pagination
+#= require ./helpers/bandango.unauthorized_helper
 #= require_self
 #= require bootstrap
 #= require alertify
@@ -19,9 +20,6 @@
 #= require bootstrap-datepicker
 #= require bootstrap-datepicker.es
 #= require bandango
-
-
-
 
 # for more details see: http://emberjs.com/guides/application/
 log = <%= Rails.env == "development" %>
@@ -33,7 +31,6 @@ window.Bandango = Ember.Application.create({
   LOG_BINDINGS: log,
   LOG_ACTIVE_GENERATION: log,
   LOG_VIEW_LOOKUPS: log,
-  customEvents: {
-    blur: 'blur'
-  }
+  customEvents: { blur: "blur" }
+  ready: bandangoUnauthorizedHelper
 });
