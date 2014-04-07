@@ -16,7 +16,7 @@ class CashDenominationItem < ActiveRecord::Base
 
 # methods
   def total
-    cantidad * cash_denomination.price
+    cantidad.to_i * cash_denomination.price
   end
 
   def cash_denomination
