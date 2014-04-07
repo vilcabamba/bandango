@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407120140) do
+ActiveRecord::Schema.define(version: 20140407231225) do
 
   create_table "cash_denomination_items", force: true do |t|
     t.integer  "cash_denomination_id",             null: false
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20140407120140) do
   add_index "sustento_comprobantes", ["codigo"], name: "index_sustento_comprobantes_on_codigo", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",         null: false
+    t.string   "username",                        null: false
     t.string   "email"
     t.string   "crypted_password"
     t.string   "salt"
@@ -231,8 +231,10 @@ ActiveRecord::Schema.define(version: 20140407120140) do
     t.datetime "updated_at"
     t.string   "token"
     t.string   "nombres"
+    t.boolean  "active",           default: true
   end
 
+  add_index "users", ["active"], name: "index_users_on_active", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

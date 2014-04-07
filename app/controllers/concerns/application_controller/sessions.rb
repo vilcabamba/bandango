@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     protected
 
     def current_user
-      @current_user ||= User.cached_find(session[:user_id]) if session[:user_id]
+      @current_user ||= User.active_cached_find(session[:user_id]) if session[:user_id]
     rescue ActiveRecord::RecordNotFound
       session[:user_id] = nil
     end
