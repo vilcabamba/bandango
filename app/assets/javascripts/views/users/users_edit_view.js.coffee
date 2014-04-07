@@ -24,7 +24,7 @@ Bandango.UsersEditView = Bandango.UserFormView.extend
     false
 
   successDestroying: ->
-    alertify.log "Usuario eliminado"
+    alertify.log "Usuario desactivado"
     @get("controller").transitionToRoute "users.index"
 
   failureDestroying: ->

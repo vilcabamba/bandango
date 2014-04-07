@@ -3,3 +3,4 @@ Bandango.User = DS.Model.extend Bandango.UserMixin, Bandango.PersonImagen,
   email:    DS.attr()
   nombres:  DS.attr()
   password: DS.attr()
+  active:   DS.attr()
