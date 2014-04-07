@@ -80,7 +80,4 @@ Bandango::Application.configure do
 
   # ember
   config.ember.variant = :production
-
-  # exception notification
-  config.middleware.use ExceptionNotification::Rack, :email => { :email_prefix => "[error en bandango]", :sender_address => %{"bot notificador" <bot@shiriculapo.com>}, :exception_recipients => %w{admin@macool.me} }
 end

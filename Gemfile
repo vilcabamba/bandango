@@ -42,12 +42,11 @@ gem "puma"
 # gem 'debugger', group: [:development, :test]
 
 gem "kaminari"
-gem "exception_notification"
-gem "rb-fsevent"
 
 gem "foreman"
 
 group :test, :development do
+  gem "rb-fsevent"
   gem "factory_girl_rails"
   gem "capybara"
   gem "guard-rspec"
