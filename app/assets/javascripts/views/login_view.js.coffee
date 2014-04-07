@@ -10,7 +10,7 @@ Bandango.LoginView = Ember.View.extend
     @setProperties
       sendingRequest: false
       error: response.responseJSON.message
-    alertify.log "Tu nombre de usuario y/o contraseña no coinciden"
+    alertify.log response.responseJSON.message
 
   submit: ->
     @setProperties

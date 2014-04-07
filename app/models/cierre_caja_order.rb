@@ -5,7 +5,7 @@
 #  id             :integer          not null, primary key
 #  cierre_caja_id :integer          not null
 #  order_id       :integer          not null
-#  order_type     :integer          not null
+#  order_type     :string(255)      not null
 #  created_at     :datetime
 #  updated_at     :datetime
 #

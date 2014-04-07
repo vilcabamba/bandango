@@ -5,7 +5,7 @@
 #  id                   :integer          not null, primary key
 #  cash_denomination_id :integer          not null
 #  cierre_caja_id       :integer          not null
-#  cantidad             :integer          not null
+#  cantidad             :integer          default(0), not null
 #  created_at           :datetime
 #
 
