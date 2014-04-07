@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
       session[:user_id] = nil
     end
 
-    def confirm_logged_in
+    def require_login
       unless current_user
-        redirect_to root_url
+        redirect_to root_url, status: 401
         false
       end
     end
