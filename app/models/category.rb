@@ -14,4 +14,7 @@ class Category < ActiveRecord::Base
 # relationships
   has_many :items, dependent: :destroy
 
+# scopes
+  scope :sorted, -> { order(:nombre) }
+
 end

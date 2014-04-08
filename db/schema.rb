@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20140407231225) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["nombre"], name: "index_categories_on_nombre", using: :btree
+
   create_table "cierre_caja_orders", force: true do |t|
     t.integer  "cierre_caja_id", null: false
     t.integer  "order_id",       null: false
