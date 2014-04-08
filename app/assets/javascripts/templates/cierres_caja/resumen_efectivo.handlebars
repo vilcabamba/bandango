@@ -47,23 +47,33 @@
         </tr>
         <tr class="row_divider">
           <td>Fondo anterior</td>
-          <td>{{number_to_currency model.fondoAnterior}}</td>
+          <td>
+            <span class="label label-info">{{number_to_currency model.fondoAnterior}}</span>
+          </td>
         </tr>
         <tr>
           <td>Ventas</td>
-          <td>{{number_to_currency model.totalVentas}}</td>
+          <td>
+            <span class="label label-default">{{number_to_currency model.totalVentas}}</span>
+          </td>
         </tr>
         <tr>
           <td>Compras</td>
-          <td>{{number_to_currency model.totalCompras}}</td>
+          <td>
+            <span class="label label-default">{{number_to_currency model.totalCompras}}</span>
+          </td>
         </tr>
         <tr class="row_divider">
           <td>Efectivo teórico</td>
-          <td>{{number_to_currency model.efectivoTeorico}}</td>
+          <td>
+            <span class="label label-success">{{number_to_currency model.efectivoTeorico}}</span>
+          </td>
         </tr>
         <tr>
           <td>Efectivo real</td>
-          <td>{{number_to_currency model.efectivoReal}}</td>
+          <td>
+            <span class="label label-info">{{number_to_currency model.efectivoReal}}</span>
+          </td>
         </tr>
         <tr class="row_divider">
           <td>Descuadre</td>
@@ -75,13 +85,15 @@
             {{#if view.includeForm}}
               {{view Ember.TextField type="number" step="any" value=model.retiro class="small_padding form-control minimal_input"}}
             {{else}}
-              {{number_to_currency model.retiro}}
+              <span class="label label-warning">{{number_to_currency model.retiro}}</span>
             {{/if}}
           </td>
         </tr>
         <tr class="row_divider">
           <td>Nuevo fondo de caja</td>
-          <td>{{number_to_currency model.nuevoFondo}}</td>
+          <td>
+            <span class="label label-primary">{{number_to_currency model.nuevoFondo}}</span>
+          </td>
         </tr>
       </tbody>
     </table>
