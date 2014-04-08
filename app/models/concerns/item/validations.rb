@@ -17,7 +17,7 @@ class Item < ActiveRecord::Base
     end
 
     def validate_nombre_is_unique_on_category
-      errors.add(:nombre, "Ya existe un ítem con ese nombre") if category.items.exists?(nombre: nombre)
+      errors.add(:nombre, "Ya existe un ítem con ese nombre") if category.items.where.not(id: id).exists?(nombre: nombre)
     end
   end
 end
