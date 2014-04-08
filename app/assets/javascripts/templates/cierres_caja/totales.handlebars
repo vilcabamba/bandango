@@ -14,10 +14,10 @@
             {{name}}
           </td>
           <td class="align_right">
-            {{qty}}
+            <span class="badge">{{qty}}</span>
           </td>
-          <td class="align_right">
-            {{number_to_currency sum}}
+          <td class="align_center">
+            <span class="label label-success">{{number_to_currency sum}}</span>
           </td>
         </tr>
       {{/each}}

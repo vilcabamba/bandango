@@ -1,11 +1,13 @@
 Bandango.CierreCajaDescuadreCellView = Ember.View.extend
   tagName: "td"
-  classNameBindings: "descuadreClass".w()
-  template: Ember.Handlebars.compile("{{view.descuadreValue}}")
+  template: Ember.Handlebars.compile("<span {{bind-attr class=':label view.descuadreClass'}}>{{view.descuadreValue}}</span>")
 
   descuadreClass: (->
-    "text-danger" if @get("model.descuadre") != 0
-  ).property("model.descuadre")
+    if @get("model.hasDescuadre")
+      "label-danger"
+    else
+      "label-default"
+  ).property("model.hasDescuadre")
 
   descuadreValue: (->
     text = Bandango.numberToCurrencyHelper(@get("model.descuadre"))

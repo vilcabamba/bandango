@@ -22,6 +22,9 @@
 class CierreCaja < ActiveRecord::Base
   register_currency :usd
 
+# scopes
+  scope :recent, -> { order(id: :desc) }
+
 # relationships
   belongs_to :user
   has_many :cash_denomination_items, dependent: :destroy

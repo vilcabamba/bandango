@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407231225) do
+ActiveRecord::Schema.define(version: 20140408023843) do
 
   create_table "cash_denomination_items", force: true do |t|
     t.integer  "cash_denomination_id",             null: false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20140407231225) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["nombre"], name: "index_categories_on_nombre", using: :btree
 
   create_table "cierre_caja_orders", force: true do |t|
     t.integer  "cierre_caja_id", null: false
@@ -76,7 +78,9 @@ ActiveRecord::Schema.define(version: 20140407231225) do
     t.datetime "updated_at"
   end
 
+  add_index "clientes", ["email"], name: "index_clientes_on_email", using: :btree
   add_index "clientes", ["identificacion"], name: "index_clientes_on_identificacion", unique: true, using: :btree
+  add_index "clientes", ["nombres"], name: "index_clientes_on_nombres", using: :btree
 
   create_table "compras", force: true do |t|
     t.integer  "sustento_comprobante_id",                                                  null: false
@@ -169,6 +173,7 @@ ActiveRecord::Schema.define(version: 20140407231225) do
     t.float    "base_compra"
   end
 
+  add_index "items", ["nombre"], name: "index_items_on_nombre", using: :btree
   add_index "items", ["se_compra"], name: "index_items_on_se_compra", using: :btree
   add_index "items", ["se_vende"], name: "index_items_on_se_vende", using: :btree
 

@@ -6,16 +6,28 @@ module Api
 
     def index
       if params[:identificacion].present?
-        respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
+        search_by_identificacion
       elsif params[:search].present?
-        render json: Cliente.search(params[:search]).limit(10),
-               meta: { query: params[:search] }
+        search
       else
-        @clientes = Cliente.page(params[:page])
-        render json: @clientes,
-               meta: { total_pages: @clientes.total_pages,
-                              page: @clientes.current_page }
+        list
       end
+    end
+
+    def search_by_identificacion
+      respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
+    end
+
+    def search
+      render json: Cliente.sorted.search(params[:search]).limit(10),
+             meta: { query: params[:search] }
+    end
+
+    def list
+      clientes = Cliente.sorted.page(params[:page])
+      render json: clientes,
+             meta: { total_pages: clientes.total_pages,
+                            page: clientes.current_page }
     end
 
     def show

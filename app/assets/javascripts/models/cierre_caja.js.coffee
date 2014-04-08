@@ -35,6 +35,10 @@ Bandango.CierreCaja = DS.Model.extend
     @get("efectivoReal") - @get("efectivoTeorico")
   ).property("efectivoReal")
 
+  hasDescuadre: (->
+    @get("descuadre") != 0
+  ).property("descuadre")
+
   nuevoFondo: (->
     @get("efectivoReal") - money(@get("retiro"))
   ).property("efectivoReal", "retiro")

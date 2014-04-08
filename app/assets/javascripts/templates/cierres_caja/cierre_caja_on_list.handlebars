@@ -5,5 +5,13 @@
   <div class="info">
     <div class="title">{{humanize_time createdAt format="long"}}</div>
     <div>{{user.firstNames}}</div>
+    <div>
+      <span class="label label-success">{{number_to_currency efectivoTeorico}}</span>
+      <span class="label label-warning">{{number_to_currency retiro}}</span>
+      {{#if hasDescuadre}}
+        <span class="label label-danger">{{number_to_currency descuadre}}</span>
+      {{/if}}
+      <span class="label label-primary">{{number_to_currency nuevoFondo}}</span>
+    </div>
   </div>
 {{/with}}
