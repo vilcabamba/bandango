@@ -100,9 +100,9 @@ class SeedDummyData
       cierre_caja.cash_denomination_items = CashDenomination.all.map do |cash_denomination|
         CashDenominationItem.new(cash_denomination: cash_denomination, cantidad: cantidades[cash_denomination.price.to_s].to_i)
       end
-      cierre_caja.retiro = cierre_caja.efectivo_real
-      cierre_caja.created_at = date
-      cierre_caja.user = User.first
+      cierre_caja.retiro = rand(cierre_caja.send(:calculate_efectivo_real))
+      cierre_caja.created_at = (date.to_time + rand(10).hours + rand(60).minutes)
+      cierre_caja.user = random("user")
       cierre_caja.save!
     end
 
