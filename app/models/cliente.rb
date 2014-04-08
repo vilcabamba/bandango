@@ -26,4 +26,6 @@ class Cliente < ActiveRecord::Base
   has_many :ventas
   has_many :compras
 
+# scopes
+  scope :sorted, -> { order(:nombres, :email) }
 end
