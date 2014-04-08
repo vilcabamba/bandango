@@ -1,10 +1,6 @@
-class CurrentUserSerializer < ActiveModel::Serializer
+class CurrentUserSerializer < UserSerializer
   root false
-  
-  attributes :id,
-             :nombres,
-             :username,
-             :email,
-             :token
+
+  attributes :token
 
 end

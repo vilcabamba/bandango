@@ -2,7 +2,7 @@ Bandango.humanizeTimeFormatHelper =
   formats:
     short: "MMM D, YYYY"
     short_full: "DD-MM-YYYY HH:mm"
-    long: "DD MMMM YYYY h:m a"
+    long: "DD MMMM YYYY h:mm a"
 
   format: (name) ->
     if name and format = @formats[name]

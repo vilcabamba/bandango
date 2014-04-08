@@ -8,5 +8,7 @@
 {{partial "users/show"}}
 
 <div class="actions">
-  {{link-to "editar" "users.edit" this class="btn btn-default"}}
+  {{#if active}}
+    {{link-to "editar" "users.edit" this class="btn btn-default"}}
+  {{/if}}
 </div>

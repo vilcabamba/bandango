@@ -11,9 +11,23 @@
 #  updated_at       :datetime
 #  token            :string(255)
 #  nombres          :string(255)
+#  active           :boolean          default(TRUE)
 #
 
 require 'spec_helper'
 
 describe User do
+  let(:user) { create :user }
+
+  context "default" do
+    describe "active" do
+      it { expect(user.active).to be_true }
+    end
+  end
+
+  describe "#deactivate!" do
+    before { user.deactivate! }
+
+    it { expect(user.active).to be_false }
+  end
 end

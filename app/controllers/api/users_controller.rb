@@ -22,7 +22,7 @@ module Api
     end
 
     def destroy
-      respond_with User.destroy(params[:id])
+      respond_with User.cached_find(params[:id]).deactivate!
     end
 
     private

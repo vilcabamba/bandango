@@ -4,6 +4,10 @@ users:
     password: Admin123
   - username: macool
     email: a@macool.me
+    nombres: Mario Andrés
+  - username: johndoe
+    email: johndoe@shiriculapo.com
+    nombres: John Doe
 
 emisor:
   razon_social: Mario Andrés Correa

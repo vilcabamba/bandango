@@ -2,6 +2,7 @@ Bandango.SessionController = Ember.Controller.extend
   logOut: ->
     @set "user", null
     Bandango.__container__.lookup("controller:application").transitionToRoute "login"
+    Bandango.__container__.lookup("store:main").init() # reset store
     alertify.log "Tu sesión ha caducado"
 
   login: ->

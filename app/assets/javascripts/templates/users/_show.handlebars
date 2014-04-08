@@ -9,5 +9,8 @@
     {{#if isCurrentUser}}
       <span class="label label-info">Este eres tú</span>
     {{/if}}
+    {{#unless active}}
+      <span class="label label-danger">Usuario desactivado</span>
+    {{/unless}}
   </div>
 </div>
