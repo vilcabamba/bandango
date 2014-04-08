@@ -23,6 +23,7 @@ class Item < ActiveRecord::Base
   include Validations
 
 # scopes
+  scope :sorted, -> { order(:nombre) }
   scope :category, ->(category_id) { where(category_id: category_id) }
   scope :type,     ->(type) {
     if type == "venta"
@@ -37,5 +38,5 @@ class Item < ActiveRecord::Base
   has_many :order_item
   has_many :ventas, through: :order_item
   has_many :compras, through: :order_item
-  
+
 end

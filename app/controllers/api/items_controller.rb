@@ -5,15 +5,20 @@ module Api
     respond_to :json
 
     def index
-      if params[:query]     # respond to jQuery autocomplete
-        @items = Item.type(params[:type]).search_by_nombre params[:query]
-        render json: @items
-      else
-        @items = Item.category(params[:category_id]).page(params[:page])
-        render json: @items,
-               meta: { total_pages: @items.total_pages,
-                              page: @items.current_page }
-      end
+      params[:query] ? search : list
+    end
+
+    def search
+      # respond to jQuery autocomplete
+      @items = Item.sorted.type(params[:type]).search_by_nombre params[:query]
+      render json: @items
+    end
+
+    def list
+      @items = Item.sorted.category(params[:category_id]).page(params[:page])
+      render json: @items,
+             meta: { total_pages: @items.total_pages,
+                            page: @items.current_page }
     end
 
     def show
