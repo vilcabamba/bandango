@@ -8,7 +8,7 @@ module Orderable
     validate  :has_order_items
 
   # scopes
-    scope :recent, -> { order("id DESC") }
+    scope :recent, -> { order(fecha_emision: :desc) }
     scope :pago, ->(forma_de_pago) { where(forma_de_pago: forma_de_pago) }
     scope :efectivo, -> { pago("Efectivo") }
   end

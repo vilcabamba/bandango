@@ -3,7 +3,7 @@ module Api
     respond_to :json
 
     def index
-      @ventas = Venta.includes(:cliente, :comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item]).page(params[:page])
+      @ventas = Venta.recent.includes(:cliente, :comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item]).page(params[:page])
       render json: @ventas, meta: { total_pages: @ventas.total_pages, page: @ventas.current_page }
     end
 
