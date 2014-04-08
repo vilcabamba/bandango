@@ -110,4 +110,4 @@ gem "dotenv-rails"
 gem "money-rails"
 
 # errbit
-gem "airbrake"
+gem "airbrake_user_attributes"
