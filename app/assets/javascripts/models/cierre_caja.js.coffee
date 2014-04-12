@@ -32,7 +32,7 @@ Bandango.CierreCaja = DS.Model.extend
   ).property("efectivoCompras", "ivaCompras", "iceCompras")
 
   descuadre: (->
-    @get("efectivoReal") - @get("efectivoTeorico")
+    @get("efectivoReal") - money(@get("efectivoTeorico"))
   ).property("efectivoReal")
 
   hasDescuadre: (->
@@ -48,7 +48,7 @@ Bandango.CierreCaja = DS.Model.extend
     efectivoReal = @get("cashDenominationItems").reduce (prev, cashDenominationItem) ->
       prev + cashDenominationItem.get("totalPrice")
     , 0
-    @set "efectivoReal", efectivoReal
+    @set "efectivoReal", money(efectivoReal)
   ).observes("cashDenominationItems.@each.cantidad")
 
 # methods
