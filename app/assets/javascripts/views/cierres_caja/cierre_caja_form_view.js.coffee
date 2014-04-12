@@ -3,7 +3,6 @@ Bandango.CierreCajaFormView = Bandango.ModelBackedView.extend
   includeForm: true
 
   cierreCajaSaved: (cierreCaja) ->
-    @successCallback "Cierre de caja guardado"
     @get("controller").transitionToRoute "cierres_caja.show", cierreCaja.get("id")
 
   saveCierreCaja: ->

@@ -14,7 +14,7 @@ Bandango.CierreCajaDescuadreCellView = Ember.View.extend
     if @get("model.descuadre") > 0 # add a '+'
       i = text.indexOf(Bandango.currencyPrefix)
       j = i + Bandango.currencyPrefix.length
-      text = text.slice(i, j) + "+" + text.slice(j, text.length-1)
+      text = text.slice(i, j) + "+" + text.slice(j, text.length)
     text
   ).property("model.descuadre")
 

@@ -108,7 +108,7 @@ class CierreCaja < ActiveRecord::Base
     self.efectivo_ventas = ventas_efectivo.map(&:total_price).reduce(:+).to_f.round 2
     self.iva_ventas = ventas_efectivo.map(&:total_iva).reduce(:+).to_f.round 2
     self.ice_ventas = ventas_efectivo.map(&:total_ice).reduce(:+).to_f.round 2
-    self.efectivo_teorico = total_ventas - total_compras
+    self.efectivo_teorico = fondo_anterior + total_ventas - total_compras
     self.efectivo_real = calculate_efectivo_real
     self.totales ||= calculate_totales
     self
