@@ -5,6 +5,7 @@ users:
   - username: macool
     email: a@macool.me
     nombres: Mario Andrés
+    password: marioandres
   - username: johndoe
     email: johndoe@shiriculapo.com
     nombres: John Doe
