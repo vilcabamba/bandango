@@ -3,7 +3,7 @@ ruby "2.0.0"
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '3.0.4'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -70,8 +70,8 @@ group :test do
 end
 
 # ember
-gem "ember-rails", github: "emberjs/ember-rails"
-gem "ember-source", "1.2.0"
+gem "ember-rails", "0.14.1"
+gem "ember-source", "1.5.0"
 
 # sorcery
 gem "sorcery"
