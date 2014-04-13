@@ -9,6 +9,10 @@ users:
   - username: johndoe
     email: johndoe@shiriculapo.com
     nombres: John Doe
+  - username: will  
+    email: wily@shiriculapo.com
+    nombres: Wil Brav
+    password: abcabc
 
 emisor:
   razon_social: Mario Andrés Correa
