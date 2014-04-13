@@ -51,6 +51,10 @@ clientes:
     tipo_id: Pasaporte - otro
     nombres: qoloquio
     email: hola@qoloquio.com
+  - identificacion: 1104783509001
+    tipo_id: RUC
+    nombres: Wilson Bravo   
+    email: wily@shiriculapo.com
 
 categories:
   bebidas:
