@@ -17,5 +17,6 @@
  *= require datepicker3
  *= require offline
  *= require offline.es
+ *= require nprogress
  *= require_tree .
  */
