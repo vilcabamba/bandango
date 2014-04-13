@@ -22,6 +22,12 @@ class Venta < ActiveRecord::Base
   include Validations
   include OrderableInfo
 
+# scopes
+  scope :eager_loaded, -> {
+    includes(:cliente, :comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item])
+    .references(:cliente, :comprobante, :retenciones, :concepto_retencion_fuente, :order_items, :item)
+  }
+
 # relationships
   belongs_to :cliente
   belongs_to :comprobante
