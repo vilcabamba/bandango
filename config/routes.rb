@@ -80,7 +80,7 @@ Bandango::Application.routes.draw do
   end
 
   # sidekiq:
-  mount Sidekiq::Web, at: "/sidekiq_web", :constraints => AdminConstraint.new
+  mount Sidekiq::Web, at: "/_sidekiq", :constraints => AdminConstraint.new
 
 end
 # put next lines before end statement: (route unroutable paths)
