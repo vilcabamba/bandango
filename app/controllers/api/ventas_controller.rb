@@ -8,7 +8,7 @@ module Api
     end
 
     def show
-      respond_with Venta.eager_loading.cached_find(params[:id])
+      respond_with Venta.eager_loaded.cached_find(params[:id])
     end
 
     def create
