@@ -8,7 +8,7 @@ module Api
     end
 
     def show
-      respond_with Compra.includes(:cliente, :comprobante, :sustento_comprobante, retenciones: [:concepto_retencion_fuente], order_items: [:item]).cached_find(params[:id])
+      respond_with Compra.eager_loaded.cached_find(params[:id])
     end
 
     def create
