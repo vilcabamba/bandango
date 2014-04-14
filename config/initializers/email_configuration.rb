@@ -4,6 +4,6 @@ ActionMailer::Base.smtp_settings = {
   authentication: ENV["SMTP_AUTHENTICATION"] || "plain",
   enable_starttls_auto: true,
   domain: ENV["SMTP_DOMAIN"],
-  user_name: ENV["SMTP_USER_NAME"],
+  user_name: ENV["SMTP_USERNAME"],
   password: ENV["SMTP_PASSWORD"]
 }
