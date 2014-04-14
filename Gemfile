@@ -109,5 +109,5 @@ gem "dotenv-rails"
 
 gem "money-rails"
 
-# errbit
-gem "airbrake"
+gem "girl_friday" # for async airbrake error deliveries
+gem "airbrake" # errbit

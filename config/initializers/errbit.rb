@@ -3,4 +3,5 @@ Airbrake.configure do |config|
   config.host        = "pangi.shiriculapo.com"
   config.port        = 80
   config.secure      = config.port == 443
+  config.async       = true
 end
