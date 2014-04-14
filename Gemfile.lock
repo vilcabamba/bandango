@@ -47,8 +47,6 @@ GEM
     airbrake (3.1.16)
       builder
       multi_json
-    airbrake_user_attributes (0.1.6)
-      airbrake (~> 3.1.0)
     arel (5.0.0)
     barber (0.4.2)
       ember-source
@@ -322,7 +320,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack-action_caching!
-  airbrake_user_attributes
+  airbrake
   annotate!
   better_errors
   binding_of_caller
