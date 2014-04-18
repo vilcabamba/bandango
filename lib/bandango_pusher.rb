@@ -10,6 +10,8 @@ class BandangoPusher
   end
   
   def initialize!
+    schedule_sani_worker
+    
     @socket = PusherClient::Socket.new(@key, secret: @secret)
 
     # Subscribe to business chanel
