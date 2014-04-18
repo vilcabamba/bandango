@@ -7,6 +7,13 @@ class SessionsController < ApplicationController
       render json: {message: "Verifica tu nombre de usuario y contraseña"}, status: 422
     end
   end
+  
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
+  end
+  
+  private
 
   def logged_in
     render json: @user, serializer: CurrentUserSerializer
@@ -14,10 +21,5 @@ class SessionsController < ApplicationController
 
   def inactive_account
     render json: {message: "Tu cuenta está inactiva"}, status: 422
-  end
-
-  def destroy
-    session[:user_id] = nil
-    redirect_to root_path
   end
 end
