@@ -36,7 +36,7 @@ module Api
     end
 
     private
-    
+
     def search_by_identificacion
       respond_with Cliente.cached_search_for_identificacion(params[:identificacion])
     end
