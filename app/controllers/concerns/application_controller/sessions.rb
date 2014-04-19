@@ -15,10 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_login
-      unless current_user
-        redirect_to root_url, status: 401
-        false
-      end
+      redirect_to(root_url, status: 401) unless current_user
     end
 
     def logout

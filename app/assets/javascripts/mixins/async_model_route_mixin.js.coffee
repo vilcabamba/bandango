@@ -1,7 +1,7 @@
 Bandango.AsyncModelRouteMixin = Ember.Mixin.create
   asyncModelPromise: (->
     @controller.get("store").findAll @get("asyncModel")
-  ).property()
+  ).property().volatile() # has to be evaluated always
 
   fetchAsyncModel: ->
     @controller.set "isFetching", true

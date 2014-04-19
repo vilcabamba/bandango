@@ -1,4 +1,4 @@
-Bandango.GravatarImagenHelper =
+Bandango.gravatarImagenHelper =
   hexdigestAndDefault: (email) ->
     if Ember.isEmpty(email)
       ["a", "mm"]
