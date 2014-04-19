@@ -1,5 +1,4 @@
 :verbose: false
-:namespace: Bandango_production
 :concurrency: 1
 :queues:
   - default

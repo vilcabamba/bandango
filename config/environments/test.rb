@@ -33,4 +33,7 @@ Bandango::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  
+  # do not use cache on test
+  config.cache_store = :null_store
 end
