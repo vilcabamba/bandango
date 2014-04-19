@@ -35,5 +35,4 @@ Bandango::Application.routes.draw do
 
   # sidekiq:
   mount Sidekiq::Web, at: "/_sidekiq", :constraints => AdminConstraint.new
-
 end

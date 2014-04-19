@@ -15,7 +15,7 @@
 #= require offline.options
 #= require nprogress
 #= require nprogress.bandango
-#= require ./helpers/bandango.unauthorized_helper
+#= require ./helpers/bandango_ready_helper
 #= require_self
 #= require bootstrap
 #= require alertify
@@ -36,5 +36,5 @@ window.Bandango = Ember.Application.create({
   LOG_ACTIVE_GENERATION: log,
   LOG_VIEW_LOOKUPS: log,
   customEvents: { blur: "blur" }
-  ready: bandangoUnauthorizedHelper
+  ready: bandangoReadyHelper
 });
