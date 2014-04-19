@@ -69,6 +69,10 @@ end
 group :test do
 end
 
+group :production do
+  gem "rails_12factor"
+end
+
 # ember
 gem "ember-rails", "0.14.1"
 gem "ember-source", "1.5.0"
