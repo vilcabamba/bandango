@@ -113,5 +113,4 @@ gem "dotenv-rails"
 
 gem "money-rails"
 
-gem "girl_friday" # for async airbrake error deliveries
-gem "airbrake" # errbit
+gem "sentry-raven", github: "getsentry/raven-ruby"
