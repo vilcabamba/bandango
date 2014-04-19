@@ -1,10 +1,15 @@
 Bandango.AsyncModelRouteMixin = Ember.Mixin.create
+  asyncModelPromise: (->
+    @controller.get("store").findAll @get("asyncModel")
+  ).property()
+
   fetchAsyncModel: ->
-    modelName = @get("asyncModel")
     @controller.set "isFetching", true
-    @controller.get("store").findAll(modelName).then (model) =>
-      @controller.set "isFetching", false
-      @controller.set "model", model
+    @get("asyncModelPromise").then $.proxy(@asyncModelFetched, @)
+
+  asyncModelFetched: (model) ->
+    @controller.set "isFetching", false
+    @controller.set "model", model
 
   setupController: (@controller, model) ->
     @controller.set("model", model) if model
