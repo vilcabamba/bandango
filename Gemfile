@@ -77,7 +77,7 @@ gem "ember-source", "1.5.0"
 gem "sorcery"
 
 # annotate models
-gem "annotate", :git => "git://github.com/ctran/annotate_models.git"
+gem "annotate", github: "ctran/annotate_models"
 
 # id_ecuador
 gem "id_ecuador", ">= 0.0.2.alpha"
