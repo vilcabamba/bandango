@@ -39,3 +39,4 @@ Bandango.Router.map ()->
       @route "show", path: "/:item_id"
       @route "edit", path: "/:item_id/edit"
 
+  @route "missing", path: "/*path"
