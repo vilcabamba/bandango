@@ -4,6 +4,9 @@ fourOhFour = ->
   applicationController.transitionToRoute "missing", currentPath
 
 window.bandangoReadyHelper = ->
+  # hide spinner icon
+  $("#loading_bandango").remove()
+
   # listen for ajax errors
   $(document).ajaxError (event, request, settings) ->
     switch request.status

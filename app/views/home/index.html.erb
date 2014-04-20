@@ -1,3 +1,7 @@
+<div id="loading_bandango">
+  <div class="spinner-icon"></div>
+</div>
+
 <% if current_user %>
   <%= javascript_tag do %>
     Bandango.currentSession.willLoginAs(<%= raw CurrentUserSerializer.new(current_user).to_json %>);
