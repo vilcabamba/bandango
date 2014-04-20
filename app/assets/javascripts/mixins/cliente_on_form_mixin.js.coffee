@@ -10,7 +10,9 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
     cliente = @get("model.cliente") || Ember.Object.create()
     attributes = ["tipoId", "nombres", "direccion", "telefono", "email"]
     for attribute in attributes
-      @set attribute, cliente.get(attribute)
+      if newAttr = cliente.get(attribute)
+        @set(attribute, newAttr)
+    null
 
 # query callbacks
   gotClientes: (clientes) ->
@@ -47,10 +49,8 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
 # chosen
   applyChosen: ->
     @$(".tiposIdsSelect").chosen disable_search: true
-    @observeChosen()
 
   observeChosen: (->
-    $select = @$(".tiposIdsSelect")
     identificacion = @get("identificacion") || ""
     tipoId = switch identificacion.length
       when 10
@@ -59,9 +59,15 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
         "RUC"
       else
         "Pasaporte - otro"
+    @setCurrentTipoId tipoId
+  ).observes("identificacion")
+
+  setCurrentTipoId: ( tipoId=@get("tipoId") )->
+    $select = @$(".tiposIdsSelect")
+    @set "tipoId", tipoId
     $select.val tipoId
     $select.trigger "chosen:updated"
-  ).observes("identificacion")
+
 
   destroyChosen: ->
     @$(".tiposIdsSelect").chosen("destroy")
@@ -75,6 +81,7 @@ Bandango.ClienteOnFormMixin = Ember.Mixin.create
   didInsertElement: ->
     @_super()
     @applyChosen()
+    @setCurrentTipoId()
     if @get("queryForClienteOnIdentificacionChange")
       @$(".identificacion_input").on("keyup" , $.proxy(@identificacionKeyUpped, @))
                                  .on("change", $.proxy(@identificacionChanged, @))
