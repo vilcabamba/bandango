@@ -9,7 +9,6 @@
   <meta name="author" content="Mario Andrés Correa">
   <meta name="viewport" content="width=device-width">
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,5 +16,6 @@
   <div id="app">
     <%= yield %>
   </div>
+  <%= javascript_include_tag "application" %>
 </body>
 </html>
