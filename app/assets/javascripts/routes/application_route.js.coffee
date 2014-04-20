@@ -5,3 +5,6 @@ Bandango.ApplicationRoute = Ember.Route.extend
       @transitionTo "dashboard" if transition.targetName == "index"
     else
       @transitionTo "login"
+
+  actions:
+    error: Raven.onBandangoError
