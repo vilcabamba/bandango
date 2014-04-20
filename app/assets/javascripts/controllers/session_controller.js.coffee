@@ -1,4 +1,12 @@
 Bandango.SessionController = Ember.Controller.extend
+  init: ->
+    if userProperties = window.bandangoWillLoginAs
+      @set "userProperties", userProperties
+      $.ajaxSetup
+        headers: { "Authorization": "Token token=\"#{userProperties.token}\""}
+      $("#bandango_will_login").remove() # remove token script from document
+      window.bandangoWillLoginAs = null  # remove global variable
+
   logOut: ->
     @set "user", null
     Bandango.ravenHelper.logOut()
@@ -13,12 +21,6 @@ Bandango.SessionController = Ember.Controller.extend
 
   initializeWithStore: (@store) ->
     @login()
-
-  willLoginAs: (userProperties) ->
-    @set "userProperties", userProperties
-    Ember.debug "will log in with token #{userProperties.token}"
-    $.ajaxSetup
-      headers: { "Authorization": "Token token=\"#{userProperties.token}\""}
 
   logInAs: (userProperties) ->
     @set "userProperties", userProperties

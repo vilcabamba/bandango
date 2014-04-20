@@ -3,7 +3,7 @@
 </div>
 
 <% if current_user %>
-  <%= javascript_tag do %>
-    Bandango.currentSession.willLoginAs(<%= raw CurrentUserSerializer.new(current_user).to_json %>);
+  <%= javascript_tag id: "bandango_will_login" do %>
+    window.bandangoWillLoginAs = <%= raw CurrentUserSerializer.new(current_user).to_json %>;
   <% end %>
 <% end %>
