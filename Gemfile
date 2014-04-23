@@ -114,3 +114,5 @@ gem "dotenv-rails"
 gem "money-rails"
 
 gem "sentry-raven", github: "getsentry/raven-ruby"
+
+gem "public_activity"
