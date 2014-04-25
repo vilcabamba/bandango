@@ -14,6 +14,7 @@
 #
 
 class Cliente < ActiveRecord::Base
+  include Trackable
   include Cacheable
   include Searchable
   include Validations
