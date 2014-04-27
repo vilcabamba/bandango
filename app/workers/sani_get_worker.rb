@@ -1,16 +1,14 @@
-class SaniGetWorker
+class SaniGetWorker < SaniWorker
   include Sidekiq::Worker
   sidekiq_options backtrace: true
 
   def perform
-    since = SaniRequest.last_id
-    url = SANI[:host] + "/api/transacciones.json?since=#{since}"
-    begin
-      response = JSON.parse(RestClient.get url, :content_type => :json, :Authorization => "Token token=\"#{SANI[:token]}\"")
+    url = "#{transacciones_url}?since=#{SaniRequest.last_id}"
+    sani_request do
+      response = RestClient.get(url, restclient_options)
+      response = JSON.parse(response)
       SaniRequest.parse_transacciones response["transacciones"]
       SaniRequest.last_id = response["meta"]["max_id"]
-    rescue Errno::ETIMEDOUT
-      # handle connectivity error
     end
   end
   def self.schedule
