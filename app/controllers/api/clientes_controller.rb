@@ -19,16 +19,21 @@ module Api
     end
 
     def create
-      respond_with :api, Cliente.create(cliente_params)
+      cliente = Cliente.new(cliente_params)
+      track!(cliente) if cliente.save
+      respond_with :api, cliente
     end
 
     def update
-      respond_with Cliente.update(params[:id], cliente_params)
+      cliente = Cliente.find(params[:id])
+      track!(cliente) if cliente.update(cliente_params)
+      respond_with cliente
     end
 
     def destroy
       cliente = Cliente.cached_find(params[:id])
       if cliente.can_destroy?
+        track!(cliente, params: nil)
         respond_with cliente.destroy
       else
         render json: { cliente: "", errors: { base: cliente.why_cant_destroy } }, status: 422
