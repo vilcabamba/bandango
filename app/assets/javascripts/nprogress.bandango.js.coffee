@@ -1,5 +1,3 @@
-$(document).ajaxStart ->
-  NProgress.start()
+$(document).ajaxStart -> NProgress.start()
 
-$(document).ajaxStop ->
-  NProgress.done()
+$(document).ajaxStop -> NProgress.done()
